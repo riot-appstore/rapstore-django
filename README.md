@@ -16,3 +16,9 @@ Simply run `docker-compose -f install/docker-compose.yml up --build`. Docker com
 * Install Django, DRF and all dependencies
 * Apply all DB migrations
 * Serve the website at localhost:8000
+
+# Admin
+It's possible to add Boards, Modules and Applications directly from Django admin. Simply go to localhost:8000/admin.
+Current config is:
+* User: riot
+* Pass: password0
