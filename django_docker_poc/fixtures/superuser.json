@@ -1,0 +1,20 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$4hEGBAKoN4cZ$TBg6WPDIrGIsXPSYe2uZgJcnsZ5PYnQuP3srkeKsNek=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "riot",
+        "first_name": "",
+        "last_name": "",
+        "email": "riot@riot-os.org",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-02-12T18:21:52.026Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

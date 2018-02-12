@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: 
+        context: ../django_docker_poc
+        dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+        - ../django_docker_poc:/code
+    depends_on:
+      - db

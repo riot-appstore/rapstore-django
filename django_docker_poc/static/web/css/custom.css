@@ -1,0 +1,61 @@
+// for debugging layout
+// * { border: 1px solid red; }
+
+:root {
+    --riot-green:#00b188;
+    --riot-red:#ca0022;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 85px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 85px;
+    line-height: 85px; /* Vertically center the text there */
+    background-color: #151515;
+}
+
+/*for file upload button when using Bootstrap 3 and not 4*/
+[hidden] {
+    display: none !important;
+}
+
+.file {
+    visibility: hidden;
+    position: absolute;
+}
+
+.vertical-center {
+   display: inline-block;
+   vertical-align: middle;
+   float: none;
+}
+
+/*
+    changing collapse icon for panels
+    Mix between two sources:
+    - https://codepen.io/zabielski/pen/ZGLbav
+    - https://stackoverflow.com/questions/18325779/bootstrap-3-collapse-show-state-with-chevron-icon
+*/
+.panel-title a:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e113"; /* glyphicon-chevron-up bootstrap.css */
+    float: right;
+    color: grey;
+}
+.panel-title a.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e114"; /* glyphicon-chevron-down bootstrap.css */
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+    <html lang="en">
+         <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <link rel="icon" href="/img/favicon.png" type="image/png">
+            <link rel="stylesheet" href="/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/js/main.js"></script>
+            <script src="/js/browser-integration.js"></script>
+            <script src="/js/dialogs.js"></script>
+            <script src="/js/webusb-autodetect.js"></script>
+
+            <title>RAPstore</title>
+        </head>
+        <body>
+            <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h1>RAPstore</h1>
+                        <p>Let us build your custom RIOT OS according to your needs</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="/img/riot_logo.png" alt="RIOT logo" class="img-responsive"></img>
+                    </div>
+
+                    <!--{MODAL_DIALOG}-->
+                </div>
+            </div>
+        </div>
+            <div class="container">
+            <ul id="navigations_tabs" class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab0">Example applications</a></li>
+            <li><a data-toggle="tab" href="#tab1">Your custom RIOT OS</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab0" class="tab-pane fade in active">
+                {BOARD_SELECTOR}
+                {APPLICATIONS}
+            </div>
+
+            <div id="tab1" class="tab-pane fade">
+                 {BOARD_SELECTOR}
+                <h3>2. Upload your main C file:</h3>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="{INPUT_ID}" type="file" name="img[]" class="file">
+                    <div class="input-group">
+                        <input type="text" class="form-control" readonly placeholder="Upload main source file">
+                        <span class="input-group-btn">
+                            <button class="browse btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+                {MODULES}
+        <h3>4. Build and flash:</h3>
+        <div class="container-fluid">
+            <button type="button" class="btn btn-primary" id="{BUTTON_ID}" onclick="download()">Compile your personal RIOT OS</button>
+            <div class="well" id="{CMD_OUTPUT_ID}">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" id="{PROGRESSBAR_ID}" style="width:100%; visibility:hidden"></div>
+                </div>
+            </div>
+        </div>
+            </div>
+
+        </div>
+            </div>
+            {FOOTER}
+        </body>
+    </html>
