@@ -7,17 +7,20 @@ class Transaction(models.Model):
 
 class Board(models.Model):
     internal_name = models.CharField(max_length=255)
+    flash_program = models.CharField(max_length=32)
     display_name = models.CharField(max_length=255)
-    description  = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
 class Application(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    path = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
+    group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
 class Module(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    path = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
     group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
