@@ -26,5 +26,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', get_html),
+    url(r'^$', get_html),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
