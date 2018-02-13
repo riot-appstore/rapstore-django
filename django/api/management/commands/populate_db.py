@@ -24,6 +24,7 @@ from api.models import Transaction
 from api.models import Module
 from api.models import Board
 from api.models import Application
+from django.utils.html import escape
 
 replacement_dict = {
     'acd52832': 'aconno ACD52832',
@@ -158,7 +159,7 @@ def update_modules(transaction):
 
                 #sql = 'INSERT INTO modules (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
                 #db.query(sql, (module_name, os.path.join(module_path, name), description, module_directory))
-                data = {"name": module_name, "path": os.path.join(module_path, name), "description": description, "group_identifier": module_directory, "transaction": transaction}
+                data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
 
@@ -221,7 +222,7 @@ def update_applications(transaction):
 
                 #sql = 'INSERT INTO applications (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
                 #db.query(sql, (application_name, os.path.join(application_path, name), description, application_directory))
-                data = {"name": application_name, "path": os.path.join(application_path, name), "description": description, "group_identifier": application_directory, "transaction": transaction}
+                data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
                 Application.objects.update_or_create(name=application_name, defaults=data)
 
     #db.commit()
