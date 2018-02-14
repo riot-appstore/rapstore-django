@@ -18,6 +18,9 @@ class Application(models.Model):
     group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
+    class Meta:
+        permissions = (('has_dev_perm','Has dev permissions'),)
+
 class Module(models.Model):
     name = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
