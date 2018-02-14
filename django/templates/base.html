@@ -48,6 +48,11 @@
                 <div id="tab1" class="tab-pane fade">
                     {% include "custom.html" %}
                 </div>
+                {% if perm.api.has_dev_perm %}
+                <div id="tab2" class="tab-pane fade">
+                    {% include "dev.html" %}
+                </div>
+                {% endif %}
             </div>
         </div>
         <footer class="footer">
