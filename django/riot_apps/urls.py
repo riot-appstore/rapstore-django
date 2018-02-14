@@ -17,7 +17,7 @@ from django.contrib import admin
 
 from django.conf.urls import url, include
 from rest_framework import routers
-from web.views import get_html
+from web.views import main_site
 from riot_apps import settings
 from django.conf.urls.static import static
 
@@ -26,5 +26,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', get_html),
+    url(r'^$', main_site),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

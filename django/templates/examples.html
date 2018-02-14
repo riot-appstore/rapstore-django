@@ -1,0 +1,52 @@
+{% with id_prefix="examplesTab_" column_width="6"%}
+{% include "board_selector.html" %}
+
+<div class="row">
+{% for application in applications%}
+    <div class="col-md-{{column_width}}"> 
+        <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-target="#panel_body{{application.id}}" style="cursor:pointer;">{{application.name}}</a>
+                </h4>
+            </div>
+            <div id="panel_body{{application.id}}" class="panel-body collapse">
+                {{application.description}}
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button id="{{ id_prefix }}button{{ application.id }}" type="button" class="btn btn-primary" onclick="download_example('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Download and flash</button>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="progress" id="{{ id_prefix }}progressDiv{{ application.id }}" style="visibility:hidden">
+                            <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar{{ application.id }}" style="width:100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="{{ id_prefix }}modalDialog{{ application.id }}" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Error Log</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:2 and not forloop.last %}
+    </div><div class="row">
+    {% endif %}
+{% endfor %}
+</div>
+{% endwith %}
