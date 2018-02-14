@@ -24,6 +24,9 @@
                     <div class="col-sm-8">
                         <h1>RAPstore</h1>
                         <p>Let us build your custom RIOT OS according to your needs</p>
+                        {% if user.is_authenticated %}
+                        <p>Hello, {{user.username|capfirst}}. <a href="{%url 'logout'%}">Log out.</a></p>
+                        {% endif %}
                     </div>
                     <div class="col-sm-4">
                         <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive"></img>
