@@ -21,6 +21,17 @@ If you want to populate the database with all examples, boards and modules, just
 
 # Admin
 It's possible to add Boards, Modules and Applications directly from Django admin. Simply go to `localhost:8000/admin`.
-Current config is:
+
+# Current users and roles:
+Currently only logout is supported from main site. Please, login in via admin site!
+### Superuser
 * User: riot
+* Pass: password0
+
+### Developer
+* User: dev
+* Pass: password0
+
+### User
+* User: user
 * Pass: password0
