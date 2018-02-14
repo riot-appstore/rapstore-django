@@ -1,1 +1,0 @@
-[{"model": "api.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$36000$nGXD6TyLARmd$XqQeLv1i46DJF3DJkDGVDl5V2ph6akZI/fLZ8Ig+Vo0=", "last_login": null, "is_superuser": true, "username": "riot", "first_name": "", "last_name": "", "email": "riot@riot-os.org", "is_staff": true, "is_active": true, "date_joined": "2018-02-14T15:11:14.951Z", "groups": [], "user_permissions": []}}]
