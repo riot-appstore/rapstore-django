@@ -1,10 +1,5 @@
 from django.db import models
 import uuid
-from django.contrib.auth.models import AbstractUser
-
-class User(AbstractUser):
-    class Meta:
-        permissions = (('has_dev_perm','The current user has dev permissions'),)
 
 class Transaction(models.Model):
     uuid = models.UUIDField(default=uuid.uuid1, editable=False, unique=True)
