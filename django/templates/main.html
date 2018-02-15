@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <ul id="navigations_tabs" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab0">Example applications</a></li>
+        <li><a data-toggle="tab" href="#tab1">Your custom RIOT OS</a></li>
+        {% if perms.api.has_dev_perm %} <li><a data-toggle="tab" href="#tab2">Developer</a></li> {%endif%}
+    </ul>
+    <div class="tab-content">
+        <div id="tab0" class="tab-pane fade in active">
+            {% include "examples.html" %}
+        </div>
+
+        <div id="tab1" class="tab-pane fade">
+            {% include "custom.html" %}
+        </div>
+        {% if perms.api.has_dev_perm %}
+        <div id="tab2" class="tab-pane fade">
+            {% include "dev.html" %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

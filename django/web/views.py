@@ -16,7 +16,7 @@ from django.template.loader import get_template
 from django.template import RequestContext
 
 def main_site(request):
-    t = get_template('base.html')
+    t = get_template('main.html')
     html = t.render(context={'boards': Board.objects.all(), 'applications': Application.objects.all(), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)
     return HttpResponse(html)
 
