@@ -14,7 +14,9 @@ from api.models import Application
 from api.models import Board
 from django.template.loader import get_template
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def main_site(request):
     t = get_template('main.html')
     html = t.render(context={'boards': Board.objects.all(), 'applications': Application.objects.all(), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)

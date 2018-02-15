@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from api.dummy import dummy_request
+from django.contrib.auth.decorators import login_required
 
 from io import StringIO
 
 
+@login_required
 def request_download(request):
     # Read request. For now, just read dummy request
     #TODO:
