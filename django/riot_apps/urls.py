@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from api.views import request_download
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -31,4 +32,5 @@ urlpatterns = [
     url(r'^$', main_site),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
+    url(r'^build/$', request_download, {}, name='build'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
