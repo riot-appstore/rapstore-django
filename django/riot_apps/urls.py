@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from rest_framework import routers
 from web.views import main_site
-from web.views import login
 from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
+from django.contrib.auth.views import login
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', main_site),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
-    url(r'^login/$', login, {}, name='login'),
+    url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

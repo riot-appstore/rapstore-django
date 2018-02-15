@@ -26,6 +26,8 @@
                         <p>Let us build your custom RIOT OS according to your needs</p>
                         {% if user.is_authenticated %}
                         <p>Hello, {{user.username|capfirst}}. <a href="{%url 'logout'%}">Log out.</a></p>
+                        {% else %}
+                        <p> <a href="{%url 'login'%}">Login</a> </p>
                         {% endif %}
                     </div>
                     <div class="col-sm-4">
