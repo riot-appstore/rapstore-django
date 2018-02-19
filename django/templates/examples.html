@@ -15,10 +15,13 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-md-4">
-                        <button id="{{ id_prefix }}button{{ application.id }}" type="button" class="btn btn-primary" onclick="download_example('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Build and flash</button>
+                    <div class="col-md-3">
+                        <button id="{{ id_prefix }}button_build_flash{{ application.id }}" type="button" class="btn btn-primary" onclick="download_example('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Build and flash</button>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
+                        <button id="{{ id_prefix }}button_download{{ application.id }}" type="button" class="btn btn-primary">Download</button>
+                    </div>
+                    <div class="col-md-6">
                         <div class="progress" id="{{ id_prefix }}progressDiv{{ application.id }}" style="visibility:hidden">
                             <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar{{ application.id }}" style="width:100%;"></div>
                         </div>
