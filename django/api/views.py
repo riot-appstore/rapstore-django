@@ -12,6 +12,7 @@ def request_download(request):
     #TODO:
     build_request = dummy_request()
 
+    # Decode base64
     elf_file = StringIO()
     elf_file.write(build_request["files"]["elf"])
 
