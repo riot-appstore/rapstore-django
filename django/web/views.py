@@ -19,5 +19,5 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def main_site(request):
     t = get_template('main.html')
-    html = t.render(context={'boards': Board.objects.all(), 'applications': Application.objects.all(), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)
+    html = t.render(context={'boards': Board.objects.all(), 'applications': Application.objects.all().order_by('name'), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)
     return HttpResponse(html)

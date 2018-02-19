@@ -18,20 +18,3 @@ Simply run `docker-compose -f install/docker-compose.yml up --build`. Docker com
 * Serve the website at localhost:8000
 
 If you want to populate the database with all examples, boards and modules, just execute (with the docker-compose up running!): `docker-compose -f install/docker-compose.yml exec web python manage.py populate_db`
-
-# Admin
-It's possible to add Boards, Modules and Applications directly from Django admin. Simply go to `localhost:8000/admin`.
-
-# Current users and roles:
-Currently only logout is supported from main site. Please, login in via admin site!
-### Superuser
-* User: riot
-* Pass: password0
-
-### Developer
-* User: dev
-* Pass: password0
-
-### User
-* User: user
-* Pass: password0
