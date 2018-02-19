@@ -6,7 +6,7 @@
             <div class="form-group">
                 <select class="form-control" id="{SELECTOR_ID}">
                     {% for board in boards %}
-                    <option value="{{board.internal_name}}">{{board.display_name}}</option>
+                    <option value="{{board.internal_name}}">{{board.display_name}} ({{board.internal_name}})</option>
                     {% endfor %}
                 </select>
             </div>
