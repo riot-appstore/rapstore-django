@@ -1,8 +1,8 @@
-{% with id_prefix="examplesTab_" column_width="6"%}
+{% with id_prefix="examplesTab_" column_width="6" %}
 {% include "board_selector.html" %}
 
 <div class="row">
-{% for application in applications%}
+{% for application in applications %}
     <div class="col-md-{{column_width}}"> 
         <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default">
             <div class="panel-heading">
