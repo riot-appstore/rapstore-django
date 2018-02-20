@@ -298,13 +298,31 @@ function checkBrowserIntegration() {
 
     if (!containsExtensionTag) {
         showAlertNoExtension();
+        disableAllFlashButtons(false, null);
     }
     else if (!containsNativeMessagingHostTag) {
         showAlertNoNativeMessagingHost();
+        disableAllFlashButtons(true, false);
     }
 
     extensionAvailable = containsExtensionTag;
     nativeMessagingHostAvailable = containsNativeMessagingHostTag;
+}
+
+function disableAllFlashButtons(extensionAvailable, hostAvailable) {
+
+    $('.build-and-flash-button').each(function() {
+
+        $(this).removeClass('btn-primary');
+        $(this).addClass('btn-default');
+
+        if (!extensionAvailable) {
+            $(this).attr("onclick", "showAlertNoExtension()");
+        }
+        else if (!hostAvailable) {
+            $(this).attr("onclick", "showAlertNoNativeMessagingHost()");
+        }
+    });
 }
 
 
