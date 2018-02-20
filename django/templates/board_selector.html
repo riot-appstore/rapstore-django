@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-10">
             <div class="form-group">
-                <select class="form-control" id="{SELECTOR_ID}">
+                <select class="form-control board-selector" data-bind="value: boardsel, event:{change: hello}">
                     {% for board in boards %}
                     <option value="{{board.internal_name}}">{{board.display_name}} ({{board.internal_name}})</option>
                     {% endfor %}

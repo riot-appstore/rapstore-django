@@ -1,4 +1,27 @@
 {% extends "base.html" %}
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+<script>
+    if(localStorage) {
+        $(document).ready(function(){
+        if(localStorage.board) {
+            $('.board-selector').each(function() {
+                $(this).val( localStorage.board );
+            });
+        }
+
+        var viewModel = {
+            hello: function() {
+             localStorage["board"] = $('.board-selector').val();
+            },
+            boardsel: ko.observable()
+        };
+        ko.applyBindings(viewModel);
+
+        });
+    }
+</script>
+{% endblock %}
 {% block content %}
 <div class="container">
     <ul id="navigations_tabs" class="nav nav-tabs">
