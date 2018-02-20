@@ -19,6 +19,8 @@ from django.contrib.auth.decorators import login_required
 from web.forms import UserProfileForm
 from django.urls import reverse
 
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def main_site(request):
     t = get_template('main.html')
@@ -41,3 +43,7 @@ def install_instruction_browser_integration(request):
     t = get_template('install_instruction_browser_integration.html')
     html = t.render()
     return HttpResponse(html)
+
+class AppDetails(LoginRequiredMixin, DetailView):
+    model = Application
+    template_name = 'app_detail.html'
