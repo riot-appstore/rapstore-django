@@ -5,11 +5,11 @@ services:
     image: postgres
   web:
     build: 
-        context: ../django
+        context: ./django
         dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-        - ../django:/code
+        - ./django:/code
     depends_on:
       - db
