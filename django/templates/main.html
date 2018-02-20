@@ -4,19 +4,20 @@
 <script>
     if(localStorage) {
         $(document).ready(function(){
-        if(localStorage.board) {
-            $('.board-selector').each(function() {
-                $(this).val( localStorage.board );
-            });
-        }
+        
+            if(localStorage.board) {
+                $('.board-selector').each(function() {
+                    $(this).val( localStorage.board );
+                });
+            }
 
-        var viewModel = {
-            set_board_name: function() {
-             localStorage["board"] = $('.board-selector').val();
-            },
-            boardsel: ko.observable()
-        };
-        ko.applyBindings(viewModel);
+            var viewModel = {
+                set_board_name: function() {
+                 localStorage["board"] = $('.board-selector').val();
+                },
+                boardsel: ko.observable()
+            };
+            ko.applyBindings(viewModel);
 
         });
     }
