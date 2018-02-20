@@ -119,7 +119,7 @@ function buildAndFlashCustomPost() {
         }
     }
 
-    var board = document.getElementById("customTab_boardSelector").value;
+    var board = document.getElementById("board-selector").value;
     var main_file = document.getElementById("customTab_main_file_input").files[0];
 
     if (checkboxesChecked.length == 0) {
@@ -285,7 +285,7 @@ function buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, p
     params = "";
     params += "application=" + applicationID;
     params += "&";
-    params += "board=" + document.getElementById("examplesTab_boardSelector").value;
+    params += "board=" + document.getElementById("board-selector").value;
 
     xhttp.send(params);
 }
