@@ -57,7 +57,7 @@ $(window).on("load", function() {
 
 
 // return true if everything went fine, false in case of failure
-function do_prechecks() {
+function doPrechecks() {
 
     // first check: is another download already running?
     if(downloadIsRunning) {
@@ -82,16 +82,16 @@ function do_prechecks() {
 
 function buildAndFlashCustom() {
 
-    if (do_prechecks()) {
-        downloadPost();
+    if (doPrechecks()) {
+        buildAndFlashCustomPost();
     }
 }
 
 
 function buildAndFlashExample(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
 
-    if (do_prechecks()) {
-        downloadExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID);
+    if (doPrechecks()) {
+        buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID);
     }
 }
 
@@ -106,7 +106,7 @@ function buildAndDownloadCustom() {
 }
 
 
-function downloadPost() {
+function buildAndFlashCustomPost() {
 
     //https://stackoverflow.com/questions/8563240/how-to-get-all-checked-checkboxes
     var checkboxes = document.getElementsByName("module_checkbox");
@@ -203,7 +203,7 @@ function downloadPost() {
 }
 
 
-function downloadExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
+function buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
 
     downloadIsRunning = true;
     setNavigationEnabled(false);
