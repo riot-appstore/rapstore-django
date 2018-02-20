@@ -17,6 +17,10 @@
         {% block extra_scripts %}
         {% endblock %}
 
+        {% with dialog_id="modalDialogBrowserIntegration" title="Component for RAPstore browser integration is missing" message="" %}
+        {% include "modal_dialog.html" %}
+        {% endwith %}
+
         <title>RAPstore</title>
     </head>
     <body>
@@ -30,10 +34,6 @@
                     <div class="col-sm-4">
                         <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive"></img>
                     </div>
-
-                    {% with dialog_id="modalDialogBrowserIntegration" title="Component for RAPstore browser integration is missing" message="" %}
-                    {% include "modal_dialog.html" %}
-                    {% endwith %}
                 </div>
             </div>
         </div>
