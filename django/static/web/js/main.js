@@ -80,23 +80,33 @@ function do_prechecks() {
 }
 
 
-function download() {
+function buildAndFlashCustom() {
 
     if (do_prechecks()) {
-        download_post();
+        downloadPost();
     }
 }
 
 
-function download_example(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
+function buildAndFlashExample(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
 
     if (do_prechecks()) {
-        download_example_post(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID);
+        downloadExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID);
     }
 }
 
 
-function download_post() {
+function buildAndDownloadExample() {
+    // TODO: implement
+}
+
+
+function buildAndDownloadCustom() {
+    // TODO: implement
+}
+
+
+function downloadPost() {
 
     //https://stackoverflow.com/questions/8563240/how-to-get-all-checked-checkboxes
     var checkboxes = document.getElementsByName("module_checkbox");
@@ -125,7 +135,7 @@ function download_post() {
         downloadIsRunning = true;
         setNavigationEnabled(false);
 
-        var downloadButton = document.getElementById("customTab_downloadButton");
+        var downloadButton = document.getElementById("customTab_buttonBuildFlash");
         var progressBar = document.getElementById("customTab_progressBar");
 
         downloadButton.disabled = true;
@@ -193,7 +203,7 @@ function download_post() {
 }
 
 
-function download_example_post(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
+function downloadExamplePost(applicationID, progressDivID, progressBarID, panelID, buttonID, modalDialogID) {
 
     downloadIsRunning = true;
     setNavigationEnabled(false);

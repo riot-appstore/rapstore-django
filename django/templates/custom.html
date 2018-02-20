@@ -39,7 +39,8 @@
 
 <h3>4. Build and flash:</h3>
 <div class="container-fluid">
-    <button type="button" class="btn btn-primary" id="{{ id_prefix }}downloadButton" onclick="download()">Compile your personal RIOT OS</button>
+    <button type="button" class="btn btn-primary" id="{{ id_prefix }}buttonBuildFlash" onclick="buildAndFlashCustom()">Build and flash</button>
+    <button type="button" class="btn btn-primary" id="{{ id_prefix }}buttonDownload" onclick="buildAndDownloadCustom()">Download</button>
     <div class="well" id="{{ id_prefix }}cmdOutput">
         <div class="progress">
             <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar" style="width:100%; visibility:hidden"></div>
