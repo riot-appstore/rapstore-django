@@ -14,6 +14,8 @@
         <script src="{% static '/web/js/browser-integration.js' %}"></script>
         <script src="{% static '/web/js/dialogs.js' %}"></script>
         <script src="{% static '/web/js/webusb-autodetect.js' %}"></script>
+        {% block extra_scripts %}
+        {% endblock %}
 
         <title>RAPstore</title>
     </head>
