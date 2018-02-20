@@ -39,8 +39,9 @@
 
 <h3>4. Build and flash:</h3>
 <div class="container-fluid">
-    <button type="button" class="btn btn-primary" id="{{ id_prefix }}buttonBuildFlash" onclick="buildAndFlashCustom()">Build and flash</button>
-    <button type="button" class="btn btn-primary" id="{{ id_prefix }}buttonDownload" onclick="buildAndDownloadCustom()">Download</button>
+    <button id="{{ id_prefix }}buttonBuildFlash" type="button" class="btn btn-primary" style="margin-right: 20px;" onclick="buildAndFlashCustom()">Build and flash</button>
+    <button id="{{ id_prefix }}buttonDownload" type="button" class="btn btn-primary" onclick="buildAndDownloadCustom()">Download</button>
+    <hr/>
     <div class="well" id="{{ id_prefix }}cmdOutput">
         <div class="progress">
             <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar" style="width:100%; visibility:hidden"></div>
