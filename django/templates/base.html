@@ -51,13 +51,8 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul id="navigations_tabs" class="nav navbar-nav">
-                        <li class="active"><a data-toggle="tab" href="#tab0">Example applications</a></li>
-                        <li><a data-toggle="tab" href="#tab1">Your custom RIOT OS</a></li>
-                        {% if perms.api.has_dev_perm %}
-                        <li><a data-toggle="tab" href="#tab2">Developer</a></li>
-                        {%endif%}
-                    </ul>
+                    {% block navbar %}
+                    {% endblock %}
                     <ul class="nav navbar-nav navbar-right">
                         <form class="navbar-form navbar-left">
                             <div class="form-group">
