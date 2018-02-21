@@ -298,7 +298,7 @@ def get_description(path, name):
     if description is None:
         description = get_description_helper(os.path.join(path, name, 'main.c'))
 
-    return description if description is not None else ''
+    return description if description is not None else 'There is no description yet'
 
 
 def get_name(path, application_directory):
