@@ -30,7 +30,7 @@ from django.contrib.auth.views import login
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', main_site),
+    url(r'^$', main_site, name="main_site"),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^build/$', request_download, {}, name='build'),
