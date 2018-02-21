@@ -25,6 +25,7 @@ def main_site(request):
     html = t.render(context={'boards': Board.objects.all().order_by('display_name'), 'applications': Application.objects.all().order_by('name'), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)
     return HttpResponse(html)
 
+@login_required
 def user_profile(request):
     if(request.method == 'POST'):
         form = UserProfileForm(instance=request.user, data=request.POST)
@@ -32,6 +33,6 @@ def user_profile(request):
             form.save()
         return HttpResponseRedirect(reverse('user-profile'))
     t = get_template('user_profile.html')
-    form = UserProfileForm({"email": request.user.email})
+    form = UserProfileForm(instance=request.user)
     html = t.render(context={"form": form}, request=request)
     return HttpResponse(html)

@@ -24,8 +24,10 @@
 <div class="container">
     <div class="col-md-8"> 
         <div data-bind="visible: !editing()">
-            <p><strong>Username: </strong>{{user.username}}</p>
-            <p><strong>Email: </strong>{{user.email}}</p>
+            <p><strong>Username: </strong>{{user.username|default:"___"}}</p>
+            <p><strong>Email: </strong>{{user.email|default:"___"}}</p>
+            <p><strong>First name: </strong>{{user.first_name|default:"___"}}</p>
+            <p><strong>Last name: </strong>{{user.last_name|default:"___"}}</p>
         </div>
         <form action="/user-profile/" data-bind="visible: editing()" method="POST">
             {% csrf_token %}
