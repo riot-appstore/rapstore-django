@@ -37,10 +37,11 @@
                     {% endblock %}
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li class="navbar-form">{% include "board_selector.html" %}</li>
+                        <form class="navbar-form navbar-left">
+                            {% include "board_selector.html" %}
+                        </form>
 
                         <form class="navbar-form navbar-left">
-
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search" autofocus="autofocus">
                             </div>
@@ -82,7 +83,7 @@
             </div>
         </div>
 
-        <div id="content-view" class="container">
+        <div class="container-fluid">
             {% block content %}
             {% endblock %}
         </div>

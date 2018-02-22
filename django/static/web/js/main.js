@@ -42,11 +42,9 @@ $(window).on("load", function() {
     $body = $('body');
 
     if (isFirefox) {
-        var autodetectButton1 = document.getElementById('examplesTab_autodetectButton');
-        autodetectButton1.parentNode.removeChild(autodetectButton1);
 
-        var autodetectButton2 = document.getElementById('customTab_autodetectButton');
-        autodetectButton2.parentNode.removeChild(autodetectButton2);
+        var autodetectButton = document.getElementById('autodetectButton');
+        autodetectButton.parentNode.removeChild(autodetectButton);
     }
 
     // waiting for async operations of extension to finish before continue

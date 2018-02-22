@@ -67,7 +67,7 @@ filterRules = [
 ]
 
 
-async function autodetect(selectorID) {
+async function autodetect() {
 
 /*
 unless otherwise specified, following vendorid and productid entries are coming from:
@@ -105,7 +105,7 @@ unless otherwise specified, following vendorid and productid entries are coming 
         }
         else {
             console.log(selectedRule.boardInternalName);
-            document.getElementById(selectorID).value = selectedRule.boardInternalName;
+            document.getElementById("board-selector").value = selectedRule.boardInternalName;
         }
 
         return device;

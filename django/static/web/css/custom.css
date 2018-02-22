@@ -10,12 +10,6 @@
     padding: 15px;
 }
 
-#content-view {
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 95%;
-}
-
 html {
     position: relative;
     min-height: 100%;
