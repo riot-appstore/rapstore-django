@@ -3,7 +3,7 @@
 
 <div class="row">
 {% for application in applications %}
-    <div class="col-md-{{column_width}}"> 
+    <div class="col-sm-{{column_width}}">
         <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -15,11 +15,11 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-sm-5">
                         <button id="{{ id_prefix }}buttonBuildFlash{{ application.id }}" type="button" class="btn btn-primary build-and-flash-button" onclick="buildAndFlashExample('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Install</button>
                         <button id="{{ id_prefix }}buttonDownload{{ application.id }}" type="button" class="btn btn-primary build-and-download-button" onclick="buildAndDownloadExample()">Download only</button>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-sm-7">
                         <div class="progress" id="{{ id_prefix }}progressDiv{{ application.id }}" style="visibility:hidden">
                             <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar{{ application.id }}" style="width:100%;"></div>
                         </div>

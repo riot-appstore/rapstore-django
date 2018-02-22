@@ -3,7 +3,7 @@
 <h3>2. Upload your main C file:</h3>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <input id="{{ id_prefix }}main_file_input" type="file" name="img[]" class="file">
             <div class="input-group">
                 <input type="text" class="form-control" readonly placeholder="Upload main source file">
@@ -22,7 +22,7 @@
     <div class="checkbox well"><h4>{{ group.grouper }}</h4>
         <div class="row">
         {% for checkbox in group.list|dictsort:"name" %}
-            <div class="col-md-{{ column_width }}">
+            <div class="col-sm-{{ column_width }}">
                 <label>
                     <input type="checkbox" name="module_checkbox" value="{{ checkbox.id }}">
                     <div data-toggle="tooltip" data-placement="bottom" title="{{checkbox.description}}">{{checkbox.name}}</div>

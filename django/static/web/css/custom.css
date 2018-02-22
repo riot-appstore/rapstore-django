@@ -10,6 +10,12 @@
     padding: 15px;
 }
 
+#content-view {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 95%;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -71,4 +77,54 @@ body {
     color: #ffffff;
     background-color: #2a9fd6;
     border-radius: 0 0 4px 4px;
+}
+
+/* make sidebar nav vertical */
+@media (min-width: 768px) {
+
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
+    .sidebar-nav .navbar ul {
+        float: none;
+    }
+    .sidebar-nav .navbar ul:not {
+        display: block;
+    }
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+    .sidebar-nav .navbar li a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}
+
+/* nice looking submenues for sidebar */
+.list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 45px;
 }
