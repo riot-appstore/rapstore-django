@@ -1,8 +1,12 @@
 <!-- ID_PREFIX, SELECTOR_ID-->
-<h3>1. Select a board:</h3>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10">
+
+        <div class="col-md-3">
+            <button id="{{id_prefix}}autodetectButton" type="button" class="btn btn-default btn-block" onclick="autodetect('{{id_prefix}}boardSelector')">Try autodetect</button>
+        </div>
+
+        <div class="col-md-9">
             <div class="form-group">
                 <select class="form-control board-selector" data-bind="value: boardsel, event:{change: set_board_name}">
                     {% for board in boards %}
@@ -11,8 +15,6 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-2">
-            <button id="{{id_prefix}}autodetectButton" type="button" class="btn btn-default btn-block" onclick="autodetect('{{id_prefix}}boardSelector')">Try autodetect</button>
-        </div>
+
     </div>
 </div>

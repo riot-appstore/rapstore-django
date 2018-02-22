@@ -1,6 +1,5 @@
 {% with id_prefix="customTab_" column_width="3" %}
-{% include "board_selector.html" %}
-<h3>2. Upload your main C file:</h3>
+<h3>1. Upload your main C file:</h3>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-6">
@@ -15,7 +14,7 @@
     </div>
 </div>
 
-<h3>3. Select modules:</h3>
+<h3>2. Select modules:</h3>
 <div class="container-fluid">
 {% regroup modules by group_identifier as group_internals %}
 {% for group in group_internals %}
@@ -37,7 +36,7 @@
 {% endfor %}
 </div>
 
-<h3>4. Build and flash:</h3>
+<h3>3. Build and flash:</h3>
 <div class="container-fluid">
     <button id="{{ id_prefix }}buttonBuildFlash" type="button" class="btn btn-primary build-and-flash-button" style="margin-right: 20px;" onclick="buildAndFlashCustom()">Install</button>
     <button id="{{ id_prefix }}buttonDownload" type="button" class="btn btn-primary build-and-download-button" onclick="buildAndDownloadCustom()">Download only</button>
