@@ -6,6 +6,10 @@
     --riot-red:#ca0022;
 }
 
+#main-jumbotron {
+    padding: 15px;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -14,7 +18,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 85px;
-    padding-top: 65px;
+    padding-top: 50px;
 }
 
 .footer {
