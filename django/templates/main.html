@@ -33,20 +33,18 @@
 </ul>
 {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="tab-content">
-        <div id="tab0" class="tab-pane fade in active">
-            {% include "examples.html" %}
-        </div>
-
-        <div id="tab1" class="tab-pane fade">
-            {% include "custom.html" %}
-        </div>
-        {% if perms.api.has_dev_perm %}
-        <div id="tab2" class="tab-pane fade">
-            {% include "dev.html" %}
-        </div>
-        {% endif %}
+<div class="tab-content">
+    <div id="tab0" class="tab-pane fade in active">
+        {% include "examples.html" %}
     </div>
+
+    <div id="tab1" class="tab-pane fade">
+        {% include "custom.html" %}
+    </div>
+    {% if perms.api.has_dev_perm %}
+    <div id="tab2" class="tab-pane fade">
+        {% include "dev.html" %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

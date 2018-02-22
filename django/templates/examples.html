@@ -43,7 +43,7 @@
 
     <div class="col-sm-10">
 
-        {% with id_prefix="examplesTab_" column_width="6" %}
+        {% with id_prefix="examplesTab_" column_width="4" %}
 
         <div class="row">
         {% for application in applications %}
@@ -59,11 +59,11 @@
                     </div>
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col-sm-5">
+                            <div class="col-sm-6">
                                 <button id="{{ id_prefix }}buttonBuildFlash{{ application.id }}" type="button" class="btn btn-primary build-and-flash-button" onclick="buildAndFlashExample('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Install</button>
                                 <button id="{{ id_prefix }}buttonDownload{{ application.id }}" type="button" class="btn btn-primary build-and-download-button" onclick="buildAndDownloadExample()">Download only</button>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-6">
                                 <div class="progress" id="{{ id_prefix }}progressDiv{{ application.id }}" style="visibility:hidden">
                                     <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar{{ application.id }}" style="width:100%;"></div>
                                 </div>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            {% if forloop.counter|divisibleby:2 and not forloop.last %}
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
             </div><div class="row">
             {% endif %}
         {% endfor %}
