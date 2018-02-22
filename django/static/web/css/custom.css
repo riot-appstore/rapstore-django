@@ -8,10 +8,15 @@
 
 #main-jumbotron {
     padding: 15px;
+    min-height: 180px;
 }
 
 #missing-components {
     visibility: hidden;
+}
+
+#missing-components-label-section {
+    padding-bottom: 10px;
 }
 
 html {
