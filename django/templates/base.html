@@ -70,14 +70,42 @@
         </nav>
 
         <div id="main-jumbotron" class="jumbotron">
-            <div class="container main-jumbotron-container">
+            <div class="container-fluid main-jumbotron-container">
                 <div class="row">
-                    <div class="col-sm-8">
-                        <h1>RAPstore</h1>
-                        <p>Let us build your custom RIOT OS according to your needs</p>
+                    <div class="col-sm-2">
+
+                        <h6>Following problems were detected:</h6>
+
+                        <div class="row">
+                            <div class="container-fluid">
+                                <span class="label label-warning">Extension not available</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="container-fluid">
+                                <span class="label label-warning">Host not available</span>
+                            </div>
+                        </div>
+
+                        Without the components above your are not able to flash devices from your browser. To fix this, click
+                            <a href="https://github.com/riot-appstore/rapstore-browser-integration">here</a>
+
                     </div>
-                    <div class="col-sm-4">
-                        <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive" width="250"/>
+                    <div class="col-sm-10">
+
+                        <div class="container">
+                            <div class="col-sm-7">
+                                <h1>RAPstore</h1>
+                            <p>The friendly App Store for the Internet of Things.</p>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <span class="label label-default">powered by</span>
+                                <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive" width="250"/>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
