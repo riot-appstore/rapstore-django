@@ -295,12 +295,16 @@ function checkBrowserIntegration() {
     var containsNativeMessagingHostTag = document.body.classList.contains("rapstore_native_messaging_host_installed");
 
     if (!containsExtensionTag) {
-        showAlertNoExtension();
-        disableAllFlashButtons(false, null);
+        $('#missing-components-label-section').append('<div class="row"><div class="container-fluid"><span class="label label-warning">Extension not available</span></div></div>')
     }
-    else if (!containsNativeMessagingHostTag) {
-        showAlertNoNativeMessagingHost();
-        disableAllFlashButtons(true, false);
+
+    if (!containsNativeMessagingHostTag) {
+        $('#missing-components-label-section').append('<div class="row"><div class="container-fluid"><span class="label label-warning">Host not available</span></div></div>')
+    }
+
+    if (!containsExtensionTag || !containsNativeMessagingHostTag) {
+        $('#missing-components').css('visibility', 'visible');
+        disableAllFlashButtons(containsExtensionTag, containsNativeMessagingHostTag);
     }
 
     extensionAvailable = containsExtensionTag;

@@ -74,22 +74,13 @@
                 <div class="row">
                     <div class="col-sm-2">
 
-                        <h6>Following problems were detected:</h6>
-
-                        <div class="row">
-                            <div class="container-fluid">
-                                <span class="label label-warning">Extension not available</span>
+                        <div id="missing-components">
+                            <h6>Following problems were detected:</h6>
+                            <div id="missing-components-label-section">
                             </div>
+                            Without the components above you are not able to flash devices from your browser. To fix this, click
+                                <a href="https://github.com/riot-appstore/rapstore-browser-integration">here</a>.
                         </div>
-
-                        <div class="row">
-                            <div class="container-fluid">
-                                <span class="label label-warning">Host not available</span>
-                            </div>
-                        </div>
-
-                        Without the components above your are not able to flash devices from your browser. To fix this, click
-                            <a href="https://github.com/riot-appstore/rapstore-browser-integration">here</a>
 
                     </div>
                     <div class="col-sm-10">
@@ -102,7 +93,9 @@
 
                             <div class="col-sm-3">
                                 <span class="label label-default">powered by</span>
-                                <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive" width="250"/>
+                                <a href="https://riot-os.org/">
+                                    <img src="{% static '/web/img/riot_logo.png' %}" alt="RIOT logo" class="img-responsive" width="250"/>
+                                </a>
                             </div>
                         </div>
 
