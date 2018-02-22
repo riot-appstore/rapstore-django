@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from api.views import request_download
+from uploader.views import uploader
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -35,4 +36,5 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^build/$', request_download, {}, name='build'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
+    url(r'^uploader/', uploader, {}, name='uploader'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
