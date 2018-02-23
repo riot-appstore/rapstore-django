@@ -6,6 +6,11 @@
     --riot-red:#ca0022;
 }
 
+#content-view {
+    z-index: -1;
+    position: relative;
+}
+
 #main-jumbotron {
     padding: 15px;
     margin: 0;
@@ -84,20 +89,14 @@ body {
 
 /* bootstrap 3 helpers https://www.bootply.com/118877 */
 
-#nav.affix {
+.nav.affix {
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index:10;
+    width: 100%
 }
 
-#sidebar.affix-top {
-    position: static;
-}
-
-#sidebar.affix {
-    position: fixed;
-    top: 80px;
+.nav-wrapper {
+    min-height: 50px;
 }
 
 

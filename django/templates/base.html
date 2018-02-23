@@ -63,8 +63,8 @@
             </div>
         </header>
 
-        <div id="nav">
-            <nav class="navbar navbar-default navbar-static">
+        <div class="nav-wrapper">
+            <nav class="nav navbar navbar-default affix" data-spy="affix" data-offset-top="180">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -114,7 +114,7 @@
             </nav>
         </div>
 
-        <div class="container-fluid">
+        <div id="content-view" class="container-fluid">
             {% block content %}
             {% endblock %}
         </div>
