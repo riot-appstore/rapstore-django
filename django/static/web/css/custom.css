@@ -82,7 +82,7 @@ body {
     border-radius: 0 0 4px 4px;
 }
 
-/* bootstrap 3 helpers */
+/* bootstrap 3 helpers https://www.bootply.com/118877 */
 
 #nav.affix {
     position: fixed;
