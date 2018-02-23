@@ -6,11 +6,6 @@
     --riot-red:#ca0022;
 }
 
-#content-view {
-    z-index: -1;
-    position: relative;
-}
-
 #main-jumbotron {
     padding: 15px;
     margin: 0;
@@ -97,6 +92,8 @@ body {
 
 .nav-wrapper {
     min-height: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 
