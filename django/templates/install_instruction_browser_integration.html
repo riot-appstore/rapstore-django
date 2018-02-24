@@ -2,10 +2,63 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <ul class="pager">
-            <li><a href="#">Previous</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
+
+        <div class="col-sm-3">
+        </div>
+
+        <div class="col-sm-6">
+
+            <br><br><br>
+
+            <div class="well">
+                <h1 style="text-align: center;">1. Prerequisites</h1>
+                <font size="4"><ul>
+                    <li>OS: Unix-based (e.g. Ubuntu)</li>
+                    <li>Browser: Firefox, Chrome or Chromium</li>
+                    <li>Python</li>
+                </ul></font>
+            </div>
+
+
+            <br><br><br>
+
+            <div class="well">
+                <h1 style="text-align: center;">2. Download</h1>
+                <font size="4"><ul>
+                    <li>
+                        Download zip archive
+                        <a href="https://github.com/riot-appstore/rapstore-browser-integration/archive/v0.1.0.zip" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"> Download</span></a>
+                    </li>
+                    <li>Store the archive in a program directory</li>
+                    <li>Unzip the archive (you can delete the archive afterwards)</li>
+                </ul></font>
+            </div>
+
+            <br><br><br>
+
+            <div class="well">
+                <h1 style="text-align: center;">3. Installation</h1>
+                <font size="4"><ul>
+                    <li>open a terminal</li>
+                    <li>execute <b class="text-primary">"cd your_install_path/src"</b></li>
+                    <li>execute <b class="text-primary">"python install.py browser"</b>, where browser is one of [firefox, chrome, chromium]</li>
+                </ul></font>
+            </div>
+
+            <br><br><br>
+
+            <div class="well">
+                <h1 style="text-align: center;">4. Finish</h1>
+                <font size="4"><p>If you are installing for chrome or chromium you will need to restart your browser to enable the extension.</p></font>
+            </div>
+
+            <br><br><br>
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+
+
     </div>
 </div>
 {% endblock %}
