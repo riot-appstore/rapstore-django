@@ -9,6 +9,7 @@ fs = FileSystemStorage(location='/apps')
 class Application(models.Model):
     author = models.ForeignKey(User)
     elf_file = models.FileField(storage=fs)
+    repo_url = models.URLField(max_length=255)
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=255)
     updated_at = models.DateTimeField(auto_now=True)
