@@ -15,3 +15,6 @@ class Application(models.Model):
     app_folder = models.FileField(storage=fs)
     app_repo_url = models.URLField(max_length=255, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def download_tar():
+        # get the remote repo from app_repo_url and create the command string
+        # wget the remote repo, check the command was executed correctly and we have the tar, and attach it to app_folder
