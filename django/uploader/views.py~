@@ -8,17 +8,17 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def uploader(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES, author=request.user)
-        print("request received")
-        print(form)
+        form = UploadFileForm(request.POST, request.FILES)
+        # if app_repo_url is populated and app_folder is not, then form.download_tar()
+
+        # checking validity should include checking that a tar.gz file is definitely attached to app_folder. app_repo_url, on the other hand, isn't necessary
         if form.is_valid():
-            print("valid")
             obj = form.save(commit=False)
             obj.author = request.user
-            obj.save
+            obj.save()
             return HttpResponseRedirect('/success/')
         else:
-            print("invalid")
+            return HttpResponseRedirect('/failure/')
     else:
         form = UploadFileForm()
 
