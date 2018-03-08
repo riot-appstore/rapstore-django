@@ -4,4 +4,4 @@ from uploader.models import Application
 class UploadFileForm(forms.ModelForm):
     class Meta:
         model=Application
-        fields=('name', 'description', 'licences', 'project_page', 'app_folder', 'app_repo_url') 
+        fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
