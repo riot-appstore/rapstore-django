@@ -9,9 +9,11 @@ from django.contrib.auth.decorators import login_required
 def uploader(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        # if app_repo_url is populated and app_folder is not, then form.download_tar()
+        # if app_repo_url is populated and app_folder is not, then form.download_tar(). if app_folder is populated and app_repo_url is not, then just check validity and save the form. If both are populated at this point, then an error has occurred. (Is there a built in way to check that only one or other of certain fields are returned in a django form?)
 
-        # checking validity should include checking that a tar.gz file is definitely attached to app_folder. app_repo_url, on the other hand, isn't necessary
+        if form.data.get('app_repo_url', False) and not form.data.get('app_tarball', False): form.instance.download_tar()
+        
+        # checking validity should include checking that a tar.gz file is definitely attached to app_folder. Also that the app name is unique. In general, failure should include some output to the user. app_repo_url, on the other hand, isn't necessary
         if form.is_valid():
             obj = form.save(commit=False)
             obj.author = request.user
