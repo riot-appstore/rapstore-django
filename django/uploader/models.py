@@ -16,15 +16,17 @@ class Application(models.Model):
     project_page = models.URLField(max_length=255)
     app_tarball = models.FileField(storage=fs, blank=True)
     app_repo_url = models.URLField(max_length=255, blank=True)
+    
     updated_at = models.DateTimeField(auto_now=True)
-    def download_tar(self):
+    def download_tar(self, link):
         # get the remote repo from app_repo_url and create the command string
-        link = "https://github.com/danpetry/ng-python" + "/archive/master.tar.gz"
+        print("*********************printing link now***************")
+        print(link)
         r = requests.get(link, verify=False)
-        with open("/apps/master.tar.gz", "wb") as f:
+        with open("/apps/master2.tar.gz", "wb") as f:
             f.write(r.content)
 
-        reopen = open("/apps/master.tar.gz", "rb")
+        reopen = open("/apps/master2.tar.gz", "rb")
         self.app_tarball = File(reopen)
 
         # could also use Django file storage functions to directly save the file to fs
