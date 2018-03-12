@@ -59,4 +59,4 @@ def test(request):
     with open(dest+"/app.elf", "rb") as file:
         b64 = base64.b64encode(file.read())
 
-    return HttpResponse(str(dest)+":"+b64)
+    return HttpResponse(b64)
