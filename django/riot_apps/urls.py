@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from api.views import request_download
 from uploader.views import uploader
 from django.contrib import admin
 
@@ -40,7 +39,6 @@ urlpatterns = [
     url(r'^$', main_site, name="main_site"),
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
-    url(r'^build/$', request_download, {}, name='build'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^uploader/', uploader, {}, name='uploader'),
     url(r'^api/', include(router.urls)),
