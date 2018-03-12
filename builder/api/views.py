@@ -6,6 +6,7 @@ import tempfile
 import tarfile
 import os
 from subprocess import Popen, PIPE, STDOUT
+import base64
 
 def extract_tar(tar):
     # Create temp folder
@@ -40,6 +41,7 @@ def execute_makefile(app_build_dir, board, app_name):
     cmd = ["make",
            "-C", app_build_dir,
            "RIOTBASE=/RIOT",
+           "ELFFILE=app.elf",
            "BOARD=%s" % board]
     #logging.debug('make: %s', cmd)
 
@@ -52,6 +54,9 @@ def test(request):
     dest=write_tar(f)
 
     #Since we have the folder, let's do stuff
-    dest=execute_makefile(dest, "samr21-xpro", "test")
+    execute_makefile(dest, "samr21-xpro", "test")
 
-    return HttpResponse(str(dest))
+    with open(dest+"/app.elf", "rb") as file:
+        b64 = base64.b64encode(file.read())
+
+    return HttpResponse(str(dest)+":"+b64)
