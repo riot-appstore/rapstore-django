@@ -25,6 +25,12 @@ from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
 from django.contrib.auth.views import login
+from rest_framework.routers import DefaultRouter
+from api.views import ApplicationViewSet
+
+router = DefaultRouter()
+
+router.register('apps', ApplicationViewSet, base_name='apps')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -37,4 +43,5 @@ urlpatterns = [
     url(r'^build/$', request_download, {}, name='build'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^uploader/', uploader, {}, name='uploader'),
+    url(r'^api/', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
