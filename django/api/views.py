@@ -7,6 +7,7 @@ from api.serializers import ApplicationSerializer
 from uploader.models import Application
 import requests
 from rest_framework.decorators import detail_route, list_route
+import base64
 
 from io import StringIO
 
@@ -21,7 +22,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         f=app.app_tarball
         files = {'file': f}
         r = requests.post("http://builder:8000/test/", files=files)
-        return HttpResponse("Building "+str(r.text))
+        response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=file.elf'
+        return response
 
 @login_required
 def request_download(request):
