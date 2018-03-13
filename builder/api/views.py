@@ -51,10 +51,11 @@ def execute_makefile(app_build_dir, board, app_name):
 @csrf_exempt
 def test(request):
     f = request.FILES['file']
+    board = request.POST['board']
     dest=write_tar(f)
 
     #Since we have the folder, let's do stuff
-    execute_makefile(dest, "samr21-xpro", "test")
+    execute_makefile(dest, board, "test")
 
     with open(dest+"/app.elf", "rb") as file:
         b64 = base64.b64encode(file.read())
