@@ -20,7 +20,11 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app = get_object_or_404(Application, pk=pk)
         f=app.app_tarball
         files = {'file': f}
-        r = requests.post("http://builder:8000/test/", data={"board": "samr21-xpro"},files=files)
+        board = request.GET.get('board', None)
+        if not board:
+            return HttpResponse("Board not found")
+
+        r = requests.post("http://builder:8000/test/", data={"board": board}, files=files)
 
         #TODO:
         if(r.status_code != 200):
