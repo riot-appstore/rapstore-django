@@ -20,7 +20,12 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app = get_object_or_404(Application, pk=pk)
         f=app.app_tarball
         files = {'file': f}
-        r = requests.post("http://builder:8000/test/", files=files)
+        r = requests.post("http://builder:8000/test/", data={"board": "samr21-xpro"},files=files)
+
+        #TODO:
+        if(r.status_code != 200):
+            return HttpResponse("Error")
+
         response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=file.elf'
         return response
