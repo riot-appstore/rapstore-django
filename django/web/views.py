@@ -39,6 +39,6 @@ def user_profile(request):
     html = t.render(context={"form": form}, request=request)
     return HttpResponse(html)
 
-class AppDetails(LoginRequiredMixin, DetailView):
+class AppDetails(DetailView):
     model = Application
     template_name = 'app_detail.html'
