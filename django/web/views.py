@@ -1,4 +1,3 @@
->>>>>>> add dummy app_detail pag2
 """
  * Copyright (C) 2017 Hendrik van Essen
  *
