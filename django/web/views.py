@@ -1,3 +1,4 @@
+>>>>>>> add dummy app_detail pag2
 """
  * Copyright (C) 2017 Hendrik van Essen
  *
@@ -44,6 +45,6 @@ def install_instruction_browser_integration(request):
     html = t.render()
     return HttpResponse(html)
 
-class AppDetails(LoginRequiredMixin, DetailView):
+class AppDetails(DetailView):
     model = Application
     template_name = 'app_detail.html'
