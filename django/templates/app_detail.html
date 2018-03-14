@@ -1,20 +1,42 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 {% block content %}
-<div class="container">
-    <div class="col-sm-4">
-        <h3>Configure application</h3>
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Configuration 1</label>
-                <input type="email" class="form-control" id="config_1" aria-describedby="config1Help" placeholder="Enter config 1">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="container rounded app-panel panel-default panel">
+    <div class="row form-group">
+        <div class="col-sm-9">
+            <h3> My first app </h3>
+            <p> One line description </p>
+            <p> * * * * * </p>
+        </div>
+        <div class="col-sm-3">
+            <div class="text-center">
+                <div class="center-block form-group" style="margin-top:5em;width:200px;height:200px;background:gray"></div>
+                <a class="btn btn-primary" href="#" role="button">Install</a>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Configuration 2</label>
-                <input type="email" class="form-control" id="config_2" aria-describedby="config2Help" placeholder="Enter config 2">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-        </form>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12">
+            <p>Description</p>
+        </div>
+    </div>
+    <div class="row form-group" style="margin-top: 5em">
+        <div class="col-sm-9">
+            <p>Last update: NONE</p>
+            <p>Curremt Version: NONE</p>
+            <p>Category: Sensor</p>
+            <p>License: Apache (Link)</p>
+        </div>
+        <div class="col-sm-3">
+            <p>Developer contac:</p>
+            <p>Name: NONE</p>
+            <p>Email: NONE</p>
+            <p>Website: NONE</p>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12">
+            <p>Minimum RIOT version: NONE</p>
+        </div>
     </div>
 </div>
 {% endblock %}
