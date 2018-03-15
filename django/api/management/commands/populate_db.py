@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 """
- * Copyright (C) 2017 Hendrik van Essen
+ * Copyright (C) 2018 FU Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
@@ -36,8 +36,6 @@ def update_modules(transaction):
     Update table "modules". The table is truncated and data is re-imported
     """
 
-    #db.query('TRUNCATE modules')
-
     for i in range(len(config.module_directories)):
         module_directory = config.module_directories[i]
         module_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, module_directory)
@@ -50,9 +48,8 @@ def update_modules(transaction):
                     continue
 
                 description = get_description(module_path, name)
-
                 module_name = get_name(os.path.join(module_path, name), name)
-                
+
                 data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
@@ -239,6 +236,7 @@ class Command(BaseCommand):
             update_boards(transaction)
             update_applications(transaction)
             print("OK")
+
         except Exception as e:
             transaction.delete()
             print("FAIL: {}".format(str(e)))

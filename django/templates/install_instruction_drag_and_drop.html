@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div class="gap-50"></div>
+
+    <h2 style="text-align: center;">Install instructions for drag and drop</h2>
+    <font size="4">
+        <p>In order to bring the apps provided by RAPstore on your device, your can place the binary files directly on the storage for a subset of boards. Have a look at the
+        detail page of the board to know if your board is supporting that mechanism.</p>
+    </font>
+
+    <div class="gap-50"></div>
+
+    <div class="row">
+
+        <div class="col-sm-3">
+        </div>
+
+        <div class="col-sm-6">
+
+            <div class="well">
+                <h3 style="text-align: center;">1. Download your app's binary</h3>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="well">
+                <h3 style="text-align: center;">2. Open the storage of the device in your file explorer</h3>
+                <p>IMAGE OF FILE EXPLORER HERE</p>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="well">
+                <h3 style="text-align: center;">3. Drag and drop the binary file to the storage</h3>
+                <p>IMAGE OF DRAG AND DROP HERE (WINDOWS AND LINUX VERSION)</p>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div style="text-align: center;">
+                <a href="{% url 'main_site'%}" class="btn btn-primary btn-lg">Go back to main site</a>
+            </div>
+
+            <div class="gap-50"></div>
+
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
