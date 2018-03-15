@@ -44,6 +44,8 @@ def install_instruction_browser_integration(request):
     html = t.render()
     return HttpResponse(html)
 
-class AppDetails(DetailView):
-    model = Application
-    template_name = 'app_detail.html'
+def generate_app_detail_view(template):
+    class AppDetails(DetailView):
+        model = Application
+        template_name = template
+    return AppDetails
