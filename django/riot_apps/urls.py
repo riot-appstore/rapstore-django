@@ -39,5 +39,5 @@ urlpatterns = [
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration'),
     url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
-    url(r'^app_details/(?P<pk>\d+)/install/$', generate_app_detail_view(template="app_build.html").as_view(), {}, name='app-details'),
+    url(r'^app_details/(?P<pk>\d+)/install/$', generate_app_detail_view(template="app_build.html").as_view(), {}, name='app-install'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
