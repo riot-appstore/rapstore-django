@@ -9,10 +9,10 @@
  * directory for more details.
 """
 
-from django.core.management.base import BaseCommand
-
 import os
 import sys
+
+from django.core.management.base import BaseCommand
 
 # append root of the python code tree to sys.apth so that imports are working
 #   alternative: add path to rapstore_backend to the PYTHONPATH environment variable, but this includes one more step
@@ -27,114 +27,8 @@ from api.models import Module
 from api.models import Board
 from api.models import Application
 from django.utils.html import escape
-
-replacement_dict = {
-    'acd52832': 'aconno ACD52832',
-    'airfy-beacon': 'Airfy Beacon',
-    'arduino-due': 'Arduino Due',
-    'arduino-duemilanove': 'Arduino Duemilanove',
-    'arduino-mega2560': 'Arduino Mega2560',
-    'arduino-mkr1000': 'Arduino MKR1000',
-    'arduino-mkrzero': 'Arduino MKR ZERO',
-    'arduino-uno': 'Arduino Uno',
-    'arduino-zero': 'Arduino Zero',
-    'avsextrem': 'AVS Extrem',
-    'b-l072z-lrwan1': 'STMicroelectronics B-L072Z-LRWAN1',
-    'b-l475e-iot01a': 'STMicroelectronics B-L475E-IOT01A',
-    'bluepill': 'Blue Pill',
-    'calliope-mini': 'Calliope Mini',
-    'cc2538dk': 'CC2538DK',
-    'cc2650-launchpad': 'CC2650 LaunchPad',
-    'cc2650stk': 'CC2650STK',
-    'chronos': 'eZ430 Chronos',
-    'ek-lm4f120xl': 'EK-LM4F120XL',
-    'f4vi1': 'F4VI1',
-    'feather-m0': 'Adafruit Feather M0',
-    'fox': 'HikoB Fox',
-    'frdm-k22f': 'FRDM-K22F',
-    'frdm-k64f': 'FRDM-K64F',
-    'ikea-tradfri': 'IKEA TRÅDFRI',
-    'iotlab-a8-m3': 'IoT LAB A8-M3',
-    'iotlab-m3': 'IoT LAB M3',
-    'limifrog-v1': 'LimiFrog-v1',
-    'maple-mini': 'Maple Mini',
-    'mbed_lpc1768': 'mbed_lpc1768',
-    'microbit': 'micro:bit',
-    'mips-malta': 'MIPS Malta',
-    'msb-430': 'MSB-430',
-    'msb-430h': 'MSB-430H',
-    'msba2': 'MSBA2',
-    'msbiot': 'MSB-IoT',
-    'mulle': 'Mulle',
-    'nrf51dongle': 'nRF51 Dongle',
-    'nrf52840dk': 'NRF52840DK',
-    'nrf52dk': 'NRF52DK',
-    'nrf6310': 'NRF6310',
-    'nucleo-f030': 'Nucleo-F030',
-    'nucleo-f070': 'Nucleo-F070',
-    'nucleo-f072': 'Nucleo-F072',
-    'nucleo-f091': 'Nucleo-F091',
-    'nucleo-f103': 'Nucleo-F103',
-    'nucleo-f302': 'Nucleo-F302',
-    'nucleo-f303': 'Nucleo-F303',
-    'nucleo-f334': 'Nucleo-F334',
-    'nucleo-f401': 'Nucleo-F401',
-    'nucleo-f410': 'Nucleo-F410',
-    'nucleo-f411': 'Nucleo-F411',
-    'nucleo-f446': 'Nucleo-F446',
-    'nucleo-l053': 'Nucleo-L053',
-    'nucleo-l073': 'Nucleo-L073',
-    'nucleo-l152': 'Nucleo-L152',
-    'nucleo-l476': 'Nucleo-L467',
-    'nucleo144-f207': 'Nucleo144-F207',
-    'nucleo144-f303': 'Nucleo144-F303',
-    'nucleo144-f412': 'Nucleo144-F412',
-    'nucleo144-f413': 'Nucleo144-F413',
-    'nucleo144-f429': 'Nucleo144-F429',
-    'nucleo144-f446': 'Nucleo144-F446',
-    'nucleo144-f722': 'Nucleo144-F722',
-    'nucleo144-f746': 'Nucleo144-F746',
-    'nucleo144-f767': 'Nucleo144-F767',
-    'nucleo32-f031': 'Nucleo144-F031',
-    'nucleo32-f042': 'Nucleo144-F042',
-    'nucleo32-f303': 'Nucleo144-F303',
-    'nucleo32-l031': 'Nucleo144-F031',
-    'nucleo32-l432': 'Nucleo144-F432',
-    'nz32-sc151': 'NZ32-SC151',
-    'opencm904': 'OpenCM9.04',
-    'openmote-cc2538': 'OpenMote',
-    'pba-d-01-kw2x': 'Phytec phyWAVE-KW22',
-    'pca10000': 'PCA10000',
-    'pca10005': 'PCA10005',
-    'pic32-clicker': 'PIC32 Clicker',
-    'pic32-wifire': 'PIC32 WiFire',
-'qemu-i386': 'qemu-i386',
-    'remote-pa': 'Zolertia remote (Prototype)',
-    'remote-reva': 'Zolertia remote Rev. A',
-    'remote-revb': 'Zolertia remote Rev. B',
-    'ruuvitag': 'RuuviTag',
-    'samd21-xpro': 'SAMD21-xpro',
-    'saml21-xpro': 'SAML21-xpro',
-    'samr21-xpro': 'SAMR21-xpro',
-    'seeeduino_arch-pro': 'Seeeduino Arch-Pro',
-    'sltb001a': 'Silicon Labs',
-    'slwstk6220a': 'SLWSSTK6220A',
-    'sodaq-autonomo': 'SODAQ Autonomo',
-    'sodaq-explorer': 'SODAQ ExpLoRer',
-    'spark-core': 'Spark Core',
-    'stm32f0discovery': 'STM32F0discovery',
-    'stm32f3discovery': 'STM32F3discovery',
-    'stm32f4discovery': 'STM32F4discovery',
-    'stm32f7discovery': 'STM32F7discovery',
-    'telosb': 'TelosB',
-    'thingy52': 'Nordic Thingy:52',
-    'udoo': 'UDOO',
-    'waspmote-pro': 'Waspmote Pro',
-    'wsn430-v1_3b': 'WSN430 v1_3b',
-    'wsn430-v1_4': 'WSN430 v1_4',
-    'yunjia-nrf51822': 'yunjia-nrf51822',
-    'z1': 'Zolertia Z1',
-}
+from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
+from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
 
 
 def update_modules(transaction):
@@ -158,9 +52,7 @@ def update_modules(transaction):
                 description = get_description(module_path, name)
 
                 module_name = get_name(os.path.join(module_path, name), name)
-
-                #sql = 'INSERT INTO modules (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (module_name, os.path.join(module_path, name), description, module_directory))
+                
                 data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
@@ -184,27 +76,23 @@ def update_boards(transaction):
                 and not item == 'native'
         )
 
-    #db.query('TRUNCATE boards')
-
     path = os.path.join(PROJECT_ROOT_DIR, config.path_root, 'boards')
 
-    for item in os.listdir(path):
-        if is_valid_board(path, item):
+    for board_internalname in os.listdir(path):
+        if is_valid_board(path, board_internalname):
 
-            #sql = 'INSERT INTO boards (display_name, internal_name, flash_program) VALUES (%s, %s, %s);'
-            #db.query(sql, (item, item, 'openocd'))
-            data = {"internal_name": item, "display_name": replacement_dict.get(item, item), "flash_program": 'openocd', "transaction": transaction}
-            Board.objects.update_or_create(internal_name=item, defaults=data)
+            displayname = internalname_displayname_dict.get(board_internalname, board_internalname)
+            storageflashsupport = internalname_storageflashsupport_dict.get(board_internalname, False)
 
-    #db.commit()
+            data = {"internal_name": board_internalname, "display_name": displayname, "flash_program": 'openocd', "storage_flash_support": storageflashsupport, "transaction": transaction}
+
+            Board.objects.update_or_create(internal_name=board_internalname, defaults=data)
 
 
 def update_applications(transaction):
     """
     Update table "applications". The table is truncated and data is re-imported
     """
-
-    #db.query('TRUNCATE applications')
 
     for i in range(len(config.application_directories)):
 
@@ -222,12 +110,8 @@ def update_applications(transaction):
 
                 application_name = get_name(os.path.join(application_path, name), name)
 
-                #sql = 'INSERT INTO applications (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (application_name, os.path.join(application_path, name), description, application_directory))
                 data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
                 Application.objects.update_or_create(name=application_name, defaults=data)
-
-    #db.commit()
 
 
 def get_description(path, name):
