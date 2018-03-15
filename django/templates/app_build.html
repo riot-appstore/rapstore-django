@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container rounded app-panel panel-default panel">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3> Install app on your device </h3>
+            <div class="form-group">
+                Board
+                <form>
+                    {% include "board_selector.html" %}
+                </form>
+            </div>
+            <!--
+            <div class="form-group">
+                Configuration
+                <textarea class="form-control"></textarea>
+            </div>
+            -->
+            <button type="button" class="btn btn-primary">Install on device</button>
+            <button type="button" class="btn btn-primary">Download binary file</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
