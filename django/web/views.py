@@ -49,3 +49,12 @@ def generate_app_detail_view(template):
         model = Application
         template_name = template
     return AppDetails
+
+class AppInstall(DetailView):
+    model = Application
+    template_name = "app_build.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["boards"] = Board.objects.all().order_by('display_name')
+        return context
