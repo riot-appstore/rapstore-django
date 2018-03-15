@@ -3,6 +3,15 @@
 <div class="container rounded app-panel panel-default panel">
     <div class="row">
         <div class="col-sm-12">
+            <ul class="breadcrumb">
+                <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+                <li><a href="{% url "app-details" pk=application.pk%}">{{application.name}}</a></li>
+                <li class="active">Install</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             <h3> Install app on your device </h3>
             <div class="form-group">
                 Board

@@ -1,6 +1,14 @@
 {% extends "main.html" %}
 {% block content %}
 <div class="container rounded app-panel panel-default panel">
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="breadcrumb">
+                <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+                <li class="active">{{application.name}}</li>
+            </ul>
+        </div>
+    </div>
     <div class="row form-group">
         <div class="col-sm-9">
             <h3> {{application.name}} </h3>
