@@ -9,6 +9,7 @@ class Board(models.Model):
     internal_name = models.CharField(max_length=255)
     flash_program = models.CharField(max_length=32)
     display_name = models.CharField(max_length=255)
+    storage_flash_support = models.BooleanField(default=False)
     transaction = models.ForeignKey('Transaction')
 
 class Application(models.Model):

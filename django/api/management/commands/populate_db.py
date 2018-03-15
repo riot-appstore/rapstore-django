@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 """
  * Copyright (C) 2017 Hendrik van Essen
