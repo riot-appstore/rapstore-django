@@ -22,10 +22,12 @@ from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 def main_site(request):
     t = get_template('main.html')
     html = t.render(context={'boards': Board.objects.all().order_by('display_name'), 'applications': Application.objects.all().order_by('name'), 'modules': Module.objects.all().order_by('group_identifier')}, request=request)
     return HttpResponse(html)
+
 
 @login_required
 def user_profile(request):
@@ -38,6 +40,13 @@ def user_profile(request):
     form = UserProfileForm(instance=request.user)
     html = t.render(context={"form": form}, request=request)
     return HttpResponse(html)
+
+
+def install_instruction_browser_integration(request):
+    t = get_template('install_instruction_browser_integration.html')
+    html = t.render()
+    return HttpResponse(html)
+
 
 class AppDetails(DetailView):
     model = Application

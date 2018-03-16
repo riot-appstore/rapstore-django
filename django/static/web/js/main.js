@@ -48,7 +48,7 @@ $(window).on("load", function() {
     }
 
     // waiting for async operations of extension to finish before continue
-    setTimeout(checkBrowserIntegration, 1 * 1000);
+    setTimeout(checkBrowserIntegration, 1 * 100);
 
     return extensionAvailable && nativeMessagingHostAvailable;
 });
