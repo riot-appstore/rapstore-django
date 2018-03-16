@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container">
@@ -15,32 +16,47 @@
 
     <div class="row">
 
-        <div class="col-sm-3">
+        <div class="col-sm-1">
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-10">
 
-            <div class="well">
-                <h3 style="text-align: center;">1. Download your app's binary</h3>
+            <div class="well text-center">
+                <h3>1. Download your app's binary</h3>
+                <font size="4">
+                    <p>Save the file in the default 'Download' directory</p>
+                </font>
             </div>
 
             <div class="gap-50"></div>
 
-            <div class="well">
-                <h3 style="text-align: center;">2. Open the storage of the device in your file explorer</h3>
-                <p>IMAGE OF FILE EXPLORER HERE</p>
+            <div class="well text-center">
+                <h3>2. Open your file explorer</h3>
+                <font size="4"><ul class="text-left">
+                    <li>Navigate to your 'Download' directory</li>
+                    <li>Open a new window or tab and navigate to the storage of the connected device</li>
+                </ul></font>
             </div>
 
             <div class="gap-50"></div>
 
-            <div class="well">
+            <div class="well text-center">
                 <h3 style="text-align: center;">3. Drag and drop the binary file to the storage</h3>
-                <p>IMAGE OF DRAG AND DROP HERE (WINDOWS AND LINUX VERSION)</p>
+                <img class="img-responsive" src="{% static '/web/img/windows-drag-and-drop.png' %}" alt="Drag and drop on Windows"/>
             </div>
 
             <div class="gap-50"></div>
 
-            <div style="text-align: center;">
+            <div class="well text-center">
+                <h3>4. Your app is ready to use</h3>
+                <font size="4">
+                    <p>You can disconnect your device if the process has finished (e.g. if the device's LED is not blinking anymore)</p>
+                </font>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="text-center">
                 <a href="{% url 'main_site'%}" class="btn btn-primary btn-lg">Go back to main site</a>
             </div>
 
@@ -48,7 +64,7 @@
 
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-1">
         </div>
 
 
