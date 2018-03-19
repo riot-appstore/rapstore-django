@@ -72,6 +72,12 @@ body {
 .app-panel {
     height: 80%;
     overflow: hidden;
+    -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: background 0.5s;
+}
+
+.app-panel:hover {
+    background: #2a9fd6;
 }
 
 .app-panel-header {
@@ -86,6 +92,11 @@ body {
 .app-panel-footer {
     height: 20%;
     padding: 0;
+}
+
+.app-panel .app-name {
+    font-size:1.2em;
+    margin-top: 2em;
 }
 
 /*
