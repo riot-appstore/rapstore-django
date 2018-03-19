@@ -50,14 +50,14 @@
                 {% for application in applications %}
                     <div class="col-sm-2">
                         <div>
-                            <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
-                                <div id="panel_body{{application.id}}" class="panel-body app-panel-body app-panel text-center">
-                                    <a href="{% url "app-details" pk=application.pk %}"><img class="avatar center-block" width="170" height="170" avatar="{{application.name}}"></a>
-                                    <a href="{% url "app-details" pk=application.pk %}" class="" style="width:100%">
-                                        <span style="font-size:1.2em">{{application.name}}</span>
-                                        </a>
+                            <a style="text-decoration: none; font-weight: normal; color: white;" href="{% url "app-details" pk=application.pk %}">
+                                <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
+                                    <div id="panel_body{{application.id}}" class="panel-body app-panel-body app-panel text-center">
+                                        <img class="avatar center-block" width="170" height="170" avatar="{{application.name}}">
+                                        <p class="app-name">{{application.name}}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
 
                         <div class="modal fade" id="{{ id_prefix }}modalDialog{{ application.id }}" role="dialog">
