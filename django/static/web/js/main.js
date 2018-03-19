@@ -369,8 +369,8 @@ $(document).on('change', '.file', function(){
         size  = size || 60;
 
         var colours = [
-                "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
-                "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
+                "#8d1821", "#6fbda5", "#a01b25", "#5bb499", "#bd202c",
+                "#3fa788", "#c6414b", "#358d73", "#cd5760", "#2f7d66"
             ],
 
             nameSplit = String(name).toUpperCase().split(' '),
@@ -388,13 +388,13 @@ $(document).on('change', '.file', function(){
         }
 
         charIndex     = (initials == '?' ? 72 : initials.charCodeAt(0)) - 64;
-        colourIndex   = charIndex % 20;
+        colourIndex   = charIndex % colours.length;
         canvas        = d.createElement('canvas');
         canvas.width  = size;
         canvas.height = size;
         context       = canvas.getContext("2d");
 
-        context.fillStyle = colours[colourIndex - 1];
+        context.fillStyle = colours[colourIndex];
         context.fillRect (0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width/2)+"px Arial";
         context.textAlign = "center";
