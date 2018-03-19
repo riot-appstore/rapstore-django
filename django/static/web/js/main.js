@@ -39,14 +39,6 @@ window.onbeforeunload = function (event) {
 
 $(window).on("load", function() {
 
-    $body = $('body');
-
-    if (isFirefox) {
-
-        var autodetectButton = document.getElementById('autodetectButton');
-        autodetectButton.parentNode.removeChild(autodetectButton);
-    }
-
     // waiting for async operations of extension to finish before continue
     setTimeout(checkBrowserIntegration, 1 * 100);
 

@@ -111,6 +111,18 @@ body {
     padding-left: 1em;
 }
 
+.a-wrapper-no-decoration {
+    text-decoration: none;
+    font-weight: normal;
+    color: white;
+}
+
+.a-wrapper-no-decoration:hover {
+    text-decoration: none;
+    font-weight: normal;
+    color: white;
+}
+
 /*
     changing collapse icon for panels
     Mix between two sources:
