@@ -3,7 +3,12 @@
 <div class="container rounded app-panel panel-default panel">
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-1">
+            <a class="btn btn-primary download-binary-with-info" href="{% url 'main_site' %}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </a>
+        </div>
+        <div class="col-sm-11">
             <ul class="breadcrumb">
                 <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
                 <li class="active">{{application.name}}</li>
