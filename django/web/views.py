@@ -48,6 +48,20 @@ def install_instruction_browser_integration(request):
     return HttpResponse(html)
 
 
-class AppDetails(DetailView):
+def generate_app_detail_view(template):
+
+    class AppDetails(DetailView):
+        model = Application
+        template_name = template
+
+    return AppDetails
+
+
+class AppInstall(DetailView):
     model = Application
-    template_name = 'app_detail.html'
+    template_name = "app_build.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["boards"] = Board.objects.all().order_by('display_name')
+        return context

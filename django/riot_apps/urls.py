@@ -21,7 +21,8 @@ from rest_framework import routers
 from web.views import main_site, user_profile, install_instruction_browser_integration
 from web.views import main_site
 from web.views import user_profile
-from web.views import AppDetails
+from web.views import generate_app_detail_view
+from web.views import AppInstall
 from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
@@ -38,5 +39,6 @@ urlpatterns = [
     url(r'^build/$', request_download, {}, name='build'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration'),
-    url(r'^app_details/(?P<pk>\d+)/$', AppDetails.as_view(), {}, name='app-details'),
+    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
+    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

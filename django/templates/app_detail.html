@@ -1,6 +1,14 @@
 {% extends "main.html" %}
 {% block content %}
 <div class="container rounded app-panel panel-default panel">
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="breadcrumb">
+                <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+                <li class="active">{{application.name}}</li>
+            </ul>
+        </div>
+    </div>
     <div class="row form-group">
         <div class="col-sm-9">
             <h3> {{application.name}} </h3>
@@ -9,8 +17,10 @@
         </div>
         <div class="col-sm-3">
             <div class="text-center">
-                <div class="center-block form-group" style="margin-top:5em;width:200px;height:200px;background:gray"></div>
-                <a class="btn btn-primary" href="#" role="button">Install</a>
+                <div class="center-block form-group" style="margin-top:5em;width:200px;height:200px">
+                    <img width="200" height="200" class="avatar" avatar="Andy">
+                </div>
+                <a class="btn btn-primary" href="{% url "app-install" pk=application.pk %}" role="button">Install</a>
             </div>
         </div>
     </div>
