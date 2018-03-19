@@ -1,5 +1,5 @@
 <div class="row">
-
+<!--
     <div class="col-sm-2">
 
         <div class="sidebar-nav">
@@ -30,13 +30,14 @@
                         <a href="#" class="list-group-item">Data processing</a>
 
                     </div>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </div>
 
     </div>
+    -->
 
-    <div class="col-sm-10">
+    <div class="col-sm-12">
 
         <div class="row">
 
@@ -47,21 +48,14 @@
                 {% with id_prefix="examplesTab_" column_width="4" %}
                 <div class="row">
                 {% for application in applications %}
-                    <div class="col-sm-{{column_width}}">
-                        <div class="app-panel-div">
+                    <div class="col-sm-2">
+                        <div>
                             <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
-                                <div class="panel-heading app-panel-header">
-                                    <h4 class="panel-title">
-                                        <button type="button" class="btn btn-default build-and-flash-button" style="width: 100%; height: 100%;">{{application.name}}</button>
-                                    </h4>
-                                </div>
-                                <div id="panel_body{{application.id}}" class="panel-body app-panel-body">
-                                    {{application.description|safe}}
-                                </div>
-                                <div class="panel-footer app-panel-footer">
-                                    <a href="{% url "app-details" pk=application.pk %}" class="btn btn-primary active" style="width:100%">
-                                        Install
-                                    </a>
+                                <div id="panel_body{{application.id}}" class="panel-body app-panel-body app-panel text-center">
+                                    <a href="{% url "app-details" pk=application.pk %}"><img class="avatar center-block" width="170" height="170" avatar="{{application.name}}"></a>
+                                    <a href="{% url "app-details" pk=application.pk %}" class="" style="width:100%">
+                                        <span style="font-size:1.2em">{{application.name}}</span>
+                                        </a>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    {% if forloop.counter|divisibleby:6 and not forloop.last %}
                     </div><div class="row">
                     {% endif %}
                 {% endfor %}
