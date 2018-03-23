@@ -1,3 +1,4 @@
 *.pyc
 *.swp
 .idea/
+rapstore-frontend/node_modules
