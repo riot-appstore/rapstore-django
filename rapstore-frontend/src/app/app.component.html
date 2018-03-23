@@ -1,0 +1,119 @@
+<header class="masthead">
+    <div id="main-jumbotron" class="jumbotron">
+        <div class="container-fluid main-jumbotron-container">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <div id="missing-components">
+                        <h6>Following problems were detected:</h6>
+                        <div id="missing-components-label-section">
+                        </div>
+                        Without the components above you are not able to flash devices from your browser. To fix this, click
+                        <!--<a href="{%url 'install-instruction-browser-integration'%}">here</a>.-->
+                    </div>
+
+                </div>
+                <div class="col-sm-10">
+
+                    <div class="container">
+                        <div class="col-sm-7">
+                            <h1>RAPstore</h1>
+                        <p>The friendly App Store for the Internet of Things.</p>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <span class="label label-default">powered by</span>
+                            <a href="https://riot-os.org/">
+                                <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-responsive" width="250"/>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--block navbar-->
+<div class="nav-wrapper">
+    <nav class="nav navbar navbar-default affix" data-spy="affix" data-offset-top="160">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+
+                <!--block navtabs-->
+                <ul id="navigations_tabs" class="nav navbar-nav">
+                    <li class="active"><a data-toggle="tab" routerLink="">Example applications</a></li>
+                    <!--<li><a data-toggle="tab" href="#tab1">Your custom RIOT OS</a></li>-->
+                    <!--if perms.api.has_dev_perm-->
+                    <li><a data-toggle="tab" href="#tab2">Developer</a></li>
+                    <!--endif-->
+                </ul>
+                <!--endblock-->
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <form class="navbar-form navbar-left">
+                        <!--include "board_selector.html"-->
+                    </form>
+
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" autofocus="autofocus">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+
+                    <!--if user.is_authenticated-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">Logged in as <b>user.username</b><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="user-profile">Your profile</a></li>
+                            <li><a href="#">Your configurations</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="logout">Log out</a></li>
+                        </ul>
+                    </li>
+
+                    <!--else-->
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+                    <!--endif-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!--endblock-->
+
+<div id="content-view" class="container-fluid">
+    <!--{% block content %}-->
+    <div class="tab-content">
+        <router-outlet></router-outlet>
+    </div>
+    <!--{% endblock %}-->
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">&copy; 2017-2018</div>
+            <div class="col-sm-4">
+                <a href="https://riot-os.org/">
+                    <img src="/assets/img/riot_logo_footer.png" alt="RIOT logo" width="64" height="35"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
