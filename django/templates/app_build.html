@@ -1,8 +1,17 @@
 {% extends "main.html" %}
+
+{% block navtabs %}
+{% endblock %}
+
 {% block content %}
 <div class="container rounded app-panel panel-default panel">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-1">
+            <a class="btn btn-primary download-binary-with-info" href="{% url 'app-details' pk=application.pk %}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </a>
+        </div>
+        <div class="col-sm-11">
             <ul class="breadcrumb">
                 <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
                 <li><a href="{% url "app-details" pk=application.pk%}">{{application.name}}</a></li>
@@ -26,7 +35,10 @@
             </div>
             -->
             <button type="button" class="btn btn-primary">Install on device</button>
-            <button type="button" class="btn btn-primary">Download binary file</button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary download-binary-with-info">Download binary file</button>
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-info-sign"></span></button>
+            </div>
         </div>
     </div>
 </div>

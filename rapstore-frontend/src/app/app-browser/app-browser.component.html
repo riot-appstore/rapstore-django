@@ -10,32 +10,16 @@
             <ng-container *ngFor="let application of apps">
                 <div class="col-sm-2">
                     <div>
-                        <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
-                            <div id="panel_body{{application.id}}" class="panel-body app-panel-body app-panel text-center">
-                                <a routerLink="detail"><ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
-</a>                                <a routerLink="detail" class="" style="width:100%">
-                                    <span style="font-size:1.2em">{{application.name}}</span>
-                                    </a>
-                            </div>
-                        </div>
-                    </div>
+                        <a class="a-wrapper-no-decoration" href="">
+                            <div class="panel panel-default app-overview-item">
+                                <div class="panel-body app-panel-body app-panel text-center">
+                                <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
 
-                    <div class="modal fade" id="{{ id_prefix }}modalDialog{{ application.id }}" role="dialog">
-                        <div class="modal-dialog modal-lg">
+                                <p class="app-name">{{application.name}}</p>
+                                </div>
 
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Error Log</h4>
                             </div>
-                            <div class="modal-body">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <!--if forloop.counter|divisibleby:6 and not forloop.last

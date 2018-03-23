@@ -38,15 +38,6 @@ window.onbeforeunload = function (event) {
 
 
 $(window).on("load", function() {
-
-    $body = $('body');
-
-    if (isFirefox) {
-
-        var autodetectButton = document.getElementById('autodetectButton');
-        autodetectButton.parentNode.removeChild(autodetectButton);
-    }
-
     // waiting for async operations of extension to finish before continue
     setTimeout(checkBrowserIntegration, 1 * 100);
 
@@ -359,3 +350,89 @@ $(document).on('click', '.browse', function(){
 $(document).on('change', '.file', function(){
     $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
 });
+
+
+(function(w, d){
+
+
+  function LetterAvatar (name, size) {
+
+    name  = name || '';
+    size  = size || 60;
+
+    var colours = [
+        "#8d1821", "#6fbda5", "#a01b25", "#5bb499", "#bd202c",
+        "#3fa788", "#c6414b", "#358d73", "#cd5760", "#2f7d66"
+      ],
+
+      nameSplit = String(name).toUpperCase().split(' '),
+      initials, charIndex, colourIndex, canvas, context, dataURI;
+
+
+    if (nameSplit.length == 1) {
+      initials = nameSplit[0] ? nameSplit[0].charAt(0):'?';
+    } else {
+      initials = nameSplit[0].charAt(0) + nameSplit[1].charAt(0);
+    }
+
+    if (w.devicePixelRatio) {
+      size = (size * w.devicePixelRatio);
+    }
+
+    charIndex     = (initials == '?' ? 72 : initials.charCodeAt(0)) - 64;
+    colourIndex   = charIndex % colours.length;
+    canvas        = d.createElement('canvas');
+    canvas.width  = size;
+    canvas.height = size;
+    context       = canvas.getContext("2d");
+
+    context.fillStyle = colours[colourIndex];
+    context.fillRect (0, 0, canvas.width, canvas.height);
+    context.font = Math.round(canvas.width/2)+"px Arial";
+    context.textAlign = "center";
+    context.fillStyle = "#FFF";
+    context.fillText(initials, size / 2, size / 1.5);
+
+    dataURI = canvas.toDataURL();
+    canvas  = null;
+
+    return dataURI;
+  }
+
+  LetterAvatar.transform = function() {
+
+    Array.prototype.forEach.call(d.querySelectorAll('img[avatar]'), function(img, name) {
+      name = img.getAttribute('avatar');
+      img.src = LetterAvatar(name, img.getAttribute('width'));
+      img.removeAttribute('avatar');
+      img.setAttribute('alt', name);
+    });
+  };
+
+
+  // AMD support
+  if (typeof define === 'function' && define.amd) {
+
+    define(function () { return LetterAvatar; });
+
+    // CommonJS and Node.js module support.
+  } else if (typeof exports !== 'undefined') {
+
+    // Support Node.js specific `module.exports` (which can be a function)
+    if (typeof module != 'undefined' && module.exports) {
+      exports = module.exports = LetterAvatar;
+    }
+
+    // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+    exports.LetterAvatar = LetterAvatar;
+
+  } else {
+
+    window.LetterAvatar = LetterAvatar;
+
+    d.addEventListener('DOMContentLoaded', function(event) {
+      LetterAvatar.transform();
+    });
+  }
+
+})(window, document);
