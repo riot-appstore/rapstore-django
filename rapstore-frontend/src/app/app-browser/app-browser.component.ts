@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Application, APPS } from '../models';
+import { Component, OnInit, Input } from '@angular/core';
+import { Application} from '../models';
+import { AppserviceService } from '../appservice.service';
 
 @Component({
   selector: 'app-app-browser',
@@ -9,11 +10,13 @@ import { Application, APPS } from '../models';
 
 export class AppBrowserComponent implements OnInit {
 
-  constructor() { }
+  @Input() apps: Application;
+  constructor(private AppserviceService: AppserviceService) { }
 
   ngOnInit() {
+    this.AppserviceService.getAll()
+      .subscribe(app => this.apps = app);
   }
-  apps = APPS;
   id_prefix="examplesTab_";
   column_width=4;
 

@@ -8,8 +8,8 @@ import { AppBuildComponent } from './app-build/app-build.component';
 
 const routes: Routes = [
   { path: '', component: AppBrowserComponent },
-  { path: 'detail/:id', component: AppDetailComponent },
-  { path: 'build/:id', component: AppBuildComponent }
+  { path: 'app/:id', component: AppDetailComponent },
+  { path: 'app/:id/build', component: AppBuildComponent }
 ];
 
 @NgModule({
