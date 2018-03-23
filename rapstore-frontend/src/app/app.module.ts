@@ -9,6 +9,7 @@ import { AppBrowserComponent } from './app-browser/app-browser.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { AppDetailComponent } from './app-detail/app-detail.component';
 import { AppserviceService } from './appservice.service';
+import { AppBuildComponent } from './app-build/app-build.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AppserviceService } from './appservice.service';
     AppComponent,
     AppBrowserComponent,
     AppDetailComponent,
+    AppBuildComponent,
   ],
   imports: [
     BrowserModule,

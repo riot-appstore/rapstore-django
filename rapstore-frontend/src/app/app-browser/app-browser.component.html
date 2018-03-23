@@ -10,13 +10,7 @@
             <ng-container *ngFor="let application of apps">
                 <div class="col-sm-2">
                     <div>
-                        <!--<div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
-                            <div id="panel_body{{application.id}}" class="panel-body app-panel-body app-panel text-center">
-                                <a routerLink="detail"><ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
-</a>                                <a routerLink="detail" class="" style="width:100%">
-                                    <span style="font-size:1.2em">{{application.name}}</span>
-                        </a>-->
-                        <a class="a-wrapper-no-decoration" href="">
+                        <a class="a-wrapper-no-decoration" routerLink="detail/{{application.id}}">
                             <div class="panel panel-default app-overview-item">
                                 <div class="panel-body app-panel-body app-panel text-center">
                                 <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
