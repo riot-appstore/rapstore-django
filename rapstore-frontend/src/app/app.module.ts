@@ -10,6 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AppDetailComponent } from './app-detail/app-detail.component';
 import { AppserviceService } from './appservice.service';
 import { AppBuildComponent } from './app-build/app-build.component';
+import { BoardService } from './board.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AppBuildComponent } from './app-build/app-build.component';
     NguUtilityModule,
     AppRoutingModule
   ],
-  providers: [AppserviceService],
+  providers: [AppserviceService, BoardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

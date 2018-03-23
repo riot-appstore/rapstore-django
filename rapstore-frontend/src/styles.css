@@ -179,39 +179,38 @@ body {
 .list-group.list-group-root > .list-group > .list-group > .list-group-item {
     padding-left: 45px;
 }
+
 .app-panel .app-name {
-    font-size:1.2em;
-    margin-top: 2em;
+  font-size:1.2em;
+  margin-top: 2em;
 }
 
 .app-overview-item {
-    -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
-    transition: background 0.5s;
+  -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
+  transition: background 0.5s;
 }
 
 .app-overview-item:hover {
-    background: #2a9fd6;
+  background: #2a9fd6;
 }
 
 .app-detail-avatar {
-    float:left;
+  float:left;
 }
 
 .app-detail-headline {
-    overflow: hidden;
-    padding-left: 1em;
+  overflow: hidden;
+  padding-left: 1em;
 }
 
 .a-wrapper-no-decoration {
-    text-decoration: none;
-    font-weight: normal;
-    color: white;
+  text-decoration: none;
+  font-weight: normal;
+  color: white;
 }
 
 .a-wrapper-no-decoration:hover {
-    text-decoration: none;
-    font-weight: normal;
-    color: white;
+  text-decoration: none;
+  font-weight: normal;
+  color: white;
 }
-
-
