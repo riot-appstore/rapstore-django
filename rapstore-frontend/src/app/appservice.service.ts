@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Application } from './models';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 const APPS: Application[] = [
   { id: 1, name: 'GNRC Networking', description: "Standard network for RIOT" },
@@ -18,13 +20,17 @@ const APPS: Application[] = [
 
 @Injectable()
 export class AppserviceService {
-
-  constructor() { }
+private baseUrl: string = 'http://localhost:8000';
+  constructor(private http: Http) { }
   getAll() : Observable<Application[]> {
-    return of(APPS);
+     let headers = new Headers({"Content-Type": 'application/json'});
+     let options = new RequestOptions({ headers: headers });
+     return this.http.get(`${this.baseUrl}/api/app/`).map(res => res.json());
   }
   get(id: number) : Observable<Application> {
-   return of(APPS.find(app => app.id === id));
+   let headers = new Headers({"Content-Type": 'application/json'});
+   let options = new RequestOptions({ headers: headers });
+   return this.http.get(`${this.baseUrl}/api/app/${id}/`).map(res => res.json());
  }
 
 }

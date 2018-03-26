@@ -16,5 +16,6 @@ export class AppBuildComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.AppserviceService.get(id)
       .subscribe(app => this.application = app);
+  }
 
 }

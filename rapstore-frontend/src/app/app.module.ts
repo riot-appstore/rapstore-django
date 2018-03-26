@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import {NguUtilityModule} from "ngu-utility/dist";
 
 
@@ -24,7 +25,8 @@ import { BoardService } from './board.service';
     BrowserModule,
     FormsModule,
     NguUtilityModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
   providers: [AppserviceService, BoardService],
   bootstrap: [AppComponent]
