@@ -11,12 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 
 export class AppDetailComponent implements OnInit {
   @Input() application: Application;
+  show_avatar = false;
   constructor(private AppserviceService: AppserviceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.AppserviceService.get(id)
-      .subscribe(app => this.application = app);
+    .subscribe(app => {this.application = app; this.show_avatar = true;});
   }
 
 }
