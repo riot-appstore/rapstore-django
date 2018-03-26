@@ -12,11 +12,11 @@ import {BoardService} from '../board.service';
 export class BoardSelectorComponent implements OnInit {
 
   @Input() boards: Board[];
-  constructor(private BoardService: BoardService, private route: ActivatedRoute) { }
+  constructor(private boardService: BoardService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.BoardService.getAll()
+    this.boardService.getAll()
       .subscribe(boards => this.boards = boards);
   }
 

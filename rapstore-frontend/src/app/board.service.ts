@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Board } from './models';
 import { Observable } from 'rxjs/Observable';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import {Board} from './models';
 
 @Injectable()
 export class BoardService {

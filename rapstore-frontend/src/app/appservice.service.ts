@@ -5,7 +5,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class AppserviceService {
+export class AppService {
 
   private baseUrl = 'http://localhost:8000';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Application } from '../models';
-import { AppserviceService } from '../appservice.service';
+import { AppService } from '../appservice.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,11 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class AppBuildComponent implements OnInit {
 
   @Input() application: Application;
-  constructor(private AppserviceService: AppserviceService, private route: ActivatedRoute) { }
+  constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.AppserviceService.get(id)
+    this.appService.get(id)
       .subscribe(app => this.application = app);
   }
 

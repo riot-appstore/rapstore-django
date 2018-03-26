@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AppserviceService } from './appservice.service';
+import { AppService } from './appservice.service';
 
-describe('AppserviceService', () => {
+describe('AppService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AppserviceService]
+      providers: [AppService]
     });
   });
 
-  it('should be created', inject([AppserviceService], (service: AppserviceService) => {
+  it('should be created', inject([AppService], (service: AppService) => {
     expect(service).toBeTruthy();
   }));
 });
