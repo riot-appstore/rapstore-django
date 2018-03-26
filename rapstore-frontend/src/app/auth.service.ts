@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: Http) { }
   login(username: string, password: string): Observable<boolean> {
-      const url=`${this.base_url}/api/auth`;
+      const url=`${this.base_url}/auth/`;
       return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers})
         .map((response: Response) => {
           const token = response.json() && response.json().token;
