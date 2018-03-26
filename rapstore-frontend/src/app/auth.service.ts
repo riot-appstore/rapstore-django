@@ -13,6 +13,7 @@ export class AuthService {
   constructor(private http: Http) {
       const current_user = JSON.parse(localStorage.getItem('user'));
       this.token = current_user && current_user.token;
+      this.logged_in.next(this.token);
   }
   login(username: string, password: string): Observable<boolean> {
       const url=`${this.base_url}/auth/`;
@@ -38,5 +39,10 @@ export class AuthService {
   }
   get is_logged() {
     return this.logged_in.asObservable();
+  }
+  username() {
+    if (localStorage.getItem('user')){
+      return JSON.parse(localStorage.getItem('user')).username;
+     } else return "";
   }
 }
