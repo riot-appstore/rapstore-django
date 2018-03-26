@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class AuthService {
   private base_url: string = 'http://localhost:8000';
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
-  public token: string;
+  private token: boolean;
   private logged_in = new BehaviorSubject<boolean>(false);
 
   constructor(private http: Http) {
