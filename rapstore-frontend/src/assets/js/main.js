@@ -39,7 +39,7 @@ window.onbeforeunload = function (event) {
 
 $(window).on("load", function() {
     // waiting for async operations of extension to finish before continue
-    setTimeout(checkBrowserIntegration, 1 * 100);
+    //setTimeout(checkBrowserIntegration, 1 * 100);
 
     return extensionAvailable && nativeMessagingHostAvailable;
 });

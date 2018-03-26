@@ -13,6 +13,7 @@ import { AppserviceService } from './appservice.service';
 import { AppBuildComponent } from './app-build/app-build.component';
 import { BoardService } from './board.service';
 import { BoardSelectorComponent } from './board-selector/board-selector.component';
+import { MissingComponentsLabelSectionComponent } from './missing-components-label-section/missing-components-label-section.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { BoardSelectorComponent } from './board-selector/board-selector.componen
     AppDetailComponent,
     AppBuildComponent,
     BoardSelectorComponent,
+    MissingComponentsLabelSectionComponent,
   ],
   imports: [
     BrowserModule,
