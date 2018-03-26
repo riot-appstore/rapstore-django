@@ -29,7 +29,7 @@ def request_download(request):
 
 
 class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Application.objects.all()
+    queryset = Application.objects.all().order_by('name')
     serializer_class = ApplicationSerializer
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
