@@ -4,12 +4,11 @@ import { AppserviceService } from '../appservice.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-app-detail',
-  templateUrl: './app-detail.component.html',
-  styleUrls: ['./app-detail.component.css']
+  selector: 'app-app-build',
+  templateUrl: './app-build.component.html',
+  styleUrls: ['./app-build.component.css']
 })
-
-export class AppDetailComponent implements OnInit {
+export class AppBuildComponent implements OnInit {
   @Input() application: Application;
   constructor(private AppserviceService: AppserviceService, private route: ActivatedRoute) { }
 

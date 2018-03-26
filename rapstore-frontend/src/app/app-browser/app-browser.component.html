@@ -10,7 +10,7 @@
             <ng-container *ngFor="let application of apps">
                 <div class="col-sm-2">
                     <div>
-                        <a class="a-wrapper-no-decoration" href="">
+                        <a class="a-wrapper-no-decoration" routerLink="app/{{application.id}}">
                             <div class="panel panel-default app-overview-item">
                                 <div class="panel-body app-panel-body app-panel text-center">
                                 <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
