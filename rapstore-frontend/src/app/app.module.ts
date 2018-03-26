@@ -12,6 +12,7 @@ import { AppDetailComponent } from './app-detail/app-detail.component';
 import { AppserviceService } from './appservice.service';
 import { AppBuildComponent } from './app-build/app-build.component';
 import { BoardService } from './board.service';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { BoardService } from './board.service';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [AppserviceService, BoardService],
+  providers: [AppserviceService, BoardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
