@@ -26,8 +26,7 @@
           "./assets/js/bootstrap.min.js",
           "./assets/js/main.js",
           "./assets/js/browser-integration.js",
-          "./assets/js/dialogs.js",
-          "./assets/js/webusb-autodetect.js"
+          "./assets/js/dialogs.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
