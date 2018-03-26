@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from rest_framework import routers
 from api.views import ApplicationViewSet
+from api.views import BoardViewSet
 from web.views import main_site, user_profile, install_instruction_browser_integration
 from web.views import main_site
 from web.views import user_profile
@@ -31,6 +32,7 @@ from django.contrib.auth.views import login
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
+router.register(r'board', BoardViewSet)
 
 
 # Wire up our API using automatic URL routing.

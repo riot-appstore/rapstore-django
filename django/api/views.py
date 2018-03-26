@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from api.dummy import dummy_request
 from api.serializers import ApplicationSerializer
+from api.serializers import BoardSerializer
 from api.models import Application
+from api.models import Board
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework import viewsets
@@ -26,6 +28,10 @@ def request_download(request):
     return response
 
 
-class ApplicationViewSet(viewsets.ModelViewSet):
+class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+
+class BoardViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Board.objects.all().order_by('display_name')
+    serializer_class = BoardSerializer
