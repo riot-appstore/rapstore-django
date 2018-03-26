@@ -13,6 +13,7 @@ import { AppserviceService } from './appservice.service';
 import { AppBuildComponent } from './app-build/app-build.component';
 import { BoardService } from './board.service';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { AuthService } from './auth.service';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [AppserviceService, BoardService, AuthService],
+  providers: [AppserviceService, BoardService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
