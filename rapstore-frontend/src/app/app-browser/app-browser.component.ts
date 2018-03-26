@@ -11,7 +11,7 @@ import { AppserviceService } from '../appservice.service';
 export class AppBrowserComponent implements OnInit {
 
   @Input() apps: Application[];
-  constructor(private AppserviceService: AppserviceService) { }
+  constructor(private AppserviceService: AppserviceService) {}
 
   ngOnInit() {
     this.AppserviceService.getAll()

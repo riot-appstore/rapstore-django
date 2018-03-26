@@ -8,9 +8,6 @@
 
 var downloadIsRunning = false;
 
-var extensionAvailable = false;
-var nativeMessagingHostAvailable = false;
-
 var isFirefox = typeof InstallTrigger !== 'undefined';
 var isChrome = !!window.chrome && !!window.chrome.webstore;
 
@@ -34,16 +31,7 @@ window.onbeforeunload = function (event) {
         // dont show a dialog when no download is running
         return null;
     }
-}
-
-
-$(window).on("load", function() {
-    // waiting for async operations of extension to finish before continue
-    //setTimeout(checkBrowserIntegration, 1 * 100);
-
-    return extensionAvailable && nativeMessagingHostAvailable;
-});
-
+};
 
 // return true if everything went fine, false in case of failure
 function doPrechecks() {
@@ -239,7 +227,7 @@ function buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, p
             if(innerMessage != null && innerMessage.output_archive != null) {
                 panel.className = "panel panel-success";
 
-                button.className = "btn btn-success"
+                button.className = "btn btn-success";
 
                 if (isFirefox || isChrome) {
                     messageExtension("rapstore_install_image", jsonResponse);
@@ -251,10 +239,10 @@ function buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, p
             else {
                 panel.className = "panel panel-danger";
 
-                button.className = "btn btn-danger"
+                button.className = "btn btn-danger";
                 button.innerHTML = "Show error log";
 
-                modalDialogBody.innerHTML = "<p>" + innerMessage.cmd_output + "</p>"
+                modalDialogBody.innerHTML = "<p>" + innerMessage.cmd_output + "</p>";
                 modalDialogFooter.innerHTML = '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="sendMailToSupport(\'' + modalDialogID + '\')">Send log to support</button>' + modalDialogFooter.innerHTML;
 
                 $('#' + modalDialogID + '').modal('show');
@@ -280,27 +268,7 @@ function buildAndFlashExamplePost(applicationID, progressDivID, progressBarID, p
 }
 
 
-function checkBrowserIntegration() {
 
-    var containsExtensionTag = document.body.classList.contains("rapstore_extension_installed");
-    var containsNativeMessagingHostTag = document.body.classList.contains("rapstore_native_messaging_host_installed");
-
-    if (!containsExtensionTag) {
-        $('#missing-components-label-section').append('<div class="row"><div class="container-fluid"><span class="label label-warning">Extension not available</span></div></div>')
-    }
-
-    if (!containsNativeMessagingHostTag) {
-        $('#missing-components-label-section').append('<div class="row"><div class="container-fluid"><span class="label label-warning">Host not available</span></div></div>')
-    }
-
-    if (!containsExtensionTag || !containsNativeMessagingHostTag) {
-        $('#missing-components').css('visibility', 'visible');
-        disableAllFlashButtons(containsExtensionTag, containsNativeMessagingHostTag);
-    }
-
-    extensionAvailable = containsExtensionTag;
-    nativeMessagingHostAvailable = containsNativeMessagingHostTag;
-}
 
 function disableAllFlashButtons(extensionAvailable, hostAvailable) {
 

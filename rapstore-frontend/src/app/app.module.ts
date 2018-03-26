@@ -14,6 +14,7 @@ import { AppBuildComponent } from './app-build/app-build.component';
 import { BoardService } from './board.service';
 import { BoardSelectorComponent } from './board-selector/board-selector.component';
 import { MissingComponentsLabelSectionComponent } from './missing-components-label-section/missing-components-label-section.component';
+import {BrowserIntegrationService} from './browser-integration.service';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { MissingComponentsLabelSectionComponent } from './missing-components-lab
     AppRoutingModule,
     HttpModule
   ],
-  providers: [AppserviceService, BoardService],
+  providers: [AppserviceService, BoardService, BrowserIntegrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
