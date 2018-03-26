@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Application} from '../models';
 import { AppserviceService } from '../appservice.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-app-browser',

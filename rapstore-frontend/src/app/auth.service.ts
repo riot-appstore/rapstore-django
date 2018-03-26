@@ -8,7 +8,10 @@ export class AuthService {
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   public token: string;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+      const current_user = JSON.parse(localStorage.getItem('user'));
+      this.token = current_user && current_user.token;
+  }
   login(username: string, password: string): Observable<boolean> {
       const url=`${this.base_url}/auth/`;
       return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers})
@@ -27,5 +30,10 @@ export class AuthService {
   logout() {
     this.token = null;
     localStorage.removeItem("user");  
+  }
+  logged(): boolean {
+    console.log("Checking if null");
+    console.log(this.token);
+    return this.token != null;
   }
 }
