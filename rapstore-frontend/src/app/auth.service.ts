@@ -45,4 +45,7 @@ export class AuthService {
       return JSON.parse(localStorage.getItem('user')).username;
      } else return "";
   }
+  is_developer() {
+    return false;
+  }
 }
