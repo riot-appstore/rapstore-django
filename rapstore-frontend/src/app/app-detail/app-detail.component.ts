@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class AppDetailComponent implements OnInit {
+
   @Input() application: Application;
   constructor(private AppserviceService: AppserviceService, private route: ActivatedRoute) { }
 

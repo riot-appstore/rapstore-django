@@ -10,6 +10,7 @@ import {BoardService} from '../board.service';
 })
 
 export class BoardSelectorComponent implements OnInit {
+
   @Input() boards: Board[];
   constructor(private BoardService: BoardService, private route: ActivatedRoute) { }
 
