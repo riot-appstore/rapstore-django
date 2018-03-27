@@ -18,8 +18,7 @@ from django.contrib import admin
 
 from django.conf.urls import url, include
 from rest_framework import routers
-from web.views import main_site
-from web.views import user_profile
+from web.views import main_site, user_profile, install_instruction_browser_integration
 from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
@@ -42,4 +41,5 @@ urlpatterns = [
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^uploader/', uploader, {}, name='uploader'),
     url(r'^api/', include(router.urls)),
+    url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

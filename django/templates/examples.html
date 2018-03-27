@@ -19,19 +19,15 @@
 
                         <a href="#" class="list-group-item">LED</a>
                         <a href="#" class="list-group-item active">Network</a>
+                        <a href="#" class="list-group-item">Sensor</a>
                         <div class="list-group">
-
-                            <a href="#" class="list-group-item">Sensor</a>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">GPS</a>
-                                <a href="#" class="list-group-item">Temperature</a>
-                                <a href="#" class="list-group-item">Humidity</a>
-                                <a href="#" class="list-group-item">Air pressure</a>
-                            </div>
-
-                            <a href="#" class="list-group-item">Data processing</a>
-
+                            <a href="#" class="list-group-item">GPS</a>
+                            <a href="#" class="list-group-item">Temperature</a>
+                            <a href="#" class="list-group-item">Humidity</a>
+                            <a href="#" class="list-group-item">Air pressure</a>
                         </div>
+
+                        <a href="#" class="list-group-item">Data processing</a>
 
                     </div>
                 </div><!--/.nav-collapse -->
@@ -42,58 +38,62 @@
 
     <div class="col-sm-10">
 
-        {% with id_prefix="examplesTab_" column_width="4" %}
-
         <div class="row">
-        {% for application in applications %}
-            <div class="col-sm-{{column_width}}">
-                <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="collapsed" data-toggle="collapse" data-target="#panel_body{{application.id}}" style="cursor:pointer;">{{application.name}}</a>
-                        </h4>
-                    </div>
-                    <div id="panel_body{{application.id}}" class="panel-body collapse">
-                        {{application.description|safe}}
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button id="{{ id_prefix }}buttonBuildFlash{{ application.id }}" type="button" class="btn btn-primary build-and-flash-button" onclick="buildAndFlashExample('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Install</button>
-                                <button id="{{ id_prefix }}buttonDownload{{ application.id }}" type="button" class="btn btn-primary build-and-download-button" onclick="buildAndDownloadExample()">Download only</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="progress" id="{{ id_prefix }}progressDiv{{ application.id }}" style="visibility:hidden">
-                                    <div class="progress-bar progress-bar-striped active" id="{{ id_prefix }}progressBar{{ application.id }}" style="width:100%;"></div>
+
+            <div class="col-sm-2">
+            </div>
+
+            <div class="col-sm-9">
+                {% with id_prefix="examplesTab_" column_width="4" %}
+                <div class="row">
+                {% for application in applications %}
+                    <div class="col-sm-{{column_width}}">
+                        <div class="app-panel-div">
+                            <div id="{{ id_prefix }}panel{{ application.id }}" class="panel panel-default app-panel">
+                                <div class="panel-heading app-panel-header">
+                                    <h4 class="panel-title">
+                                        <button type="button" class="btn btn-default build-and-flash-button" style="width: 100%; height: 100%;">{{application.name}}</button>
+                                    </h4>
+                                </div>
+                                <div id="panel_body{{application.id}}" class="panel-body app-panel-body">
+                                    {{application.description|safe}}
+                                </div>
+                                <div class="panel-footer app-panel-footer">
+                                    <button id="{{ id_prefix }}buttonBuildFlash{{ application.id }}" type="button" class="btn btn-primary build-and-flash-button" style="width: 100%; height: 100%;" onclick="buildAndFlashExample('{{application.id}}', '{{ id_prefix }}progressDiv{{ application.id }}}', '{{ id_prefix }}progressBar{{ application.id }}', '{{ id_prefix }}panel{{ application.id }}', '{{ id_prefix }}button{{ application.id }}}', '{{ id_prefix }}modalDialog{{ application.id }}')">Install</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="{{ id_prefix }}modalDialog{{ application.id }}" role="dialog">
-                    <div class="modal-dialog modal-lg">
 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error Log</h4>
-                        </div>
-                        <div class="modal-body">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+                        <div class="modal fade" id="{{ id_prefix }}modalDialog{{ application.id }}" role="dialog">
+                            <div class="modal-dialog modal-lg">
 
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Error Log</h4>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
                     </div>
+                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    </div><div class="row">
+                    {% endif %}
+                {% endfor %}
                 </div>
+                {% endwith %}
             </div>
-            {% if forloop.counter|divisibleby:3 and not forloop.last %}
-            </div><div class="row">
-            {% endif %}
-        {% endfor %}
+
+            <div class="col-sm-1">
+            </div>
+
         </div>
-        {% endwith %}
 
     </div>
 

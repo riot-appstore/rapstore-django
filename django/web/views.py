@@ -36,3 +36,8 @@ def user_profile(request):
     form = UserProfileForm(instance=request.user)
     html = t.render(context={"form": form}, request=request)
     return HttpResponse(html)
+
+def install_instruction_browser_integration(request):
+    t = get_template('install_instruction_browser_integration.html')
+    html = t.render()
+    return HttpResponse(html)

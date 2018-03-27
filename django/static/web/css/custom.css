@@ -56,6 +56,38 @@ body {
    float: none;
 }
 
+.padding-50 {
+    padding: 50px;
+}
+
+.gap-50 {
+    height: 50px;
+}
+
+.app-panel-div {
+    width: 230px;
+    height: 230px;
+}
+
+.app-panel {
+    height: 80%;
+    overflow: hidden;
+}
+
+.app-panel-header {
+    height: 20%;
+    padding: 0;
+}
+
+.app-panel-body {
+    height: 60%;
+}
+
+.app-panel-footer {
+    height: 20%;
+    padding: 0;
+}
+
 /*
     changing collapse icon for panels
     Mix between two sources:
@@ -93,7 +125,7 @@ body {
 .nav-wrapper {
     min-height: 50px;
     position: relative;
-    z-index: 1;
+    z-index: 100;
 }
 
 
