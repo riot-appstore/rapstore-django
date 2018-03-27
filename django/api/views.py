@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from api.dummy import dummy_request
 from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
 from api.models import Application
