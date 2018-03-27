@@ -24,7 +24,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         if not board:
             return HttpResponse("Board not found")
 
-        r = requests.post("http://builder:8000/test/", data={"board": board}, files=files)
+        r = requests.post("http://builder:8000/build/", data={"board": board}, files=files)
 
         #TODO:
         if(r.status_code != 200):

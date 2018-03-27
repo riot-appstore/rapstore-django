@@ -49,7 +49,7 @@ def execute_makefile(app_build_dir, board, app_name):
     return process.communicate()[0]
 
 @csrf_exempt
-def test(request):
+def build(request):
     f = request.FILES['file']
     board = request.POST['board']
     dest=write_tar(f)
