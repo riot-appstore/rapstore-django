@@ -12,7 +12,7 @@ export class BrowserIntegrationService {
 
   public isExtensionAvailable(): Observable<boolean> {
 
-    setTimeout(this.checkBrowserIntegration, 500);
+    setTimeout(() => this.checkBrowserIntegration, 500);
 
     setTimeout(() => {
       this.checkBrowserIntegration();
