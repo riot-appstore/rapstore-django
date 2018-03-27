@@ -13,3 +13,14 @@ services:
         - ./django:/code
     depends_on:
       - db
+  builder:
+    build:
+        context: ./builder
+        dockerfile: Dockerfile
+    command: bash -c "chmod +x /code/docker-entry.sh && /code/docker-entry.sh"
+    volumes:
+      - ./builder:/code
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db

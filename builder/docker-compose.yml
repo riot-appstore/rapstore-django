@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: bash -c "chmod +x /code/docker-entry.sh && /code/docker-entry.sh"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
