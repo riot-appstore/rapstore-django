@@ -20,15 +20,15 @@ class Board(models.Model):
     display_name = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
-class Application(models.Model):
-    name = models.CharField(max_length=255)
-    path = models.CharField(max_length=255)
-    description = models.TextField(max_length=255)
-    group_identifier = models.CharField(max_length=255)
-    transaction = models.ForeignKey('Transaction')
-
-    class Meta:
-        permissions = (('has_dev_perm','Has dev permissions'),)
+#class Application(models.Model):
+#    name = models.CharField(max_length=255)
+#    path = models.CharField(max_length=255)
+#    description = models.TextField(max_length=255)
+#    group_identifier = models.CharField(max_length=255)
+#    transaction = models.ForeignKey('Transaction')
+#
+#    class Meta:
+#        permissions = (('has_dev_perm','Has dev permissions'),)
 
 class Module(models.Model):
     name = models.CharField(max_length=255)

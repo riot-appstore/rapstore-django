@@ -19,26 +19,26 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.authtoken import views
-from api.views import ApplicationViewSet
+#from api.views import ApplicationViewSet
 from api.views import BoardViewSet
 from web.views import main_site, user_profile, install_instruction_browser_integration
 from web.views import main_site
 from web.views import user_profile
-from web.views import generate_app_detail_view
-from web.views import AppInstall
+#from web.views import generate_app_detail_view
+#from web.views import AppInstall
 from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
 from django.contrib.auth.views import login
 from rest_framework.routers import DefaultRouter
-from api.views import ApplicationViewSet
+#from api.views import ApplicationViewSet
 
 router = DefaultRouter()
 
-router.register('apps', ApplicationViewSet, base_name='apps')
+#router.register('apps', ApplicationViewSet, base_name='apps')
 
 router = routers.DefaultRouter()
-router.register(r'app', ApplicationViewSet)
+#router.register(r'app', ApplicationViewSet)
 router.register(r'board', BoardViewSet)
 
 # Wire up our API using automatic URL routing.
@@ -53,8 +53,8 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration'),
-    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
-    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
+#    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
+#    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
     url(r'^uploader/', uploader, {}, name='uploader'),
     url(r'^api/', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
