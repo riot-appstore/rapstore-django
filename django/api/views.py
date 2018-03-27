@@ -14,9 +14,10 @@ import base64
 from io import StringIO
 
 
-class ApplicationViewSet(viewsets.ModelViewSet):
+class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Application.objects.all().order_by('name')
     serializer_class = ApplicationSerializer
-    queryset = Application.objects.all()
+
     
     @detail_route(methods=['get'])
     def build(self, request, pk=None):
@@ -36,10 +37,6 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         response['Content-Disposition'] = 'attachment; filename=file.elf'
         return response
 
-
-class ApplicationViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Application.objects.all().order_by('name')
-    serializer_class = ApplicationSerializer
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Board.objects.all().order_by('display_name')
