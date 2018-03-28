@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from uploader.views import uploader
+#from uploader.views import uploader
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -55,6 +55,6 @@ urlpatterns = [
     url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration'),
 #    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
 #    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
-    url(r'^uploader/', uploader, {}, name='uploader'),
+#    url(r'^uploader/', uploader, {}, name='uploader'),
     url(r'^api/', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
