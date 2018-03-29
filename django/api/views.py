@@ -5,8 +5,10 @@ from api.serializers import BoardSerializer
 from api.models import Application
 from api.models import Board
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework import viewsets
+from rest_framework.response import Response
 import requests
 from rest_framework.decorators import detail_route, list_route
 import base64
@@ -41,7 +43,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return response
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user, app_tarball=self.request.data.get('file'))
+        serializer.save(app_tarball=self.request.data.get('app_tarball'))
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
