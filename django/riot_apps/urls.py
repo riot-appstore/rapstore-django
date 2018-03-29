@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from uploader.views import uploader
 from django.contrib import admin
 
 from django.conf.urls import url, include
@@ -24,8 +23,8 @@ from api.views import BoardViewSet
 from web.views import main_site, user_profile, install_instruction_browser_integration
 from web.views import main_site
 from web.views import user_profile
-from web.views import generate_app_detail_view
-from web.views import AppInstall
+#from web.views import generate_app_detail_view
+#from web.views import AppInstall
 from riot_apps import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import logout
@@ -35,7 +34,7 @@ from api.views import ApplicationViewSet
 
 router = DefaultRouter()
 
-router.register('apps', ApplicationViewSet, base_name='apps')
+#router.register('apps', ApplicationViewSet, base_name='apps')
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
@@ -53,8 +52,7 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^user-profile/', user_profile, {}, name='user-profile'),
     url(r'^install-instruction-browser-integration', install_instruction_browser_integration, {}, name='install-instruction-browser-integration'),
-    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
-    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
-    url(r'^uploader/', uploader, {}, name='uploader'),
+#    url(r'^app_details/(?P<pk>\d+)/$', generate_app_detail_view(template="app_detail.html").as_view(), {}, name='app-details'),
+#    url(r'^app_details/(?P<pk>\d+)/install/$', AppInstall.as_view(), {}, name='app-install'),
     url(r'^api/', include(router.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from api.models import Application
 from api.models import Board
+from django.contrib.auth.models import User
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault)
     class Meta:
         model = Application
         fields = '__all__'
