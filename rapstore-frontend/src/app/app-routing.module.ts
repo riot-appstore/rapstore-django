@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'install-instruction-browser-integration', component: PageInstallInstructionBrowserIntegrationComponent },
   { path: 'app/:id', component: AppDetailComponent },
-  { path: 'app/:id/build', component: AppBuildComponent }
+  { path: 'app/:id/build', component: AppBuildComponent },
   { path: 'upload', component: AppUploaderComponent }
 ];
 

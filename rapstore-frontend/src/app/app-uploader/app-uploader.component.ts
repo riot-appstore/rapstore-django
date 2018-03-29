@@ -20,7 +20,7 @@ export class AppUploaderComponent implements OnInit {
   if(this.file && this.model.name) {
     let formData:FormData = new FormData();
     console.log(this.model.name);
-    formData.append('name', this.model.name;
+    formData.append('name', this.model.name);
     formData.append('app_tarball', this.file, this.file.name);
     let headers = new Headers();
 
