@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Application } from '../models';
 import { AppService } from '../appservice.service';
 import { ActivatedRoute } from '@angular/router';
+import 'rxjs/Rx' ;
 
 @Component({
   selector: 'app-app-build',
@@ -17,6 +18,10 @@ export class AppBuildComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.appService.get(id)
       .subscribe(app => this.application = app);
+  }
+
+  downloadElf(){
+    window.open("http://localhost:8000/api/app/12/build?board=samr21-xpro");
   }
 
 }
