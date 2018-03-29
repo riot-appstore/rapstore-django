@@ -1,4 +1,9 @@
 <div class="container">
     <h3> Uploader:</h3>
+    <form (ngSubmit)="fileUpload()" #appUploadForm="ngForm">
+        <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required /> 
+        <input type="file" (change)="fileChanged($event)" name="file" accept="image/png">
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
