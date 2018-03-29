@@ -10,7 +10,7 @@ import 'rxjs/Rx' ;
   styleUrls: ['./app-build.component.css']
 })
 export class AppBuildComponent implements OnInit {
-
+  private selected_board: number;
   @Input() application: Application;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
@@ -20,8 +20,11 @@ export class AppBuildComponent implements OnInit {
       .subscribe(app => this.application = app);
   }
 
-  downloadElf(){
-    window.open("http://localhost:8000/api/app/12/build?board=samr21-xpro");
+  onBoardChange(id) {
+    this.selected_board=id;
+  }
+  downloadElf(id){
+    window.open("http://localhost:8000/api/app/"+id+"/build?board="+this.selected_board);
   }
 
 }

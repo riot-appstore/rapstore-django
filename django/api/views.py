@@ -25,6 +25,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
+    #TODO: Add auth
     @detail_route(methods=['get'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
@@ -34,7 +35,8 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         if not board:
             return HttpResponse("Board not found")
 
-        r = requests.post("http://builder:8000/build/", data={"board": board}, files=files)
+        board_name = Board.objects.get(pk=board).internal_name
+        r = requests.post("http://builder:8000/build/", data={"board": board_name}, files=files)
 
         if(r.status_code != 200):
             return HttpResponse("Error")

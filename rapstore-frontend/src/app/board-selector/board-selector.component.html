@@ -1,8 +1,8 @@
 <!-- ID_PREFIX, SELECTOR_ID-->
 <div class="form-group">
-  <select class="form-control board-selector" data-bind="value: boardsel, event:{change: set_board_name}">
+  <select (change)="onChange(t.value)" #t class="form-control board-selector" data-bind="value: boardsel, event:{change: set_board_name}">
     <ng-container *ngFor="let board of boards">
-      <option value="{{board.internal_name}}">{{board.display_name}} ({{board.internal_name}})</option>
+      <option value="{{board.id}}">{{board.display_name}} ({{board.internal_name}})</option>
     </ng-container>
   </select>
 </div>

@@ -223,7 +223,7 @@ def update_applications(transaction):
                 #sql = 'INSERT INTO applications (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
                 #db.query(sql, (application_name, os.path.join(application_path, name), description, application_directory))
                 data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
-                Application.objects.update_or_create(name=application_name, defaults=data)
+                #Application.objects.update_or_create(name=application_name, defaults=data)
 
     #db.commit()
 
