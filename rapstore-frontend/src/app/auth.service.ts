@@ -48,4 +48,7 @@ export class AuthService {
   is_developer() {
     return false;
   }
+  get_token() {
+    return this.token;
+  }
 }
