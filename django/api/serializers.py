@@ -4,7 +4,7 @@ from api.models import Board
 from django.contrib.auth.models import User
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault)
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Application
         fields = '__all__'

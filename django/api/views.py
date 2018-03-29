@@ -44,7 +44,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return response
 
     def perform_create(self, serializer):
-        serializer.save(app_tarball=self.request.data.get('app_tarball'))
+        serializer.save(author=self.request.user, app_tarball=self.request.data.get('app_tarball'))
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
