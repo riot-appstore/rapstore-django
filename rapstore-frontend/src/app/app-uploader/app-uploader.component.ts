@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./app-uploader.component.css']
 })
 export class AppUploaderComponent implements OnInit {
-  private file: Filelist;
+  private file: File;
   model: any = {};
   private baseurl = "http://localhost:8000";
   constructor(private http: Http, private AuthService: AuthService) { }
