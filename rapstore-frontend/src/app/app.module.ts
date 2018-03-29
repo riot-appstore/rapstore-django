@@ -21,6 +21,7 @@ import { BoardSelectorComponent } from './board-selector/board-selector.componen
 import { MissingComponentsLabelSectionComponent } from './missing-components-label-section/missing-components-label-section.component';
 import {BrowserIntegrationService} from './browser-integration.service';
 import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
+import { AppUploaderComponent } from './app-uploader/app-uploader.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { PageInstallInstructionBrowserIntegrationComponent } from './page-instal
     BoardSelectorComponent,
     MissingComponentsLabelSectionComponent,
     PageInstallInstructionBrowserIntegrationComponent,
+    AppUploaderComponent,
   ],
   imports: [
     CommonModule,
