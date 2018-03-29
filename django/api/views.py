@@ -14,6 +14,7 @@ from rest_framework.decorators import detail_route, list_route
 import base64
 from django import forms
 from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from io import StringIO
 
@@ -22,8 +23,8 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('name')
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
-    
     @detail_route(methods=['get'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
