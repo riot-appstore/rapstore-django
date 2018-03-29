@@ -20,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BoardSelectorComponent } from './board-selector/board-selector.component';
 import { MissingComponentsLabelSectionComponent } from './missing-components-label-section/missing-components-label-section.component';
 import {BrowserIntegrationService} from './browser-integration.service';
+import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {BrowserIntegrationService} from './browser-integration.service';
     NavbarComponent,
     BoardSelectorComponent,
     MissingComponentsLabelSectionComponent,
+    PageInstallInstructionBrowserIntegrationComponent,
   ],
   imports: [
     CommonModule,
