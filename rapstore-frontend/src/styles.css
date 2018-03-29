@@ -210,3 +210,7 @@ body {
 .avatar {
   border-radius: 10%;
 }
+
+.font-size-4px {
+  font-size: 4em;
+}
