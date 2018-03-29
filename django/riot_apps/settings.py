@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
     'web',
-    'uploader',
 ]
 
 MIDDLEWARE = [
