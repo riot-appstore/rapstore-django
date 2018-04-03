@@ -7,12 +7,34 @@ from rest_framework.authtoken.models import Token
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 import requests
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+class UserProfile(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    user = models.OneToOneField(User)
+    location = models.CharField(max_length=255, blank=True)
+    company = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Transaction(models.Model):
     uuid = models.UUIDField(default=uuid.uuid1, editable=False, unique=True)
