@@ -8,21 +8,26 @@ export class AuthService {
   private base_url = 'http://localhost:8000';
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private token: boolean;
+  private is_dev: boolean;
   private logged_in = new BehaviorSubject<boolean>(false);
 
   constructor(private http: Http) {
       const current_user = JSON.parse(localStorage.getItem('user'));
       this.token = current_user && current_user.token;
+      this.is_dev = current_user && current_user.is_dev;
       this.logged_in.next(this.token);
   }
   login(username: string, password: string): Observable<boolean> {
       const url=`${this.base_url}/auth/`;
       return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers})
         .map((response: Response) => {
-          const token = response.json() && response.json().token;
+          const data = response.json();
+          const token = data && data.token;
+          const is_dev = data && data.is_dev;
           if(token) {
             this.token = token;
-            localStorage.setItem("user", JSON.stringify({username: username, token: token}));
+            this.is_dev = is_dev;
+            localStorage.setItem("user", JSON.stringify({username: username, token: token, is_dev: is_dev}));
             this.logged_in.next(true);
             return true;
           }
@@ -34,19 +39,12 @@ export class AuthService {
   }
   logout() {
     this.token = null;
+    this.is_dev = null;
     localStorage.removeItem("user");
     this.logged_in.next(false);
   }
   get is_logged() {
     return this.logged_in.asObservable();
-  }
-  username() {
-    if (localStorage.getItem('user')){
-      return JSON.parse(localStorage.getItem('user')).username;
-     } else return "";
-  }
-  is_developer() {
-    return false;
   }
   get_token() {
     return this.token;

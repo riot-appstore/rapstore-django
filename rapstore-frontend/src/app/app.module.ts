@@ -22,6 +22,7 @@ import { MissingComponentsLabelSectionComponent } from './missing-components-lab
 import {BrowserIntegrationService} from './browser-integration.service';
 import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
 import { AppUploaderComponent } from './app-uploader/app-uploader.component';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { AppUploaderComponent } from './app-uploader/app-uploader.component';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService],
+  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
