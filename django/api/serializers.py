@@ -13,3 +13,14 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    is_dev = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'username', 'is_dev', 'email')
+
+    def get_is_dev(self, obj):
+        if(obj.has_perm('has_dev_perm')):
+            return True
+        return False

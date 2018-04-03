@@ -20,6 +20,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from api.views import ApplicationViewSet
 from api.views import BoardViewSet
+from api.views import UserViewSet
 from web.views import main_site, user_profile, install_instruction_browser_integration
 from web.views import main_site
 from web.views import user_profile
@@ -39,6 +40,7 @@ router = DefaultRouter()
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
 router.register(r'board', BoardViewSet)
+router.register(r'user', UserViewSet, base_name='user')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

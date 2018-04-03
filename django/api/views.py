@@ -2,10 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
+from api.serializers import UserSerializer
 from api.models import Application
 from api.models import Board
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -15,6 +17,7 @@ import base64
 from django import forms
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 from io import StringIO
 
@@ -57,3 +60,11 @@ class UploadFileForm(forms.ModelForm):
     class Meta:
         model=Application
         fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
+
+class UserViewSet(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated,)
+    def list(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
