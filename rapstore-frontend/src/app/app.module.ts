@@ -24,6 +24,7 @@ import { PageInstallInstructionBrowserIntegrationComponent } from './page-instal
 import { AppUploaderComponent } from './app-uploader/app-uploader.component';
 import { UserService } from './user.service';
 import { DeveloperComponent } from './developer/developer.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { DeveloperComponent } from './developer/developer.component';
     PageInstallInstructionBrowserIntegrationComponent,
     AppUploaderComponent,
     DeveloperComponent,
+    SignupComponent,
   ],
   imports: [
     CommonModule,
