@@ -5,16 +5,11 @@ import { User } from './models'
 
 @Injectable()
 export class UserService {
-  @Output() userChangeEvent: EventEmitter<User> = new EventEmitter(true);
   private url = "http://localhost:8000/api/user/";
   private contentType = {'Content-Type': 'application/json'};
   private user: User;
 
   constructor(private authService: AuthService, private http: Http) { }
-  refresh()
-  {
-    this.userChangeEvent.emit();
-  }
   get() {
     return this.http.get(this.url, this.getAuthOptions()).map(res => res.json());
   }
