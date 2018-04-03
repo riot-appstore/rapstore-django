@@ -11,7 +11,6 @@ export class AuthService {
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private token: boolean;
   private is_dev: boolean;
-  private logged_in = new BehaviorSubject<boolean>(false);
 
   @Output() userChangeEvent: EventEmitter<boolean> = new EventEmitter(true);
 
@@ -19,7 +18,6 @@ export class AuthService {
       const current_user = JSON.parse(localStorage.getItem('user'));
       this.token = current_user && current_user.token;
       this.is_dev = current_user && current_user.is_dev;
-      this.logged_in.next(this.token);
   }
   login(username: string, password: string): Observable<boolean> {
       const url=`${this.base_url}/auth/`;
@@ -33,12 +31,10 @@ export class AuthService {
             this.token = token;
             this.is_dev = is_dev;
             localStorage.setItem("user", JSON.stringify({username: username, token: token, is_dev: is_dev}));
-            this.logged_in.next(true);
             return true;
           }
           else {
             this.refresh(false);
-            this.logged_in.next(false);
             return false;
           }
         });
@@ -48,10 +44,6 @@ export class AuthService {
     this.is_dev = null;
     this.refresh(false);
     localStorage.removeItem("user");
-    this.logged_in.next(false);
-  }
-  get is_logged() {
-    return this.logged_in.asObservable();
   }
   get_token() {
     return this.token;

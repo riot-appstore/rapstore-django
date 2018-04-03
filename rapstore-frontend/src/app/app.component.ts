@@ -17,7 +17,6 @@ import { User } from './models';
 export class AppComponent implements OnInit, OnDestroy {
 
   private user: User;
-  is_logged_in$: Observable<boolean>;
 
   private $subscriptionExtension: Subscription;
   private $subscriptionHost: Subscription;
@@ -28,8 +27,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {}
 
   ngOnInit(): void {
-
-    this.is_logged_in$ = this.authService.is_logged;
 
     this.$subscriptionExtension = this.browserIntegrationService.isExtensionAvailable()
       .subscribe(updatedBool => { this.extensionAvailable = updatedBool; });
