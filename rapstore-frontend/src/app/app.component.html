@@ -50,7 +50,7 @@
                     <li class="active"><a data-toggle="tab" routerLink="">Example applications</a></li>
                     <ng-container *ngIf="user">
                     <li><a routerLink="upload">Upload</a></li>
-                    <li *ngIf="user && user.is_dev"><a data-toggle="tab" href="#tab2">Developer</a></li>
+                    <li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>
                     </ng-container>
                     <!--endif-->
                 </ul>

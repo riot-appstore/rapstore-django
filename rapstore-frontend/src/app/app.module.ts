@@ -23,6 +23,7 @@ import {BrowserIntegrationService} from './browser-integration.service';
 import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
 import { AppUploaderComponent } from './app-uploader/app-uploader.component';
 import { UserService } from './user.service';
+import { DeveloperComponent } from './developer/developer.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UserService } from './user.service';
     MissingComponentsLabelSectionComponent,
     PageInstallInstructionBrowserIntegrationComponent,
     AppUploaderComponent,
+    DeveloperComponent,
   ],
   imports: [
     CommonModule,
