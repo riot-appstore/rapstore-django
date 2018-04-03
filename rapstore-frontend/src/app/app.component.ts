@@ -37,10 +37,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this.$subscriptionHost = this.browserIntegrationService.isNativeMessagingHostAvailable()
       .subscribe(updatedBool => { this.nativeMessagingHostAvailable = updatedBool; });
 
-    this.userService.get()
-      .subscribe(user => this.user = user);
+      this.fetch_user();
+
+      this.authService.userChangeEvent.subscribe(value => {
+        this.fetch_user();
+      });
   }
 
+  fetch_user() {
+    if(this.authService.get_token()) {
+        this.userService.get()
+          .subscribe(user => this.user = user);
+      }
+      else {
+        this.user = null;
+      }
+  }
   get_username() {
     return this.user.username;
   }

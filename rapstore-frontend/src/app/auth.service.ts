@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UserService } from './user.service';
+import { User } from './models'
 
 @Injectable()
 export class AuthService {
@@ -10,6 +12,8 @@ export class AuthService {
   private token: boolean;
   private is_dev: boolean;
   private logged_in = new BehaviorSubject<boolean>(false);
+
+  @Output() userChangeEvent: EventEmitter<boolean> = new EventEmitter(true);
 
   constructor(private http: Http) {
       const current_user = JSON.parse(localStorage.getItem('user'));
@@ -25,6 +29,7 @@ export class AuthService {
           const token = data && data.token;
           const is_dev = data && data.is_dev;
           if(token) {
+            this.refresh(true);
             this.token = token;
             this.is_dev = is_dev;
             localStorage.setItem("user", JSON.stringify({username: username, token: token, is_dev: is_dev}));
@@ -32,6 +37,7 @@ export class AuthService {
             return true;
           }
           else {
+            this.refresh(false);
             this.logged_in.next(false);
             return false;
           }
@@ -40,6 +46,7 @@ export class AuthService {
   logout() {
     this.token = null;
     this.is_dev = null;
+    this.refresh(false);
     localStorage.removeItem("user");
     this.logged_in.next(false);
   }
@@ -48,5 +55,9 @@ export class AuthService {
   }
   get_token() {
     return this.token;
+  }
+  refresh(logging: boolean)
+  {
+    this.userChangeEvent.emit(logging);
   }
 }
