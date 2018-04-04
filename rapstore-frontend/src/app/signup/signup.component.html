@@ -1,0 +1,9 @@
+<div class="container">
+    <h3> Sign up!</h3>
+    <form (ngSubmit)="signup()" #signupForm="ngForm">
+       <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required /> 
+       <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required /> 
+       <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required /> 
+        <button type="submit">Signup</button>
+    </form>
+</div>

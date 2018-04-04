@@ -1,13 +1,12 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { AuthService } from './auth.service';
-import { User } from './models'
+import { Signup } from './models'
 
 @Injectable()
 export class UserService {
   private url = "http://localhost:8000/api/user/";
   private contentType = {'Content-Type': 'application/json'};
-  private user: User;
 
   constructor(private authService: AuthService, private http: Http) { }
   get() {
@@ -17,6 +16,10 @@ export class UserService {
      const authHeaders = new Headers(this.contentType);
      authHeaders.append('Authorization', 'Token ' + this.authService.get_token());
      return new RequestOptions({headers: authHeaders});
+  }
+  register(signup: Signup) {
+    const authHeaders = new Headers(this.contentType);
+    return this.http.post(`${this.url}register/`, signup, new RequestOptions({headers: authHeaders})).map(res => res.json());
   }
 
 }

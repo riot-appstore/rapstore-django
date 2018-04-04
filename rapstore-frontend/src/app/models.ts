@@ -20,3 +20,9 @@ export class User {
   email: string;
   is_dev: boolean;
 }
+
+export class Signup {
+  username: string;
+  password: string;
+  email: string;
+}
