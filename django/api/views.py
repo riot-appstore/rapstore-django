@@ -16,8 +16,6 @@ from django import forms
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from io import StringIO
-
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('name')
@@ -33,13 +31,13 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         files = {'file': f}
         board = request.GET.get('board', None)
         if not board:
-            return HttpResponse("Board not found")
+            return HttpResponse('Board not found')
 
         board_name = Board.objects.get(pk=board).internal_name
-        r = requests.post("http://builder:8000/build/", data={"board": board_name}, files=files)
+        r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
 
         if(r.status_code != 200):
-            return HttpResponse("Error")
+            return HttpResponse('Error')
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=file.elf'

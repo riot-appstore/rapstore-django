@@ -23,7 +23,6 @@ import api.settings as config
 from api.models import Transaction
 from api.models import Module
 from api.models import Board
-from api.models import Application
 from django.utils.html import escape
 
 replacement_dict = {
@@ -155,7 +154,7 @@ def update_modules(transaction):
 
                 module_name = get_name(os.path.join(module_path, name), name)
 
-                data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
+                data = {'name': module_name, 'path': os.path.join(module_path, name), 'description': escape(description), 'group_identifier': module_directory, 'transaction': transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
 
@@ -183,7 +182,7 @@ def update_boards(transaction):
     for item in os.listdir(path):
         if is_valid_board(path, item):
             
-            data = {"internal_name": item, "display_name": replacement_dict.get(item, item), "flash_program": 'openocd', "transaction": transaction}
+            data = {'internal_name': item, 'display_name': replacement_dict.get(item, item), 'flash_program': 'openocd', 'transaction': transaction}
             Board.objects.update_or_create(internal_name=item, defaults=data)
 
 
@@ -208,7 +207,7 @@ def update_applications(transaction):
 
                 application_name = get_name(os.path.join(application_path, name), name)
 
-                data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
+                data = {'name': application_name, 'path': os.path.join(application_path, name), 'description': escape(description), 'group_identifier': application_directory, 'transaction': transaction}
                 #Application.objects.update_or_create(name=application_name, defaults=data)
 
 
@@ -336,8 +335,8 @@ class Command(BaseCommand):
             update_modules(transaction)
             update_boards(transaction)
             update_applications(transaction)
-            print("OK")
+            print('OK')
         except Exception as e:
             transaction.delete()
-            print("FAIL: {}".format(str(e)))
+            print('FAIL: {}'.format(str(e)))
 
