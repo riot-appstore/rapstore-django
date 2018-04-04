@@ -24,7 +24,7 @@ from io import StringIO
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Application.objects.all().order_by('name')
+    queryset = Application.objects.all().order_by('name').filter(is_public=True)
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)

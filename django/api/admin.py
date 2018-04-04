@@ -12,7 +12,7 @@ def names(t):
 
 # Register your models here.
 admin.site.register(Board, names(("internal_name",)))
-admin.site.register(Application, names(("name", "description")))
+admin.site.register(Application, names(("name", "description", "is_public")))
 admin.site.register(Module, names(("name", "description")))
 admin.site.register(Transaction, names(("uuid",)))
 admin.site.register(UserProfile)
