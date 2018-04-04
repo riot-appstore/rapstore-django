@@ -18,9 +18,18 @@ class UserSerializer(serializers.ModelSerializer):
     is_dev = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username', 'is_dev', 'email')
+        fields = ('id', 'first_name', 'last_name', 'username', 'is_dev', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
 
     def get_is_dev(self, obj):
         if(obj.has_perm('has_dev_perm')):
             return True
         return False
+
+    def create(self, validated_data):
+        print(validated_data)
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+
+        return user

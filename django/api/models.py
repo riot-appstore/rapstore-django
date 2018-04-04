@@ -28,13 +28,12 @@ class UserProfile(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def handle_user_profile(sender, instance, created=False, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    else:
+        if(hasattr(instance, 'profile')):
+            instance.profile.save()
 
 class Transaction(models.Model):
     uuid = models.UUIDField(default=uuid.uuid1, editable=False, unique=True)

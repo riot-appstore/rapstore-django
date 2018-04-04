@@ -18,6 +18,7 @@ from django import forms
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 from io import StringIO
 
@@ -62,9 +63,17 @@ class UploadFileForm(forms.ModelForm):
         fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
 
 class UserViewSet(viewsets.ViewSet):
-    permission_classes = (IsAuthenticated,)
     def list(self, request):
         user = request.user
+        if user.is_anonymous:
+            return Response()
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
+    @list_route(methods=['POST'])
+    def register(self, request):
+        serializer = UserSerializer(data=request.data)
+        if(serializer.is_valid()):
+            serializer.save(is_active=False)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
