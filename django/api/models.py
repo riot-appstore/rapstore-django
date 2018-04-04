@@ -63,6 +63,7 @@ class Application(models.Model):
     app_tarball = models.FileField(storage=fs)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_public = models.BooleanField(default=False)
 
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
