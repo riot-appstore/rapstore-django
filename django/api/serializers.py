@@ -7,7 +7,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Application
-        fields = '__all__'
+        exclude = ('app_tarball',)
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:

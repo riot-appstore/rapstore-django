@@ -18,6 +18,7 @@ from django import forms
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 
 from io import StringIO
@@ -47,6 +48,13 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=file.elf'
+        return response
+
+    @detail_route(methods=['get'], permission_classes=[IsAdminUser, ])
+    def download(self, request, pk=None):
+        app = get_object_or_404(Application, pk=pk)
+        response = HttpResponse(app.app_tarball, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s' % app.app_tarball.name
         return response
 
     def perform_create(self, serializer):
