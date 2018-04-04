@@ -4,7 +4,7 @@
         <div class="col-sm-6">
             <form (ngSubmit)="login()" #loginForm="ngForm">
                 <div [hidden]="!error" class="alert alert-danger">
-                       {{msg}}
+                       {{error}}
                 </div>
                 <div class="form-group">
                     <label for="username">Username</label>
