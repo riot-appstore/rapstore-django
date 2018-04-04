@@ -140,8 +140,6 @@ def update_modules(transaction):
     Update table "modules". The table is truncated and data is re-imported
     """
 
-    #db.query('TRUNCATE modules')
-
     for i in range(len(config.module_directories)):
         module_directory = config.module_directories[i]
         module_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, module_directory)
@@ -157,8 +155,6 @@ def update_modules(transaction):
 
                 module_name = get_name(os.path.join(module_path, name), name)
 
-                #sql = 'INSERT INTO modules (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (module_name, os.path.join(module_path, name), description, module_directory))
                 data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
@@ -182,27 +178,19 @@ def update_boards(transaction):
                 and not item == 'native'
         )
 
-    #db.query('TRUNCATE boards')
-
     path = os.path.join(PROJECT_ROOT_DIR, config.path_root, 'boards')
 
     for item in os.listdir(path):
         if is_valid_board(path, item):
-
-            #sql = 'INSERT INTO boards (display_name, internal_name, flash_program) VALUES (%s, %s, %s);'
-            #db.query(sql, (item, item, 'openocd'))
+            
             data = {"internal_name": item, "display_name": replacement_dict.get(item, item), "flash_program": 'openocd', "transaction": transaction}
             Board.objects.update_or_create(internal_name=item, defaults=data)
-
-    #db.commit()
 
 
 def update_applications(transaction):
     """
     Update table "applications". The table is truncated and data is re-imported
     """
-
-    #db.query('TRUNCATE applications')
 
     for i in range(len(config.application_directories)):
 
@@ -220,12 +208,8 @@ def update_applications(transaction):
 
                 application_name = get_name(os.path.join(application_path, name), name)
 
-                #sql = 'INSERT INTO applications (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (application_name, os.path.join(application_path, name), description, application_directory))
                 data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
                 #Application.objects.update_or_create(name=application_name, defaults=data)
-
-    #db.commit()
 
 
 def get_description(path, name):
