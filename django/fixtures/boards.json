@@ -1,0 +1,1112 @@
+[
+    {
+        "model": "api.board",
+        "pk": 334,
+        "fields": {
+            "internal_name": "nucleo-l152",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-L152",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 335,
+        "fields": {
+            "internal_name": "cc2650-launchpad",
+            "flash_program": "openocd",
+            "display_name": "CC2650 LaunchPad",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 336,
+        "fields": {
+            "internal_name": "stm32f7discovery",
+            "flash_program": "openocd",
+            "display_name": "STM32F7discovery",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 337,
+        "fields": {
+            "internal_name": "seeeduino_arch-pro",
+            "flash_program": "openocd",
+            "display_name": "Seeeduino Arch-Pro",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 338,
+        "fields": {
+            "internal_name": "frdm-kw41z",
+            "flash_program": "openocd",
+            "display_name": "frdm-kw41z",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 339,
+        "fields": {
+            "internal_name": "nucleo-f302",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F302",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 340,
+        "fields": {
+            "internal_name": "spark-core",
+            "flash_program": "openocd",
+            "display_name": "Spark Core",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 341,
+        "fields": {
+            "internal_name": "saml21-xpro",
+            "flash_program": "openocd",
+            "display_name": "SAML21-xpro",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 342,
+        "fields": {
+            "internal_name": "acd52832",
+            "flash_program": "openocd",
+            "display_name": "aconno ACD52832",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 343,
+        "fields": {
+            "internal_name": "stm32f3discovery",
+            "flash_program": "openocd",
+            "display_name": "STM32F3discovery",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 344,
+        "fields": {
+            "internal_name": "nucleo-f446",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F446",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 345,
+        "fields": {
+            "internal_name": "frdm-k64f",
+            "flash_program": "openocd",
+            "display_name": "FRDM-K64F",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 346,
+        "fields": {
+            "internal_name": "nucleo32-f031",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F031",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 347,
+        "fields": {
+            "internal_name": "nucleo32-f303",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F303",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 348,
+        "fields": {
+            "internal_name": "nucleo144-f767",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F767",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 349,
+        "fields": {
+            "internal_name": "arduino-due",
+            "flash_program": "openocd",
+            "display_name": "Arduino Due",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 350,
+        "fields": {
+            "internal_name": "jiminy-mega256rfr2",
+            "flash_program": "openocd",
+            "display_name": "jiminy-mega256rfr2",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 351,
+        "fields": {
+            "internal_name": "nucleo144-f303",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F303",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 352,
+        "fields": {
+            "internal_name": "msbiot",
+            "flash_program": "openocd",
+            "display_name": "MSB-IoT",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 353,
+        "fields": {
+            "internal_name": "openmote-cc2538",
+            "flash_program": "openocd",
+            "display_name": "OpenMote",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 354,
+        "fields": {
+            "internal_name": "nrf52840dk",
+            "flash_program": "openocd",
+            "display_name": "NRF52840DK",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 355,
+        "fields": {
+            "internal_name": "nucleo-f070",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F070",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 356,
+        "fields": {
+            "internal_name": "msb-430",
+            "flash_program": "openocd",
+            "display_name": "MSB-430",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 357,
+        "fields": {
+            "internal_name": "ikea-tradfri",
+            "flash_program": "openocd",
+            "display_name": "IKEA TR\u00c5DFRI",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 358,
+        "fields": {
+            "internal_name": "avsextrem",
+            "flash_program": "openocd",
+            "display_name": "AVS Extrem",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 359,
+        "fields": {
+            "internal_name": "wsn430-v1_3b",
+            "flash_program": "openocd",
+            "display_name": "WSN430 v1_3b",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 360,
+        "fields": {
+            "internal_name": "airfy-beacon",
+            "flash_program": "openocd",
+            "display_name": "Airfy Beacon",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 361,
+        "fields": {
+            "internal_name": "mega-xplained",
+            "flash_program": "openocd",
+            "display_name": "mega-xplained",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 362,
+        "fields": {
+            "internal_name": "nrf52dk",
+            "flash_program": "openocd",
+            "display_name": "NRF52DK",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 363,
+        "fields": {
+            "internal_name": "nucleo-l073",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-L073",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 364,
+        "fields": {
+            "internal_name": "nrf51dongle",
+            "flash_program": "openocd",
+            "display_name": "nRF51 Dongle",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 365,
+        "fields": {
+            "internal_name": "nucleo-f030",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F030",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 366,
+        "fields": {
+            "internal_name": "udoo",
+            "flash_program": "openocd",
+            "display_name": "UDOO",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 367,
+        "fields": {
+            "internal_name": "telosb",
+            "flash_program": "openocd",
+            "display_name": "TelosB",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 368,
+        "fields": {
+            "internal_name": "remote-revb",
+            "flash_program": "openocd",
+            "display_name": "Zolertia remote Rev. B",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 369,
+        "fields": {
+            "internal_name": "arduino-mkrfox1200",
+            "flash_program": "openocd",
+            "display_name": "arduino-mkrfox1200",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 370,
+        "fields": {
+            "internal_name": "nucleo144-f722",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F722",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 371,
+        "fields": {
+            "internal_name": "maple-mini",
+            "flash_program": "openocd",
+            "display_name": "Maple Mini",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 372,
+        "fields": {
+            "internal_name": "remote-reva",
+            "flash_program": "openocd",
+            "display_name": "Zolertia remote Rev. A",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 373,
+        "fields": {
+            "internal_name": "msb-430h",
+            "flash_program": "openocd",
+            "display_name": "MSB-430H",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 374,
+        "fields": {
+            "internal_name": "cc2538dk",
+            "flash_program": "openocd",
+            "display_name": "CC2538DK",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 375,
+        "fields": {
+            "internal_name": "chronos",
+            "flash_program": "openocd",
+            "display_name": "eZ430 Chronos",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 376,
+        "fields": {
+            "internal_name": "nucleo-f103",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F103",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 377,
+        "fields": {
+            "internal_name": "bluepill",
+            "flash_program": "openocd",
+            "display_name": "Blue Pill",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 378,
+        "fields": {
+            "internal_name": "nucleo-l476",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-L467",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 379,
+        "fields": {
+            "internal_name": "nucleo-f072",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F072",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 380,
+        "fields": {
+            "internal_name": "f4vi1",
+            "flash_program": "openocd",
+            "display_name": "F4VI1",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 381,
+        "fields": {
+            "internal_name": "nucleo-l452re",
+            "flash_program": "openocd",
+            "display_name": "nucleo-l452re",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 382,
+        "fields": {
+            "internal_name": "iotlab-m3",
+            "flash_program": "openocd",
+            "display_name": "IoT LAB M3",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 383,
+        "fields": {
+            "internal_name": "nucleo-f401",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F401",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 384,
+        "fields": {
+            "internal_name": "sodaq-autonomo",
+            "flash_program": "openocd",
+            "display_name": "SODAQ Autonomo",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 385,
+        "fields": {
+            "internal_name": "b-l475e-iot01a",
+            "flash_program": "openocd",
+            "display_name": "STMicroelectronics B-L475E-IOT01A",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 386,
+        "fields": {
+            "internal_name": "waspmote-pro",
+            "flash_program": "openocd",
+            "display_name": "Waspmote Pro",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 387,
+        "fields": {
+            "internal_name": "stm32f4discovery",
+            "flash_program": "openocd",
+            "display_name": "STM32F4discovery",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 388,
+        "fields": {
+            "internal_name": "frdm-k22f",
+            "flash_program": "openocd",
+            "display_name": "FRDM-K22F",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 389,
+        "fields": {
+            "internal_name": "arduino-mkr1000",
+            "flash_program": "openocd",
+            "display_name": "Arduino MKR1000",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 390,
+        "fields": {
+            "internal_name": "calliope-mini",
+            "flash_program": "openocd",
+            "display_name": "Calliope Mini",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 391,
+        "fields": {
+            "internal_name": "nucleo-f303",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F303",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 392,
+        "fields": {
+            "internal_name": "cc2650stk",
+            "flash_program": "openocd",
+            "display_name": "CC2650STK",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 393,
+        "fields": {
+            "internal_name": "sltb001a",
+            "flash_program": "openocd",
+            "display_name": "Silicon Labs",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 394,
+        "fields": {
+            "internal_name": "nucleo144-f413",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F413",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 395,
+        "fields": {
+            "internal_name": "nrf6310",
+            "flash_program": "openocd",
+            "display_name": "NRF6310",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 396,
+        "fields": {
+            "internal_name": "z1",
+            "flash_program": "openocd",
+            "display_name": "Zolertia Z1",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 397,
+        "fields": {
+            "internal_name": "opencm904",
+            "flash_program": "openocd",
+            "display_name": "OpenCM9.04",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 398,
+        "fields": {
+            "internal_name": "msba2",
+            "flash_program": "openocd",
+            "display_name": "MSBA2",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 399,
+        "fields": {
+            "internal_name": "nucleo-l053",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-L053",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 400,
+        "fields": {
+            "internal_name": "limifrog-v1",
+            "flash_program": "openocd",
+            "display_name": "LimiFrog-v1",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 401,
+        "fields": {
+            "internal_name": "pic32-clicker",
+            "flash_program": "openocd",
+            "display_name": "PIC32 Clicker",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 402,
+        "fields": {
+            "internal_name": "slstk3401a",
+            "flash_program": "openocd",
+            "display_name": "slstk3401a",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 403,
+        "fields": {
+            "internal_name": "stk3600",
+            "flash_program": "openocd",
+            "display_name": "stk3600",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 404,
+        "fields": {
+            "internal_name": "nucleo-f334",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F334",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 405,
+        "fields": {
+            "internal_name": "microbit",
+            "flash_program": "openocd",
+            "display_name": "micro:bit",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 406,
+        "fields": {
+            "internal_name": "nucleo-f411",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F411",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 407,
+        "fields": {
+            "internal_name": "stm32f0discovery",
+            "flash_program": "openocd",
+            "display_name": "STM32F0discovery",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 408,
+        "fields": {
+            "internal_name": "iotlab-a8-m3",
+            "flash_program": "openocd",
+            "display_name": "IoT LAB A8-M3",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 409,
+        "fields": {
+            "internal_name": "sodaq-explorer",
+            "flash_program": "openocd",
+            "display_name": "SODAQ ExpLoRer",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 410,
+        "fields": {
+            "internal_name": "arduino-mega2560",
+            "flash_program": "openocd",
+            "display_name": "Arduino Mega2560",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 411,
+        "fields": {
+            "internal_name": "nucleo32-f042",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F042",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 412,
+        "fields": {
+            "internal_name": "nucleo-f091",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F091",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 413,
+        "fields": {
+            "internal_name": "mulle",
+            "flash_program": "openocd",
+            "display_name": "Mulle",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 414,
+        "fields": {
+            "internal_name": "nucleo144-f412",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F412",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 415,
+        "fields": {
+            "internal_name": "nucleo-f410",
+            "flash_program": "openocd",
+            "display_name": "Nucleo-F410",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 416,
+        "fields": {
+            "internal_name": "thingy52",
+            "flash_program": "openocd",
+            "display_name": "Nordic Thingy:52",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 417,
+        "fields": {
+            "internal_name": "fox",
+            "flash_program": "openocd",
+            "display_name": "HikoB Fox",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 418,
+        "fields": {
+            "internal_name": "mips-malta",
+            "flash_program": "openocd",
+            "display_name": "MIPS Malta",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 419,
+        "fields": {
+            "internal_name": "nucleo32-l031",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F031",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 420,
+        "fields": {
+            "internal_name": "samd21-xpro",
+            "flash_program": "openocd",
+            "display_name": "SAMD21-xpro",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 421,
+        "fields": {
+            "internal_name": "samr21-xpro",
+            "flash_program": "openocd",
+            "display_name": "SAMR21-xpro",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 422,
+        "fields": {
+            "internal_name": "nucleo144-f446",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F446",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 423,
+        "fields": {
+            "internal_name": "nz32-sc151",
+            "flash_program": "openocd",
+            "display_name": "NZ32-SC151",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 424,
+        "fields": {
+            "internal_name": "nucleo-f207zg",
+            "flash_program": "openocd",
+            "display_name": "nucleo-f207zg",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 425,
+        "fields": {
+            "internal_name": "stk3700",
+            "flash_program": "openocd",
+            "display_name": "stk3700",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 426,
+        "fields": {
+            "internal_name": "remote-pa",
+            "flash_program": "openocd",
+            "display_name": "Zolertia remote (Prototype)",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 427,
+        "fields": {
+            "internal_name": "ek-lm4f120xl",
+            "flash_program": "openocd",
+            "display_name": "EK-LM4F120XL",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 428,
+        "fields": {
+            "internal_name": "arduino-zero",
+            "flash_program": "openocd",
+            "display_name": "Arduino Zero",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 429,
+        "fields": {
+            "internal_name": "nucleo144-f429",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F429",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 430,
+        "fields": {
+            "internal_name": "ruuvitag",
+            "flash_program": "openocd",
+            "display_name": "RuuviTag",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 431,
+        "fields": {
+            "internal_name": "arduino-uno",
+            "flash_program": "openocd",
+            "display_name": "Arduino Uno",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 432,
+        "fields": {
+            "internal_name": "yunjia-nrf51822",
+            "flash_program": "openocd",
+            "display_name": "yunjia-nrf51822",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 433,
+        "fields": {
+            "internal_name": "b-l072z-lrwan1",
+            "flash_program": "openocd",
+            "display_name": "STMicroelectronics B-L072Z-LRWAN1",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 434,
+        "fields": {
+            "internal_name": "slwstk6220a",
+            "flash_program": "openocd",
+            "display_name": "SLWSSTK6220A",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 435,
+        "fields": {
+            "internal_name": "wsn430-v1_4",
+            "flash_program": "openocd",
+            "display_name": "WSN430 v1_4",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 436,
+        "fields": {
+            "internal_name": "arduino-mkrzero",
+            "flash_program": "openocd",
+            "display_name": "Arduino MKR ZERO",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 437,
+        "fields": {
+            "internal_name": "pic32-wifire",
+            "flash_program": "openocd",
+            "display_name": "PIC32 WiFire",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 438,
+        "fields": {
+            "internal_name": "nucleo144-f746",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F746",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 439,
+        "fields": {
+            "internal_name": "feather-m0",
+            "flash_program": "openocd",
+            "display_name": "Adafruit Feather M0",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 440,
+        "fields": {
+            "internal_name": "teensy31",
+            "flash_program": "openocd",
+            "display_name": "teensy31",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 441,
+        "fields": {
+            "internal_name": "arduino-duemilanove",
+            "flash_program": "openocd",
+            "display_name": "Arduino Duemilanove",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 442,
+        "fields": {
+            "internal_name": "pba-d-01-kw2x",
+            "flash_program": "openocd",
+            "display_name": "Phytec phyWAVE-KW22",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 443,
+        "fields": {
+            "internal_name": "nucleo32-l432",
+            "flash_program": "openocd",
+            "display_name": "Nucleo144-F432",
+            "transaction": 1
+        }
+    },
+    {
+        "model": "api.board",
+        "pk": 444,
+        "fields": {
+            "internal_name": "mbed_lpc1768",
+            "flash_program": "openocd",
+            "display_name": "mbed_lpc1768",
+            "transaction": 1
+        }
+    }
+]
