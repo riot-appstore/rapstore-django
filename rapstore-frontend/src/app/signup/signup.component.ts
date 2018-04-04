@@ -8,6 +8,8 @@ import { UserService } from '../user.service'
 })
 export class SignupComponent implements OnInit {
   model: any = {};
+  message: string = "";
+  errors: string[] = [];
 
   constructor(private userService: UserService) { }
 
@@ -15,10 +17,21 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    this.refresh();
     this.userService.register(this.model)
       .subscribe(result => {
-        console.log("Registered!");
-      });
+        this.message = "Successful registration. Please wait until a RAPstore admin activates your account";
+        }, err => {
+          let errors = JSON.parse(err.text());
+          for(let k in errors) {
+            this.errors.push(`${k}: ${errors[k]}` );
+          }
+        });
+  }
+
+  refresh() {
+    this.message = "";
+    this.errors = [];
   }
 
 
