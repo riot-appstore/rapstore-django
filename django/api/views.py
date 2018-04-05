@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
 from api.serializers import UserSerializer
+from api.serializers import CreateUserSerializer
 from api.models import Application
 from api.models import Board
 from django.contrib.auth.decorators import login_required
@@ -80,8 +81,8 @@ class UserViewSet(viewsets.ViewSet):
 
     @list_route(methods=['POST'])
     def register(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = CreateUserSerializer(data=request.data)
         if(serializer.is_valid()):
-            serializer.save(is_active=False)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
