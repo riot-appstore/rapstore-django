@@ -1,16 +1,22 @@
+# -*- coding: UTF-8 -*-
 
 """
- * Copyright (C) 2017 Hendrik van Essen
+ * Copyright (C) 2018 FU Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
  * directory for more details.
 """
 
-from django.core.management.base import BaseCommand
-
 import os
 import sys
+import requests
+import tarfile
+import tempfile
+
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+from rest_framework.authtoken.models import Token
 
 # append root of the python code tree to sys.apth so that imports are working
 #   alternative: add path to rapstore_backend to the PYTHONPATH environment variable, but this includes one more step
@@ -23,6 +29,7 @@ import api.settings as config
 from api.models import Transaction
 from api.models import Module
 from api.models import Board
+from api.models import Application
 from django.utils.html import escape
 
 replacement_dict = {
@@ -181,34 +188,66 @@ def update_boards(transaction):
 
     for item in os.listdir(path):
         if is_valid_board(path, item):
-            
+
             data = {'internal_name': item, 'display_name': replacement_dict.get(item, item), 'flash_program': 'openocd', 'transaction': transaction}
             Board.objects.update_or_create(internal_name=item, defaults=data)
 
 
-def update_applications(transaction):
+def register_riot_apps():
     """
-    Update table "applications". The table is truncated and data is re-imported
+    "upload" riot applications by user "riot-community"
     """
 
     for i in range(len(config.application_directories)):
 
-        application_directory = config.application_directories[i]
-        application_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, application_directory)
+        application_set_dir = config.application_directories[i]
+        application_set_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, application_set_dir)
 
-        for name in os.listdir(application_path):
-            if not os.path.isfile(os.path.join(application_path, name)):
+        for name in os.listdir(application_set_path):
+
+            application_path = os.path.join(application_set_path, name)
+
+            if not os.path.isfile(application_path):
 
                 # ignoring include directories
                 if name == 'include':
                     continue
 
-                description = get_description(application_path, name)
+                description = get_description(application_set_path, name)
 
-                application_name = get_name(os.path.join(application_path, name), name)
+                application_name = get_name(application_path, name)
 
-                data = {'name': application_name, 'path': os.path.join(application_path, name), 'description': escape(description), 'group_identifier': application_directory, 'transaction': transaction}
-                #Application.objects.update_or_create(name=application_name, defaults=data)
+                tmp_fd, tmp_file_path = tempfile.mkstemp()
+                make_tarfile(tmp_file_path, application_path)
+
+                author_user = User.objects.get(username='RIOT-community')
+                token = Token.objects.get(user=author_user).key
+
+                headers = {
+                    'Authorization': 'Token ' + token,
+                    'Accept': 'application/json',
+                }
+                payload = {
+                    'name': application_name,
+                    'description': escape(description),
+                    'licences': None,
+                    'project_page': 'https://www.riot-os.org/',
+                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
+                }
+                files = {'app_tarball': open(tmp_file_path, 'rb')}
+
+                r = requests.post('http://localhost:8000/api/app/', headers=headers, data=payload, files=files)
+
+                os.remove(tmp_file_path)
+
+                if r.status_code != 200:
+                    print('posting app {0} failed!'.format(application_name))
+                    print(r.content)
+
+
+def make_tarfile(output_path, source_dir):
+    with tarfile.open(output_path, "w:gz") as tar:
+        tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 
 def get_description(path, name):
@@ -334,8 +373,9 @@ class Command(BaseCommand):
         try:
             update_modules(transaction)
             update_boards(transaction)
-            update_applications(transaction)
+            register_riot_apps()
             print('OK')
+
         except Exception as e:
             transaction.delete()
             print('FAIL: {}'.format(str(e)))

@@ -27,7 +27,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['get'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f=app.app_tarball
+        f = app.app_tarball
         files = {'file': f}
         board = request.GET.get('board', None)
         if not board:
