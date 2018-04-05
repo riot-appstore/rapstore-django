@@ -63,10 +63,12 @@ class BoardViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Board.objects.all().order_by('display_name')
     serializer_class = BoardSerializer
 
+
 class UploadFileForm(forms.ModelForm):
     class Meta:
         model=Application
         fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
+
 
 class UserViewSet(viewsets.ViewSet):
     def list(self, request):

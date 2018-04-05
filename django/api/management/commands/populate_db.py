@@ -233,6 +233,7 @@ def register_riot_apps():
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
                     'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
+                    'is_public': True
                 }
                 files = {'app_tarball': open(tmp_file_path, 'rb')}
 
