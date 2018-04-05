@@ -4,6 +4,7 @@ from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
 from api.serializers import UserSerializer
 from api.models import Application
+from api.models import ApplicationInstance
 from api.models import Board
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -23,7 +24,15 @@ from rest_framework import status
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Application.objects.all().order_by('name').filter(is_public=True)
+
+    queryset = Application.objects.all().order_by('name')
+
+    """for app in queryset:
+        app_instances = app.applicationinstance_set.all().filter(is_public=False)
+
+        if len(app_instances) == 0:
+            queryset.remove(app)"""
+
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -66,8 +75,8 @@ class BoardViewSet(viewsets.ReadOnlyModelViewSet):
 
 class UploadFileForm(forms.ModelForm):
     class Meta:
-        model=Application
-        fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
+        model=ApplicationInstance
+        fields=('app_tarball', 'version_code', 'version_name')
 
 
 class UserViewSet(viewsets.ViewSet):
