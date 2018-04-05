@@ -63,7 +63,7 @@ fs = FileSystemStorage(location='/apps')
 #Represents external applications (to be uploaded)
 class Application(models.Model):
     author = models.ForeignKey(User)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=255, null=True, blank=True)
     licences = models.CharField(max_length=255, null=True, blank=True) 
     project_page = models.URLField(max_length=255, null=True, blank=True)
