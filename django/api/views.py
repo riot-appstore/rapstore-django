@@ -22,8 +22,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 
-from io import StringIO
-
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all().order_by('name').filter(is_public=True)
@@ -35,17 +33,17 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['get'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f=app.app_tarball
+        f = app.app_tarball
         files = {'file': f}
         board = request.GET.get('board', None)
         if not board:
-            return HttpResponse("Board not found")
+            return HttpResponse('Board not found')
 
         board_name = Board.objects.get(pk=board).internal_name
-        r = requests.post("http://builder:8000/build/", data={"board": board_name}, files=files)
+        r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
 
         if(r.status_code != 200):
-            return HttpResponse("Error")
+            return HttpResponse('Error')
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=file.elf'
@@ -66,10 +64,12 @@ class BoardViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Board.objects.all().order_by('display_name')
     serializer_class = BoardSerializer
 
+
 class UploadFileForm(forms.ModelForm):
     class Meta:
         model=Application
         fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
+
 
 class UserViewSet(viewsets.ViewSet):
     def list(self, request):

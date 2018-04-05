@@ -10,10 +10,12 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 import requests
 
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
 
 class UserProfile(models.Model):
     GENDER_CHOICES = (
@@ -27,6 +29,7 @@ class UserProfile(models.Model):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
+
 @receiver(post_save, sender=User)
 def handle_user_profile(sender, instance, created=False, **kwargs):
     if created:
@@ -37,9 +40,11 @@ def handle_user_profile(sender, instance, created=False, **kwargs):
             print(instance.userprofile.location)
             instance.userprofile.save()
 
+
 class Transaction(models.Model):
     uuid = models.UUIDField(default=uuid.uuid1, editable=False, unique=True)
     pass
+
 
 class Board(models.Model):
     internal_name = models.CharField(max_length=255)
@@ -47,12 +52,14 @@ class Board(models.Model):
     display_name = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
+
 class Module(models.Model):
     name = models.CharField(max_length=255)
     path = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
     group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
+
 
 fs = FileSystemStorage(location='/apps')
 #Represents external applications (to be uploaded)
