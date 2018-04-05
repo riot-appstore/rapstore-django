@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 import requests
 
 
@@ -15,6 +16,25 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
+class UserProfile(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    user = models.OneToOneField(User)
+    location = models.CharField(max_length=255, blank=True)
+    company = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+
+@receiver(post_save, sender=User)
+def handle_user_profile(sender, instance, created=False, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+    else:
+        if(hasattr(instance, 'profile')):
+            instance.profile.save()
 
 class Transaction(models.Model):
     uuid = models.UUIDField(default=uuid.uuid1, editable=False, unique=True)
@@ -47,6 +67,7 @@ class Application(models.Model):
     app_tarball = models.FileField(storage=fs)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_public = models.BooleanField(default=False)
 
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)

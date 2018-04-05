@@ -17,14 +17,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
-        if (result) {
-          this.router.navigate(['/']);
-        }
-        else {
-          console.log('Invalid');
-          this.error = 'Invalid username or password';
-        }
-      });
+        this.router.navigate(['/']);
+        }, err =>{
+          this.error = "Invalid username or password";
+        });
   }
 
 }

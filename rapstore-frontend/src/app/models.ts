@@ -11,3 +11,18 @@ export class Board {
   flash_program: string;
   transction: number;
 }
+
+export class User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  is_dev: boolean;
+}
+
+export class Signup {
+  username: string;
+  password: string;
+  email: string;
+}

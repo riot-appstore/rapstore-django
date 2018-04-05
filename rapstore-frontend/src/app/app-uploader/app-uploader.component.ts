@@ -10,6 +10,8 @@ import { AuthService } from '../auth.service';
 export class AppUploaderComponent implements OnInit {
   private file: File;
   model: any = {};
+  message: string = "";
+  error: string = "";
   private baseurl = "http://localhost:8000";
   constructor(private http: Http, private AuthService: AuthService) { }
 
@@ -19,7 +21,6 @@ export class AppUploaderComponent implements OnInit {
   fileUpload() {
   if(this.file && this.model.name) {
     let formData:FormData = new FormData();
-    console.log(this.model.name);
     formData.append('name', this.model.name);
     formData.append('app_tarball', this.file, this.file.name);
     let headers = new Headers();
@@ -30,8 +31,8 @@ export class AppUploaderComponent implements OnInit {
     this.http.post(`${this.baseurl}/api/app/`, formData, options)
         .map(res => res.json())
         .subscribe(
-            data => console.log('success'),
-            error => console.log(error)
+        data => this.message = `Successfully uploaded ${this.model.name} app!. The app will be under a review process in order to make it public.`,
+            error => this.error = "It was not possible to upload the app due to unknown reasons."
         )
   } 
   }

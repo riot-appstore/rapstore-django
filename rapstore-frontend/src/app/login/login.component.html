@@ -1,8 +1,21 @@
 <div class="container">
     <h3> Login:</h3>
-    <form (ngSubmit)="login()" #loginForm="ngForm">
-       <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required /> 
-       <input type="text" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required /> 
-        <button type="submit">Login</button>
-    </form>
+    <div class="row">
+        <div class="col-sm-6">
+            <form (ngSubmit)="login()" #loginForm="ngForm">
+                <div [hidden]="!error" class="alert alert-danger">
+                       {{error}}
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                   <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required /> 
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                   <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required /> 
+                </div>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
 </div>

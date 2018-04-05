@@ -1,54 +1,55 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UserService } from './user.service';
+import { User } from './models'
 
 @Injectable()
 export class AuthService {
   private base_url = 'http://localhost:8000';
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private token: boolean;
-  private logged_in = new BehaviorSubject<boolean>(false);
+  private is_dev: boolean;
+
+  @Output() userChangeEvent: EventEmitter<boolean> = new EventEmitter(true);
 
   constructor(private http: Http) {
       const current_user = JSON.parse(localStorage.getItem('user'));
       this.token = current_user && current_user.token;
-      this.logged_in.next(this.token);
+      this.is_dev = current_user && current_user.is_dev;
   }
   login(username: string, password: string): Observable<boolean> {
       const url=`${this.base_url}/auth/`;
       return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers})
         .map((response: Response) => {
-          const token = response.json() && response.json().token;
+          const data = response.json();
+          const token = data && data.token;
+          const is_dev = data && data.is_dev;
           if(token) {
+            this.refresh(true);
             this.token = token;
-            localStorage.setItem("user", JSON.stringify({username: username, token: token}));
-            this.logged_in.next(true);
+            this.is_dev = is_dev;
+            localStorage.setItem("user", JSON.stringify({username: username, token: token, is_dev: is_dev}));
             return true;
           }
           else {
-            this.logged_in.next(false);
+            this.refresh(false);
             return false;
           }
         });
   }
   logout() {
     this.token = null;
+    this.is_dev = null;
+    this.refresh(false);
     localStorage.removeItem("user");
-    this.logged_in.next(false);
-  }
-  get is_logged() {
-    return this.logged_in.asObservable();
-  }
-  username() {
-    if (localStorage.getItem('user')){
-      return JSON.parse(localStorage.getItem('user')).username;
-     } else return "";
-  }
-  is_developer() {
-    return false;
   }
   get_token() {
     return this.token;
+  }
+  refresh(logging: boolean)
+  {
+    this.userChangeEvent.emit(logging);
   }
 }
