@@ -16,9 +16,14 @@ class BoardSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     is_dev = serializers.SerializerMethodField()
+    location = serializers.CharField(source="userprofile.location", required=False)
+    company = serializers.CharField(source="userprofile.company", required=False)
+    gender = serializers.CharField(source="userprofile.gender", required=False)
+    phone_number = serializers.CharField(source="userprofile.phone_number", required=False)
+
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username', 'is_dev', 'email', 'password')
+        exclude = ('is_superuser', 'is_staff', 'is_active', 'groups', 'user_permissions')
         extra_kwargs = {'password': {'write_only': True}}
 
     def get_is_dev(self, obj):
