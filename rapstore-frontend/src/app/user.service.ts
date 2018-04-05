@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { AuthService } from './auth.service';
-import { Signup } from './models'
+import { Signup, User } from './models'
 
 @Injectable()
 export class UserService {
@@ -11,6 +11,9 @@ export class UserService {
   constructor(private authService: AuthService, private http: Http) { }
   get() {
     return this.http.get(this.url, this.getAuthOptions()).map(res => res.json());
+  }
+  update(user: User) {
+    return this.http.put(`${this.url}update/`, user, this.getAuthOptions()).map(res => res.json());
   }
    getAuthOptions(): RequestOptions {
      const authHeaders = new Headers(this.contentType);

@@ -79,6 +79,18 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
+    @list_route(methods=['PUT'], url_path="update")
+    def update_data(self, request):
+        user = request.user
+        if user.is_anonymous:
+            return Response()
+
+        serializer = UserSerializer(user, data=request.data)
+        if(serializer.is_valid()):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     @list_route(methods=['POST'])
     def register(self, request):
         serializer = CreateUserSerializer(data=request.data)

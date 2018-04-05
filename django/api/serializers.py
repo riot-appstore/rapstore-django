@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from api.models import Application
 from api.models import Board
+from api.models import UserProfile
 from django.contrib.auth.models import User
 
 class ApplicationSerializer(serializers.ModelSerializer):
@@ -27,19 +28,27 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+#TODO: Improve!
 class UserSerializer(serializers.ModelSerializer):
     is_dev = serializers.SerializerMethodField()
-    location = serializers.CharField(source="userprofile.location", required=False)
-    company = serializers.CharField(source="userprofile.company", required=False)
-    gender = serializers.CharField(source="userprofile.gender", required=False)
-    phone_number = serializers.CharField(source="userprofile.phone_number", required=False)
+    location = serializers.CharField(source="userprofile.location", required=False, allow_blank=True)
+    company = serializers.CharField(source="userprofile.company", required=False, allow_blank=True)
+    gender = serializers.ChoiceField(source="userprofile.gender", required=False, allow_blank=True, choices=UserProfile.GENDER_CHOICES)
+    phone_number = serializers.CharField(source="userprofile.phone_number", required=False, allow_blank=True)
 
     class Meta:
         model = User
-        exclude = ('is_superuser', 'is_staff', 'is_active', 'groups', 'user_permissions')
+        exclude = ('is_superuser', 'is_staff', 'is_active', 'groups', 'user_permissions', 'password')
         read_only_fields = ("username", )
 
     def get_is_dev(self, obj):
         if(obj.has_perm('has_dev_perm')):
             return True
         return False
+
+    def update(self, instance, validated_data):
+        userprofile = instance.userprofile
+        userprofile.__dict__.update(validated_data.pop('userprofile'))
+        instance.__dict__.update(**validated_data)
+        instance.save()
+        return instance
