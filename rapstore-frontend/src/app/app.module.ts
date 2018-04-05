@@ -25,6 +25,7 @@ import { AppUploaderComponent } from './app-uploader/app-uploader.component';
 import { UserService } from './user.service';
 import { DeveloperComponent } from './developer/developer.component';
 import { SignupComponent } from './signup/signup.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { SignupComponent } from './signup/signup.component';
     AppUploaderComponent,
     DeveloperComponent,
     SignupComponent,
+    UserprofileComponent,
   ],
   imports: [
     CommonModule,
