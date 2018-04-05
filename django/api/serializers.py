@@ -3,16 +3,19 @@ from api.models import Application
 from api.models import Board
 from django.contrib.auth.models import User
 
+
 class ApplicationSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Application
-        exclude = ('app_tarball',)
+        exclude = ('app_tarball', 'is_public')
+
 
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = '__all__'
+
 
 class UserSerializer(serializers.ModelSerializer):
     is_dev = serializers.SerializerMethodField()
