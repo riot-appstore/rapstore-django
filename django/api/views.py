@@ -25,13 +25,14 @@ from rest_framework import status
 
 class ApplicationViewSet(viewsets.ModelViewSet):
 
-    queryset = Application.objects.all().order_by('name')
+    queryset = Application.objects.order_by('name')
 
-    """for app in queryset:
-        app_instances = app.applicationinstance_set.all().filter(is_public=False)
+    for app in queryset:
+        # needs at least one visible application instance
+        app_instances = app.applicationinstance_set.filter(is_public=True)
 
         if len(app_instances) == 0:
-            queryset.remove(app)"""
+            queryset = queryset.exclude(name=app.name)
 
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
@@ -50,11 +51,12 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         board_name = Board.objects.get(pk=board).internal_name
         r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
 
-        if(r.status_code != 200):
+        if r.status_code != 200:
             return HttpResponse('Error')
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=file.elf'
+
         return response
 
     @detail_route(methods=['get'], permission_classes=[IsAdminUser, ])
@@ -62,6 +64,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app = get_object_or_404(Application, pk=pk)
         response = HttpResponse(app.app_tarball, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=%s' % app.app_tarball.name
+
         return response
 
     def perform_create(self, serializer):
@@ -93,4 +96,5 @@ class UserViewSet(viewsets.ViewSet):
         if(serializer.is_valid()):
             serializer.save(is_active=False)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

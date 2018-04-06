@@ -50,6 +50,9 @@ class Board(models.Model):
     display_name = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
+    def __str__(self):
+        return self.internal_name
+
 
 class Module(models.Model):
     name = models.CharField(max_length=255)
@@ -57,6 +60,9 @@ class Module(models.Model):
     description = models.TextField(max_length=255)
     group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
+
+    def __str__(self):
+        return self.name
 
 
 fs = FileSystemStorage(location='/apps')
@@ -69,6 +75,9 @@ class Application(models.Model):
     project_page = models.URLField(max_length=255, null=True, blank=True)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
@@ -90,7 +99,7 @@ class Application(models.Model):
 
 class ApplicationInstance(models.Model):
     application = models.ForeignKey(Application)
-    version_code = models.PositiveIntegerField(default=1)
+    version_code = models.PositiveIntegerField(default=0)
     version_name = models.CharField(max_length=255)
     app_tarball = models.FileField(storage=fs)
     is_public = models.BooleanField(default=False)
