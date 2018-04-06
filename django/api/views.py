@@ -45,8 +45,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         if(r.status_code != 200):
             return HttpResponse('Error')
 
-        response = HttpResponse(base64.b64decode(r.text), content_type='application/force-download')
+        response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attachment; filename=file.elf'
+        response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 
     @detail_route(methods=['get'], permission_classes=[IsAdminUser, ])
