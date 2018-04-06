@@ -36,7 +36,6 @@ export class AppBuildComponent implements OnInit {
     }, 700);
     this.appService.download(id, this.selected_board, this.application.name).subscribe(
         (response) => { // download file
-            this.loading = false;
             clearInterval(this.timer_id);
 
             let filename = response.headers.get("content-disposition").split("=")[1];
@@ -49,7 +48,8 @@ export class AppBuildComponent implements OnInit {
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
-    });
+            }, (err) => {},
+            () => this.loading=false);
   }
 
 }
