@@ -5,6 +5,7 @@ from api.serializers import BoardSerializer
 from api.serializers import UserSerializer
 from api.serializers import CreateUserSerializer
 from api.models import Application
+from api.models import ApplicationInstance
 from api.models import Board
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -24,7 +25,16 @@ from rest_framework import status
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
-    queryset = Application.objects.all().order_by('name').filter(is_public=True)
+
+    queryset = Application.objects.order_by('name')
+
+    for app in queryset:
+        # needs at least one visible application instance
+        app_instances = app.applicationinstance_set.filter(is_public=True)
+
+        if len(app_instances) == 0:
+            queryset = queryset.exclude(name=app.name)
+
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -42,7 +52,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         board_name = Board.objects.get(pk=board).internal_name
         r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
 
-        if(r.status_code != 200):
+        if r.status_code != 200:
             return HttpResponse('Error')
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
@@ -55,6 +65,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app = get_object_or_404(Application, pk=pk)
         response = HttpResponse(app.app_tarball, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=%s' % app.app_tarball.name
+
         return response
 
     def perform_create(self, serializer):
@@ -68,8 +79,8 @@ class BoardViewSet(viewsets.ReadOnlyModelViewSet):
 
 class UploadFileForm(forms.ModelForm):
     class Meta:
-        model=Application
-        fields=('name', 'description', 'licences', 'project_page', 'app_tarball', 'app_repo_url') 
+        model=ApplicationInstance
+        fields=('app_tarball', 'version_code', 'version_name')
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -98,4 +109,5 @@ class UserViewSet(viewsets.ViewSet):
         if(serializer.is_valid()):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

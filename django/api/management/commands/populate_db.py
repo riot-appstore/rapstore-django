@@ -232,8 +232,7 @@ def register_riot_apps():
                     'description': escape(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
-                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
-                    'is_public': True
+                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT'
                 }
                 files = {'app_tarball': open(tmp_file_path, 'rb')}
 
@@ -241,9 +240,15 @@ def register_riot_apps():
 
                 os.remove(tmp_file_path)
 
-                if r.status_code != 200:
+                if r.status_code not in {200, 201}:
                     print('posting app {0} failed!'.format(application_name))
                     print(r.content)
+
+                else:
+                    # auto public
+                    object = Application.objects.get(name=application_name)
+                    object.is_public = True
+                    object.save()
 
 
 def make_tarfile(output_path, source_dir):

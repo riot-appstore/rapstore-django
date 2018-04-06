@@ -50,6 +50,9 @@ class Board(models.Model):
     display_name = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
+    def __str__(self):
+        return self.internal_name
+
 
 class Module(models.Model):
     name = models.CharField(max_length=255)
@@ -58,19 +61,23 @@ class Module(models.Model):
     group_identifier = models.CharField(max_length=255)
     transaction = models.ForeignKey('Transaction')
 
+    def __str__(self):
+        return self.name
+
 
 fs = FileSystemStorage(location='/apps')
 #Represents external applications (to be uploaded)
 class Application(models.Model):
     author = models.ForeignKey(User)
-    name = models.CharField(max_length=255)
-    description = models.TextField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, unique=True)
+    description = models.TextField(max_length=65535, null=True, blank=True)
     licences = models.CharField(max_length=255, null=True, blank=True) 
     project_page = models.URLField(max_length=255, null=True, blank=True)
-    app_tarball = models.FileField(storage=fs)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
@@ -88,3 +95,15 @@ class Application(models.Model):
 
         # could also use Django file storage functions to directly save the file to fs
         # wget the remote repo, check the command was executed correctly and we have the tar, and attach it to app_folder
+
+
+class ApplicationInstance(models.Model):
+    application = models.ForeignKey(Application)
+    version_code = models.PositiveIntegerField(default=0)
+    version_name = models.CharField(max_length=255)
+    app_tarball = models.FileField(storage=fs)
+    is_public = models.BooleanField(default=False)
+
+    class Meta:
+        permissions = (('has_dev_perm','Has dev permissions'),)
+        unique_together = ('version_code', 'application',)
