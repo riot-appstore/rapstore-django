@@ -1,25 +1,28 @@
-from django.shortcuts import render
-from rest_framework import viewsets
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import tempfile
 import tarfile
-import os
 from subprocess import Popen, PIPE, STDOUT
 import base64
+
 
 def extract_tar(tar):
     # Create temp folder
     folder = tempfile.mkdtemp()
     tar.extractall(path=folder)
+
     return folder
+
 
 def write_tar(f):
     try:
-        tf=tarfile.open(fileobj=f)
+        tf = tarfile.open(fileobj=f)
+
     except:
-        return "Not OK"
+        return 'Not OK'
+
     return extract_tar(tf)
+
 
 def execute_makefile(app_build_dir, board, app_name):
     """
@@ -38,26 +41,28 @@ def execute_makefile(app_build_dir, board, app_name):
         Output from executing make
     """
 
-    cmd = ["make",
-           "-C", app_build_dir,
-           "RIOTBASE=/RIOT",
-           "ELFFILE=app.elf",
-           "BOARD=%s" % board]
+    cmd = ['make',
+           '-C', app_build_dir,
+           'RIOTBASE=/RIOT',
+           'ELFFILE=app.elf',
+           'BOARD=%s' % board]
     #logging.debug('make: %s', cmd)
 
     process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
+
     return process.communicate()[0]
+
 
 @csrf_exempt
 def build(request):
     f = request.FILES['file']
     board = request.POST['board']
-    dest=write_tar(f)
+    dest = write_tar(f)
 
     #Since we have the folder, let's do stuff
-    execute_makefile(dest, board, "test")
+    execute_makefile(dest, board, 'test')
 
-    with open(dest+"/app.elf", "rb") as file:
+    with open(dest+'/app.elf', 'rb') as file:
         b64 = base64.b64encode(file.read())
 
     return HttpResponse(b64)

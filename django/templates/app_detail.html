@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+
+{% block navtabs %}
+{% endblock %}
+
+{% block content %}
+<div class="container rounded app-panel panel-default panel">
+
+    <div class="row">
+        <div class="col-sm-1">
+            <a class="btn btn-primary download-binary-with-info" href="{% url 'main_site' %}">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </a>
+        </div>
+        <div class="col-sm-11">
+            <ul class="breadcrumb">
+                <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+                <li class="active">{{application.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row form-group">
+        <div class="col-sm-9">
+            <div class="app-detail-avatar">
+                <img width="170" height="170" class="avatar" avatar="{{application.name}}">
+            </div>
+            <div class="app-detail-headline">
+                <h3> {{application.name}} </h3>
+                <p> One line description </p>
+                <p> * * * * * </p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <p>Last update: NONE</p>
+            <p>Current Version: NONE</p>
+            <p>Category: Sensor</p>
+            <p>License: Apache (Link)</p>
+            <a class="btn btn-primary" style="width: 200px" href="{% url "app-install" pk=application.pk %}" role="button">Install</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row form-group">
+        <div class="col-sm-12">
+            <p>{{application.description|safe}}</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <strong>Developer contact:</strong>
+        <p>Name: NONE</p>
+        <p>Email: NONE</p>
+        <p>Website: NONE</p>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-12">
+            <p>Minimum RIOT version: NONE</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+<div id="missing-components">
+    <h6>Following problems were detected:</h6>
+    <div id="missing-components-label-section">
+      <div *ngIf="!extensionAvailable;" class="row"><div class="container-fluid"><span class="label label-warning">Extension not available</span></div></div>
+      <div *ngIf="!nativeMessagingHostAvailable;" class="row"><div class="container-fluid"><span class="label label-warning">Host not available</span></div></div>
+    </div>
+    Without the components above you are not able to flash devices from your browser. To fix this, click
+    <a routerLink="/install-instruction-browser-integration">here</a>.
+</div>

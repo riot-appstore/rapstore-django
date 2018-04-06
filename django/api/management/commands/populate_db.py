@@ -1,16 +1,22 @@
+# -*- coding: UTF-8 -*-
 
 """
- * Copyright (C) 2017 Hendrik van Essen
+ * Copyright (C) 2018 FU Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
  * directory for more details.
 """
 
-from django.core.management.base import BaseCommand
-
 import os
 import sys
+import requests
+import tarfile
+import tempfile
+
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+from rest_framework.authtoken.models import Token
 
 # append root of the python code tree to sys.apth so that imports are working
 #   alternative: add path to rapstore_backend to the PYTHONPATH environment variable, but this includes one more step
@@ -140,8 +146,6 @@ def update_modules(transaction):
     Update table "modules". The table is truncated and data is re-imported
     """
 
-    #db.query('TRUNCATE modules')
-
     for i in range(len(config.module_directories)):
         module_directory = config.module_directories[i]
         module_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, module_directory)
@@ -157,9 +161,7 @@ def update_modules(transaction):
 
                 module_name = get_name(os.path.join(module_path, name), name)
 
-                #sql = 'INSERT INTO modules (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (module_name, os.path.join(module_path, name), description, module_directory))
-                data = {"name": module_name, "path": os.path.join(module_path, name), "description": escape(description), "group_identifier": module_directory, "transaction": transaction}
+                data = {'name': module_name, 'path': os.path.join(module_path, name), 'description': escape(description), 'group_identifier': module_directory, 'transaction': transaction}
                 Module.objects.update_or_create(name=module_name, defaults=data)
 
 
@@ -182,50 +184,76 @@ def update_boards(transaction):
                 and not item == 'native'
         )
 
-    #db.query('TRUNCATE boards')
-
     path = os.path.join(PROJECT_ROOT_DIR, config.path_root, 'boards')
 
     for item in os.listdir(path):
         if is_valid_board(path, item):
 
-            #sql = 'INSERT INTO boards (display_name, internal_name, flash_program) VALUES (%s, %s, %s);'
-            #db.query(sql, (item, item, 'openocd'))
-            data = {"internal_name": item, "display_name": replacement_dict.get(item, item), "flash_program": 'openocd', "transaction": transaction}
+            data = {'internal_name': item, 'display_name': replacement_dict.get(item, item), 'flash_program': 'openocd', 'transaction': transaction}
             Board.objects.update_or_create(internal_name=item, defaults=data)
 
-    #db.commit()
 
-
-def update_applications(transaction):
+def register_riot_apps():
     """
-    Update table "applications". The table is truncated and data is re-imported
+    "upload" riot applications by user "riot-community"
     """
-
-    #db.query('TRUNCATE applications')
 
     for i in range(len(config.application_directories)):
 
-        application_directory = config.application_directories[i]
-        application_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, application_directory)
+        application_set_dir = config.application_directories[i]
+        application_set_path = os.path.join(PROJECT_ROOT_DIR, config.path_root, application_set_dir)
 
-        for name in os.listdir(application_path):
-            if not os.path.isfile(os.path.join(application_path, name)):
+        for name in os.listdir(application_set_path):
+
+            application_path = os.path.join(application_set_path, name)
+
+            if not os.path.isfile(application_path):
 
                 # ignoring include directories
                 if name == 'include':
                     continue
 
-                description = get_description(application_path, name)
+                description = get_description(application_set_path, name)
 
-                application_name = get_name(os.path.join(application_path, name), name)
+                application_name = get_name(application_path, name)
 
-                #sql = 'INSERT INTO applications (name, path, description, group_identifier) VALUES (%s, %s, %s, %s);'
-                #db.query(sql, (application_name, os.path.join(application_path, name), description, application_directory))
-                data = {"name": application_name, "path": os.path.join(application_path, name), "description": escape(description), "group_identifier": application_directory, "transaction": transaction}
-                Application.objects.update_or_create(name=application_name, defaults=data)
+                tmp_fd, tmp_file_path = tempfile.mkstemp()
+                make_tarfile(tmp_file_path, application_path)
 
-    #db.commit()
+                author_user = User.objects.get(username='RIOT-community')
+                token = Token.objects.get(user=author_user).key
+
+                headers = {
+                    'Authorization': 'Token ' + token,
+                    'Accept': 'application/json',
+                }
+                payload = {
+                    'name': application_name,
+                    'description': escape(description),
+                    'licences': None,
+                    'project_page': 'https://www.riot-os.org/',
+                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT'
+                }
+                files = {'app_tarball': open(tmp_file_path, 'rb')}
+
+                r = requests.post('http://localhost:8000/api/app/', headers=headers, data=payload, files=files)
+
+                os.remove(tmp_file_path)
+
+                if r.status_code not in {200, 201}:
+                    print('posting app {0} failed!'.format(application_name))
+                    print(r.content)
+
+                else:
+                    # auto public
+                    object = Application.objects.get(name=application_name)
+                    object.is_public = True
+                    object.save()
+
+
+def make_tarfile(output_path, source_dir):
+    with tarfile.open(output_path, "w:gz") as tar:
+        tar.add(source_dir, arcname=os.path.basename(source_dir))
 
 
 def get_description(path, name):
@@ -351,9 +379,10 @@ class Command(BaseCommand):
         try:
             update_modules(transaction)
             update_boards(transaction)
-            update_applications(transaction)
-            print("OK")
+            register_riot_apps()
+            print('OK')
+
         except Exception as e:
             transaction.delete()
-            print("FAIL: {}".format(str(e)))
+            print('FAIL: {}'.format(str(e)))
 
