@@ -31,6 +31,8 @@ from api.models import Module
 from api.models import Board
 from api.models import Application
 from django.utils.html import escape
+from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
+from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
 
 
 def update_modules(transaction):
@@ -78,11 +80,21 @@ def update_boards(transaction):
 
     path = os.path.join(PROJECT_ROOT_DIR, config.path_root, 'boards')
 
-    for item in os.listdir(path):
-        if is_valid_board(path, item):
+    for board_internalname in os.listdir(path):
+        if is_valid_board(path, board_internalname):
 
-            data = {'internal_name': item, 'display_name': replacement_dict.get(item, item), 'flash_program': 'openocd', 'transaction': transaction}
-            Board.objects.update_or_create(internal_name=item, defaults=data)
+            displayname = internalname_displayname_dict.get(board_internalname, board_internalname)
+            storageflashsupport = internalname_storageflashsupport_dict.get(board_internalname, False)
+
+            data = {
+                "internal_name": board_internalname,
+                "display_name": displayname,
+                "flash_program": 'openocd',
+                "storage_flash_support": storageflashsupport,
+                "transaction": transaction
+            }
+
+            Board.objects.update_or_create(internal_name=board_internalname, defaults=data)
 
 
 def register_riot_apps():
