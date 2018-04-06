@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { DeveloperComponent } from './developer/developer.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
+import { PageInstallInstructionDragAndDropComponent } from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
 import { AuthGuard } from './auth-guard';
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: '', component: AppBrowserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'install-instruction-browser-integration', component: PageInstallInstructionBrowserIntegrationComponent },
+  { path: 'install-instruction-drag-and-drop', component: PageInstallInstructionDragAndDropComponent },
   { path: 'app/:id', component: AppDetailComponent },
   { path: 'app/:id/build', component: AppBuildComponent },
   { path: 'upload', component: AppUploaderComponent },

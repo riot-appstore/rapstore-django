@@ -1,76 +1,125 @@
 <div class="container">
 
-  <div class="gap-50"></div>
+    <div class="gap-50"></div>
 
-  <h2 class="text-center">Install instructions for the RAPstore browser integration</h2>
-    <h4><small>In order to bring the apps provided by RAPstore on your device, some additional software is needed. The browser is not able to do
-      all necessary steps (mainly because of security reasons). With the browser integration, which consists of an extension and a native
-      application, you get the ability to download an app directly on to your IoT device, without any further knowledge about programming software
-      for your device.</small></h4>
+    <h2 class="text-center">Install instructions for the RAPstore browser integration</h2>
+    <h4>
+        <small>In order to bring the apps provided by RAPstore on your device, some additional software is needed. The
+            browser is not able to do
+            all necessary steps (mainly because of security reasons). With the browser integration, which consists of an
+            extension and a native
+            application, you get the ability to download an app directly on to your IoT device, without any further
+            knowledge about programming software
+            for your device.
+        </small>
+    </h4>
 
-  <div class="gap-50"></div>
+    <div class="gap-50"></div>
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-sm-3">
+        <div class="col-sm-3">
+        </div>
+
+        <div class="col-sm-6">
+
+            <div class="well">
+                <h3 class="text-center">1. Prerequisites</h3>
+                <ul>
+                    <li>
+                        <h4>
+                            <small>OS: Unix-based (e.g. Ubuntu)</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>Browser: Firefox, Chrome or Chromium</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>Python</small>
+                        </h4>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="well">
+                <h3 class="text-center">2. Download</h3>
+                <ul>
+                    <li>
+                        <h4>
+                            <small>
+                                Download zip archive
+                                <a href="https://github.com/riot-appstore/rapstore-browser-integration/archive/v0.1.0.zip"
+                                   class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"> Download</span></a>
+                            </small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>Store the archive in a program directory</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>Unzip the archive (you can delete the archive afterwards)</small>
+                        </h4>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="well">
+                <h3 class="text-center">3. Installation</h3>
+                <ul>
+                    <li>
+                        <h4>
+                            <small>open a terminal</small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>execute <b class="text-primary">"cd your_install_path/src"</b></small>
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                            <small>execute <b class="text-primary">"python install.py browser"</b>, where browser is one
+                                of [firefox, chrome, chromium]
+                            </small>
+                        </h4>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="well">
+                <h3 class="text-center">4. Finish</h3>
+                <h4>
+                    <small>If you are installing for chrome or chromium you will need to restart your browser to enable
+                        the extension.
+                    </small>
+                </h4>
+            </div>
+
+            <div class="gap-50"></div>
+
+            <div class="text-center">
+                <a routerLink="/" class="btn btn-primary btn-lg">Go back to main site</a>
+            </div>
+
+            <div class="gap-50"></div>
+
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+
+
     </div>
-
-    <div class="col-sm-6">
-
-      <div class="well">
-        <h3 class="text-center">1. Prerequisites</h3>
-        <ul>
-          <li><h4><small>OS: Unix-based (e.g. Ubuntu)</small></h4></li>
-          <li><h4><small>Browser: Firefox, Chrome or Chromium</small></h4></li>
-          <li><h4><small>Python</small></h4></li>
-        </ul>
-      </div>
-
-      <div class="gap-50"></div>
-
-      <div class="well">
-        <h3 class="text-center">2. Download</h3>
-        <ul>
-          <li><h4><small>
-            Download zip archive
-            <a href="https://github.com/riot-appstore/rapstore-browser-integration/archive/v0.1.0.zip" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"> Download</span></a>
-          </small></h4></li>
-          <li><h4><small>Store the archive in a program directory</small></h4></li>
-          <li><h4><small>Unzip the archive (you can delete the archive afterwards)</small></h4></li>
-        </ul>
-      </div>
-
-      <div class="gap-50"></div>
-
-      <div class="well">
-        <h3 class="text-center">3. Installation</h3>
-        <ul>
-          <li><h4><small>open a terminal</small></h4></li>
-          <li><h4><small>execute <b class="text-primary">"cd your_install_path/src"</b></small></h4></li>
-          <li><h4><small>execute <b class="text-primary">"python install.py browser"</b>, where browser is one of [firefox, chrome, chromium]</small></h4></li>
-        </ul>
-      </div>
-
-      <div class="gap-50"></div>
-
-      <div class="well">
-        <h3 class="text-center">4. Finish</h3>
-        <h4><small>If you are installing for chrome or chromium you will need to restart your browser to enable the extension.</small></h4>
-      </div>
-
-      <div class="gap-50"></div>
-
-      <div class="text-center">
-        <a routerLink="/" class="btn btn-primary btn-lg">Go back to main site</a>
-      </div>
-
-      <div class="gap-50"></div>
-
-    </div>
-
-    <div class="col-sm-3">
-    </div>
-
-
-  </div>
 </div>

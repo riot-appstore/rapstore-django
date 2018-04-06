@@ -26,6 +26,7 @@ import { UserService } from './user.service';
 import { DeveloperComponent } from './developer/developer.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { PageInstallInstructionDragAndDropComponent } from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     DeveloperComponent,
     SignupComponent,
     UserprofileComponent,
+    PageInstallInstructionDragAndDropComponent,
   ],
   imports: [
     CommonModule,
