@@ -12,6 +12,8 @@ import 'rxjs/Rx' ;
 export class AppBuildComponent implements OnInit {
   private selected_board: number;
   private loading: boolean = false;
+  private dots: string = "";
+  private timer_id: number;
   @Input() application: Application;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
@@ -26,9 +28,17 @@ export class AppBuildComponent implements OnInit {
   }
   downloadElf(id){
     this.loading = true;
+    this.timer_id = setInterval(val => {
+       this.dots += ".";
+       if(this.dots.length == 4) {
+         this.dots = "";
+       }
+    }, 700);
     this.appService.download(id, this.selected_board, this.application.name).subscribe(
         (response) => { // download file
             this.loading = false;
+            clearInterval(this.timer_id);
+
             let filename = response.headers.get("content-disposition").split("=")[1];
             let blob = new Blob([response.blob()], {type: 'application/octet_stream'});
             let downloadUrl= window.URL.createObjectURL(blob);

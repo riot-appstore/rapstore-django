@@ -46,7 +46,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             return HttpResponse('Error')
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=file.elf'
+        response['Content-Disposition'] = 'attachment; filename=%s.elf' % app.name
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 
