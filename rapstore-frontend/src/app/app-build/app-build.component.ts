@@ -24,7 +24,7 @@ export class AppBuildComponent implements OnInit {
     this.selected_board=id;
   }
   downloadElf(id){
-    window.open("http://localhost:8000/api/app/"+id+"/build?board="+this.selected_board);
+    this.appService.download(id, this.selected_board, this.application.name);
   }
 
 }
