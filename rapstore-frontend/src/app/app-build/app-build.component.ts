@@ -11,6 +11,9 @@ import 'rxjs/Rx' ;
 })
 export class AppBuildComponent implements OnInit {
   private selected_board: number;
+  private loading: boolean = false;
+  private dots: string = "";
+  private timer_id: number;
   @Input() application: Application;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
@@ -24,7 +27,29 @@ export class AppBuildComponent implements OnInit {
     this.selected_board=id;
   }
   downloadElf(id){
-    window.open("http://localhost:8000/api/app/"+id+"/build?board="+this.selected_board);
+    this.loading = true;
+    this.timer_id = setInterval(val => {
+       this.dots += ".";
+       if(this.dots.length == 4) {
+         this.dots = "";
+       }
+    }, 700);
+    this.appService.download(id, this.selected_board, this.application.name).subscribe(
+        (response) => { // download file
+            clearInterval(this.timer_id);
+
+            let filename = response.headers.get("content-disposition").split("=")[1];
+            let blob = new Blob([response.blob()], {type: 'application/octet_stream'});
+            let downloadUrl= window.URL.createObjectURL(blob);
+            let element = document.createElement('a');
+            element.setAttribute('href', downloadUrl);
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            }, (err) => {},
+            () => this.loading=false);
   }
 
 }
