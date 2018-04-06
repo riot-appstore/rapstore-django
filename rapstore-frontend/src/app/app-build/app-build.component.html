@@ -28,7 +28,8 @@
             -->
             <button type="button" class="btn btn-primary">Install on device</button>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary download-binary-with-info" (click)="downloadElf(application.id)">Download binary file</button>
+                <button [hidden]="loading" type="button" class="btn btn-primary download-binary-with-info" (click)="downloadElf(application.id)">Download binary file</button>
+                <button [hidden]="!loading" type="button" class="btn disabled btn-info">Loading...</button>
                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-info-sign"></span></button>
             </div>
         </div>
