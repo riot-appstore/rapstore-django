@@ -27,17 +27,19 @@ from rest_framework import status
 class ApplicationViewSet(viewsets.ModelViewSet):
 
     queryset = Application.objects.order_by('name')
-
-    for app in queryset:
-        # needs at least one visible application instance
-        app_instances = app.applicationinstance_set.filter(is_public=True)
-
-        if len(app_instances) == 0:
-            queryset = queryset.exclude(name=app.name)
-
     serializer_class = ApplicationSerializer
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        for app in queryset:
+            # needs at least one visible application instance
+            app_instances = app.applicationinstance_set.filter(is_public=True)
+
+            if len(app_instances) == 0:
+                queryset = queryset.exclude(name=app.name)
+        return queryset
 
     #TODO: Add auth
     @detail_route(methods=['get'])
