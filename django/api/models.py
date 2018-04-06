@@ -35,8 +35,10 @@ def handle_user_profile(sender, instance, created=False, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
     else:
-        if(hasattr(instance, 'profile')):
-            instance.profile.save()
+        if(hasattr(instance, 'userprofile')):
+            print("ASD")
+            print(instance.userprofile.location)
+            instance.userprofile.save()
 
 
 class Transaction(models.Model):

@@ -8,6 +8,7 @@ import { AppUploaderComponent } from './app-uploader/app-uploader.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DeveloperComponent } from './developer/developer.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
 import { AuthGuard } from './auth-guard';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'app/:id/build', component: AppBuildComponent },
   { path: 'upload', component: AppUploaderComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'user-profile', component: UserprofileComponent },
   { path: 'developer', component: DeveloperComponent }
 ];
 
