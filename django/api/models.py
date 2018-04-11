@@ -21,6 +21,7 @@ class UserProfile(models.Model):
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
+        ('U', 'Undefined'),
     )
     user = models.OneToOneField(User)
     location = models.CharField(max_length=255, blank=True)

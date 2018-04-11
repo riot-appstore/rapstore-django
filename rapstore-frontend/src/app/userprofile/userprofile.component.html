@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="col-md-8"> 
+    <div class="col-md-8">
         <h3>User Profile:</h3>
         <div [hidden]="edit">
             <p><strong>Username: </strong>{{user?.username}}</p>
@@ -14,39 +14,40 @@
         <form [hidden]="!edit" (ngSubmit)="update()" #updateUserForm="ngForm">
             <div class="form-group">
                <label for="first_name">First name</label>
-               <input type="text" class="form-control" name="first_name" [(ngModel)]="model.first_name" #first_name="ngModel" required /> 
+               <input type="text" class="form-control" name="first_name" [(ngModel)]="model.first_name" #first_name="ngModel" required />
             </div>
             <div class="form-group">
                <label for="last_name">Last name</label>
-               <input type="text" class="form-control" name="last_name" [(ngModel)]="model.last_name" #last_name="ngModel" required /> 
+               <input type="text" class="form-control" name="last_name" [(ngModel)]="model.last_name" #last_name="ngModel" required />
             </div>
             <div class="form-group">
                <label for="location">Location</label>
-               <input type="text" class="form-control" name="location" [(ngModel)]="model.location" #location="ngModel" required /> 
+               <input type="text" class="form-control" name="location" [(ngModel)]="model.location" #location="ngModel" required />
             </div>
             <div class="form-group">
                <label for="company">Company</label>
-               <input type="text" class="form-control" name="company" [(ngModel)]="model.company" #company="ngModel" required /> 
+               <input type="text" class="form-control" name="company" [(ngModel)]="model.company" #company="ngModel" required />
             </div>
             <div class="form-group">
                <label for="gender">Gender</label>
                <select required class="form-control" [ngModel]="model.gender" (change)="model.gender=gender.value"name="gender" #gender>
                    <option value="M">Male</option>
                    <option value="F">Female</option>
+                   <option value="U">I do not want to reveal that</option>
                </select>
             </div>
             <div class="form-group">
                <label for="phone_number">Phone number</label>
-               <input type="text" class="form-control" name="phone_number" [(ngModel)]="model.phone_number" #phone_number="ngModel" required /> 
+               <input type="text" class="form-control" name="phone_number" [(ngModel)]="model.phone_number" #phone_number="ngModel" required />
             </div>
             <input type="button" (click)="set_edit(false)" value="Cancel"/> <!-- add cancel logic -->
             <input type="submit" value="OK" />
         </form>
     </div>
-    <div class="col-md-8" [hidden]="edit"> 
+    <div class="col-md-8" [hidden]="edit">
         <button (click)="set_edit(true)">Edit</button> <!-- add logic -->
     </div>
-    <div class="col-md-8"> 
+    <div class="col-md-8">
         <a routerLink=""> Go back to main site </a>
     </div>
 </div>
