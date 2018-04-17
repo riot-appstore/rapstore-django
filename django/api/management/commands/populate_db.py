@@ -97,6 +97,7 @@ def update_boards(transaction):
             Board.objects.update_or_create(internal_name=board_internalname, defaults=data)
 
 
+# assumes riot apps are not loaded yet!
 def register_riot_apps():
     """
     "upload" riot applications by user "riot-community"
@@ -152,7 +153,7 @@ def register_riot_apps():
                 else:
                     # auto public
                     app = Application.objects.get(name=application_name)
-                    
+
                     object = ApplicationInstance.objects.get(application=app)
                     object.is_public = True
                     object.save()
