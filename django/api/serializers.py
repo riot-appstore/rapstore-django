@@ -6,23 +6,21 @@ from api.models import UserProfile
 from django.contrib.auth.models import User
 
 
-class ApplicationSerializer(serializers.ModelSerializer):
+class ApplicationInstanceSerializer(serializers.ModelSerializer):
+    app_tarball = serializers.FileField()
+    application = serializers.PrimaryKeyRelatedField(read_only=True)
 
+    class Meta:
+        model = ApplicationInstance
+        exclude = ('is_public',)
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Application
         fields = '__all__'
-
-
-class ApplicationInstanceSerializer(serializers.ModelSerializer):
-
-    application = serializers.PrimaryKeyRelatedField(read_only=True)
-
-    class Meta:
-        model = ApplicationInstance
-        exclude = ('app_tarball', 'is_public')
-
 
 class BoardSerializer(serializers.ModelSerializer):
 
