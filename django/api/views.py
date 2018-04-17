@@ -87,7 +87,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    #TODO: Add auth
+    # TODO: Add auth
     @detail_route(methods=['GET'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)

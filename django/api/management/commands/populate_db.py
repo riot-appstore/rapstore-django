@@ -29,7 +29,7 @@ import api.settings as config
 from api.models import Transaction
 from api.models import Module
 from api.models import Board
-from api.models import Application
+from api.models import Application, ApplicationInstance
 from django.utils.html import escape
 from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
 from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
@@ -130,17 +130,14 @@ def register_riot_apps():
                 headers = {
                     'Authorization': 'Token ' + token,
                 }
-                app_instance = {
-                        "version_name": "1.0",
-                        "version_code": "1.0"
-                        }
                 payload = {
                     'name': application_name,
                     'description': escape(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
                     'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
-                    'initial_instance.version_name': "example"
+                    'initial_instance.version_name': '1.3.1',
+                    'initial_instance.version_code': '7'
                 }
                 files = {'app_tarball': open(tmp_file_path, 'rb')}
 
@@ -154,7 +151,9 @@ def register_riot_apps():
 
                 else:
                     # auto public
-                    object = Application.objects.get(name=application_name)
+                    app = Application.objects.get(name=application_name)
+                    
+                    object = ApplicationInstance.objects.get(application=app)
                     object.is_public = True
                     object.save()
 
