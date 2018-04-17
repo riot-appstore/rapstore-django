@@ -27,9 +27,10 @@ from rest_framework import parsers
 from rest_framework.exceptions import ValidationError
 from django.db import IntegrityError
 
+
 class NestedMultipartParser(parsers.MultiPartParser):
     def parse(self, stream, media_type=None, parser_context=None):
-        result = super().parse(stream=stream, media_type=media_type, parser_context=parser_context)
+        result = super(NestedMultipartParser, self).parse(stream=stream, media_type=media_type, parser_context=parser_context)
         data = {}
         for key, value in result.data.items():
             if '.' in key:
@@ -43,6 +44,7 @@ class NestedMultipartParser(parsers.MultiPartParser):
             else:
                 data[key] = value
         return parsers.DataAndFiles(data, result.files)
+
 
 class ApplicationViewSet(viewsets.ModelViewSet):
 
@@ -61,8 +63,32 @@ class ApplicationViewSet(viewsets.ModelViewSet):
                 queryset = queryset.exclude(name=app.name)
         return queryset
 
+    @list_route(methods=['PUT'], url_path="update")
+    def update_data(self, request):
+        user = request.user
+
+        try:
+            app = Application.objects.get(name=request.data['name'])
+
+        except Application.DoesNotExist as e:
+            return Response(str(e), status=status.HTTP_404_NOT_FOUND)
+
+        if app.author != user:
+            return Response(
+                'User "{0}" does not own the app "{1}" and is therefore not allowed to change it!'.format(user, app),
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = ApplicationSerializer(app, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     #TODO: Add auth
-    @detail_route(methods=['get'])
+    @detail_route(methods=['GET'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
         f = app.app_tarball
@@ -82,7 +108,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 
-    @detail_route(methods=['get'], permission_classes=[IsAdminUser, ])
+    @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
         response = HttpResponse(app.app_tarball, content_type='application/force-download')
@@ -91,6 +117,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return response
 
     def perform_create(self, serializer):
+
         app_tarball = self.request.data.pop('app_tarball', None)
         initial_instance = self.request.data.pop("initial_instance", {})
         if app_tarball:
@@ -102,6 +129,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
         try:
             app_instance_serializer.save(application=serializer.instance)
+
         except IntegrityError as e:
             serializer.instance.delete()
             raise e
@@ -119,11 +147,14 @@ class UploadFileForm(forms.ModelForm):
 
 
 class UserViewSet(viewsets.ViewSet):
+
     def list(self, request):
         user = request.user
         if user.is_anonymous:
             return Response()
+
         serializer = UserSerializer(user)
+
         return Response(serializer.data)
 
     @list_route(methods=['PUT'], url_path="update")
@@ -133,15 +164,16 @@ class UserViewSet(viewsets.ViewSet):
             return Response()
 
         serializer = UserSerializer(user, data=request.data)
-        if(serializer.is_valid()):
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=['POST'])
     def register(self, request):
         serializer = CreateUserSerializer(data=request.data)
-        if(serializer.is_valid()):
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 

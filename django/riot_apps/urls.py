@@ -33,10 +33,6 @@ from django.contrib.auth.views import login
 from rest_framework.routers import DefaultRouter
 from api.views import ApplicationViewSet
 
-router = DefaultRouter()
-
-#router.register('apps', ApplicationViewSet, base_name='apps')
-
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
 router.register(r'board', BoardViewSet)
