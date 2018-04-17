@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from api.serializers import ApplicationSerializer
+from api.serializers import ApplicationInstanceSerializer
 from api.serializers import BoardSerializer
 from api.serializers import UserSerializer
 from api.serializers import CreateUserSerializer
@@ -22,22 +23,43 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
+from rest_framework import parsers
+from rest_framework.exceptions import ValidationError
+from django.db import IntegrityError
 
+class NestedMultipartParser(parsers.MultiPartParser):
+    def parse(self, stream, media_type=None, parser_context=None):
+        result = super().parse(stream=stream, media_type=media_type, parser_context=parser_context)
+        data = {}
+        for key, value in result.data.items():
+            if '.' in key:
+                values = key.split('.')                
+                nested_dict_key = values[0]
+                nested_value_key = values[1]
+                if len(nested_dict_key) and len(nested_value_key):
+                    if nested_dict_key not in data:
+                       data[nested_dict_key] = {}
+                    data[nested_dict_key][nested_value_key] = value
+            else:
+                data[key] = value
+        return parsers.DataAndFiles(data, result.files)
 
 class ApplicationViewSet(viewsets.ModelViewSet):
 
     queryset = Application.objects.order_by('name')
-
-    for app in queryset:
-        # needs at least one visible application instance
-        app_instances = app.applicationinstance_set.filter(is_public=True)
-
-        if len(app_instances) == 0:
-            queryset = queryset.exclude(name=app.name)
-
     serializer_class = ApplicationSerializer
-    parser_classes = (MultiPartParser, FormParser,)
+    parser_classes = (NestedMultipartParser, FormParser,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        queryset = self.queryset
+        for app in queryset:
+            # needs at least one visible application instance
+            app_instances = app.applicationinstance_set.filter(is_public=True)
+
+            if len(app_instances) == 0:
+                queryset = queryset.exclude(name=app.name)
+        return queryset
 
     #TODO: Add auth
     @detail_route(methods=['get'])
@@ -69,7 +91,20 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return response
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user, app_tarball=self.request.data.get('app_tarball'))
+        app_tarball = self.request.data.pop('app_tarball', None)
+        initial_instance = self.request.data.pop("initial_instance", {})
+        if app_tarball:
+            initial_instance["app_tarball"] = app_tarball[0]
+
+        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance)
+        app_instance_serializer.is_valid(raise_exception=True)
+
+        serializer.save(author=self.request.user)
+        try:
+            app_instance_serializer.save(application=serializer.instance)
+        except IntegrityError as e:
+            serializer.instance.delete()
+            raise e
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):

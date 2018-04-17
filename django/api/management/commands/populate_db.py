@@ -129,14 +129,18 @@ def register_riot_apps():
 
                 headers = {
                     'Authorization': 'Token ' + token,
-                    'Accept': 'application/json',
                 }
+                app_instance = {
+                        "version_name": "1.0",
+                        "version_code": "1.0"
+                        }
                 payload = {
                     'name': application_name,
                     'description': escape(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
-                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT'
+                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
+                    'initial_instance.version_name': "example"
                 }
                 files = {'app_tarball': open(tmp_file_path, 'rb')}
 
