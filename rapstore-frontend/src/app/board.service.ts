@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BoardService {
 
-  private baseUrl = 'http://localhost:8000';
+  private baseUrl = `http://${window.location.hostname}:8080`;
 
   constructor(private http: Http) {}
 

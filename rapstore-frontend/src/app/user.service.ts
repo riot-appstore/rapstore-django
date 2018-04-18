@@ -5,7 +5,7 @@ import { Signup, User } from './models'
 
 @Injectable()
 export class UserService {
-  private url = "http://localhost:8000/api/user/";
+  private url = `http://${window.location.hostname}:8080/api/user/`;
   private contentType = {'Content-Type': 'application/json'};
 
   constructor(private authService: AuthService, private http: Http) { }
