@@ -25,7 +25,7 @@ SECRET_KEY = 'v^0nds6=g_b4$juu_!n^vh1$vt)o^9d!ro612ga6ryk3vt_%$w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['demo.riot-apps.net', 'staging.riot-apps.net', 'dev.riot-apps.net', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
