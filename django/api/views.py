@@ -68,7 +68,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         for app in queryset:
             # needs at least one visible application instance
-            app_instances = app.applicationinstance_set.filter(is_public=True)
+            app_instances = ApplicationInstance.objects.filter(application=app, is_public=True)
 
             if len(app_instances) == 0:
                 queryset = queryset.exclude(name=app.name)
