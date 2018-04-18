@@ -26,6 +26,7 @@ from rest_framework import status
 from rest_framework import parsers
 from rest_framework.exceptions import ValidationError
 from django.db import IntegrityError
+from api.permissions import IsAppOwnerOrReadOnly
 
 
 class NestedMultipartParser(parsers.MultiPartParser):
@@ -51,7 +52,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.order_by('name')
     serializer_class = ApplicationSerializer
     parser_classes = (NestedMultipartParser, FormParser,)
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly, IsAppOwnerOrReadOnly,)
 
     def get_queryset(self):
         queryset = self.queryset
@@ -62,30 +63,6 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             if len(app_instances) == 0:
                 queryset = queryset.exclude(name=app.name)
         return queryset
-
-    @list_route(methods=['PUT'], url_path="update")
-    def update_data(self, request):
-        user = request.user
-
-        try:
-            app = Application.objects.get(name=request.data['name'])
-
-        except Application.DoesNotExist as e:
-            return Response(str(e), status=status.HTTP_404_NOT_FOUND)
-
-        if app.author != user:
-            return Response(
-                'User "{0}" does not own the app "{1}" and is therefore not allowed to change it!'.format(user, app),
-                status=status.HTTP_403_FORBIDDEN
-            )
-
-        serializer = ApplicationSerializer(app, data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # TODO: Add auth
     @detail_route(methods=['GET'])
