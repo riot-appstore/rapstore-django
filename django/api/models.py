@@ -77,7 +77,7 @@ class Module(models.Model):
 
 
 fs = FileSystemStorage(location='/apps')
-#Represents external applications (to be uploaded)
+# Represents external applications (to be uploaded)
 class Application(models.Model):
     author = models.ForeignKey(User)
     name = models.CharField(max_length=255, unique=True)
@@ -85,6 +85,7 @@ class Application(models.Model):
     licences = models.CharField(max_length=255, null=True, blank=True) 
     project_page = models.URLField(max_length=255, null=True, blank=True)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
+    download_count = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
