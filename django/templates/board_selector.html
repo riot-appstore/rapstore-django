@@ -1,8 +1,0 @@
-<!-- ID_PREFIX, SELECTOR_ID-->
-<div class="form-group">
-    <select class="form-control board-selector" data-bind="value: boardsel, event:{change: set_board_name}">
-        {% for board in boards %}
-        <option value="{{board.internal_name}}">{{board.display_name}} ({{board.internal_name}})</option>
-        {% endfor %}
-    </select>
-</div>
