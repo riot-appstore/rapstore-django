@@ -51,4 +51,4 @@ urlpatterns = [
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^api/', include(router.urls)),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
