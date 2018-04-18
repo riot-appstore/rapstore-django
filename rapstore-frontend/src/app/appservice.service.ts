@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AppService {
 
-  private baseUrl = 'http://localhost:8000';
+  private baseUrl = `http://${window.location.hostname}:8080`;
   private loading: boolean = false;
 
   constructor(private http: Http) { }
@@ -24,7 +24,7 @@ export class AppService {
    return this.http.get(`${this.baseUrl}/api/app/${id}/`).map(res => res.json());
   }
   download(id: number, board: number, name: string) {
-        return this.http.get("http://localhost:8000/api/app/"+id+"/build?board="+board, {
+        return this.http.get(this.baseUrl+"/api/app/"+id+"/build?board="+board, {
         responseType: ResponseContentType.Blob,
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
     });

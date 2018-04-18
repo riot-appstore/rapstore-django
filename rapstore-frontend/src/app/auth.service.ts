@@ -7,7 +7,7 @@ import { User } from './models'
 
 @Injectable()
 export class AuthService {
-  private base_url = 'http://localhost:8000';
+  private base_url = `http://${window.location.hostname}:8080`;
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private token: boolean;
   private is_dev: boolean;
