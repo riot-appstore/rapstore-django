@@ -65,13 +65,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly, IsAppOwnerOrReadOnly,)
 
     def get_queryset(self):
-        queryset = self.queryset
-        for app in queryset:
-            # needs at least one visible application instance
-            app_instances = ApplicationInstance.objects.filter(application=app, is_public=True)
-
-            if len(app_instances) == 0:
-                queryset = queryset.exclude(name=app.name)
+        queryset = self.queryset.filter(applicationinstance__is_public=True)
         return queryset
 
     # TODO: Add auth
