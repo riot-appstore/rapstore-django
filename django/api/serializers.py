@@ -1,3 +1,13 @@
+# -*- coding: UTF-8 -*-
+
+"""
+ * Copyright (C) 2018 FU Berlin and HAW Hamburg
+ *
+ * This file is subject to the terms and conditions of the GNU Lesser
+ * General Public License v2.1. See the file LICENSE in the top level
+ * directory for more details.
+"""
+
 from rest_framework import serializers
 from api.models import Application
 from api.models import ApplicationInstance
@@ -22,6 +32,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         model = Application
         fields = '__all__'
 
+
 class BoardSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -30,7 +41,9 @@ class BoardSerializer(serializers.ModelSerializer):
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
+
     is_active = serializers.HiddenField(default=serializers.CreateOnlyDefault(False))
+
     class Meta:
         model = User
         exclude = ('is_superuser', 'is_staff', 'groups', 'user_permissions')

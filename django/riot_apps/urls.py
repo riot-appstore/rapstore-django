@@ -1,3 +1,13 @@
+# -*- coding: UTF-8 -*-
+
+"""
+ * Copyright (C) 2018 FU Berlin and HAW Hamburg
+ *
+ * This file is subject to the terms and conditions of the GNU Lesser
+ * General Public License v2.1. See the file LICENSE in the top level
+ * directory for more details.
+"""
+
 """riot_apps URL Configuratio2
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -32,10 +42,6 @@ from django.contrib.auth.views import logout
 from django.contrib.auth.views import login
 from rest_framework.routers import DefaultRouter
 from api.views import ApplicationViewSet
-
-router = DefaultRouter()
-
-#router.register('apps', ApplicationViewSet, base_name='apps')
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
