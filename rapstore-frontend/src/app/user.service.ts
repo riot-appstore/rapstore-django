@@ -2,10 +2,11 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { AuthService } from './auth.service';
 import { Signup, User } from './models'
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class UserService {
-  private url = `http://${window.location.hostname}:8080/api/user/`;
+  private url = `${environment.apiUrl}/api/user/`;
   private contentType = {'Content-Type': 'application/json'};
 
   constructor(private authService: AuthService, private http: Http) { }

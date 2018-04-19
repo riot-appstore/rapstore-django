@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-app-uploader',
@@ -12,7 +13,7 @@ export class AppUploaderComponent implements OnInit {
   model: any = {};
   message: string = "";
   error: string = "";
-  private baseurl = `http://${window.location.hostname}:8080`;
+  private baseurl = environment.apiUrl;
   constructor(private http: Http, private AuthService: AuthService) { }
 
   ngOnInit() {

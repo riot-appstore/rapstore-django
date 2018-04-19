@@ -3,11 +3,12 @@ import { Application } from './models';
 import { Observable } from 'rxjs/Observable';
 import { Http, RequestOptions, Headers, ResponseContentType } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AppService {
 
-  private baseUrl = `http://${window.location.hostname}:8080`;
+  private baseUrl = environment.apiUrl;
   private loading: boolean = false;
 
   constructor(private http: Http) { }

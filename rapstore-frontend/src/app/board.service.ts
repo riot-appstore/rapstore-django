@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Board } from './models';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class BoardService {
 
-  private baseUrl = `http://${window.location.hostname}:8080`;
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: Http) {}
 

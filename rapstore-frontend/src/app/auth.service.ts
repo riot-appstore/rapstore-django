@@ -4,10 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserService } from './user.service';
 import { User } from './models'
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthService {
-  private base_url = `http://${window.location.hostname}:8080`;
+  private base_url = environment.apiUrl;
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private token: boolean;
   private is_dev: boolean;
