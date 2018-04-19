@@ -161,7 +161,7 @@ def register_riot_apps():
 
 def make_tarfile(output_path, source_dir):
     with tarfile.open(output_path, "w:gz") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+        tar.add(source_dir, arcname=".")
 
 
 def get_description(path, name):

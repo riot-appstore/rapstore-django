@@ -68,7 +68,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         for app in queryset:
             # needs at least one visible application instance
-            app_instances = app.applicationinstance_set.filter(is_public=True)
+            app_instances = ApplicationInstance.objects.filter(application=app, is_public=True)
 
             if len(app_instances) == 0:
                 queryset = queryset.exclude(name=app.name)
@@ -78,7 +78,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.app_tarball
+        f = app.applicationinstance_set.first().app_tarball
         files = {'file': f}
         board = request.GET.get('board', None)
         if not board:

@@ -12,7 +12,7 @@ export class AppUploaderComponent implements OnInit {
   model: any = {};
   message: string = "";
   error: string = "";
-  private baseurl = "http://localhost:8000";
+  private baseurl = `http://${window.location.hostname}:8080`;
   constructor(private http: Http, private AuthService: AuthService) { }
 
   ngOnInit() {
