@@ -30,7 +30,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Application
-        exclude = ('download_count',)
+        fields = '__all__'
+        read_only_fields = ('download_count',)
 
 
 class BoardSerializer(serializers.ModelSerializer):

@@ -52,11 +52,6 @@ body {
     overflow: hidden;
 }
 
-.app-panel .app-name {
-  font-size:1.2em;
-  margin-top: 2em;
-}
-
 /*
     changing collapse icon for panels
     Mix between two sources:

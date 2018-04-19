@@ -7,10 +7,6 @@
     background: #2a9fd6;
 }
 
-.app-panel-body {
-    height: 60%;
-}
-
 .a-wrapper-no-decoration {
     text-decoration: none;
     font-weight: normal;
@@ -21,4 +17,13 @@
     text-decoration: none;
     font-weight: normal;
     color: white;
+}
+
+.app-panel .app-name {
+    font-size:1.2em;
+    margin-bottom: 1em;
+}
+
+#app-info-section {
+    margin-top: 2em;
 }
