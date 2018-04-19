@@ -92,7 +92,7 @@ class Application(models.Model):
         return self.name
 
     class Meta:
-        permissions = (('has_dev_perm','Has dev permissions'),)
+        permissions = (('has_dev_perm', 'Has dev permissions'),)
 
     def download_tar(self, link):
         # get the remote repo from app_repo_url and create the command string

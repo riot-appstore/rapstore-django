@@ -8,35 +8,32 @@
  * directory for more details.
 """
 
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from api.serializers import ApplicationSerializer
-from api.serializers import ApplicationInstanceSerializer
-from api.serializers import BoardSerializer
-from api.serializers import UserSerializer
-from api.serializers import CreateUserSerializer
+import base64
+import requests
+
 from api.models import Application
 from api.models import ApplicationInstance
 from api.models import Board
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework import generics
-from rest_framework import viewsets
-from rest_framework.response import Response
-import requests
-from rest_framework.decorators import detail_route, list_route
-import base64
-from django import forms
-from rest_framework.parsers import FormParser, MultiPartParser
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.permissions import IsAdminUser
-from rest_framework import status
-from rest_framework import parsers
-from rest_framework.exceptions import ValidationError
-from django.db import IntegrityError
 from api.permissions import IsAppOwnerOrReadOnly
+from api.serializers import ApplicationInstanceSerializer
+from api.serializers import ApplicationSerializer
+from api.serializers import BoardSerializer
+from api.serializers import CreateUserSerializer
+from api.serializers import UserSerializer
+from django.db import IntegrityError
+from django.db.models import F
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import parsers
+from rest_framework import status
+from rest_framework import viewsets
+from rest_framework.decorators import detail_route, list_route
+from rest_framework.parsers import FormParser
+from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+
+from django import forms
 
 
 class NestedMultipartParser(parsers.MultiPartParser):
@@ -71,9 +68,11 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     # TODO: Add auth
     @detail_route(methods=['GET'])
     def build(self, request, pk=None):
+
         app = get_object_or_404(Application, pk=pk)
         f = app.applicationinstance_set.first().app_tarball
         files = {'file': f}
+
         board = request.GET.get('board', None)
         if not board:
             return HttpResponse('Board not found')
@@ -83,6 +82,10 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         if r.status_code != 200:
             return HttpResponse('Error')
+
+        # build was successful, increment download counter now
+        app.download_count = F('download_count') + 1
+        app.save()
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attachment; filename=%s.elf' % app.name
