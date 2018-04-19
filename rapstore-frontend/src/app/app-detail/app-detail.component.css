@@ -1,0 +1,8 @@
+.app-detail-avatar {
+    float:left;
+}
+
+.app-detail-headline {
+    overflow: hidden;
+    padding-left: 1em;
+}

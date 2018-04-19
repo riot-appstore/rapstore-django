@@ -2,6 +2,8 @@ export class Application {
   id: number;
   name: string;
   description: string;
+  download_count: number;
+  author: User;
 }
 
 export class Board {

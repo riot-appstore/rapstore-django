@@ -13,9 +13,11 @@
                         <a class="a-wrapper-no-decoration" routerLink="app/{{application.id}}">
                             <div class="panel panel-default app-overview-item">
                                 <div class="panel-body app-panel-body app-panel text-center">
-                                <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
+                                    <p class="app-name">{{application.name}}</p>
+                                    <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
 
-                                <p class="app-name">{{application.name}}</p>
+                                    <p class="pull-left"><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> 17</p>
+                                    <p class="pull-right"><span class="glyphicon glyphicon-user" aria-hidden=true></span> HendrikVE</p>
                                 </div>
 
                             </div>
