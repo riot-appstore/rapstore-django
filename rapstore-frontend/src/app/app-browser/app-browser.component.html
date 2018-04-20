@@ -12,10 +12,14 @@
                     <div>
                         <a class="a-wrapper-no-decoration" routerLink="app/{{application.id}}">
                             <div class="panel panel-default app-overview-item">
-                                <div class="panel-body app-panel-body app-panel text-center">
-                                <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
+                                <div class="panel-body app-panel text-center">
+                                    <p class="app-name">{{application.name | uppercase}}</p>
+                                    <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
 
-                                <p class="app-name">{{application.name}}</p>
+                                    <div id="app-info-section">
+                                        <p class="pull-left"><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application.download_count}}</p>
+                                        <p class="pull-right"><span class="glyphicon glyphicon-user" aria-hidden=true></span> {{application.author.username}}</p>
+                                    </div>
                                 </div>
 
                             </div>

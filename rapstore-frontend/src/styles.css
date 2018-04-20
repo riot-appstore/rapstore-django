@@ -3,16 +3,6 @@
     --riot-red:#ca0022;
 }
 
-#main-jumbotron {
-    padding: 15px;
-    margin: 0;
-    min-height: 180px;
-}
-
-#missing-components-label-section {
-    padding-bottom: 10px;
-}
-
 html {
     position: relative;
     min-height: 100%;
@@ -57,63 +47,9 @@ body {
     height: 50px;
 }
 
-.app-panel-div {
-    width: 230px;
-    height: 230px;
-}
-
 .app-panel {
     height: 80%;
     overflow: hidden;
-}
-
-.app-panel-header {
-    height: 20%;
-    padding: 0;
-}
-
-.app-panel-body {
-    height: 60%;
-}
-
-.app-panel-footer {
-    height: 20%;
-    padding: 0;
-}
-
-.app-panel .app-name {
-  font-size:1.2em;
-  margin-top: 2em;
-}
-
-.app-overview-item {
-  -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
-  transition: background 0.5s;
-}
-
-.app-overview-item:hover {
-  background: #2a9fd6;
-}
-
-.app-detail-avatar {
-  float:left;
-}
-
-.app-detail-headline {
-  overflow: hidden;
-  padding-left: 1em;
-}
-
-.a-wrapper-no-decoration {
-  text-decoration: none;
-  font-weight: normal;
-  color: white;
-}
-
-.a-wrapper-no-decoration:hover {
-  text-decoration: none;
-  font-weight: normal;
-  color: white;
 }
 
 /*
