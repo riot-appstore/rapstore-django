@@ -23,8 +23,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
+  private feedbackConfiguration = {};
 
-  constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {}
+  constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {
+         this.feedbackConfiguration = {
+        };
+  }
 
   ngOnInit(): void {
 
