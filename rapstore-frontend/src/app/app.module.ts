@@ -27,6 +27,8 @@ import { DeveloperComponent } from './developer/developer.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { PageInstallInstructionDragAndDropComponent } from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
+import {FeedbackModule} from "ngx-bootstrap-feedback/feedback.module";
+import {ModalModule} from "@herbis/ngx-modal";
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { PageInstallInstructionDragAndDropComponent } from './page-install-instr
     FormsModule,
     NguUtilityModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FeedbackModule,
+    ModalModule
   ],
   providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService],
   bootstrap: [AppComponent]
