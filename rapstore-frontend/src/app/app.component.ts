@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
 
-  protected appVersion = environment.appVersion;
+  protected appVersion: string = environment.VERSION;
 
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {}
 
