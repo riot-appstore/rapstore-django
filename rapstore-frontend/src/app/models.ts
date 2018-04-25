@@ -34,3 +34,7 @@ export class Signup {
   first_name: string;
   last_name: string;
 }
+
+export class Feedback {
+  description: string;
+}

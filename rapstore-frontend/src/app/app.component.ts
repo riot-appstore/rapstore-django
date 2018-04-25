@@ -3,10 +3,11 @@ import {BrowserIntegrationService} from './browser-integration.service';
 import {Subscription} from 'rxjs/Subscription';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { FeedbackService } from './feedback.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
-import { User } from './models';
+import { User, Feedback } from './models';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +25,12 @@ export class AppComponent implements OnInit, OnDestroy {
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
   private feedbackConfiguration = {};
-  private description = "";
+  private feedback: any = {};
 
-  constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {
+  constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService, private feedbackService: FeedbackService) {
          this.feedbackConfiguration = {
-         onSubmit: () => {alert(this.description); this.description=""},
-         onCancel: () => this.description = "";
+         onSubmit: () => {this.feedbackService.sendFeedback(this.feedback).subscribe((val) => alert("Thank you for your feedback!"), (err) => alert("There was a problem uploading the feedback. Please try again");); this.feedback={}},
+         onCancel: () => this.feedback = {};
         };
   }
 
