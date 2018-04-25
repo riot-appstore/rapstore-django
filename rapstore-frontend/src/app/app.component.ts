@@ -24,9 +24,12 @@ export class AppComponent implements OnInit, OnDestroy {
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
   private feedbackConfiguration = {};
+  private description = "";
 
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {
          this.feedbackConfiguration = {
+         onSubmit: () => {alert(this.description); this.description=""},
+         onCancel: () => this.description = "";
         };
   }
 
