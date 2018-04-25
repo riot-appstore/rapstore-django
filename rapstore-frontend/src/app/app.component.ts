@@ -29,7 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService, private feedbackService: FeedbackService) {
          this.feedbackConfiguration = {
-         onSubmit: () => {this.feedbackService.sendFeedback(this.feedback).subscribe((val) => alert("Thank you for your feedback!"), (err) => alert("There was a problem uploading the feedback. Please try again");); this.feedback={}},
+         onSubmit: () => {
+         this.feedbackService.sendFeedback(this.feedback).subscribe((val) => alert("Thank you for your feedback!"), (err) => alert("There was a problem uploading the feedback. Please try again")); this.feedback={}},
          onCancel: () => this.feedback = {};
         };
   }
