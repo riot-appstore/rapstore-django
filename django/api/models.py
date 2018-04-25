@@ -119,3 +119,8 @@ class ApplicationInstance(models.Model):
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
         unique_together = ('version_code', 'application',)
+
+class Feedback(models.Model):
+    date = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True)
+    pass
