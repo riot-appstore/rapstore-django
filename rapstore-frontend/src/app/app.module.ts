@@ -29,6 +29,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { PageInstallInstructionDragAndDropComponent } from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
 import {FeedbackModule} from "ngx-bootstrap-feedback/feedback.module";
 import {ModalModule} from "@herbis/ngx-modal";
+import { FeedbackService } from './feedback.service';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import {ModalModule} from "@herbis/ngx-modal";
     FeedbackModule,
     ModalModule
   ],
-  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService],
+  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
