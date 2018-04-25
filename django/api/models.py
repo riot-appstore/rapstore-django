@@ -82,7 +82,7 @@ class Application(models.Model):
     author = models.ForeignKey(User)
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=65535, null=True, blank=True)
-    licences = models.CharField(max_length=255, null=True, blank=True) 
+    licenses = models.CharField(max_length=255, null=True, blank=True) 
     project_page = models.URLField(max_length=255, null=True, blank=True)
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     download_count = models.PositiveIntegerField(default=0)
