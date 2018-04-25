@@ -14,18 +14,21 @@ import requests
 from api.models import Application
 from api.models import ApplicationInstance
 from api.models import Board
+from api.models import Feedback
 from api.permissions import IsAppOwnerOrReadOnly
 from api.serializers import ApplicationInstanceSerializer
 from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
 from api.serializers import CreateUserSerializer
 from api.serializers import UserSerializer
+from api.serializers import FeedbackSerializer
 from django.db import IntegrityError
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import parsers
 from rest_framework import status
+from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.parsers import FormParser
@@ -162,3 +165,7 @@ class UserViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class FeedbackViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
