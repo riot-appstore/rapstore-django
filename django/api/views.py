@@ -34,7 +34,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from django import forms
-
+import json
 
 class NestedMultipartParser(parsers.MultiPartParser):
     def parse(self, stream, media_type=None, parser_context=None):
@@ -91,6 +91,19 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         response['Content-Disposition'] = 'attachment; filename=%s.elf' % app.name
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
+
+    @detail_route(methods=['GET'])
+    def supported_boards(self, request, pk=None):
+        app = get_object_or_404(Application, pk=pk)
+        f = app.applicationinstance_set.first().app_tarball
+        files = {'file': f}
+
+        r = requests.post('http://builder:8000/supported_boards/', files=files)
+        supported_boards = json.loads(r.text)["supported_boards"]
+        queryset = Board.objects.filter(internal_name__in=supported_boards)
+        serializer = BoardSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
     @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
     def download(self, request, pk=None):
