@@ -100,7 +100,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         r = requests.post('http://builder:8000/supported_boards/', files=files)
         supported_boards = json.loads(r.text)["supported_boards"]
-        queryset = Board.objects.filter(internal_name__in=supported_boards)
+        queryset = Board.objects.filter(internal_name__in=supported_boards).order_by('display_name')
         serializer = BoardSerializer(queryset, many=True)
         return Response(serializer.data)
 
