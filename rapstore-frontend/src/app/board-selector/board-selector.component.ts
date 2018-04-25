@@ -17,7 +17,7 @@ export class BoardSelectorComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.boardService.getAll()
+    this.boardService.getSupported(id)
       .subscribe(boards => this.boards = boards);
   }
   onChange(value) {
