@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
 import 'rxjs/add/operator/take';
 import { User } from './models';
 
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
+
+  protected appVersion: string = environment.VERSION;
 
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService) {}
 
