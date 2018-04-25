@@ -3,6 +3,7 @@ import { Application } from '../models';
 import { AppService } from '../appservice.service';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/Rx' ;
+import Timer = NodeJS.Timer;
 
 @Component({
   selector: 'app-app-build',
@@ -13,7 +14,7 @@ export class AppBuildComponent implements OnInit {
   private selected_board: number;
   private loading: boolean = false;
   private dots: string = "";
-  private timer_id: number;
+  private timer_id: Timer;
   @Input() application: Application;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 

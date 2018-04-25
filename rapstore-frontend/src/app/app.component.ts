@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { FeedbackService } from './feedback.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
 import 'rxjs/add/operator/take';
 import { User, Feedback } from './models';
 
@@ -26,7 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
   protected nativeMessagingHostAvailable = true;
   private feedbackConfiguration = {};
   private feedback: any = {};
-
+  protected appVersion: string = environment.VERSION;
+  
   constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService, private feedbackService: FeedbackService) {
     this.feedbackConfiguration = {
       onSubmit: () => {
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
       onCancel: () => this.feedback = {}
     };
   }
+
 
   ngOnInit(): void {
 
