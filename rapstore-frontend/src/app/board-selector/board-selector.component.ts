@@ -18,7 +18,7 @@ export class BoardSelectorComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.boardService.getAll()
-      .subscribe(boards => this.boards = boards);
+    .subscribe(boards => {this.boards = boards; this.notify.emit(boards[0].id)});
   }
   onChange(value) {
     this.notify.emit(value);
