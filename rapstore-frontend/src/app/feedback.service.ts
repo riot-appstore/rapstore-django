@@ -11,7 +11,7 @@ export class FeedbackService {
   constructor(private http: Http) { }
   sendFeedback(feedback: Feedback) {
     const authHeaders = new Headers(this.contentType);
-    return this.http.post(`${this.baseUrl}/feedback/`,feedback , new RequestOptions({headers: authHeaders})).map(res => res.json());
+    return this.http.post(`${this.baseUrl}/api/feedback/`,feedback , new RequestOptions({headers: authHeaders})).map(res => res.json());
   }
 
 }
