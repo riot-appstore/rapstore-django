@@ -44,6 +44,7 @@ def execute_makefile(app_build_dir, board, app_name):
 
     cmd = ['make',
            '-C', app_build_dir,
+           'binfile',
            'RIOTBASE=/RIOT',
            'ELFFILE=app.elf',
            'BOARD=%s' % board]
@@ -85,7 +86,7 @@ def build(request):
     #Since we have the folder, let's do stuff
     execute_makefile(dest, board, 'test')
 
-    with open(dest+'/app.elf', 'rb') as file:
+    with open(dest+'/app.bin', 'rb') as file:
         b64 = base64.b64encode(file.read())
 
     return HttpResponse(b64)
