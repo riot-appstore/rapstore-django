@@ -39,7 +39,7 @@ class ApplicationAdmin(admin.ModelAdmin):
     def publish(self, obj):
         instance = obj.applicationinstance_set.first()
         html = format_html('<a class="button" href="{}"> Publish </a>'.format(""))
-        return html
+        return html if not instance.is_public else ""
 
 # Register your models here.
 admin.site.register(Board, names(('internal_name',)))
