@@ -111,8 +111,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        response = HttpResponse(app.app_tarball, content_type='application/force-download')
-        response['Content-Disposition'] = 'attachment; filename=%s' % app.app_tarball.name
+        f = app.applicationinstance_set.first().app_tarball
+        response = HttpResponse(f, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s.tar.gz' % app.name
 
         return response
 

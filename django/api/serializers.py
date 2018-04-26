@@ -72,7 +72,7 @@ class BoardSerializer(serializers.ModelSerializer):
 
 class CreateUserSerializer(serializers.ModelSerializer):
 
-    is_active = serializers.HiddenField(default=serializers.CreateOnlyDefault(False))
+    is_active = serializers.HiddenField(default=serializers.CreateOnlyDefault(True))
 
     class Meta:
         model = User

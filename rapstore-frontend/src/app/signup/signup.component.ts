@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
     this.refresh();
     this.userService.register(this.model)
       .subscribe(result => {
-        this.message = "Successful registration. Please wait until a RAPstore admin activates your account";
+        this.message = "Successful registration!";
         }, err => {
           let errors = JSON.parse(err.text());
           for(let k in errors) {
