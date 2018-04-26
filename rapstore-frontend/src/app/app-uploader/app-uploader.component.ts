@@ -13,7 +13,7 @@ import { Application } from '../models'
 export class AppUploaderComponent implements OnInit {
   private file: File;
   message: string = "";
-  error: string = "";
+  errors: string[] = [];
   private baseurl = environment.apiUrl;
   constructor(private http: Http, private AuthService: AuthService, private model: Application) {
     this.model.initial_instance={id: 0, version_name: "", version_code: ""}; }
@@ -23,6 +23,7 @@ export class AppUploaderComponent implements OnInit {
 
   fileUpload() {
   if(this.file && this.model.name) {
+    this.errors = [];
     let formData:FormData = new FormData();
     formData.append('name', this.model.name);
     formData.append('description', this.model.description);
@@ -40,7 +41,11 @@ export class AppUploaderComponent implements OnInit {
         .map(res => res.json())
         .subscribe(
         data => this.message = `Successfully uploaded ${this.model.name} app!. The app will be under a review process in order to make it public.`,
-            error => this.error = "It was not possible to upload the app due to unknown reasons."
+        err => {
+          let errors = JSON.parse(err.text());
+          for(let k in errors) {
+            this.errors.push(`${k}: ${errors[k]}` );
+          }
         )
   } 
   }
