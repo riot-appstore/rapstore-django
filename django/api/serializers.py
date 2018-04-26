@@ -13,6 +13,7 @@ from api.models import Application
 from api.models import ApplicationInstance
 from api.models import Board
 from api.models import UserProfile
+from api.models import Feedback
 from django.contrib.auth.models import User
 
 
@@ -83,3 +84,8 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'

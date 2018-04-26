@@ -27,6 +27,7 @@ Including another URLconf
 from api.views import ApplicationViewSet
 from api.views import BoardViewSet
 from api.views import UserViewSet
+from api.views import FeedbackViewSet
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -40,6 +41,7 @@ router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet)
 router.register(r'board', BoardViewSet)
 router.register(r'user', UserViewSet, base_name='user')
+router.register(r'feedback', FeedbackViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

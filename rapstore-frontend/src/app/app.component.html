@@ -7,7 +7,7 @@
                     <app-missing-components-label-section *ngIf="!extensionAvailable || !nativeMessagingHostAvailable;"></app-missing-components-label-section>
 
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
 
                     <div class="container">
                         <div class="col-sm-7">
@@ -21,13 +21,37 @@
                                 <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-responsive" width="250"/>
                             </a>
                         </div>
+                        <div class="col-sm-2">
+
+                        </div>
                     </div>
 
+                </div>
+                <div class="col-sm-2">
+                    <p class="pull-right"><span class="label label-warning">RAPstore version: {{appVersion}}</span></p>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<ngx-bootstrap-feedback [configuration]="feedbackConfiguration">
+  <!-- Your customizations. -->
+  <div class="row">
+    <!-- Input fields. -->
+    <div class="col-md-12">
+      <!-- Description field. -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class=" form-group form-group-sm">
+            <label for="description-input">Description:</label>
+            <textarea id="description-input" class="form-control width-locked" rows="5" required [(ngModel)]="feedback.description"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ngx-bootstrap-feedback>
+
 
 <!--block navbar-->
 <div class="nav-wrapper">
