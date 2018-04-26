@@ -1,9 +1,18 @@
+export class ApplicationInstance {
+  id: number;
+  version_code: string;
+  version_name: string;
+}
+
 export class Application {
   id: number;
   name: string;
   description: string;
   download_count: number;
   author: User;
+  licenses: string;
+  project_page: string;
+  initial_instance: ApplicationInstance;
 }
 
 export class Board {
