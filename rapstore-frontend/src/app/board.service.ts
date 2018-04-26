@@ -16,5 +16,10 @@ export class BoardService {
     let options = new RequestOptions({ headers: headers });
     return this.http.get(`${this.baseUrl}/api/board/`).map(res => res.json());
   }
+  getSupported(app_id: number): Observable<Board[]> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(`${this.baseUrl}/api/app/${app_id}/supported_boards/`).map(res => res.json());
+  }
 
 }

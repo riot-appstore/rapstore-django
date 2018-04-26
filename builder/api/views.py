@@ -4,6 +4,7 @@ import tempfile
 import tarfile
 from subprocess import Popen, PIPE, STDOUT
 import base64
+import json
 
 
 def extract_tar(tar):
@@ -51,6 +52,28 @@ def execute_makefile(app_build_dir, board, app_name):
     process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
 
     return process.communicate()[0]
+
+
+@csrf_exempt
+def supported_boards(request):
+    f = request.FILES['file']
+    dest = write_tar(f)
+
+    #Since we have the folder, let's do stuff
+    cmd = ['make',
+           '-C', dest,
+           'RIOTBASE=/RIOT',
+           'info-boards-supported']
+
+    process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
+
+    output = process.communicate()[0].split("\n")
+
+    for l in range(len(output)):
+        if output[l].find(":") < 0:
+            break
+
+    return HttpResponse(json.dumps({"supported_boards": output[l].split(" ")}))
 
 
 @csrf_exempt
