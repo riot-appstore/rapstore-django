@@ -38,7 +38,7 @@ from rest_framework.authtoken import views
 from riot_apps import settings
 
 router = routers.DefaultRouter()
-router.register(r'app', ApplicationViewSet)
+router.register(r'app', ApplicationViewSet, base_name='application')
 router.register(r'board', BoardViewSet)
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'feedback', FeedbackViewSet)
