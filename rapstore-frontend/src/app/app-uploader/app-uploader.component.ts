@@ -15,7 +15,7 @@ export class AppUploaderComponent implements OnInit {
   message: string = "";
   errors: string[] = [];
   private baseurl = environment.apiUrl;
-  constructor(private http: Http, private AuthService: AuthService, private model: Application) {
+  constructor(private http: Http, private AuthService: AuthService, protected model: Application) {
     this.model.initial_instance={id: 0, version_name: "", version_code: ""}; }
 
   ngOnInit() {
@@ -40,14 +40,14 @@ export class AppUploaderComponent implements OnInit {
     this.http.post(`${this.baseurl}/api/app/`, formData, options)
         .map(res => res.json())
         .subscribe(
-        data => this.message = `Successfully uploaded ${this.model.name} app!. The app will be under a review process in order to make it public.`,
+        data => this.message = `Successfully uploaded your app "${this.model.name}" ! The app will be under a review process in order to make it public.`,
         err => {
           let errors = JSON.parse(err.text());
           for(let k in errors) {
             this.errors.push(`${k}: ${errors[k]}` );
           }
         )
-  } 
+  }
   }
   fileChanged(event) {
     this.file = event.target.files.length > 0 && event.target.files[0];
