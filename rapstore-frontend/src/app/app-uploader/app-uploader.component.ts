@@ -42,10 +42,11 @@ export class AppUploaderComponent implements OnInit {
         .subscribe(
         data => this.message = `Successfully uploaded your app "${this.model.name}" ! The app will be under a review process in order to make it public.`,
         err => {
-          let errors = JSON.parse(err.text());
-          for(let k in errors) {
-            this.errors.push(`${k}: ${errors[k]}` );
-          }
+            let errors = JSON.parse(err.text());
+            for (let k in errors) {
+                this.errors.push(`${k}: ${errors[k]}`);
+            }
+        }
         )
   }
   }
