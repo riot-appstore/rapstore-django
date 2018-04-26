@@ -15,6 +15,7 @@ export class AppBuildComponent implements OnInit {
   private loading: boolean = false;
   private dots: string = "";
   private timer_id: Timer;
+  private error = "";
   @Input() application: Application;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
@@ -29,6 +30,7 @@ export class AppBuildComponent implements OnInit {
   }
   downloadElf(id){
     this.loading = true;
+    this.error = "";
     this.timer_id = setInterval(val => {
        this.dots += ".";
        if(this.dots.length == 4) {
@@ -49,7 +51,7 @@ export class AppBuildComponent implements OnInit {
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
-            }, (err) => {},
+            }, (err) => {this.loading=false; this.error = "Something went wrong"},
             () => this.loading=false);
   }
 
