@@ -84,7 +84,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
 
         if r.status_code != 200:
-            return HttpResponse('Error')
+            return Response({"error": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
 
         # build was successful, increment download counter now
         app.download_count = F('download_count') + 1
