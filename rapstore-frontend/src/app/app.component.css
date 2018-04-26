@@ -11,3 +11,15 @@
 #main-jumbotron h4 {
   color: #F39C12;
 }
+
+.footer-link {
+  text-decoration: underline;
+  font-weight: normal;
+  color: white;
+}
+
+.footer-link:hover {
+  text-decoration: none;
+  font-weight: normal;
+  color: white;
+}

@@ -1,55 +1,55 @@
 :root {
-    --riot-green:#00b188;
-    --riot-red:#ca0022;
+  --riot-green: #00b188;
+  --riot-red: #ca0022;
 }
 
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 85px;
+  /* Margin bottom by footer height */
+  margin-bottom: 85px;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 85px;
-    line-height: 85px; /* Vertically center the text there */
-    background-color: #151515;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 85px;
+  line-height: 85px; /* Vertically center the text there */
+  background-color: #151515;
 }
 
 /*for file upload button when using Bootstrap 3 and not 4*/
 [hidden] {
-    display: none !important;
+  display: none !important;
 }
 
 .file {
-    visibility: hidden;
-    position: absolute;
+  visibility: hidden;
+  position: absolute;
 }
 
 .vertical-center {
-   display: inline-block;
-   vertical-align: middle;
-   float: none;
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
 
 .padding-50 {
-    padding: 50px;
+  padding: 50px;
 }
 
 .gap-50 {
-    height: 50px;
+  height: 50px;
 }
 
 .app-panel {
-    height: 80%;
-    overflow: hidden;
+  height: 80%;
+  overflow: hidden;
 }
 
 /*
@@ -59,88 +59,92 @@ body {
     - https://stackoverflow.com/questions/18325779/bootstrap-3-collapse-show-state-with-chevron-icon
 */
 .panel-title a:after {
-    /* symbol for "opening" panels */
-    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
-    content: "\e113"; /* glyphicon-chevron-up bootstrap.css */
-    float: right;
-    color: grey;
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings'; /* essential for enabling glyphicon */
+  content: "\e113"; /* glyphicon-chevron-up bootstrap.css */
+  float: right;
+  color: grey;
 }
+
 .panel-title a.collapsed:after {
-    /* symbol for "collapsed" panels */
-    content: "\e114"; /* glyphicon-chevron-down bootstrap.css */
+  /* symbol for "collapsed" panels */
+  content: "\e114"; /* glyphicon-chevron-down bootstrap.css */
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-    color: #ffffff;
-    background-color: #2a9fd6;
-    border-radius: 0 0 4px 4px;
+  color: #ffffff;
+  background-color: #2a9fd6;
+  border-radius: 0 0 4px 4px;
 }
 
 /* bootstrap 3 helpers https://www.bootply.com/118877 */
 
 .nav.affix {
-    position: fixed;
-    top: 0;
-    width: 100%
+  position: fixed;
+  top: 0;
+  width: 100%
 }
 
 .nav-wrapper {
-    min-height: 50px;
-    position: relative;
-    z-index: 100;
+  min-height: 50px;
+  position: relative;
+  z-index: 100;
 }
-
 
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
 
-    .sidebar-nav .navbar .navbar-collapse {
-        padding: 0;
-        max-height: none;
-    }
-    .sidebar-nav .navbar ul {
-        float: none;
-    }
-    .sidebar-nav .navbar ul:not {
-        display: block;
-    }
-    .sidebar-nav .navbar li {
-        float: none;
-        display: block;
-    }
-    .sidebar-nav .navbar li a {
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 /* nice looking submenues for sidebar */
 .list-group.list-group-root {
-    padding: 0;
-    overflow: hidden;
+  padding: 0;
+  overflow: hidden;
 }
 
 .list-group.list-group-root .list-group {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .list-group.list-group-root .list-group-item {
-    border-radius: 0;
-    border-width: 1px 0 0 0;
+  border-radius: 0;
+  border-width: 1px 0 0 0;
 }
 
 .list-group.list-group-root > .list-group-item:first-child {
-    border-top-width: 0;
+  border-top-width: 0;
 }
 
 .list-group.list-group-root > .list-group > .list-group-item {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 
 .list-group.list-group-root > .list-group > .list-group > .list-group-item {
-    padding-left: 45px;
+  padding-left: 45px;
 }
 
 .avatar {
@@ -149,4 +153,16 @@ body {
 
 .font-size-4px {
   font-size: 4em;
+}
+
+.a-wrapper-no-decoration {
+  text-decoration: none;
+  font-weight: normal;
+  color: white;
+}
+
+.a-wrapper-no-decoration:hover {
+  text-decoration: none;
+  font-weight: normal;
+  color: white;
 }
