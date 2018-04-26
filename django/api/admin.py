@@ -24,22 +24,35 @@ def names(t):
         list_display=t
     return AdminClass
 
+def make_approved(modeladmin, request, queryset):
+    for q in queryset:
+        q.applicationinstance_set.update(is_public=True)
+
+def make_unpublish(modeladmin, request, queryset):
+    for q in queryset:
+        q.applicationinstance_set.update(is_public=False)
+
+make_approved.short_description = "Approve selected apps"
+make_unpublish.short_description = "Unpublish selected apps"
+
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'description',
-        'download', 
-        'publish'
+        'download',
+        'approve'
     )
+    actions = [make_approved, make_unpublish]
 
     def download(self, obj):
         instance = obj.applicationinstance_set.first()
         return format_html('<a class="button" href="{}"> Download </a>'.format(reverse('application-download', args=[obj.pk])))
 
-    def publish(self, obj):
+    def approve(self, obj):
         instance = obj.applicationinstance_set.first()
-        html = format_html('<a class="button" href="{}"> Publish </a>'.format(""))
-        return html if not instance.is_public else ""
+        return instance.is_public
+
+    approve.boolean=True
 
 # Register your models here.
 admin.site.register(Board, names(('internal_name',)))
