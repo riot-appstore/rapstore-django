@@ -1,6 +1,13 @@
 #main-jumbotron {
-    padding: 15px;
-    margin: 0;
-    min-height: 180px;
+  padding: 15px;
+  margin: 0;
+  min-height: 180px;
 }
 
+#main-jumbotron h1 {
+  color: #3498DB;
+}
+
+#main-jumbotron h4 {
+  color: #F39C12;
+}
