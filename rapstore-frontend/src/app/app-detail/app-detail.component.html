@@ -18,19 +18,20 @@
     <div class="row form-group">
         <div class="col-sm-9">
             <div class="app-detail-avatar">
-                <ngu-letter-avatar *ngIf="show_avatar"avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application?.name}}' ></ngu-letter-avatar>
+                <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application?.name}}'></ngu-letter-avatar>
             </div>
             <div class="app-detail-headline">
                 <h3> {{application?.name}} </h3>
                 <p> One line description </p>
                 <p> * * * * * </p>
+                <p><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application.download_count}}</p>
             </div>
         </div>
         <div class="col-sm-3">
-            <p>Last update: NONE</p>
-            <p>Current Version: NONE</p>
-            <p>Category: Sensor</p>
-            <p>License: Apache (Link)</p>
+            <p>Last update: {{application.updated_at}}</p>
+            <!-- <p>Current Version: NONE</p> -->
+            <!-- <p>Category: Sensor</p> -->
+            <p>License: {{application?.licenses}}</p>
             <a class="btn btn-primary" style="width: 200px" routerLink="/app/{{application?.id}}/build" role="button">Install</a>
         </div>
     </div>
@@ -47,13 +48,29 @@
 
     <div class="form-group">
         <strong>Developer contact:</strong>
-        <p>Name: NONE</p>
-        <p>Email: NONE</p>
-        <p>Website: NONE</p>
-    </div>
-    <div class="row form-group">
-        <div class="col-sm-12">
-            <p>Minimum RIOT version: NONE</p>
-        </div>
+
+        <p *ngIf="app_author?.first_name != '' || app_author.last_name != '' ;else author_username_only">
+            Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
+        </p>
+        <p><ng-template #author_username_only>
+          User: {{app_author?.username}}
+        </ng-template></p>
+
+        <p [hidden]="!app_author?.location">
+          Location: {{app_author?.location}}
+        </p>
+
+        <p [hidden]="!app_author?.company">
+          Company: {{app_author?.company}}
+        </p>
+
+        <p [hidden]="!app_author?.email">
+          Email: <a href="mailto:{{app_author?.email}}">{{app_author?.email}}</a>
+        </p>
+
+        <p [hidden]="!application?.project_page">
+          Website: <a href="{{application?.project_page}}">{{application?.project_page}}</a>
+        </p>
+
     </div>
 </div>

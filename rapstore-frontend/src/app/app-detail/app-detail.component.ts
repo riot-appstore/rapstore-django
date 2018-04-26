@@ -13,12 +13,19 @@ export class AppDetailComponent implements OnInit {
 
   @Input() application: Application;
   show_avatar = false;
+  app_author = null;
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.appService.get(id)
-    .subscribe(app => {this.application = app; this.show_avatar = true;});
+      .subscribe(
+        app => {
+          this.application = app;
+          this.app_author = app.author;
+          this.show_avatar = true;
+        }
+      );
   }
 
 }

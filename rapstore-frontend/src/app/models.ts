@@ -13,6 +13,7 @@ export class Application {
   licenses: string;
   project_page: string;
   initial_instance: ApplicationInstance;
+  updated_at: Date;
 }
 
 export class Board {
