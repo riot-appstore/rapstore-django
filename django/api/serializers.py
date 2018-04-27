@@ -15,6 +15,7 @@ from api.models import Board
 from api.models import UserProfile
 from api.models import Feedback
 from django.contrib.auth.models import User
+import tarfile
 
 
 #TODO: Improve!
@@ -52,6 +53,17 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
         model = ApplicationInstance
         exclude = ('is_public',)
 
+    def validate_app_tarball(self, data):
+        message = 'Invalid tar.gz file. Ensure the Makefile is in the root of the compressed file.'
+        try:
+            tar = tarfile.open(fileobj=data, mode="r")
+        except:
+            raise serializers.ValidationError(message)
+
+        if './Makefile' not in tar.getnames():
+            raise serializers.ValidationError(message)
+
+        return data
 
 class ApplicationSerializer(serializers.ModelSerializer):
     # author = serializers.PrimaryKeyRelatedField(read_only=True)
