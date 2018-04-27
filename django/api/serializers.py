@@ -63,6 +63,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
         if './Makefile' not in tar.getnames():
             raise serializers.ValidationError(message)
 
+        return data
 
 class ApplicationSerializer(serializers.ModelSerializer):
     # author = serializers.PrimaryKeyRelatedField(read_only=True)
