@@ -31,6 +31,7 @@ from api.models import Module
 from api.models import Board
 from api.models import Application, ApplicationInstance
 from django.utils.html import escape
+from django.utils.html import format_html
 from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
 from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
 
@@ -133,7 +134,7 @@ def register_riot_apps():
                 }
                 payload = {
                     'name': application_name,
-                    'description': escape(description),
+                    'description': format_html(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
                     'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
@@ -203,6 +204,8 @@ def get_description(path, name):
                     if brief_active:
                         if not '* @' in line:
                             description += line.replace('*', '', 1).strip()
+                            if ' *\n' == line:
+                                description += '.  '
                         else:
                             break
 
@@ -293,4 +296,5 @@ class Command(BaseCommand):
         except Exception as e:
             transaction.delete()
             print('FAIL: {}'.format(str(e)))
+
 
