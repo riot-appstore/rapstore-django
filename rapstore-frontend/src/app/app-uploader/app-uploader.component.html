@@ -1,6 +1,6 @@
 <div class="container">
-    <h3> Uploader:</h3>
     <div class="row">
+    <h3> Upload your RIOT app:</h3>
         <div class="col-sm-6">
             <form (ngSubmit)="fileUpload()" #appUploadForm="ngForm">
                 <div [hidden]="!message" class="alert alert-success">
@@ -36,7 +36,7 @@
                     <input type="text" class="form-control" name="version_code" [(ngModel)]="model.initial_instance.version_code" #version_code="ngModel" required /> 
                 </div>
                 <div class="form-group">
-                    <label for="file">File (tar.gz)</label>
+                    <label for="file">App in tar.gz format. Ensure the Makefile is in the root (e.g my_app.tar.gz/Makefile)</label>
                     <input type="file" (change)="fileChanged($event)" name="file" accept=".tar.gz">
                 </div>
                 <button class="btn btn-primary" type="submit">Submit</button>
