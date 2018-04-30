@@ -31,6 +31,7 @@ from api.models import Module
 from api.models import Board
 from api.models import Application, ApplicationInstance
 from django.utils.html import escape
+from django.utils.text import slugify
 from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
 from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
 
@@ -132,7 +133,7 @@ def register_riot_apps():
                     'Authorization': 'Token ' + token,
                 }
                 payload = {
-                    'name': application_name,
+                    'name': slugify(application_name),
                     'description': escape(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
