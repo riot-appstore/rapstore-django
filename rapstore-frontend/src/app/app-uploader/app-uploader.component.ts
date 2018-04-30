@@ -26,6 +26,7 @@ export class AppUploaderComponent implements OnInit {
   fileUpload() {
     if (this.file && this.model.name) {
       this.errors = [];
+      this.message = "";
       let formData: FormData = new FormData();
       formData.append('name', this.model.name);
       formData.append('description', this.model.description);
