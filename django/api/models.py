@@ -76,11 +76,13 @@ class Module(models.Model):
         return self.name
 
 
+isalphavalidator = RegexValidator(r'^[\w]*$', message='Name must be alphanumeric (no spaces, a-z, A-Z, 0-9)', code='Invalid name')
+
 fs = FileSystemStorage(location='/apps')
 # Represents external applications (to be uploaded)
 class Application(models.Model):
     author = models.ForeignKey(User)
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, validators=[isalphavalidator])
     description = models.TextField(max_length=65535, null=True, blank=True)
     licenses = models.CharField(max_length=255, null=True, blank=True) 
     project_page = models.URLField(max_length=255, null=True, blank=True)
