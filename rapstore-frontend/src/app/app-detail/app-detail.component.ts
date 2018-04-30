@@ -14,6 +14,7 @@ export class AppDetailComponent implements OnInit {
   @Input() application: Application;
   show_avatar = false;
   app_author = null;
+  private one_line_description=""
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class AppDetailComponent implements OnInit {
           this.application = app;
           this.app_author = app.author;
           this.show_avatar = true;
+          this.one_line_description = app.description.split(".")[0];
         }
       );
   }
