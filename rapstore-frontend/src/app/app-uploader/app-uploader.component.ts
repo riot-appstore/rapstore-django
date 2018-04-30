@@ -30,7 +30,12 @@ export class AppUploaderComponent implements OnInit {
       formData.append('name', this.model.name);
       formData.append('description', this.model.description);
       formData.append('licenses', this.model.licenses);
-      formData.append('project_page', this.model.project_page);
+
+      let project_page = this.model.project_page
+      if(project_page) {
+        formData.append('project_page', project_page);
+      }
+
       formData.append('app_tarball', this.file, this.file.name);
       formData.append('initial_instance.version_name', this.model.initial_instance.version_name);
       formData.append('initial_instance.version_code', this.model.initial_instance.version_code);
