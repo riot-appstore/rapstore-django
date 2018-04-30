@@ -47,7 +47,7 @@
     <hr>
 
     <div class="form-group">
-        <strong>Developer contact:</strong>
+        <p><strong>Developer contact:</strong></p>
 
         <p *ngIf="app_author?.first_name != '' || app_author.last_name != '' ;else author_username_only">
             Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
