@@ -76,7 +76,7 @@ class Module(models.Model):
         return self.name
 
 
-isalphavalidator = RegexValidator(r'^[\w-_]+$', message='Name must be alphanumeric, hyphen or underscore only. No spaces allowed', code='Invalid name')
+isalphavalidator = RegexValidator(r'^[-\w_]+$', message='Name must be alphanumeric, hyphen or underscore only. No spaces allowed', code='Invalid name')
 
 fs = FileSystemStorage(location='/apps')
 # Represents external applications (to be uploaded)
