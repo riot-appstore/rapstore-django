@@ -38,7 +38,7 @@ export class AppUploaderComponent implements OnInit {
 
       formData.append('app_tarball', this.file, this.file.name);
       formData.append('initial_instance.version_name', "VERSION");
-      formData.append('initial_instance.version_code', 0);
+      formData.append('initial_instance.version_code', "0");
       let headers = new Headers();
 
       headers.append('Authorization', 'Token ' + this.AuthService.get_token());
