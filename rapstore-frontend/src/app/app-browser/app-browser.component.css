@@ -10,6 +10,11 @@
 .app-panel .app-name {
   font-size: 1em;
   margin-bottom: 1em;
+
+  /* prevent newline within a name, instead truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #app-info-section {
