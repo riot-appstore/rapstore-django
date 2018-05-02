@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PageInstallInstructionBrowserIntegrationComponent } from './page-install-instruction-browser-integration.component';
+import {PageInstallInstructionBrowserIntegrationComponent} from './page-install-instruction-browser-integration.component';
 
 describe('PageInstallInstructionBrowserIntegrationComponent', () => {
   let component: PageInstallInstructionBrowserIntegrationComponent;
@@ -8,9 +8,9 @@ describe('PageInstallInstructionBrowserIntegrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageInstallInstructionBrowserIntegrationComponent ]
+      declarations: [PageInstallInstructionBrowserIntegrationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

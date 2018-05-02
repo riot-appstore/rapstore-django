@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AppBrowserComponent } from './app-browser.component';
+import {AppBrowserComponent} from './app-browser.component';
 
 describe('AppBrowserComponent', () => {
   let component: AppBrowserComponent;
@@ -8,9 +8,9 @@ describe('AppBrowserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppBrowserComponent ]
+      declarations: [AppBrowserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

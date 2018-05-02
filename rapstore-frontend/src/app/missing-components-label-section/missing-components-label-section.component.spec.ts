@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MissingComponentsLabelSectionComponent } from './missing-components-label-section.component';
+import {MissingComponentsLabelSectionComponent} from './missing-components-label-section.component';
 
 describe('MissingComponentsLabelSectionComponent', () => {
   let component: MissingComponentsLabelSectionComponent;
@@ -8,9 +8,9 @@ describe('MissingComponentsLabelSectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MissingComponentsLabelSectionComponent ]
+      declarations: [MissingComponentsLabelSectionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

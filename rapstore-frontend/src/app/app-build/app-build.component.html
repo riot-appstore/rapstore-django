@@ -1,41 +1,44 @@
 <div class="container rounded app-panel panel-default panel">
-    <div class="row">
-        <div class="col-sm-1">
-            <a class="btn btn-primary download-binary-with-info" routerLink="/app/{{application?.id}}">
-                <span class="glyphicon glyphicon-arrow-left"></span>
-            </a>
-        </div>
-        <div class="col-sm-11">
-            <ul class="breadcrumb">
-                <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
-                <li><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
-                <li class="active">Install</li>
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <a class="btn btn-primary download-binary-with-info" routerLink="/app/{{application?.id}}">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+      </a>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h3> Install app on your device </h3>
-                <div [hidden]="!error" class="alert alert-danger">
-                    {{error}}
-                </div>
-            <div class="form-group">
-                Board
-              <app-board-selector (notify)="onBoardChange($event)"></app-board-selector>
-            </div>
-            <!--
-            <div class="form-group">
-                Configuration
-                <textarea class="form-control"></textarea>
-            </div>
-            -->
-            <!--<button type="button" class="btn btn-primary">Install on device</button>-->
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button [hidden]="loading" type="button" class="btn btn-primary download-binary-with-info" (click)="downloadElf(application.id)">Download binary file</button>
-                <button [hidden]="!loading" type="button" class="btn disabled btn-info">Download binary file</button>
-                <button routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-info-sign"></span></button>
-            </div>
-            <h1 [hidden]="!loading">Loading{{dots}}</h1>
-        </div>
+    <div class="col-sm-11">
+      <ul class="breadcrumb">
+        <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
+        <li><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
+        <li class="active">Install</li>
+      </ul>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3> Install app on your device </h3>
+      <div [hidden]="!error" class="alert alert-danger">
+        {{error}}
+      </div>
+      <div class="form-group">
+        Board
+        <app-board-selector (notify)="onBoardChange($event)"></app-board-selector>
+      </div>
+      <!--
+      <div class="form-group">
+          Configuration
+          <textarea class="form-control"></textarea>
+      </div>
+      -->
+      <!--<button type="button" class="btn btn-primary">Install on device</button>-->
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button [hidden]="loading" type="button" class="btn btn-primary download-binary-with-info"
+                (click)="downloadElf(application.id)">Download binary file
+        </button>
+        <button [hidden]="!loading" type="button" class="btn disabled btn-info">Download binary file</button>
+        <button routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary"><span
+          class="glyphicon glyphicon-info-sign"></span></button>
+      </div>
+      <h1 [hidden]="!loading">Loading{{dots}}</h1>
+    </div>
+  </div>
 </div>

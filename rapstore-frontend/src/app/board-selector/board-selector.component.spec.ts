@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BoardSelectorComponent } from './board-selector.component';
+import {BoardSelectorComponent} from './board-selector.component';
 
 describe('BoardSelectorComponent', () => {
   let component: BoardSelectorComponent;
@@ -8,9 +8,9 @@ describe('BoardSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardSelectorComponent ]
+      declarations: [BoardSelectorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

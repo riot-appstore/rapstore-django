@@ -13,13 +13,19 @@ export class BoardSelectorComponent implements OnInit {
 
   @Input() boards: Board[];
   @Output() notify: EventEmitter<number> = new EventEmitter<number>();
-  constructor(private boardService: BoardService, private route: ActivatedRoute) { }
+
+  constructor(private boardService: BoardService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.boardService.getSupported(id)
-    .subscribe(boards => {this.boards = boards; this.notify.emit(boards[0].id)});
+      .subscribe(boards => {
+        this.boards = boards;
+        this.notify.emit(boards[0].id);
+      });
   }
+
   onChange(value) {
     this.notify.emit(value);
   }
