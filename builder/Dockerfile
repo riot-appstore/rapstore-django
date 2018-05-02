@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:17.10
 RUN apt-get update
 RUN apt-get -y install build-essential unzip wget git python-pip
 RUN apt-get -y install software-properties-common
