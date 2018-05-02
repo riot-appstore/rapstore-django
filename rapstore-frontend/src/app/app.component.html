@@ -70,16 +70,14 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
-        <!--block navtabs-->
-        <ul id="navigations_tabs" class="nav navbar-nav">
-          <li class="active"><a data-toggle="tab" routerLink="">Applications</a></li>
+        <ul class="nav navbar-nav">
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Applications</a></li>
           <ng-container *ngIf="user">
-            <li><a routerLink="upload">Upload your RIOT application</a></li>
+            <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="upload">Upload your RIOT application</a></li>
             <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
           </ng-container>
           <!--endif-->
         </ul>
-        <!--endblock-->
 
         <ul class="nav navbar-nav navbar-right">
 
