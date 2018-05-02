@@ -133,7 +133,7 @@ def register_riot_apps():
                     'Authorization': 'Token ' + token,
                 }
                 payload = {
-                    'name': slugify(application_name),
+                    'name': application_name,
                     'description': escape(description),
                     'licences': None,
                     'project_page': 'https://www.riot-os.org/',
