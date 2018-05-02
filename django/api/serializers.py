@@ -60,7 +60,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
         except:
             raise serializers.ValidationError(message)
 
-        if './Makefile' not in tar.getnames():
+        if './Makefile' not in tar.getnames() and 'Makefile' not in tar.getnames():
             raise serializers.ValidationError(message)
 
         return data

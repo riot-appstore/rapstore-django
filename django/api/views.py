@@ -26,6 +26,7 @@ from django.db import IntegrityError
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.text import slugify
 from rest_framework import parsers
 from rest_framework import status
 from rest_framework import mixins
@@ -91,7 +92,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app.save()
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=%s.bin' % app.name
+        response['Content-Disposition'] = 'attachment; filename=%s.bin' % slugify(app.name)
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 

@@ -26,14 +26,20 @@ export class AppUploaderComponent implements OnInit {
   fileUpload() {
     if (this.file && this.model.name) {
       this.errors = [];
+      this.message = "";
       let formData: FormData = new FormData();
       formData.append('name', this.model.name);
       formData.append('description', this.model.description);
       formData.append('licenses', this.model.licenses);
-      formData.append('project_page', this.model.project_page);
+
+      let project_page = this.model.project_page
+      if(project_page) {
+        formData.append('project_page', project_page);
+      }
+
       formData.append('app_tarball', this.file, this.file.name);
-      formData.append('initial_instance.version_name', this.model.initial_instance.version_name);
-      formData.append('initial_instance.version_code', this.model.initial_instance.version_code);
+      formData.append('initial_instance.version_name', "VERSION");
+      formData.append('initial_instance.version_code', "0");
       let headers = new Headers();
 
       headers.append('Authorization', 'Token ' + this.AuthService.get_token());

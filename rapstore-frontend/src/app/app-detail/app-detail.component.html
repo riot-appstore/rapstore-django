@@ -22,13 +22,13 @@
             </div>
             <div class="app-detail-headline">
                 <h3> {{application?.name}} </h3>
-                <p> One line description </p>
-                <p> * * * * * </p>
+                <p> {{ one_line_description }} </p>
+                <!--<p> * * * * * </p>-->
                 <p><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application?.download_count}}</p>
             </div>
         </div>
         <div class="col-sm-3">
-            <p>Last update: {{application?.updated_at | date : 'dd/MM/yyyy H:mm:ss' }}</p>
+            <p>Last update: {{application?.updated_at | date : 'dd/MM/yyyy' }}</p>
             <!-- <p>Current Version: NONE</p> -->
             <!-- <p>Category: Sensor</p> -->
             <p>License: {{application?.licenses}}</p>
@@ -47,13 +47,11 @@
     <hr>
 
     <div class="form-group">
-        <strong>Developer contact:</strong>
-
         <p *ngIf="app_author?.first_name != '' || app_author.last_name != '' ;else author_username_only">
-            Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
+            Developer Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
         </p>
         <p><ng-template #author_username_only>
-          User: {{app_author?.username}}
+          Developer: {{app_author?.username}}
         </ng-template></p>
 
         <p [hidden]="!app_author?.location">
