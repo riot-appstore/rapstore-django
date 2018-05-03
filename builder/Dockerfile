@@ -11,6 +11,7 @@ RUN mkdir /code
 COPY . /code/
 WORKDIR /code/
 COPY requirements.txt /code/
+RUN git config --global user.email "riot@riot-os.org"
 RUN pip install -r requirements.txt
 #RUN python manage.py collectstatic --noinput
 #CMD ["bash", "docker-entry.sh"]
