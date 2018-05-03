@@ -43,6 +43,7 @@ def execute_makefile(app_build_dir, board, app_name):
     """
 
     cmd = ['make',
+           '-j4',
            '-C', app_build_dir,
            'binfile',
            'RIOTBASE=/RIOT',
