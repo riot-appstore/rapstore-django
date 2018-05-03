@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PageInstallInstructionDragAndDropComponent } from './page-install-instruction-drag-and-drop.component';
+import {PageInstallInstructionDragAndDropComponent} from './page-install-instruction-drag-and-drop.component';
 
 describe('PageInstallInstructionDragAndDropComponent', () => {
   let component: PageInstallInstructionDragAndDropComponent;
@@ -8,9 +8,9 @@ describe('PageInstallInstructionDragAndDropComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageInstallInstructionDragAndDropComponent ]
+      declarations: [PageInstallInstructionDragAndDropComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

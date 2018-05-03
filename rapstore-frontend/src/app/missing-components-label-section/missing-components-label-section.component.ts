@@ -15,15 +15,20 @@ export class MissingComponentsLabelSectionComponent implements OnInit, OnDestroy
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
 
-  constructor(private browserIntegrationService: BrowserIntegrationService) {}
+  constructor(private browserIntegrationService: BrowserIntegrationService) {
+  }
 
   ngOnInit(): void {
 
     this.$subscriptionExtension = this.browserIntegrationService.isExtensionAvailable()
-      .subscribe(updatedBool => { this.extensionAvailable = updatedBool; });
+      .subscribe(updatedBool => {
+        this.extensionAvailable = updatedBool;
+      });
 
     this.$subscriptionHost = this.browserIntegrationService.isNativeMessagingHostAvailable()
-      .subscribe(updatedBool => { this.nativeMessagingHostAvailable = updatedBool; });
+      .subscribe(updatedBool => {
+        this.nativeMessagingHostAvailable = updatedBool;
+      });
   }
 
   ngOnDestroy(): void {

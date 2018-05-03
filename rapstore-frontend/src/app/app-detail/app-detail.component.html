@@ -1,74 +1,78 @@
 <div class="container rounded app-panel panel-default panel">
-    <div class="row">
-        <div class="col-sm-1">
-            <a class="btn btn-primary download-binary-with-info" routerLink="/">
-                <span class="glyphicon glyphicon-arrow-left"></span>
-            </a>
-        </div>
-        <div class="col-sm-11">
-            <ul class="breadcrumb">
-                <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
-                <li class="active">{{application?.name}}</li>
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-sm-1">
+      <a class="btn btn-primary download-binary-with-info" routerLink="/">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+      </a>
     </div>
-
-    <hr>
-
-    <div class="row form-group">
-        <div class="col-sm-9">
-            <div class="app-detail-avatar">
-                <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application?.name}}'></ngu-letter-avatar>
-            </div>
-            <div class="app-detail-headline">
-                <h3> {{application?.name}} </h3>
-                <p> {{ one_line_description }} </p>
-                <!--<p> * * * * * </p>-->
-                <p><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application?.download_count}}</p>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <p>Last update: {{application?.updated_at | date : 'dd/MM/yyyy' }}</p>
-            <!-- <p>Current Version: NONE</p> -->
-            <!-- <p>Category: Sensor</p> -->
-            <p>License: {{application?.licenses}}</p>
-            <a class="btn btn-primary" style="width: 200px" routerLink="/app/{{application?.id}}/build" role="button">Install</a>
-        </div>
+    <div class="col-sm-11">
+      <ul class="breadcrumb">
+        <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
+        <li class="active">{{application?.name}}</li>
+      </ul>
     </div>
+  </div>
 
-    <hr>
+  <hr>
 
-    <div class="row form-group">
-        <div class="col-sm-12">
-            <p>{{application?.description}}</p>
-        </div>
+  <div class="row form-group">
+    <div class="col-sm-9">
+      <div class="app-detail-avatar">
+        <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
+                           avatar-data='{{application?.name}}'></ngu-letter-avatar>
+      </div>
+      <div class="app-detail-headline">
+        <h3> {{application?.name}} </h3>
+        <p> {{ one_line_description }} </p>
+        <!--<p> * * * * * </p>-->
+        <p><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application?.download_count}}</p>
+      </div>
     </div>
-
-    <hr>
-
-    <div class="form-group">
-        <p *ngIf="app_author?.first_name != '' || app_author.last_name != '' ;else author_username_only">
-            Developer Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
-        </p>
-        <p><ng-template #author_username_only>
-          Developer: {{app_author?.username}}
-        </ng-template></p>
-
-        <p [hidden]="!app_author?.location">
-          Location: {{app_author?.location}}
-        </p>
-
-        <p [hidden]="!app_author?.company">
-          Company: {{app_author?.company}}
-        </p>
-
-        <p [hidden]="!app_author?.email">
-          Email: <a href="mailto:{{app_author?.email}}">{{app_author?.email}}</a>
-        </p>
-
-        <p [hidden]="!application?.project_page">
-          Website: <a href="{{application?.project_page}}">{{application?.project_page}}</a>
-        </p>
-
+    <div class="col-sm-3">
+      <p>Last update: {{application?.updated_at | date : 'dd/MM/yyyy' }}</p>
+      <!-- <p>Current Version: NONE</p> -->
+      <!-- <p>Category: Sensor</p> -->
+      <p>License: {{application?.licenses}}</p>
+      <a class="btn btn-primary" style="width: 200px" routerLink="/app/{{application?.id}}/build"
+         role="button">Install</a>
     </div>
+  </div>
+
+  <hr>
+
+  <div class="row form-group">
+    <div class="col-sm-12">
+      <p>{{application?.description}}</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="form-group">
+    <p *ngIf="app_author?.first_name != '' || app_author.last_name != '' ;else author_username_only">
+      Developer Name: {{app_author?.first_name}} {{app_author?.last_name}} ({{app_author?.username}})
+    </p>
+    <p>
+      <ng-template #author_username_only>
+        Developer: {{app_author?.username}}
+      </ng-template>
+    </p>
+
+    <p [hidden]="!app_author?.location">
+      Location: {{app_author?.location}}
+    </p>
+
+    <p [hidden]="!app_author?.company">
+      Company: {{app_author?.company}}
+    </p>
+
+    <p [hidden]="!app_author?.email">
+      Email: <a href="mailto:{{app_author?.email}}">{{app_author?.email}}</a>
+    </p>
+
+    <p [hidden]="!application?.project_page">
+      Website: <a href="{{application?.project_page}}">{{application?.project_page}}</a>
+    </p>
+
+  </div>
 </div>

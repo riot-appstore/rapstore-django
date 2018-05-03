@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-page-install-instruction-drag-and-drop',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageInstallInstructionDragAndDropComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

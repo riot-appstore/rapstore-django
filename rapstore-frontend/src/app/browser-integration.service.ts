@@ -8,7 +8,8 @@ export class BrowserIntegrationService {
   private $subjectExtension = new Subject<boolean>();
   private $subjectHost = new Subject<boolean>();
 
-  constructor() {}
+  constructor() {
+  }
 
   public isExtensionAvailable(): Observable<boolean> {
 

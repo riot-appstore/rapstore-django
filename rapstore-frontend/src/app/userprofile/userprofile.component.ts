@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service'
-import { User } from '../models'
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../user.service';
+import {User} from '../models';
 
 @Component({
   selector: 'app-userprofile',
@@ -12,17 +12,19 @@ export class UserprofileComponent implements OnInit {
   private edit: boolean = false;
   private user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
-    this.userService.get().subscribe(user => this.user=user)
+    this.userService.get().subscribe(user => this.user = user);
   }
 
   update() {
     this.userService.update(this.model).subscribe(res => this.set_edit(false));
   }
+
   set_edit(enable: boolean) {
-    if(enable) {
+    if (enable) {
       this.model = this.user;
     }
     this.edit = enable;

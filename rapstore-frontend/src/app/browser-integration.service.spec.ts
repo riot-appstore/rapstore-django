@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { BrowserIntegrationService } from './browser-integration.service';
+import {BrowserIntegrationService} from './browser-integration.service';
 
 describe('BrowserIntegrationService', () => {
   beforeEach(() => {

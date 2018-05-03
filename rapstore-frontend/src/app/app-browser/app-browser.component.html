@@ -1,27 +1,30 @@
 <div class="row">
-<ng-container *ngFor="let application of apps; let i = index">
+  <ng-container *ngFor="let application of apps; let i = index">
     <div class="clearfix visible-sm-block" *ngIf="i % 4 == 0"></div>
     <div class="clearfix visible-md-block" *ngIf="i % 6 == 0"></div>
     <div class="col-sm-3 col-md-2">
-        <div>
-            <a class="a-wrapper-no-decoration" routerLink="app/{{application.id}}">
-                <div class="panel panel-default app-overview-item">
-                    <div class="panel-body app-panel text-center">
-                        <p class="app-name">{{application.name | uppercase}}</p>
-                        <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px" avatar-data='{{application.name}}' ></ngu-letter-avatar>
+      <div>
+        <a class="a-wrapper-no-decoration" routerLink="/app/{{application.id}}">
+          <div class="panel panel-default app-overview-item">
+            <div class="panel-body app-panel text-center">
+              <p class="app-name">{{application.name | uppercase}}</p>
+              <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px"
+                                 avatar-data='{{application.name}}'></ngu-letter-avatar>
 
-                        <div id="app-info-section">
-                            <p class="pull-left"><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span> {{application.download_count}}</p>
-                            <p class="pull-right"><span class="glyphicon glyphicon-user" aria-hidden=true></span> {{application.author.username}}</p>
-                        </div>
-                    </div>
+              <div id="app-info-section">
+                <p class="pull-left"><span class="glyphicon glyphicon-download-alt" aria-hidden=true></span>
+                  {{application.download_count}}</p>
+                <p class="pull-right"><span class="glyphicon glyphicon-user" aria-hidden=true></span>
+                  {{application.author.username}}</p>
+              </div>
+            </div>
 
-                </div>
-            </a>
-        </div>
+          </div>
+        </a>
+      </div>
     </div>
     <!--if forloop.counter|divisibleby:6 and not forloop.last
     </div><div class="row">
     endif-->
-</ng-container>
+  </ng-container>
 </div>
