@@ -36,6 +36,7 @@ from rest_framework.parsers import FormParser
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_social_auth.views import SocialTokenUserAuthView
 
 from django import forms
 import json
@@ -216,3 +217,6 @@ class UserViewSet(viewsets.ViewSet):
 class FeedbackViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
+class SecureSocialLogin(SocialTokenUserAuthView):
+    pass

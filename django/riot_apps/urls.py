@@ -29,6 +29,7 @@ from api.views import ApplicationInstanceViewSet
 from api.views import BoardViewSet
 from api.views import UserViewSet
 from api.views import FeedbackViewSet
+from api.views import SecureSocialLogin
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login
@@ -53,4 +54,6 @@ urlpatterns = [
     url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^api/', include(router.urls)),
+    url(r'^social/login/(?:(?P<provider>[a-zA-Z0-9_-]+)/?)?$',
+        SecureSocialLogin.as_view(), name='social_token_user'),
 ]
