@@ -23,12 +23,16 @@
 /* http://www.cssportal.com/css-ribbon-generator/ */
 /* BEGIN OF RIBBON */
 .box {
+  width: 170px; height: 170px;
   position: relative;
+
+  /* center box */
+  margin: auto;
 }
 
 .ribbon {
   position: absolute;
-  right: 40px; top: -5px;
+  right: -5px; top: -5px;
   z-index: 1;
   overflow: hidden;
   width: 75px; height: 75px;
