@@ -14,6 +14,7 @@ export class Application {
   project_page: string;
   initial_instance: ApplicationInstance;
   updated_at: Date;
+  source: string;
 }
 
 export class Board {
