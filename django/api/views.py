@@ -31,6 +31,7 @@ from rest_framework import parsers
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.parsers import FormParser
 from rest_framework.permissions import IsAdminUser
@@ -220,3 +221,10 @@ class FeedbackViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 class SecureSocialLogin(SocialTokenUserAuthView):
     pass
+
+#TODO: Get link from social_auth
+@api_view(('GET',))
+def get_social(request, provider):
+    if(provider) == "github":
+        return Response({"url": "https://github.com/login/oauth/authorize/?client_id=644cc0af81df7b75d19b"})
+    return Response({"error": "No provider"}, status=status.HTTP_400_BAD_REQUEST)

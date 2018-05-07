@@ -30,6 +30,7 @@ from api.views import BoardViewSet
 from api.views import UserViewSet
 from api.views import FeedbackViewSet
 from api.views import SecureSocialLogin
+from api.views import get_social
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login
@@ -56,4 +57,6 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^social/login/(?:(?P<provider>[a-zA-Z0-9_-]+)/?)?$',
         SecureSocialLogin.as_view(), name='social_token_user'),
+    url(r'^social/url/(?:(?P<provider>[a-zA-Z0-9_-]+)/?)?$',
+        get_social, name='social_url'),
 ]
