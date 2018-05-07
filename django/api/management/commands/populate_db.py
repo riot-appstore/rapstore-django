@@ -152,12 +152,19 @@ def register_riot_apps():
                     print(r.content)
 
                 else:
-                    # auto public
-                    app = Application.objects.get(name=application_name)
+                    # riot specific modifications
 
-                    object = ApplicationInstance.objects.get(application=app)
-                    object.is_public = True
-                    object.save()
+                    app = Application.objects.get(name=application_name)
+                    app_instance = ApplicationInstance.objects.get(application=app)
+
+                    # set riot as source
+                    app.source = 'R'
+
+                    # auto public
+                    app_instance.is_public = True
+
+                    app.save()
+                    app_instance.save()
 
 
 def make_tarfile(output_path, source_dir):

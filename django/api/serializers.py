@@ -65,6 +65,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
 
         return data
 
+
 class ApplicationSerializer(serializers.ModelSerializer):
     # author = serializers.PrimaryKeyRelatedField(read_only=True)
     author = UserSerializer(read_only=True)
@@ -96,6 +97,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
 
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
