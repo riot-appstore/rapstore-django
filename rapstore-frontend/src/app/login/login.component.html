@@ -1,7 +1,8 @@
 <div class="container">
-  <h3> Login:</h3>
   <div class="row">
     <div class="col-sm-6">
+      <div [hidden]="social_loading">
+      <h3> Login:</h3>
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <div [hidden]="!error" class="alert alert-danger">
           {{error}}
@@ -19,6 +20,10 @@
         <button class="btn btn-primary" type="submit">Login</button>
       </form>
       <a href="{{github_url}}">Login with Github</a>
+      </div>
+      <div [hidden]="!social_loading">
+          <h3> Loading... </h3>
+      </div>
     </div>
   </div>
 </div>

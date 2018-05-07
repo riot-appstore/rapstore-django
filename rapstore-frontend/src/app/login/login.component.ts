@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   model: any = {};
   error = '';
   github_url = '';
+  social_loading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -19,7 +20,10 @@ export class LoginComponent implements OnInit {
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         let code = params['code'];
-        this.authService.get_social_token(code).subscribe(val => console.log(val));
+        if(code) {
+          this.social_loading = true;
+          this.authService.get_social_token(code).subscribe(val => this.router.navigate(['/']));
+        }
       });
   }
 
