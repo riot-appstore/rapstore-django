@@ -72,7 +72,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = '__all__'
-        read_only_fields = ('download_count',)
+        read_only_fields = ('download_count', 'source')
 
 
 class BoardSerializer(serializers.ModelSerializer):
