@@ -56,4 +56,9 @@ export class AuthService {
   refresh(logging: boolean) {
     this.userChangeEvent.emit(logging);
   }
+
+  get_github_url() {
+  const url = `${this.base_url}/social/url/github/`;
+    return this.http.get(url, {headers: this.headers}).map(res => res.json());
+  }
 }

@@ -10,11 +10,13 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   model: any = {};
   error = '';
+  github_url = '';
 
   constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
+    this.authService.get_github_url().subscribe(val => this.github_url = val.url);
   }
 
   login() {
