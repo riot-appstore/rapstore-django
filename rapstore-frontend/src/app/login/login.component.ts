@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +12,15 @@ export class LoginComponent implements OnInit {
   error = '';
   github_url = '';
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+        let code = params['code'];
+        this.authService.get_social_token(code).subscribe(val => console.log(val));
+      });
   }
 
   login() {
