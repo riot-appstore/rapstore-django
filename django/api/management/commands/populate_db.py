@@ -130,7 +130,7 @@ def update_riot_apps():
                 try:
                     existing_app = Application.objects.get(name=application_name)
                     update_application(token, existing_app.id, application_name, description, None, 'https://www.riot-os.org/', 'https://github.com/RIOT-OS/RIOT')
-                    upload_application_instance(token, existing_app, '0.0.0', 1, tmp_file_path)
+                    upload_application_instance(token, existing_app, '0.0.0', 4, tmp_file_path)
 
                 except Application.DoesNotExist:
                     register_new_riot_app(token, application_name, description, tmp_file_path)
@@ -139,7 +139,7 @@ def update_riot_apps():
 def update_application(token, app_id, application_name, description, licences, project_page, app_repo_url):
 
     headers = {
-        'Authorization': 'Token ' + token,
+        'Authorization': 'Token ' + token
     }
     payload = {
         'name': application_name,
@@ -159,16 +159,15 @@ def update_application(token, app_id, application_name, description, licences, p
 def upload_application_instance(token, app, version_name, version_code, tmp_file_path):
 
     headers = {
-        'Authorization': 'Token ' + token,
+        'Authorization': 'Token ' + token
     }
     payload = {
-        'application': app.id,
         'version_name': version_name,
         'version_code': version_code
     }
     files = {'app_tarball': io.open(tmp_file_path, 'rb')}
 
-    r = requests.post('http://localhost:8000/api/app_instance/', headers=headers, data=payload, files=files)
+    r = requests.post('http://localhost:8000/api/app/%s/instance/' % app.id, headers=headers, data=payload, files=files)
 
     if r.status_code not in {200, 201}:
         print('uploading app instance for app {0} failed!'.format(app.name))

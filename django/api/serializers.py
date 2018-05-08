@@ -22,15 +22,15 @@ import tarfile
 class UserSerializer(serializers.ModelSerializer):
 
     is_dev = serializers.SerializerMethodField()
-    location = serializers.CharField(source="userprofile.location", required=False, allow_blank=True)
-    company = serializers.CharField(source="userprofile.company", required=False, allow_blank=True)
-    gender = serializers.ChoiceField(source="userprofile.gender", required=False, allow_blank=True, choices=UserProfile.GENDER_CHOICES)
-    phone_number = serializers.CharField(source="userprofile.phone_number", required=False, allow_blank=True)
+    location = serializers.CharField(source='userprofile.location', required=False, allow_blank=True)
+    company = serializers.CharField(source='userprofile.company', required=False, allow_blank=True)
+    gender = serializers.ChoiceField(source='userprofile.gender', required=False, allow_blank=True, choices=UserProfile.GENDER_CHOICES)
+    phone_number = serializers.CharField(source='userprofile.phone_number', required=False, allow_blank=True)
 
     class Meta:
         model = User
         exclude = ('is_superuser', 'is_staff', 'is_active', 'groups', 'user_permissions', 'password')
-        read_only_fields = ("username", )
+        read_only_fields = ('username', )
 
     def get_is_dev(self, obj):
         if(obj.has_perm('has_dev_perm')):
@@ -56,7 +56,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
     def validate_app_tarball(self, data):
         message = 'Invalid tar.gz file. Ensure the Makefile is in the root of the compressed file.'
         try:
-            tar = tarfile.open(fileobj=data, mode="r")
+            tar = tarfile.open(fileobj=data, mode='r')
         except:
             raise serializers.ValidationError(message)
 

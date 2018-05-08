@@ -122,6 +122,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         app_tarball = self.request.data.pop('app_tarball', None)
         initial_instance = self.request.data.pop("initial_instance", {})
+
         if app_tarball:
             initial_instance["app_tarball"] = app_tarball[0]
 
@@ -135,6 +136,28 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         except IntegrityError as e:
             serializer.instance.delete()
             raise e
+
+    @detail_route(methods=['POST'])
+    def instance(self, request, pk):
+
+        app_tarball = self.request.data.pop('app_tarball', None)
+
+        if app_tarball:
+            request.data["app_tarball"] = app_tarball[0]
+
+        serializer = ApplicationInstanceSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            try:
+                serializer.save(application=Application.objects.get(id=pk))
+
+            except Exception as e:
+                return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ApplicationInstanceViewSet(viewsets.ModelViewSet):
