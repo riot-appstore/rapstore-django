@@ -137,12 +137,20 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             raise e
 
 
+class ApplicationInstanceViewSet(viewsets.ModelViewSet):
+
+    queryset = ApplicationInstance.objects.order_by('version_code')
+    serializer_class = ApplicationInstanceSerializer
+
+
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
+
     queryset = Board.objects.all().order_by('display_name')
     serializer_class = BoardSerializer
 
 
 class UploadFileForm(forms.ModelForm):
+
     class Meta:
         model=ApplicationInstance
         fields=('app_tarball', 'version_code', 'version_name')
