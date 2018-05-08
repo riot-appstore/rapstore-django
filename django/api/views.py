@@ -153,7 +153,8 @@ class ApplicationViewSet(viewsets.ModelViewSet):
                 serializer.save(application=Application.objects.get(id=pk))
 
             except Exception as e:
-                return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+                print(e)
+                return Response('Could not save object', status=status.HTTP_400_BAD_REQUEST)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
