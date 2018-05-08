@@ -17,7 +17,7 @@ export class AppUploaderComponent implements OnInit {
   private baseurl = environment.apiUrl;
 
   constructor(private http: Http, private AuthService: AuthService, protected model: Application) {
-    this.model.initial_instance = {id: 0, version_name: '', version_code: ''};
+    this.model.initial_instance = {id: 0, version_name: '', version_code: 0};
   }
 
   ngOnInit() {

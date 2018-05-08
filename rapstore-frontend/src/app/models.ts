@@ -1,6 +1,6 @@
 export class ApplicationInstance {
   id: number;
-  version_code: string;
+  version_code: number;
   version_name: string;
 }
 
