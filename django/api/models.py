@@ -18,6 +18,8 @@ from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+
+import hashlib
 import requests
 
 
@@ -121,12 +123,13 @@ class ApplicationInstance(models.Model):
     version_code = models.PositiveIntegerField(default=0)
     version_name = models.CharField(max_length=255)
     app_tarball = models.FileField(storage=fs)
+    app_tarball_md5 = models.CharField(max_length=16, editable=False, null=True)
     is_public = models.BooleanField(default=False)
 
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
         unique_together = ('version_code', 'application',)
-
+        
 
 class Feedback(models.Model):
     date = models.DateTimeField(auto_now=True)
