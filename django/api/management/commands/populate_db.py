@@ -14,6 +14,7 @@ import requests
 import tarfile
 import tempfile
 import io
+import time
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
@@ -130,7 +131,7 @@ def update_riot_apps():
                 try:
                     existing_app = Application.objects.get(name=application_name)
                     update_application(token, existing_app.id, application_name, description, None, 'https://www.riot-os.org/', 'https://github.com/RIOT-OS/RIOT')
-                    upload_application_instance(token, existing_app, '0.0.0', 4, tmp_file_path)
+                    upload_application_instance(token, existing_app, '0.0.0', int(time.time()), tmp_file_path)
 
                 except Application.DoesNotExist:
                     register_new_riot_app(token, application_name, description, tmp_file_path)
