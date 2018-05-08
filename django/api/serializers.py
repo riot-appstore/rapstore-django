@@ -47,7 +47,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ApplicationInstanceSerializer(serializers.ModelSerializer):
     app_tarball = serializers.FileField()
-    application = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = ApplicationInstance
