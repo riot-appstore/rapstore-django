@@ -2,7 +2,6 @@
   -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
   transition: background 0.5s;
 }
-
 .app-overview-item:hover {
   background: #2a9fd6;
 }
@@ -20,3 +19,78 @@
 #app-info-section {
   margin-top: 2em;
 }
+
+/* http://www.cssportal.com/css-ribbon-generator/ */
+/* BEGIN OF RIBBON */
+.box {
+  width: 170px; height: 170px;
+  position: relative;
+
+  /* center box */
+  margin: auto;
+}
+
+.ribbon {
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px; height: 75px;
+  text-align: right;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; right: -21px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+
+.ribbon-official span {
+  background: #79A70A;
+  background: linear-gradient(#9BC90D 0%, #9BC90D 100%);
+}
+.ribbon-official span::before {
+  border-left: 3px solid #9BC90D;
+  border-top: 3px solid #9BC90D;
+}
+.ribbon-official span::after {
+  border-right: 3px solid #9BC90D;
+  border-top: 3px solid #9BC90D;
+}
+
+.ribbon-external span {
+  background: #79A70A;
+  background: linear-gradient(#2989D8 0%, #2989d8 100%);
+}
+.ribbon-external span::before {
+  border-left: 3px solid #2989d8;
+  border-top: 3px solid #2989d8;
+}
+.ribbon-external span::after {
+  border-right: 3px solid #2989d8;
+  border-top: 3px solid #2989d8;
+}
+/* END OF RIBBON */

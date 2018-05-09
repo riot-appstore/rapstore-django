@@ -81,6 +81,10 @@ isalphavalidator = RegexValidator(r'^[-\w_]+$', message='Name must be alphanumer
 fs = FileSystemStorage(location='/apps')
 # Represents external applications (to be uploaded)
 class Application(models.Model):
+    SOURCE_CHOICES = (
+        ('R', 'RIOT_REPO'),
+        ('E', 'EXTERNAL'),
+    )
     author = models.ForeignKey(User)
     name = models.CharField(max_length=255, unique=True, validators=[isalphavalidator])
     description = models.TextField(max_length=65535, null=True, blank=True)
@@ -89,6 +93,7 @@ class Application(models.Model):
     app_repo_url = models.URLField(max_length=255, null=True, blank=True)
     download_count = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
+    source = models.CharField(max_length=1, choices=SOURCE_CHOICES, default='E')
 
     def __str__(self):
         return self.name
@@ -121,6 +126,7 @@ class ApplicationInstance(models.Model):
     class Meta:
         permissions = (('has_dev_perm','Has dev permissions'),)
         unique_together = ('version_code', 'application',)
+
 
 class Feedback(models.Model):
     date = models.DateTimeField(auto_now=True)
