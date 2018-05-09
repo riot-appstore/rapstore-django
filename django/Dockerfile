@@ -6,6 +6,10 @@
 
 FROM python:3.5
 ENV PYTHONUNBUFFERED 1
+RUN apt-get update
+RUN apt-get install -y cron
+ADD crontab /etc/cron.d/fetch_riot
+RUN chmod 0644 /etc/cron.d/fetch_riot
 RUN mkdir /code
 RUN mkdir /apps
 COPY . /code/
