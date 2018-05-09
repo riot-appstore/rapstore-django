@@ -57,7 +57,11 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
 
-        application_id = self.context['application_id']
+        try:
+            application_id = self.context['application_id']
+
+        except KeyError:
+            application_id = -1
 
         message_file_duplicate = 'This file was already uploaded.'
 
