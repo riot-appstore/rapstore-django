@@ -16,6 +16,7 @@ from api.models import UserProfile
 from api.models import Feedback
 from django.contrib.auth.models import User
 
+import hashlib
 import tarfile
 
 
@@ -54,18 +55,36 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
         model = ApplicationInstance
         exclude = ('is_public', 'app_tarball_md5')
 
+    def validate(self, data):
+
+        application_id = self.context['application_id']
+
+        message_file_duplicate = 'This file was already uploaded.'
+
+        file = data['app_tarball']
+        tarball_md5 = _md5_of_tar(file)
+
+        # application_id "-1" is used if application is being created and has no id already
+        #   -> just accept tarball because there cant be the same tarball if there is nothing
+        if application_id != -1 and ApplicationInstance.objects.filter(application=application_id, app_tarball_md5=tarball_md5):
+            raise serializers.ValidationError(message_file_duplicate)
+
+        data['app_tarball_md5'] = tarball_md5
+
+        return data
+
     def validate_app_tarball(self, data):
 
-        message = 'Invalid tar.gz file. Ensure the Makefile is in the root of the compressed file.'
+        message_file_format = 'Invalid tar.gz file. Ensure the Makefile is in the root of the compressed file.'
 
         try:
             tar = tarfile.open(fileobj=data, mode='r')
 
         except:
-            raise serializers.ValidationError(message)
+            raise serializers.ValidationError(message_file_format)
 
         if './Makefile' not in tar.getnames() and 'Makefile' not in tar.getnames():
-            raise serializers.ValidationError(message)
+            raise serializers.ValidationError(message_file_format)
 
         return data
 
@@ -107,3 +126,25 @@ class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = '__all__'
+
+
+def _md5_of_tar(file):
+    """ calculate hash of archive over the content of all included files within the archive """
+
+    hash_md5 = hashlib.md5()
+
+    file.open()
+    tar = tarfile.open(fileobj=file)
+
+    for tarinfo in tar:
+
+        if tarinfo.isfile():
+
+            f = tar.extractfile(tarinfo)
+            content = f.read()
+
+            hash_md5.update(content)
+
+    tar.close()
+
+    return hash_md5.hexdigest()

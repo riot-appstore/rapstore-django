@@ -19,7 +19,6 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
-import hashlib
 import requests
 
 

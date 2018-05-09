@@ -126,7 +126,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         if app_tarball:
             initial_instance["app_tarball"] = app_tarball[0]
 
-        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance)
+        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance, context={'application_id': -1})
         app_instance_serializer.is_valid(raise_exception=True)
 
         serializer.save(author=self.request.user)
@@ -143,9 +143,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app_tarball = self.request.data.pop('app_tarball', None)
 
         if app_tarball:
-            request.data["app_tarball"] = app_tarball[0]
+            request.data['app_tarball'] = app_tarball[0]
 
-        serializer = ApplicationInstanceSerializer(data=request.data)
+        serializer = ApplicationInstanceSerializer(data=request.data, context={'application_id': pk})
 
         if serializer.is_valid():
 
