@@ -13,6 +13,7 @@ import sys
 import requests
 import tarfile
 import tempfile
+import io
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
@@ -24,6 +25,8 @@ from rest_framework.authtoken.models import Token
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 PROJECT_ROOT_DIR = os.path.normpath(os.path.join(CUR_DIR, os.pardir, os.pardir, os.pardir))
 sys.path.append(PROJECT_ROOT_DIR)
+
+CRON_ENCODING="utf-8"
 
 import api.settings as config
 from api.models import Transaction
@@ -141,7 +144,7 @@ def register_riot_apps():
                     'initial_instance.version_name': '1.3.1',
                     'initial_instance.version_code': '7'
                 }
-                files = {'app_tarball': open(tmp_file_path, 'rb')}
+                files = {'app_tarball': io.open(tmp_file_path, 'rb')}
 
                 r = requests.post('http://localhost:8000/api/app/', headers=headers, data=payload, files=files)
 
@@ -203,7 +206,7 @@ def get_description(path, name):
         description = ''
 
         try:
-            with open(path) as file:
+            with io.open(path, 'r', encoding=CRON_ENCODING) as file:
 
                 brief_active = False
                 for line in file:
@@ -262,7 +265,7 @@ def get_name(path, application_directory):
     name = ''
 
     try:
-        with open(os.path.join(path, 'Makefile')) as makefile:
+        with io.open(os.path.join(path, 'Makefile'), 'r', encoding=CRON_ENCODING) as makefile:
             for line in makefile:
 
                 line = line.replace(' ', '')
