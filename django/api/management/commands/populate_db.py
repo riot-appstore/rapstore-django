@@ -14,6 +14,7 @@ import requests
 import tarfile
 import tempfile
 import io
+import time
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
@@ -34,7 +35,6 @@ from api.models import Module
 from api.models import Board
 from api.models import Application, ApplicationInstance
 from django.utils.html import escape
-from django.utils.text import slugify
 from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
 from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
 
@@ -101,11 +101,7 @@ def update_boards(transaction):
             Board.objects.update_or_create(internal_name=board_internalname, defaults=data)
 
 
-# assumes riot apps are not loaded yet!
-def register_riot_apps():
-    """
-    "upload" riot applications by user "riot-community"
-    """
+def update_riot_apps():
 
     for i in range(len(config.application_directories)):
 
@@ -122,55 +118,105 @@ def register_riot_apps():
                 if name == 'include':
                     continue
 
-                description = get_description(application_set_path, name)
-
                 application_name = get_name(application_path, name)
+                description = get_description(application_set_path, name)
 
                 tmp_fd, tmp_file_path = tempfile.mkstemp()
                 make_tarfile(tmp_file_path, application_path)
 
+                # always upload riot applications by user "RIOT-community"
                 author_user = User.objects.get(username='RIOT-community')
                 token = Token.objects.get(user=author_user).key
 
-                headers = {
-                    'Authorization': 'Token ' + token,
-                }
-                payload = {
-                    'name': application_name,
-                    'description': escape(description),
-                    'licences': None,
-                    'project_page': 'https://www.riot-os.org/',
-                    'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
-                    'initial_instance.version_name': '1.3.1',
-                    'initial_instance.version_code': '7'
-                }
-                files = {'app_tarball': io.open(tmp_file_path, 'rb')}
+                try:
+                    existing_app = Application.objects.get(name=application_name)
+                    update_application(token, existing_app.id, application_name, description, None, 'https://www.riot-os.org/', 'https://github.com/RIOT-OS/RIOT')
+                    upload_application_instance(token, existing_app, '0.0.0', int(time.time()), tmp_file_path)
 
-                r = requests.post('http://localhost:8000/api/app/', headers=headers, data=payload, files=files)
+                except Application.DoesNotExist:
+                    register_new_riot_app(token, application_name, description, tmp_file_path)
 
-                os.remove(tmp_file_path)
 
-                if r.status_code not in {200, 201}:
-                    print('posting app {0} failed!'.format(application_name))
-                    print(r.content)
+def update_application(token, app_id, application_name, description, licences, project_page, app_repo_url):
 
-                else:
-                    # riot specific modifications
+    headers = {
+        'Authorization': 'Token ' + token
+    }
+    payload = {
+        'name': application_name,
+        'description': escape(description),
+        'licences': licences,
+        'project_page': project_page,
+        'app_repo_url': app_repo_url
+    }
 
-                    app = Application.objects.get(name=application_name)
-                    app_instance = ApplicationInstance.objects.get(application=app)
+    r = requests.put('http://localhost:8000/api/app/%s/' % app_id, headers=headers, data=payload)
 
-                    # set riot as source
-                    app.source = 'R'
+    if r.status_code not in {200, 201}:
+        print('update for app {0} failed!'.format(application_name))
+        print(r.content)
 
-                    # auto public
-                    app_instance.is_public = True
 
-                    app.save()
-                    app_instance.save()
+def upload_application_instance(token, app, version_name, version_code, tmp_file_path):
+
+    headers = {
+        'Authorization': 'Token ' + token
+    }
+    payload = {
+        'version_name': version_name,
+        'version_code': version_code
+    }
+    files = {'app_tarball': io.open(tmp_file_path, 'rb')}
+
+    r = requests.post('http://localhost:8000/api/app/%s/instance/' % app.id, headers=headers, data=payload, files=files)
+
+    if r.status_code not in {200, 201}:
+        print('uploading app instance for app {0} failed!'.format(app.name))
+        print(r.content)
+
+
+def register_new_riot_app(token, application_name, description, tmp_file_path):
+
+    headers = {
+        'Authorization': 'Token ' + token,
+    }
+    payload = {
+        'name': application_name,
+        'description': escape(description),
+        'licences': None,
+        'project_page': 'https://www.riot-os.org/',
+        'app_repo_url': 'https://github.com/RIOT-OS/RIOT',
+        'initial_instance.version_name': '0.0.0',
+        'initial_instance.version_code': '0'
+    }
+    files = {'app_tarball': io.open(tmp_file_path, 'rb')}
+
+    r = requests.post('http://localhost:8000/api/app/', headers=headers, data=payload, files=files)
+
+    os.remove(tmp_file_path)
+
+    if r.status_code not in {200, 201}:
+        print('posting app {0} failed!'.format(application_name))
+        print(r.content)
+        
+    else:
+        # riot specific modifications
+
+        app = Application.objects.get(name=application_name)
+        app_instance = ApplicationInstance.objects.get(application=app)
+
+        # set riot as source
+        app.source = 'R'
+
+        # auto public
+        app_instance.is_public = True
+
+        app.save()
+        app_instance.save()
 
 
 def make_tarfile(output_path, source_dir):
+    
     with tarfile.open(output_path, "w:gz") as tar:
         tar.add(source_dir, arcname=".")
 
@@ -298,7 +344,7 @@ class Command(BaseCommand):
         try:
             update_modules(transaction)
             update_boards(transaction)
-            register_riot_apps()
+            update_riot_apps()
             print('OK')
 
         except Exception as e:

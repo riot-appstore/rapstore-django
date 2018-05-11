@@ -25,20 +25,20 @@ Including another URLconf
 """
 
 from api.views import ApplicationViewSet
+from api.views import ApplicationInstanceViewSet
 from api.views import BoardViewSet
 from api.views import UserViewSet
 from api.views import FeedbackViewSet
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from rest_framework import routers
 from rest_framework.authtoken import views
-from riot_apps import settings
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet, base_name='application')
+router.register(r'app/(?P<app_id>.+)/instance', ApplicationInstanceViewSet, base_name='instance')
 router.register(r'board', BoardViewSet)
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'feedback', FeedbackViewSet)

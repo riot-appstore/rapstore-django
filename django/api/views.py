@@ -74,7 +74,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     def build(self, request, pk=None):
 
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         files = {'file': f}
 
         board = request.GET.get('board', None)
@@ -99,7 +99,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'])
     def supported_boards(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         files = {'file': f}
 
         r = requests.post('http://builder:8000/supported_boards/', files=files)
@@ -112,7 +112,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         response = HttpResponse(f, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=%s.tar.gz' % app.name
 
@@ -122,10 +122,11 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         app_tarball = self.request.data.pop('app_tarball', None)
         initial_instance = self.request.data.pop("initial_instance", {})
+
         if app_tarball:
             initial_instance["app_tarball"] = app_tarball[0]
 
-        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance)
+        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance, context={'application_id': -1})
         app_instance_serializer.is_valid(raise_exception=True)
 
         serializer.save(author=self.request.user)
@@ -136,13 +137,44 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             serializer.instance.delete()
             raise e
 
+    @detail_route(methods=['POST'])
+    def instance(self, request, pk):
+
+        app_tarball = self.request.data.pop('app_tarball', None)
+
+        if app_tarball:
+            request.data['app_tarball'] = app_tarball[0]
+
+        serializer = ApplicationInstanceSerializer(data=request.data, context={'application_id': pk})
+
+        if serializer.is_valid():
+
+            try:
+                serializer.save(application=Application.objects.get(id=pk))
+
+            except Exception as e:
+                print(e)
+                return Response('Could not save object', status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ApplicationInstanceViewSet(viewsets.ModelViewSet):
+
+    queryset = ApplicationInstance.objects.order_by('version_code')
+    serializer_class = ApplicationInstanceSerializer
+
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
+
     queryset = Board.objects.all().order_by('display_name')
     serializer_class = BoardSerializer
 
 
 class UploadFileForm(forms.ModelForm):
+
     class Meta:
         model=ApplicationInstance
         fields=('app_tarball', 'version_code', 'version_name')
