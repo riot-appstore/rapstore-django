@@ -10,6 +10,7 @@
 
 import base64
 import requests
+from riot_apps import settings
 
 from api.models import Application
 from api.models import ApplicationInstance
@@ -250,7 +251,7 @@ def get_social(request, provider):
 
         int_state = str(int_state).encode('utf-8')
 
-        response = Response({"url": "https://github.com/login/oauth/authorize/?client_id=644cc0af81df7b75d19b&state={}".format((md5(int_state).hexdigest()))})
+        response = Response({"url": "https://github.com/login/oauth/authorize/?client_id={}&state={}".format(settings.SOCIAL_AUTH_GITHUB_KEY,md5(int_state).hexdigest())})
         response.set_cookie("state", int_state)
         return response
     return Response({"error": "No provider"}, status=status.HTTP_400_BAD_REQUEST)
