@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../user.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,11 +11,13 @@ export class SignupComponent implements OnInit {
   model: any = {};
   message: string = '';
   errors: string[] = [];
+  github_url = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.authService.get_github_url().subscribe(val => this.github_url = val.url);
   }
 
   signup() {
