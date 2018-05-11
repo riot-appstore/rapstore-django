@@ -42,6 +42,11 @@ from rest_social_auth.views import SocialTokenUserAuthView
 from django import forms
 import json
 
+import uuid
+from hashlib import md5
+import os
+
+
 class NestedMultipartParser(parsers.MultiPartParser):
     def parse(self, stream, media_type=None, parser_context=None):
         result = super().parse(stream=stream, media_type=media_type, parser_context=parser_context)
@@ -226,5 +231,13 @@ class SecureSocialLogin(SocialTokenUserAuthView):
 @api_view(('GET',))
 def get_social(request, provider):
     if(provider) == "github":
-        return Response({"url": "https://github.com/login/oauth/authorize/?client_id=644cc0af81df7b75d19b"})
+        int_state=request.COOKIES.get('state', None)
+
+        if not int_state:
+            int_state=str(md5(os.urandom(32)).hexdigest()).encode('utf-8')
+            response.set_cookie("state", int_state)
+
+        int_state=str(int_state).encode('utf-8')
+        response = Response({"url": "https://github.com/login/oauth/authorize/?client_id=644cc0af81df7b75d19b&state={}".format(md5(int_state).hexdigest())})
+        return response
     return Response({"error": "No provider"}, status=status.HTTP_400_BAD_REQUEST)

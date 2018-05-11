@@ -61,7 +61,7 @@ export class AuthService {
 
   get_github_url() {
     const url = `${this.base_url}/social/url/github/`;
-    return this.http.get(url, {headers: this.headers}).map(res => res.json());
+    return this.http.get(url, {headers: this.headers, withCredentials: true}).map(res => res.json());
   }
   get_social_token(code: string) {
     const url = `${this.base_url}/social/login/github/`;
