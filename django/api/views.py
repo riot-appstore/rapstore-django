@@ -74,7 +74,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     def build(self, request, pk=None):
 
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         files = {'file': f}
 
         board = request.GET.get('board', None)
@@ -99,7 +99,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'])
     def supported_boards(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         files = {'file': f}
 
         r = requests.post('http://builder:8000/supported_boards/', files=files)
@@ -112,7 +112,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.first().app_tarball
+        f = app.applicationinstance_set.last().app_tarball
         response = HttpResponse(f, content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=%s.tar.gz' % app.name
 
