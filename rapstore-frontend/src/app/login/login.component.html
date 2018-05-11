@@ -2,7 +2,12 @@
   <div class="row">
     <div class="col-sm-6">
       <div [hidden]="social_loading">
-      <h3> Login:</h3>
+      <h3>Login with GitHub:</h3>
+      <a href="{{github_url}}"><button class="btn-default btn-primary"><img src="/assets/img/ghlogo.png" /> Login</button></a>
+      <br />
+      <br />
+      <div><hr /></div>
+      <h3> Login with User and Pass</h3>
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <div [hidden]="!error" class="alert alert-danger">
           {{error}}
@@ -19,7 +24,6 @@
         </div>
         <button class="btn btn-primary" type="submit">Login</button>
       </form>
-      <a href="{{github_url}}">Login with Github</a>
       </div>
       <div [hidden]="!social_loading">
           <h3> Loading... </h3>
