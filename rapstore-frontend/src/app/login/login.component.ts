@@ -20,9 +20,13 @@ export class LoginComponent implements OnInit {
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         let code = params['code'];
-        if(code) {
+        let state = params['state'];
+        if(code && state) {
           this.social_loading = true;
-          this.authService.get_social_token(code).subscribe(val => this.router.navigate(['/']));
+          this.authService.get_social_token(code, state).subscribe(val => this.router.navigate(['/']), error => {
+            alert("Invalid github login");
+            this.router.navigate(['/']);
+          });
         }
       });
   }

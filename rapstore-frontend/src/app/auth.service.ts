@@ -63,9 +63,9 @@ export class AuthService {
     const url = `${this.base_url}/social/url/github/`;
     return this.http.get(url, {headers: this.headers, withCredentials: true}).map(res => res.json());
   }
-  get_social_token(code: string) {
+  get_social_token(code: string, state: string) {
     const url = `${this.base_url}/social/login/github/`;
-    return this.http.post(url, JSON.stringify({code: code}), {headers: this.headers}).map((response: Response) => {
+    return this.http.post(url, JSON.stringify({code: code, state: state}), {headers: this.headers, withCredentials: true}).map((response: Response) => {
       let res = response.json();
       this.perform_login(res.username, res.token);
       return true;
