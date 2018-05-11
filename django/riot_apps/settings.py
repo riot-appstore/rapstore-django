@@ -167,6 +167,6 @@ AUTHENTICATION_BACKENDS = (
         'social_core.backends.github.GithubOAuth2',
         'django.contrib.auth.backends.ModelBackend',
         )
-SOCIAL_AUTH_GITHUB_KEY = ''
-SOCIAL_AUTH_GITHUB_SECRET = ''
+SOCIAL_AUTH_GITHUB_KEY = os.getenv('GITHUB_CLIENT_ID', '')
+SOCIAL_AUTH_GITHUB_SECRET = os.getenv('GITHUB_SECRET_KEY', '')
 REST_SOCIAL_OAUTH_REDIRECT_URI = '/login/'
