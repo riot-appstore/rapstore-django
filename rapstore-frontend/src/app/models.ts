@@ -22,6 +22,7 @@ export class Board {
   display_name: string;
   internal_name: string;
   flash_program: string;
+  storage_flash_support: boolean;
   transaction: number;
 }
 
