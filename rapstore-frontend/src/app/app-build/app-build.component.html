@@ -40,11 +40,10 @@
       -->
       <!--<button type="button" class="btn btn-primary">Install on device</button>-->
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button [hidden]="loading" type="button" class="btn btn-primary download-binary-with-info"
+        <button [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
                 (click)="downloadElf(application.id)">Download binary file
         </button>
-        <button [hidden]="!loading" type="button" class="btn disabled btn-info">Download binary file</button>
-        <button routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary"><span
+        <button [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary"><span
           class="glyphicon glyphicon-info-sign"></span></button>
       </div>
       <h1 [hidden]="!loading">Loading{{dots}}</h1>
