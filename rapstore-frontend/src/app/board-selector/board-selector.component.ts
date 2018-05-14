@@ -12,7 +12,8 @@ import {BoardService} from '../board.service';
 export class BoardSelectorComponent implements OnInit {
 
   @Input() boards: Board[];
-  @Output() notify: EventEmitter<number> = new EventEmitter<number>();
+  @Input() selectedBoard: Board;
+  @Output() notify: EventEmitter<Board> = new EventEmitter<Board>();
 
   constructor(private boardService: BoardService, private route: ActivatedRoute) {
   }
@@ -22,12 +23,13 @@ export class BoardSelectorComponent implements OnInit {
     this.boardService.getSupported(id)
       .subscribe(boards => {
         this.boards = boards;
-        this.notify.emit(boards[0].id);
+        this.selectedBoard = boards[0];
+        this.onChange();
       });
   }
 
-  onChange(value) {
-    this.notify.emit(value);
+  onChange() {
+    this.notify.emit(this.selectedBoard);
   }
 
 }

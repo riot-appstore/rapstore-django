@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Application} from '../models';
 import {AppService} from '../appservice.service';
 import {ActivatedRoute} from '@angular/router';
+import {Board} from '../models';
 import 'rxjs/Rx' ;
 import Timer = NodeJS.Timer;
 
@@ -11,7 +12,7 @@ import Timer = NodeJS.Timer;
   styleUrls: ['./app-build.component.css']
 })
 export class AppBuildComponent implements OnInit {
-  private selected_board: number;
+  private selected_board: Board;
   private loading: boolean = false;
   private dots: string = '';
   private timer_id: Timer;
@@ -27,8 +28,8 @@ export class AppBuildComponent implements OnInit {
       .subscribe(app => this.application = app);
   }
 
-  onBoardChange(id) {
-    this.selected_board = id;
+  onBoardChange(board: Board) {
+    this.selected_board = board;
   }
 
   downloadElf(id) {
@@ -40,7 +41,7 @@ export class AppBuildComponent implements OnInit {
         this.dots = '';
       }
     }, 700);
-    this.appService.download(id, this.selected_board, this.application.name).subscribe(
+    this.appService.download(id, this.selected_board.id, this.application.name).subscribe(
       (response) => { // download file
         clearInterval(this.timer_id);
 
