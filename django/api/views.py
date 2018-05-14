@@ -32,6 +32,7 @@ from rest_framework import parsers
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import viewsets
+from rest_framework import permissions
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.parsers import FormParser
 from rest_framework.permissions import IsAdminUser
@@ -71,7 +72,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return queryset
 
     # TODO: Add auth
-    @detail_route(methods=['GET'])
+    @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def build(self, request, pk=None):
 
         app = get_object_or_404(Application, pk=pk)
@@ -97,7 +98,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 
-    @detail_route(methods=['GET'])
+    @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated,])
     def supported_boards(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
         f = app.applicationinstance_set.last().app_tarball
