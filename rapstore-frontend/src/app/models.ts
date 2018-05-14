@@ -22,7 +22,7 @@ export class Board {
   display_name: string;
   internal_name: string;
   flash_program: string;
-  transction: number;
+  transaction: number;
 }
 
 export class User {
