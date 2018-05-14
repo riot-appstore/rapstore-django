@@ -79,7 +79,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         queryset = self.queryset.filter(applicationinstance__is_public=True)
         return queryset
 
-    # TODO: Add auth
+    #TODO: Serializers here...
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def build(self, request, pk=None):
 
@@ -106,7 +106,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app.save()
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=%s.bin' % slugify(app.name)
+        response['Content-Disposition'] = "attachment; filename={}.{}".format(slugify(app.name), bin_type)
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 
