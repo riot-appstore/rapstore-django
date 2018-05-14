@@ -16,6 +16,7 @@ from api.models import ApplicationInstance
 from api.models import Board
 from api.models import Feedback
 from api.permissions import IsAppOwnerOrReadOnly
+from api.permissions import IsAdminUserOrReadOnly
 from api.serializers import ApplicationInstanceSerializer
 from api.serializers import ApplicationSerializer
 from api.serializers import BoardSerializer
@@ -163,12 +164,14 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
 class ApplicationInstanceViewSet(viewsets.ModelViewSet):
 
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ApplicationInstance.objects.order_by('version_code')
     serializer_class = ApplicationInstanceSerializer
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
 
+    permission_classes = (IsAdminUserOrReadOnly,)
     queryset = Board.objects.all().order_by('display_name')
     serializer_class = BoardSerializer
 
