@@ -89,10 +89,14 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         board = request.GET.get('board', None)
         if not board:
-            return HttpResponse('Board not found')
+            return Response('Board not found', status=status.HTTP_400_BAD_REQUEST)
+
+        bin_type = request.GET.get('type', None)
+        if not bin_type or bin_type not in ['bin', 'hex', 'elf']:
+            return Response('Missing type', status=status.HTTP_400_BAD_REQUEST)
 
         board_name = Board.objects.get(pk=board).internal_name
-        r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
+        r = requests.post('http://builder:8000/build/', data={'board': board_name, 'type': bin_type}, files=files)
 
         if r.status_code != 200:
             return Response({"error": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
