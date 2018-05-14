@@ -32,7 +32,7 @@ export class AppBuildComponent implements OnInit {
     this.selected_board = board;
   }
 
-  downloadElf(id) {
+  download_binary(id, type) {
     this.loading = true;
     this.error = '';
     this.timer_id = setInterval(val => {
@@ -41,7 +41,7 @@ export class AppBuildComponent implements OnInit {
         this.dots = '';
       }
     }, 700);
-    this.appService.download(id, this.selected_board.id, this.application.name).subscribe(
+    this.appService.download(id, this.selected_board.id, this.application.name, type).subscribe(
       (response) => { // download file
         clearInterval(this.timer_id);
 
