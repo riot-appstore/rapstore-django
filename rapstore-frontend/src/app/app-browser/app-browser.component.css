@@ -1,12 +1,4 @@
-.app-overview-item {
-  -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
-  transition: background 0.5s;
-}
-.app-overview-item:hover {
-  background: #2a9fd6;
-}
-
-.app-panel .app-name {
+.app-name {
   font-size: 1em;
   margin-bottom: 1em;
 
@@ -18,6 +10,24 @@
 
 #app-info-section {
   margin-top: 2em;
+}
+
+.app-item-container {
+  overflow:hidden;
+  text-align:center;
+}
+
+.app-item {
+  width: 260px;
+  margin: 10px;
+  display:inline-block;
+
+  -webkit-transition: background 0.5s; /* For Safari 3.1 to 6.0 */
+  transition: background 0.5s;
+}
+
+.app-item:hover {
+  background: #2a9fd6;
 }
 
 /* http://www.cssportal.com/css-ribbon-generator/ */
