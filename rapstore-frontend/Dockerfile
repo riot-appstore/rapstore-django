@@ -1,6 +1,7 @@
 FROM node:8.9 as node
 
 WORKDIR /app
+RUN npm install npm@latest -g
 COPY package.json /app/
 RUN npm install
 COPY ./ /app/
