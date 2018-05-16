@@ -10,6 +10,7 @@
 
 import base64
 import requests
+from riot_apps import settings
 
 from api.models import Application
 from api.models import ApplicationInstance
@@ -32,15 +33,22 @@ from rest_framework import parsers
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework import permissions
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.parsers import FormParser
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_social_auth.views import SocialTokenUserAuthView
 
 from django import forms
 import json
+
+import uuid
+from hashlib import md5
+import os
+
 
 class NestedMultipartParser(parsers.MultiPartParser):
     def parse(self, stream, media_type=None, parser_context=None):
@@ -220,3 +228,34 @@ class UserViewSet(viewsets.ViewSet):
 class FeedbackViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
+class SecureSocialLogin(SocialTokenUserAuthView):
+    def post(self, request, *args, **kwargs):
+        int_state=request.COOKIES.get('state', None)
+        if not int_state:
+            return Response({"error": "State param not present"}, status=status.HTTP_400_BAD_REQUEST)
+
+        int_state = str(int_state).encode('utf-8')
+        v1 = md5(int_state).hexdigest()
+        v2 = request.data.get("state")
+        if v1 != v2:
+            return Response({"error": "State mismatch"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return super().post(request, *args, **kwargs)
+    pass
+
+#TODO: Get link from social_auth
+@api_view(('GET',))
+def get_social(request, provider):
+    if(provider) == "github":
+        int_state=request.COOKIES.get('state', None)
+
+        if not int_state:
+            int_state=md5(os.urandom(32)).hexdigest()
+
+        int_state = str(int_state).encode('utf-8')
+
+        response = Response({"url": "https://github.com/login/oauth/authorize/?client_id={}&state={}".format(settings.SOCIAL_AUTH_GITHUB_KEY,md5(int_state).hexdigest())})
+        response.set_cookie("state", int_state)
+        return response
+    return Response({"error": "No provider"}, status=status.HTTP_400_BAD_REQUEST)
