@@ -29,6 +29,8 @@ DEBUG = False if env_dbg == "False" or env_dbg == None else True
 
 ALLOWED_HOSTS = [u'builder', 'localhost']
 
+ADMINS=[('Hendrik VE', 'hendrik.ve@fu-berlin.de'), ('Jose A', 'jose.alamos@haw-hamburg.de')]
+
 
 # Application definition
 
