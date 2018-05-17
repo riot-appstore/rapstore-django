@@ -6,4 +6,3 @@ COPY package.json /app/
 RUN npm install
 COPY ./ /app/
 RUN npm install -g @angular/cli --unsafe-perm
-RUN test -z "$NGBUILD" && ng build --prod --aot=false  $AFLAGS
