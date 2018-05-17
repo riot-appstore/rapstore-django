@@ -1,7 +1,10 @@
 <div class="row">
+
   <ng-container *ngFor="let application of apps; let i = index">
+
     <div class="clearfix visible-sm-block" *ngIf="i % 4 == 0"></div>
     <div class="clearfix visible-md-block" *ngIf="i % 6 == 0"></div>
+
     <div class="col-sm-3 col-md-2">
       <div>
         <a class="a-wrapper-no-decoration" routerLink="/app/{{application.id}}">
@@ -33,8 +36,7 @@
         </a>
       </div>
     </div>
-    <!--if forloop.counter|divisibleby:6 and not forloop.last
-    </div><div class="row">
-    endif-->
+
   </ng-container>
+
 </div>

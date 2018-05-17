@@ -57,7 +57,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'social_django',
+    'rest_social_auth',
     'api',
+
 ]
 
 MIDDLEWARE = [
@@ -162,3 +165,11 @@ STATIC_ROOT = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
+
+AUTHENTICATION_BACKENDS = (
+        'social_core.backends.github.GithubOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+        )
+SOCIAL_AUTH_GITHUB_KEY = os.getenv('GITHUB_CLIENT_ID', '')
+SOCIAL_AUTH_GITHUB_SECRET = os.getenv('GITHUB_SECRET_KEY', '')
+REST_SOCIAL_OAUTH_REDIRECT_URI = '/login/'

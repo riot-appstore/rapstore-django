@@ -27,12 +27,8 @@ export class AuthService {
       .map((response: Response) => {
         const data = response.json();
         const token = data && data.token;
-        const is_dev = data && data.is_dev;
         if (token) {
-          this.refresh(true);
-          this.token = token;
-          this.is_dev = is_dev;
-          localStorage.setItem('user', JSON.stringify({username: username, token: token, is_dev: is_dev}));
+          this.perform_login(username, token);
           return true;
         }
         else {
@@ -42,6 +38,12 @@ export class AuthService {
       });
   }
 
+  perform_login(username: string, token: boolean) {
+    this.refresh(true);
+    this.token = token;
+    localStorage.setItem('user', JSON.stringify({username: username, token: token}));
+    
+  }
   logout() {
     this.token = null;
     this.is_dev = null;
@@ -55,5 +57,18 @@ export class AuthService {
 
   refresh(logging: boolean) {
     this.userChangeEvent.emit(logging);
+  }
+
+  get_github_url() {
+    const url = `${this.base_url}/social/url/github/`;
+    return this.http.get(url, {headers: this.headers, withCredentials: true}).map(res => res.json());
+  }
+  get_social_token(code: string, state: string) {
+    const url = `${this.base_url}/social/login/github/`;
+    return this.http.post(url, JSON.stringify({code: code, state: state}), {headers: this.headers, withCredentials: true}).map((response: Response) => {
+      let res = response.json();
+      this.perform_login(res.username, res.token);
+      return true;
+    });
   }
 }

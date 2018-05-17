@@ -20,7 +20,7 @@ import hashlib
 import tarfile
 
 
-#TODO: Improve!
+# TODO: Improve!
 class UserSerializer(serializers.ModelSerializer):
 
     is_dev = serializers.SerializerMethodField()
@@ -48,6 +48,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ApplicationInstanceSerializer(serializers.ModelSerializer):
+
+    # APPLICATION_ID_DOES_NOT_EXIST is used if application is being created and has no id already
+    APPLICATION_ID_DOES_NOT_EXIST = -1
+
     app_tarball = serializers.FileField()
     application = serializers.PrimaryKeyRelatedField(read_only=True)
 
@@ -61,16 +65,17 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
             application_id = self.context['application_id']
 
         except KeyError:
-            application_id = -1
+            application_id = self.APPLICATION_ID_DOES_NOT_EXIST
 
         message_file_duplicate = 'This file was already uploaded.'
 
         file = data['app_tarball']
         tarball_md5 = _md5_of_tar(file)
 
-        # application_id "-1" is used if application is being created and has no id already
-        #   -> just accept tarball because there cant be the same tarball if there is nothing
-        if application_id != -1 and ApplicationInstance.objects.filter(application=application_id, app_tarball_md5=tarball_md5):
+        # just accept tarball because there cant be the same tarball if there is nothing
+        if application_id != self.APPLICATION_ID_DOES_NOT_EXIST \
+                and ApplicationInstance.objects.filter(application=application_id, app_tarball_md5=tarball_md5):
+            
             raise serializers.ValidationError(message_file_duplicate)
 
         data['app_tarball_md5'] = tarball_md5

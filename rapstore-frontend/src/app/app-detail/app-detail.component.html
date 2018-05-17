@@ -34,7 +34,8 @@
       <!-- <p>Category: Sensor</p> -->
       <p>License: {{application?.licenses}}</p>
       <a class="btn btn-primary" style="width: 200px" routerLink="/app/{{application?.id}}/build"
-         role="button">Install</a>
+         role="button" *ngIf="user">Install</a>
+      <a class="btn btn-danger disabled" style="width: 200px" role="button" *ngIf="!user">Please login to install</a>
     </div>
   </div>
 
