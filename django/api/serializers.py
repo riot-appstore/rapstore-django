@@ -48,7 +48,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ApplicationInstanceSerializer(serializers.ModelSerializer):
-    
+
+    # APPLICATION_ID_DOES_NOT_EXIST is used if application is being created and has no id already
     APPLICATION_ID_DOES_NOT_EXIST = -1
 
     app_tarball = serializers.FileField()
@@ -71,8 +72,7 @@ class ApplicationInstanceSerializer(serializers.ModelSerializer):
         file = data['app_tarball']
         tarball_md5 = _md5_of_tar(file)
 
-        # APPLICATION_ID_DOES_NOT_EXIST is used if application is being created and has no id already
-        #   -> just accept tarball because there cant be the same tarball if there is nothing
+        # just accept tarball because there cant be the same tarball if there is nothing
         if application_id != self.APPLICATION_ID_DOES_NOT_EXIST \
                 and ApplicationInstance.objects.filter(application=application_id, app_tarball_md5=tarball_md5):
             
