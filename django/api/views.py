@@ -136,7 +136,10 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         if app_tarball:
             initial_instance["app_tarball"] = app_tarball[0]
 
-        app_instance_serializer = ApplicationInstanceSerializer(data=initial_instance, context={'application_id': -1})
+        app_instance_serializer = ApplicationInstanceSerializer(
+            data = initial_instance,
+            context = {'application_id': ApplicationInstanceSerializer.APPLICATION_ID_DOES_NOT_EXIST}
+        )
         app_instance_serializer.is_valid(raise_exception=True)
 
         serializer.save(author=self.request.user)
@@ -225,9 +228,11 @@ class UserViewSet(viewsets.ViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class FeedbackViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
 
 class SecureSocialLogin(SocialTokenUserAuthView):
     def post(self, request, *args, **kwargs):
@@ -243,6 +248,7 @@ class SecureSocialLogin(SocialTokenUserAuthView):
         
         return super().post(request, *args, **kwargs)
     pass
+
 
 #TODO: Get link from social_auth
 @api_view(('GET',))
