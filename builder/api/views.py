@@ -80,14 +80,16 @@ def supported_boards(request):
 
 @csrf_exempt
 def build(request):
+    #TODO: Validation...
     f = request.FILES['file']
     board = request.POST['board']
+    bin_type = request.POST['type']
     dest = write_tar(f)
 
     #Since we have the folder, let's do stuff
     execute_makefile(dest, board, 'test')
 
-    with open(dest+'/app.bin', 'rb') as file:
+    with open("{}/app.{}".format(dest, bin_type), 'rb') as file:
         b64 = base64.b64encode(file.read())
 
     return HttpResponse(b64)

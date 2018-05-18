@@ -79,7 +79,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         queryset = self.queryset.filter(applicationinstance__is_public=True)
         return queryset
 
-    # TODO: Add auth
+    #TODO: Serializers here...
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def build(self, request, pk=None):
 
@@ -89,10 +89,14 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
         board = request.GET.get('board', None)
         if not board:
-            return HttpResponse('Board not found')
+            return Response('Board not found', status=status.HTTP_400_BAD_REQUEST)
+
+        bin_type = request.GET.get('type', None)
+        if not bin_type or bin_type not in ['bin', 'hex', 'elf']:
+            return Response('Missing type', status=status.HTTP_400_BAD_REQUEST)
 
         board_name = Board.objects.get(pk=board).internal_name
-        r = requests.post('http://builder:8000/build/', data={'board': board_name}, files=files)
+        r = requests.post('http://builder:8000/build/', data={'board': board_name, 'type': bin_type}, files=files)
 
         if r.status_code != 200:
             return Response({"error": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
@@ -102,7 +106,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         app.save()
 
         response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename=%s.bin' % slugify(app.name)
+        response['Content-Disposition'] = "attachment; filename={}.{}".format(slugify(app.name), bin_type)
         response["Access-Control-Expose-Headers"] = "Content-Disposition"
         return response
 

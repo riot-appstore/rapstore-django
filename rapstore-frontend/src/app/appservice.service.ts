@@ -34,8 +34,11 @@ export class AppService {
     return new RequestOptions({headers: authHeaders, responseType: ResponseContentType.Blob});
   }
 
-  download(id: number, board: number, name: string) {
-    return this.http.get(this.baseUrl + '/api/app/' + id + '/build/?board=' + board, this.getAuthOptions());
+  download(id: number, board: number, name: string, type: string) {
+  return this.http.get(`${this.baseUrl}/api/app/${id}/build/?board=${board}&type=${type}`, {
+      responseType: ResponseContentType.Blob,
+      headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
+    });
   }
 
 }
