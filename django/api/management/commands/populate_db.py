@@ -26,6 +26,7 @@ from rest_framework.authtoken.models import Token
 CUR_DIR = os.path.abspath(os.path.dirname(__file__))
 PROJECT_ROOT_DIR = os.path.normpath(os.path.join(CUR_DIR, os.pardir, os.pardir, os.pardir))
 sys.path.append(PROJECT_ROOT_DIR)
+RIOT_LOCATION = "/RIOT"
 
 CRON_ENCODING="utf-8"
 
@@ -37,6 +38,8 @@ from api.models import Application, ApplicationInstance
 from django.utils.html import escape
 from api.db_initial_data.board_display_name_replacement import internalname_displayname_dict
 from api.db_initial_data.board_storage_flash_support_addition import internalname_storageflashsupport_dict
+
+from git import Repo
 
 
 def update_modules(transaction):
@@ -342,6 +345,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         transaction = Transaction.objects.create()
         try:
+            print("Pull: RIOT repo")
+            repo = Repo(RIOT_LOCATION)
+            repo.remotes.origin.pull()
+            print("Done")
             update_modules(transaction)
             update_boards(transaction)
             update_riot_apps()
