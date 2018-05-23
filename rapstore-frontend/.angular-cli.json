@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "./assets/bootstrap-4.0.0-dist/css/bootstrap.min.css"
+        "./assets/bootstrap-4.0.0-dist/css/bootstrap.min.css",
+        "./assets/open-iconic/font/css/open-iconic-bootstrap.css"
       ],
       "scripts": [
           "./assets/bootstrap-4.0.0-dist/js/bootstrap.min.js"
