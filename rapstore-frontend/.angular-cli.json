@@ -20,10 +20,10 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "./assets/css/bootstrap.min.css"
+        "./assets/bootstrap-4.0.0-dist/css/bootstrap.min.css"
       ],
       "scripts": [
-          "./assets/js/bootstrap.min.js"
+          "./assets/bootstrap-4.0.0-dist/js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
