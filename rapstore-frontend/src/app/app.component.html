@@ -3,18 +3,14 @@
     <div class="container-fluid main-jumbotron-container">
       <div class="row">
         <div class="col-md-2">
-
           <!-- <app-missing-components-label-section *ngIf="!extensionAvailable || !nativeMessagingHostAvailable;"></app-missing-components-label-section> -->
-
         </div>
         <div class="col-md-8">
-
           <div class="row">
             <div class="col-md-7">
               <h1><a class="a-wrapper-no-decoration" routerLink="">RAPstore</a></h1>
               <h4>The friendly App Store for the Internet of Things.</h4>
             </div>
-
             <div class="col-md-3">
               <span class="badge badge-default">powered by</span>
               <a href="https://riot-os.org/">
@@ -22,10 +18,8 @@
               </a>
             </div>
             <div class="col-md-2">
-
             </div>
           </div>
-
         </div>
         <div class="col-md-2">
           <h5><p class="float-right"><span class="badge badge-warning">BETA</span></p></h5>
@@ -52,15 +46,11 @@
     </div>
   </div>
 </ngx-bootstrap-feedback>
-
 <nav id="mainNavBar" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark py-0 mb-4">
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
     <ul class="navbar-nav mr-auto">
       <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/app">Applications</a></li>
       <ng-container *ngIf="user">
@@ -68,18 +58,13 @@
         <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
       </ng-container>
     </ul>
-
     <form class="form-inline my-2 my-lg-0">
-
       <ul class="navbar-nav mr-auto">
-
         <ng-container *ngIf="user">
           <li class="nav-item dropdown">
-
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Logged in as <b>{{user?.username}}</b>
             </a>
-
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" routerLink="user-profile">Your profile</a>
               <!--<a class="dropdown-item">Your configurations</a>-->
@@ -88,25 +73,18 @@
             </div>
           </li>
         </ng-container>
-
         <ng-container *ngIf="!user">
           <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="signup"><span class="oi oi-person"></span> Sign up</a></li>
           <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="login"><span class="oi oi-account-login"></span> Log in</a></li>
         </ng-container>
-
       </ul>
-
     </form>
-
   </div>
 </nav>
-
 <div id="content-view" class="container-fluid">
   <router-outlet></router-outlet>
 </div>
-
 <div style="padding-bottom: 85px;"></div>
-
 <footer class="footer">
   <div class="container">
     <div class="row">
