@@ -1,16 +1,16 @@
-<div class="container rounded app-panel panel-default panel">
+<div class="container rounded app-panel card">
   <div class="row">
     <div class="col-sm-1">
       <a class="btn btn-primary download-binary-with-info" routerLink="/app/{{application?.id}}">
-        <span class="glyphicon glyphicon-arrow-left"></span>
+        <span class="oi oi-arrow-thick-left"></span>
       </a>
     </div>
     <div class="col-sm-11">
-      <ul class="breadcrumb">
-        <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
-        <li><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
-        <li class="active">Install</li>
-      </ul>
+      <nav class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink=""><span class="oi oi-home"></span></a></li>
+        <li class="breadcrumb-item"><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
+        <li class="breadcrumb-item active">Install</li>
+      </nav>
     </div>
   </div>
   <div class="row">
@@ -20,13 +20,13 @@
         {{error}}
       </div>
       <div class="well well-sm">
-      <p *ngIf="selected_board?.storage_flash_support">
-      <span class="glyphicon glyphicon-ok"></span> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
-      </p>
-      
-      <p *ngIf="!selected_board?.storage_flash_support">
-      <span class="glyphicon glyphicon-remove"></span> This board doesn't support Drag and Drop. Only ELF file is provided.
-      </p>
+        <p *ngIf="selected_board?.storage_flash_support">
+          <span class="oi oi-check"></span> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
+        </p>
+
+        <p *ngIf="!selected_board?.storage_flash_support">
+          <span class="oi oi-x"></span> This board doesn't support Drag and Drop. Only ELF file is provided.
+        </p>
       </div>
       <div class="form-group">
         Board
@@ -43,8 +43,9 @@
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
                 (click)="download_binary(application.id, 'bin')">Download binary file
         </button>
-        <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em"><span
-          class="glyphicon glyphicon-info-sign"></span></button>
+        <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em">
+          <span class="oi oi-info"></span>
+        </button>
         <button [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
                 (click)="download_binary(application.id, 'elf')">Download ELF
         </button>
