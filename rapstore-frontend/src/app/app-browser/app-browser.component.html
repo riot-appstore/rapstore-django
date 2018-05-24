@@ -1,26 +1,19 @@
 <div class="row">
-
   <ng-container *ngFor="let application of apps">
-
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
       <div>
         <a class="a-wrapper-no-decoration-white-text" routerLink="/app/{{application.id}}">
           <div class="card app-overview-item">
             <div class="card-block app-panel text-center">
               <p class="app-name">{{application?.name | uppercase}}</p>
-
               <div class="box">
                 <div class="ribbon ribbon-official" *ngIf="application?.source == 'R'; else app_is_external"><span>OFFICIAL</span></div>
-
                 <ng-template #app_is_external>
                   <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
                 </ng-template>
-
                 <ngu-letter-avatar avatar-font-size="90" avatar-width="170px" avatar-height="170px"
                                    avatar-data='{{application?.name}}'></ngu-letter-avatar>
               </div>
-
-
               <div id="app-info-section">
                 <p class="float-left"><span class="oi oi-data-transfer-download"></span>
                   {{application?.download_count}}</p>
@@ -28,12 +21,9 @@
                   {{application?.author.username}}</p>
               </div>
             </div>
-
           </div>
         </a>
       </div>
     </div>
-
   </ng-container>
-
 </div>
