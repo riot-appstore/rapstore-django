@@ -1,11 +1,8 @@
 <div class="row">
 
-  <ng-container *ngFor="let application of apps; let i = index">
+  <ng-container *ngFor="let application of apps">
 
-    <div class="clearfix visible-sm-block" *ngIf="i % 4 == 0"></div>
-    <div class="clearfix visible-md-block" *ngIf="i % 6 == 0"></div>
-
-    <div class="col-sm-3 col-md-2">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
       <div>
         <a class="a-wrapper-no-decoration-white-text" routerLink="/app/{{application.id}}">
           <div class="card app-overview-item">
