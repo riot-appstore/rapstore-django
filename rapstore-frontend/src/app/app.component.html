@@ -2,33 +2,33 @@
   <div id="main-jumbotron" class="jumbotron">
     <div class="container-fluid main-jumbotron-container">
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-md-2">
 
           <!-- <app-missing-components-label-section *ngIf="!extensionAvailable || !nativeMessagingHostAvailable;"></app-missing-components-label-section> -->
 
         </div>
-        <div class="col-sm-8">
+        <div class="col-md-8">
 
-          <div class="container">
-            <div class="col-sm-7">
-              <h1><a routerLink="" style="text-decoration: none">RAPstore</a></h1>
+          <div class="row">
+            <div class="col-md-7">
+              <h1><a class="a-wrapper-no-decoration" routerLink="">RAPstore</a></h1>
               <h4>The friendly App Store for the Internet of Things.</h4>
             </div>
 
-            <div class="col-sm-3">
-              <span class="label label-default">powered by</span>
+            <div class="col-md-3">
+              <span class="badge badge-default">powered by</span>
               <a href="https://riot-os.org/">
-                <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-responsive" width="250"/>
+                <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-fluid"/>
               </a>
             </div>
-            <div class="col-sm-2">
+            <div class="col-md-2">
 
             </div>
           </div>
 
         </div>
-        <div class="col-sm-2">
-          <p class="pull-right"><span class="label label-warning">BETA</span></p>
+        <div class="col-md-2">
+          <h5><p class="float-right"><span class="badge badge-warning">BETA</span></p></h5>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
       <!-- Description field. -->
       <div class="row">
         <div class="col-md-12">
-          <div class=" form-group form-group-sm">
+          <div class=" form-group form-control-sm">
             <label for="description-input">Description:</label>
             <textarea id="description-input" class="form-control width-locked" rows="5" required
                       [(ngModel)]="feedback.description"></textarea>
@@ -53,68 +53,53 @@
   </div>
 </ngx-bootstrap-feedback>
 
+<nav id="mainNavBar" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark py-0 mb-4">
 
-<!--block navbar-->
-<div class="nav-wrapper">
-  <nav class="nav navbar navbar-default affix" data-spy="affix" data-offset-top="160">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="nav navbar-nav">
-          <li [routerLinkActive]="['active']"><a routerLink="/app">Applications</a></li>
-          <ng-container *ngIf="user">
-            <li [routerLinkActive]="['active']"><a routerLink="/upload">Upload your RIOT application</a></li>
-            <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
-          </ng-container>
-          <!--endif-->
-        </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/app">Applications</a></li>
+      <ng-container *ngIf="user">
+        <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/upload">Upload your RIOT application</a></li>
+        <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
+      </ng-container>
+    </ul>
 
-        <ul class="nav navbar-nav navbar-right">
+    <form class="form-inline my-2 my-lg-0">
 
-          <form class="navbar-form navbar-left">
-            <!--include "board_selector.html"-->
-          </form>
+      <ul class="navbar-nav mr-auto">
 
-          <!--<form class="navbar-form navbar-left">
-              <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search" autofocus="autofocus">
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
-          </form>-->
+        <ng-container *ngIf="user">
+          <li class="nav-item dropdown">
 
-          <ng-container *ngIf="user">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                 aria-haspopup="true" aria-expanded="false">Logged in as <b>{{user?.username}}</b><span
-                class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a routerLink="user-profile">Your profile</a></li>
-                <!--<li><a href="#">Your configurations</a></li>-->
-                <li role="separator" class="divider"></li>
-                <li><a (click)="logout()">Log out</a></li>
-              </ul>
-            </li>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Logged in as <b>{{user?.username}}</b>
+            </a>
 
-          </ng-container>
-          <ng-container *ngIf="!user">
-            <li><a routerLink="signup"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-            <li><a routerLink="login"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-          </ng-container>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</div>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="user-profile">Your profile</a>
+              <!--<a class="dropdown-item">Your configurations</a>-->
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logout()">Log out</a>
+            </div>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="!user">
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="signup"><span class="oi oi-person"></span> Sign up</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="login"><span class="oi oi-account-login"></span> Log in</a></li>
+        </ng-container>
+
+      </ul>
+
+    </form>
+
+  </div>
+</nav>
 
 <div id="content-view" class="container-fluid">
   <router-outlet></router-outlet>
