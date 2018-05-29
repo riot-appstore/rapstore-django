@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Application} from '../models';
 import {AppService} from '../appservice.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {UserService} from '../user.service';
 import {User} from '../models';
@@ -20,7 +20,11 @@ export class AppDetailComponent implements OnInit {
   app_author = null;
   private one_line_description = '';
 
-  constructor(private appService: AppService, private route: ActivatedRoute, private authService: AuthService, private userService: UserService) {
+  constructor(private appService: AppService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private authService: AuthService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -45,6 +49,10 @@ export class AppDetailComponent implements OnInit {
     else {
       this.user = null;
     }
+  }
+
+  request_login_page() {
+    this.router.navigate(['/login'], { queryParams: { returnURL: this.router.url } });
   }
 
 }

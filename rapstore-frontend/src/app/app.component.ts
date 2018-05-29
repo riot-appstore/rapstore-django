@@ -89,4 +89,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['/']);
   }
 
+  request_login_page() {
+    this.router.navigate(['/login'], { queryParams: { returnURL: this.router.url } });
+  }
+
 }

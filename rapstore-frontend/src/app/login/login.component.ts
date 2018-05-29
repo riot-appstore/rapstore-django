@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   error = '';
   github_url = '';
   social_loading: boolean = false;
+  returnURL: string;
 
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
@@ -29,12 +30,14 @@ export class LoginComponent implements OnInit {
           });
         }
       });
+
+    this.returnURL = this.activatedRoute.snapshot.queryParams['returnURL'] || '/';
   }
 
   login() {
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
-        this.router.navigate(['/']);
+        this.router.navigateByUrl(this.returnURL);
       }, err => {
         this.error = 'Invalid username or password';
       });
