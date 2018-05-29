@@ -1,12 +1,8 @@
 <div class="container">
+  <br><br>
   <div class="row">
-    <div class="col-sm-6">
-      <h3>Signup with GitHub:</h3>
-      <a href="{{github_url}}"><button class="btn-default btn-primary"><img src="/assets/img/ghlogo.png" /> Signup</button></a>
-      <br />
-      <br />
-      <div><hr /></div>
-      <h3> Sign Up with user and pass</h3>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
       <form (ngSubmit)="signup()" #signupForm="ngForm">
         <div [hidden]="errors.length == 0" class="alert alert-danger">
           <ul>
@@ -17,21 +13,32 @@
           {{message}}
         </div>
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
+          <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel"
                  required/>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel"
                  required/>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required/>
+          <input type="text" class="form-control" name="email" placeholder="Email address" [(ngModel)]="model.email" #email="ngModel" required/>
         </div>
-        <button class="btn btn-primary" type="submit">Sign up</button>
+        <button class="btn btn-block btn-primary" type="submit">Sign up</button>
       </form>
     </div>
+    <div class="col-sm-2">
+      <h3 class="text-center">OR</h3>
+    </div>
+    <div class="col-sm-4">
+      <div [hidden]="social_loading">
+        <a href="{{github_url}}" class="btn btn-block btn-social btn-github">
+          <span class="fa fa-github"></span> Sign in with Github
+        </a>
+      </div>
+      <div [hidden]="!social_loading">
+        <h3> Loading... </h3>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
   </div>
 </div>
