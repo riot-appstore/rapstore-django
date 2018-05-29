@@ -13,7 +13,7 @@
               <p class="app-name">{{application?.name | uppercase}}</p>
 
               <div class="box">
-                <div class="ribbon ribbon-official" *ngIf="application?.source == 'R'; else app_is_external"><span>OFFICIAL</span></div>
+                <div class="ribbon ribbon-official" *ngIf="application?.source == 'R'; else app_is_external"><span>RIOT MASTER</span></div>
 
                 <ng-template #app_is_external>
                   <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
