@@ -30,6 +30,7 @@ import {PageInstallInstructionDragAndDropComponent} from './page-install-instruc
 import {FeedbackModule} from 'ngx-bootstrap-feedback/feedback.module';
 import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
+import { ImprintComponent } from './imprint/imprint.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import {FeedbackService} from './feedback.service';
     SignupComponent,
     UserprofileComponent,
     PageInstallInstructionDragAndDropComponent,
+    ImprintComponent,
   ],
   imports: [
     CommonModule,
