@@ -18,8 +18,14 @@
   <div class="row form-group">
     <div class="col-sm-9">
       <div class="app-detail-avatar">
-        <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
-                           avatar-data='{{application?.name}}'></ngu-letter-avatar>
+        <div class="box">
+          <div class="ribbon ribbon-official" *ngIf="application?.source == 'R'; else app_is_external"><span>OFFICIAL</span></div>
+          <ng-template #app_is_external>
+            <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
+          </ng-template>
+          <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
+                             avatar-data='{{application?.name}}'></ngu-letter-avatar>
+        </div>
       </div>
       <div class="app-detail-headline">
         <h3> {{application?.name}} </h3>
