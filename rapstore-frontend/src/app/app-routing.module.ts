@@ -12,6 +12,7 @@ import {UserprofileComponent} from './userprofile/userprofile.component';
 import {PageInstallInstructionBrowserIntegrationComponent} from './page-install-instruction-browser-integration/page-install-instruction-browser-integration.component';
 import {PageInstallInstructionDragAndDropComponent} from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
 import {ImprintComponent} from './imprint/imprint.component';
+import {AboutComponent} from './about/about.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'install-instruction-browser-integration', component: PageInstallInstructionBrowserIntegrationComponent},
   {path: 'install-instruction-drag-and-drop', component: PageInstallInstructionDragAndDropComponent},
   {path: 'imprint', component: ImprintComponent},
+  {path: 'about', component: AboutComponent},
 
   {path: 'app', component: AppBrowserComponent},
   {path: 'app/:id', component: AppDetailComponent},
