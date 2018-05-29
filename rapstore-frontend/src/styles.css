@@ -14,12 +14,10 @@ body {
 }
 
 .footer {
+  padding: 20px;
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 85px;
-  line-height: 85px; /* Vertically center the text there */
   background-color: #151515;
 }
 
