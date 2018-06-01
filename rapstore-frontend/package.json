@@ -29,7 +29,9 @@
     "ngu-utility": "^1.0.5",
     "ngx-bootstrap-feedback": "^1.1.5",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "font-awesome": "^4.7.0",
+    "angular-font-awesome": "^3.1.2"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
