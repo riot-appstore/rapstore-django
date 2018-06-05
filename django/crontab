@@ -1,5 +1,5 @@
-LANG=en_US.UTF-2
+LANG=en_US.UTF-8
 LC_CTYPE=en_US.UTF-8
 
-0 */3 * * * root /usr/local/bin/python /code/manage.py populate_db
+* * * * * root /usr/local/bin/python /code/manage.py populate_db 2>&1 >> /var/log/t.log
 # An empty line is required at the end of this file for a valid cron file.
