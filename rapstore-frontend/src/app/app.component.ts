@@ -94,9 +94,4 @@ export class AppComponent implements OnInit, OnDestroy {
     this.$subscriptionExtension.unsubscribe();
     this.$subscriptionHost.unsubscribe();
   }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-  }
 }

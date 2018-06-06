@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         if(code && state) {
           this.social_loading = true;
           this.authService.get_social_token(code, state).subscribe(val => this.router.navigateByUrl(this.returnURL), error => {
-            alert("Invalid github login");
+            alert('Invalid github login');
             this.router.navigateByUrl(this.returnURL);
           });
         }
