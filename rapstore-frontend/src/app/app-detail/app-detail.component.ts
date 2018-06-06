@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Application} from '../models';
 import {AppService} from '../appservice.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../auth.service';
 import {UserService} from '../user.service';
 import {User} from '../models';
@@ -16,6 +17,7 @@ export class AppDetailComponent implements OnInit {
 
   @Input() application: Application;
   private user: User;
+  protected currentURL: string;
   show_avatar = false;
   app_author = null;
   private one_line_description = '';
@@ -28,6 +30,9 @@ export class AppDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.currentURL = this.router.url;
+
     this.fetch_user();
     const id = +this.route.snapshot.paramMap.get('id');
     this.appService.get(id)
@@ -50,9 +55,4 @@ export class AppDetailComponent implements OnInit {
       this.user = null;
     }
   }
-
-  request_login_page() {
-    this.router.navigate(['/login'], { queryParams: { returnURL: this.router.url } });
-  }
-
 }
