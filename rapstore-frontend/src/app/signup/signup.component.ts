@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../user.service';
 import {AuthService} from '../auth.service';
+import {User} from '../models';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +17,7 @@ export class SignupComponent implements OnInit {
   errors: string[] = [];
   github_url = '';
   returnURL: string;
+  private user: User;
 
   private $subscriptionRoute: Subscription;
 
@@ -24,6 +27,11 @@ export class SignupComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+
+    if (this.authService.get_token()) {
+      // dont show signup page if user is logged in
+      this.router.navigateByUrl('/');
+    }
 
     this.$subscriptionRoute = this.activatedRoute
       .queryParams

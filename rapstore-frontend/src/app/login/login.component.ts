@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {UserService} from '../user.service';
+import {User} from '../models';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +16,21 @@ export class LoginComponent implements OnInit {
   github_url = '';
   social_loading: boolean = false;
   returnURL: string;
+  private user: User;
 
   private $subscriptionRoute: Subscription;
 
   constructor(private authService: AuthService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {}
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService) {}
 
   ngOnInit() {
+
+    if (this.authService.get_token()) {
+      // dont show login page if user is logged in
+      this.router.navigateByUrl('/');
+    }
 
     this.$subscriptionRoute = this.activatedRoute
     .queryParams
