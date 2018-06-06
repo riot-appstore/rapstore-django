@@ -40,7 +40,13 @@ export class SignupComponent implements OnInit {
       .subscribe(result => {
         this.message = 'Successful registration!';
         setTimeout( () => {
-          this.router.navigateByUrl(this.returnURL);
+          this.authService.login(this.model.username, this.model.password)
+            .subscribe(result => {
+              this.router.navigateByUrl(this.returnURL);
+            }, err => {
+              alert("Something went wrong with automatic login! Please retry manually.");
+            });
+
         }, 1000 );
 
       }, err => {
