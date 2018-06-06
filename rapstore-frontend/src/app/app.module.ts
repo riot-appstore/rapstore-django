@@ -32,6 +32,7 @@ import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { AboutComponent } from './about/about.component';
     PageInstallInstructionDragAndDropComponent,
     ImprintComponent,
     AboutComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule,
