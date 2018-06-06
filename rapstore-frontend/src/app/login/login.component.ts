@@ -18,20 +18,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnURL = this.activatedRoute.snapshot.queryParams['returnURL'] || '/';
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         let code = params['code'];
         let state = params['state'];
         if(code && state) {
           this.social_loading = true;
-          this.authService.get_social_token(code, state).subscribe(val => this.router.navigate(['/']), error => {
+          this.authService.get_social_token(code, state).subscribe(val => this.router.navigate([this.returnURL]), error => {
             alert("Invalid github login");
-            this.router.navigate(['/']);
+            this.router.navigate([this.returnURL]);
           });
         }
       });
-
-    this.returnURL = this.activatedRoute.snapshot.queryParams['returnURL'] || '/';
   }
 
   login() {
