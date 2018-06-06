@@ -6,6 +6,7 @@ import {AppDetailComponent} from './app-detail/app-detail.component';
 import {AppBuildComponent} from './app-build/app-build.component';
 import {AppUploaderComponent} from './app-uploader/app-uploader.component';
 import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
 import {SignupComponent} from './signup/signup.component';
 import {DeveloperComponent} from './developer/developer.component';
 import {UserprofileComponent} from './userprofile/userprofile.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'app', pathMatch: 'full'},
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LogoutComponent},
 
   {path: 'install-instruction-browser-integration', component: PageInstallInstructionBrowserIntegrationComponent},
   {path: 'install-instruction-drag-and-drop', component: PageInstallInstructionDragAndDropComponent},
