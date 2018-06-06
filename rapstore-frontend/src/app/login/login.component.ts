@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
 
   private $subscriptionRoute: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
-  }
+  constructor(private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
 
@@ -51,5 +52,4 @@ export class LoginComponent implements OnInit {
         this.error = 'Invalid username or password';
       });
   }
-
 }

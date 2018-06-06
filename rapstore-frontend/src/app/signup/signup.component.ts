@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../user.service';
 import {AuthService} from '../auth.service';
 
@@ -12,11 +14,23 @@ export class SignupComponent implements OnInit {
   message: string = '';
   errors: string[] = [];
   github_url = '';
+  returnURL: string;
 
-  constructor(private userService: UserService, private authService: AuthService) {
-  }
+  private $subscriptionRoute: Subscription;
+
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+
+    this.$subscriptionRoute = this.activatedRoute
+      .queryParams
+      .subscribe(params => {
+        this.returnURL = params.returnURL || '/';
+      });
+
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
   }
 
@@ -25,6 +39,10 @@ export class SignupComponent implements OnInit {
     this.userService.register(this.model)
       .subscribe(result => {
         this.message = 'Successful registration!';
+        setTimeout( () => {
+          this.router.navigateByUrl(this.returnURL);
+        }, 1000 );
+
       }, err => {
         let errors = JSON.parse(err.text());
         for (let k in errors) {
@@ -37,6 +55,4 @@ export class SignupComponent implements OnInit {
     this.message = '';
     this.errors = [];
   }
-
-
 }
