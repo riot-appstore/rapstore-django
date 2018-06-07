@@ -123,7 +123,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-    @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
+    @detail_route(methods=['GET'], permission_classes=[permissions.AllowAny, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
         f = app.applicationinstance_set.last().app_tarball
