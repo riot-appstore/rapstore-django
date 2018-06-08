@@ -3,6 +3,7 @@ import {Application} from '../models';
 import {AppService} from '../appservice.service';
 import {ActivatedRoute} from '@angular/router';
 import {Board} from '../models';
+import {NotificationsService} from 'angular2-notifications';
 import 'rxjs/Rx' ;
 import Timer = NodeJS.Timer;
 
@@ -19,9 +20,10 @@ export class AppBuildComponent implements OnInit {
   private poll_id: Timer;
   private error = '';
   private task_id = "";
+  private toast;
   @Input() application: Application;
 
-  constructor(private appService: AppService, private route: ActivatedRoute) {
+  constructor(private appService: AppService, private route: ActivatedRoute, private notificationsService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -49,14 +51,21 @@ export class AppBuildComponent implements OnInit {
     this.init_loading();
     this.appService.request_build(id, this.selected_board.id, this.application.name, type).subscribe(
     res => {
+    this.toast = this.notificationsService.success(`Building "${this.application.name}"`, 'Please wait...', {
+        timeOut: 0,
+        clickToClose: false
+      });
       this.task_id = res.task_id;
       this.poll_id = setInterval(val => {
         this.appService.check_build(this.task_id).subscribe(
           res => {
             if(res.status == "SUCCESS") {
+              this.notificationsService.remove(this.toast.id);
               this.fetch_file(this.task_id);  
             }
             else if (res.status == "FAILURE") {
+              this.notificationsService.remove(this.toast.id);
+              this.show_error_toast("Failed to build", `"${this.application.name}" on "${this.selected_board.display_name}"`);
               this.set_error();
             }
           }
@@ -64,6 +73,13 @@ export class AppBuildComponent implements OnInit {
         }, 5000);
     });
      
+  }
+
+  show_error_toast(msg: string, reason: string) {
+      this.notificationsService.error(msg, reason, {
+        timeOut: 5000,
+        clickToClose: true
+      });
   }
 
   fetch_file(task_id) {
