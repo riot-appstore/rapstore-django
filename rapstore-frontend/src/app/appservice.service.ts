@@ -27,30 +27,28 @@ export class AppService {
     return this.http.get(`${this.baseUrl}/api/app/${id}/`).map(res => res.json());
   }
 
-  getAuthOptions(): RequestOptions {
+  getAuthHeaders(): Headers {
     const authHeaders = new Headers();
     authHeaders.append('Authorization', 'Token ' + this.authService.get_token());
-    authHeaders.append('Content-Type', 'application/json');
-    return new RequestOptions({headers: authHeaders});
-  }
-
-  getAuthOptionsFile(): RequestOptions {
-    const authHeaders = new Headers();
-    authHeaders.append('Authorization', 'Token ' + this.authService.get_token());
-    authHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-    return new RequestOptions({headers: authHeaders, responseType: ResponseContentType.Blob});
+    return authHeaders;
   }
 
   request_build(id: number, board: number, name: string, type: string) {
-    return this.http.get(`${this.baseUrl}/api/app/${id}/build/?board=${board}&type=${type}`, this.getAuthOptions()).map(res => res.json());
+  let headers = this.getAuthHeaders();
+  headers.append('Content-Type', 'application/json');
+  return this.http.get(`${this.baseUrl}/api/app/${id}/build/?board=${board}&type=${type}`, new RequestOptions({headers: headers})).map(res => res.json());
   }
 
   check_build(task_id: string) {
-    return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/status/`, this.getAuthOptions()).map(res => res.json());
+  let headers = this.getAuthHeaders();
+  headers.append('Content-Type', 'application/json');
+  return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/status/`, new RequestOptions({headers: headers})).map(res => res.json());
   }
 
   fetch_file(task_id) {
-    return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/fetch/`, this.getAuthOptionsFile());
+  let headers = this.getAuthHeaders();
+  headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/fetch/`, new RequestOptions({headers: headers, responseType: ResponseContentType.Blob}));
   }
 
   perform_download(filename, blob) {
