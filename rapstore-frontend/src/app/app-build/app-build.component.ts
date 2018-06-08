@@ -16,7 +16,9 @@ export class AppBuildComponent implements OnInit {
   private loading: boolean = false;
   private dots: string = '';
   private timer_id: Timer;
+  private poll_id: Timer;
   private error = '';
+  private task_id = "";
   @Input() application: Application;
 
   constructor(private appService: AppService, private route: ActivatedRoute) {
@@ -32,7 +34,7 @@ export class AppBuildComponent implements OnInit {
     this.selected_board = board;
   }
 
-  download_binary(id, type) {
+  request_build(id, type) {
     this.loading = true;
     this.error = '';
     this.timer_id = setInterval(val => {
@@ -41,25 +43,46 @@ export class AppBuildComponent implements OnInit {
         this.dots = '';
       }
     }, 700);
-    this.appService.download(id, this.selected_board.id, this.application.name, type).subscribe(
-      (response) => { // download file
-        clearInterval(this.timer_id);
 
+    this.appService.request_build(id, this.selected_board.id, this.application.name, type).subscribe(
+    res => {
+      this.task_id = res.task_id;
+      this.loading = true;
+      this.poll_id = setInterval(val => {
+        this.appService.check_build(this.task_id).subscribe(
+          res => {
+            if(res.status == "SUCCESS") {
+              this.fetch_file(this.task_id);  
+            }
+            else if (res.status == "FAILURE") {
+              this.set_error();
+            }
+          }
+        );
+        }, 5000);
+    });
+     
+  }
+
+  fetch_file(task_id) {
+    clearInterval(this.poll_id);
+    this.appService.fetch_file(task_id).subscribe(
+      (response) => { // download file
         let filename = response.headers.get('content-disposition').split('=')[1];
         let blob = new Blob([response.blob()], {type: 'application/octet_stream'});
-        let downloadUrl = window.URL.createObjectURL(blob);
-        let element = document.createElement('a');
-        element.setAttribute('href', downloadUrl);
-        element.setAttribute('download', filename);
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        clearInterval(this.timer_id);
+        this.appService.perform_download(filename, blob);
       }, (err) => {
-        this.loading = false;
-        this.error = 'Something went wrong';
+        this.set_error();
       },
       () => this.loading = false);
+  }
+
+  set_error() {
+    clearInterval(this.poll_id);
+    clearInterval(this.timer_id);
+    this.loading = false;
+    this.error = 'Something went wrong';
   }
 
 }

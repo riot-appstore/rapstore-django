@@ -41,12 +41,12 @@
       <!--<button type="button" class="btn btn-primary">Install on device</button>-->
       <div class="btn-group" role="group" aria-label="Basic example">
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
-                (click)="download_binary(application.id, 'bin')">Download binary file
+                (click)="request_build(application.id, 'bin')">Download binary file
         </button>
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em"><span
           class="glyphicon glyphicon-info-sign"></span></button>
         <button [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
-                (click)="download_binary(application.id, 'elf')">Download ELF
+                (click)="request_build(application.id, 'elf')">Download ELF
         </button>
       </div>
       <h1 [hidden]="!loading">Loading{{dots}}</h1>
