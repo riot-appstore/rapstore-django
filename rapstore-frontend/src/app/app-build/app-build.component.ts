@@ -77,7 +77,7 @@ export class AppBuildComponent implements OnInit {
       }, (err) => {
         this.set_error();
       },
-      () => this.loading = false);
+      () => this.clear());
   }
 
   clear() {
