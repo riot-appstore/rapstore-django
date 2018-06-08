@@ -75,9 +75,10 @@ class BuildManagerViewSet(viewsets.ViewSet):
     @detail_route(methods=['GET'])
     def status(self, request, pk=None):
         r = AsyncResult(pk)
-        if(r.status == "FAILURE"):
+        status = r.status
+        if(status == "FAILURE"):
             r.forget()
-        return Response({"status": r.status})
+        return Response({"status": status})
 
     @detail_route(methods=['GET'])
     def fetch(self, request, pk=None):
