@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NguUtilityModule} from 'ngu-utility/dist';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {AppComponent} from './app.component';
@@ -63,6 +64,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     HttpModule,
     FeedbackModule,
     ModalModule,
+    BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
   ],
   providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
