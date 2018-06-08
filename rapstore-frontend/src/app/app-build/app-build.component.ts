@@ -34,7 +34,7 @@ export class AppBuildComponent implements OnInit {
     this.selected_board = board;
   }
 
-  request_build(id, type) {
+  init_loading() {
     this.loading = true;
     this.error = '';
     this.timer_id = setInterval(val => {
@@ -43,11 +43,13 @@ export class AppBuildComponent implements OnInit {
         this.dots = '';
       }
     }, 700);
+  }
 
+  request_build(id, type) {
+    this.init_loading();
     this.appService.request_build(id, this.selected_board.id, this.application.name, type).subscribe(
     res => {
       this.task_id = res.task_id;
-      this.loading = true;
       this.poll_id = setInterval(val => {
         this.appService.check_build(this.task_id).subscribe(
           res => {
@@ -78,10 +80,14 @@ export class AppBuildComponent implements OnInit {
       () => this.loading = false);
   }
 
-  set_error() {
+  clear() {
     clearInterval(this.poll_id);
     clearInterval(this.timer_id);
     this.loading = false;
+  }
+
+  set_error() {
+    this.clear()
     this.error = 'Something went wrong';
   }
 
