@@ -19,6 +19,9 @@
       <div [hidden]="!error" class="alert alert-danger">
         {{error}}
       </div>
+      <div [hidden]="!loading" class="alert alert-success">
+          Successfully requested build. You can continue browsing the website while the service builds the app.
+      </div>
       <div class="well well-sm">
       <p *ngIf="selected_board?.storage_flash_support">
       <span class="glyphicon glyphicon-ok"></span> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
@@ -49,7 +52,7 @@
                 (click)="request_build(application.id, 'elf')">Download ELF
         </button>
       </div>
-      <h1 [hidden]="!loading">Loading{{dots}}</h1>
+      <br />
     </div>
   </div>
 </div>
