@@ -109,15 +109,17 @@ ENV PATH $PATH:/opt/gnu-mcu-eclipse/riscv-none-gcc/7.2.0-2-20180111-2230/bin
 ENV APP_USER user
 ENV APP_ROOT /code
 
-RUN git config --global user.email "riot@riot-os.org"
 #ENV C_FORCE_ROOT true # intentionally kept it commented
 
 
+RUN mkdir /home/${APP_USER}
 RUN groupadd -r ${APP_USER} \
     && useradd -r -m \
-    --home-dir ${APP_ROOT} \
+    --home-dir /home/${APP_USER} \
     -s /usr/sbin/nologin \
     -g ${APP_USER} ${APP_USER}
+
+RUN chown -R ${APP_USER} /home/${APP_USER}
 
 COPY requirements.txt /code/
 WORKDIR ${APP_ROOT}
@@ -125,3 +127,6 @@ WORKDIR ${APP_ROOT}
 RUN pip install -r requirements.txt
 
 USER ${APP_USER}
+RUN touch /home/${APP_USER}/.gitconfig
+RUN git config --global user.name "RIOT"
+RUN git config --global user.email "riot@riot-os.org"
