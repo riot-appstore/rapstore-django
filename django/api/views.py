@@ -206,6 +206,15 @@ class ApplicationInstanceViewSet(viewsets.ModelViewSet):
     queryset = ApplicationInstance.objects.order_by('version_code')
     serializer_class = ApplicationInstanceSerializer
 
+    @detail_route(methods=['GET'], permission_classes=[permissions.AllowAny, ])
+    def fetch(self, request, pk=None):
+        app_instance = get_object_or_404(ApplicationInstance, pk=pk)
+        f = app_instance.app_tarball
+        response = HttpResponse(f, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s.tar.gz' % app_instance.application.name
+
+        return response
+
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
 

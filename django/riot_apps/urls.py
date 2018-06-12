@@ -41,7 +41,7 @@ from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet, base_name='application')
-router.register(r'app/(?P<app_id>.+)/instance', ApplicationInstanceViewSet, base_name='instance')
+router.register(r'instance', ApplicationInstanceViewSet, base_name='instance')
 router.register(r'board', BoardViewSet)
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'feedback', FeedbackViewSet)
