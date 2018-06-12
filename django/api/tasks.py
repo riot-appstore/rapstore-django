@@ -6,7 +6,12 @@ import tempfile
 from subprocess import Popen, PIPE, STDOUT
 import tarfile
 import time
+from io import BytesIO
+from urllib.request import urlopen
+import os
+import json
 
+RAW_LOCATION = "/raw"
 @app.task
 def add(x, y):
     return x + y
@@ -16,7 +21,7 @@ def write_tar(f):
         tf = tarfile.open(fileobj=f)
 
     except:
-        return 'Not OK'
+        return None
 
     return extract_tar(tf)
 
@@ -56,6 +61,38 @@ def execute_makefile(app_build_dir, board, app_name):
     process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
 
     return process.communicate()[0]
+
+def handle_file(instance_id):
+    #TODO: Catch
+    directory = "{}/{}".format(RAW_LOCATION, instance_id)
+    if not os.path.isdir(directory):
+        #Create folder and extract
+        os.makedirs(directory)
+        url = "http://web:8000/api/instance/{}/fetch/".format(instance_id)
+        response = urlopen(url)
+        tf = tarfile.open(fileobj=BytesIO(response.read()))
+        tf.extractall(path=directory)
+    return directory
+
+@app.task
+def supported_boards(instance_id):
+    directory = handle_file(instance_id)
+
+    #Since we have the folder, let's do stuff
+    cmd = ['make',
+           '-C', directory,
+           'RIOTBASE=/RIOT',
+           'info-boards-supported']
+
+    process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
+
+    output = process.communicate()[0].decode('utf-8').split("\n")
+
+    for l in range(len(output)):
+        if output[l].find(":") < 0:
+            break
+
+    return json.dumps({"supported_boards": output[l].split(" ")})
 
 @app.task
 def build(app_name, board, bin_type, fb64):
