@@ -113,8 +113,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def build(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.last().app_tarball
-        files = {'file': f}
+        app_instance = app.applicationinstance_set.last()
 
         board = request.GET.get('board', None)
         if not board:
@@ -125,7 +124,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             return Response('Missing type', status=status.HTTP_400_BAD_REQUEST)
 
         board_name = Board.objects.get(pk=board).internal_name
-        r=tasks.build.delay(app.name, board_name, bin_type, base64.b64encode(f.read()).decode('utf-8'))
+        r=tasks.build.delay(app.name, board_name, bin_type, app_instance.pk)
 
         # build was successful, increment download counter now
         app.download_count = F('download_count') + 1

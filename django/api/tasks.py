@@ -49,18 +49,21 @@ def execute_makefile(app_build_dir, board, app_name):
         Output from executing make
     """
 
+    tmp_dir = tempfile.mkdtemp()
     cmd = ['make',
            '-j4',
            '-C', app_build_dir,
            'binfile',
            'RIOTBASE=/RIOT',
-           'ELFFILE=app.elf',
+           'BINDIR=%s' % tmp_dir,
+           'ELFFILE=%s/app.elf' % tmp_dir,
            'BOARD=%s' % board]
     #logging.debug('make: %s', cmd)
 
     process = Popen(cmd, stdout=PIPE, stderr=STDOUT)
 
-    return process.communicate()[0]
+    process.communicate()
+    return tmp_dir
 
 def handle_file(instance_id):
     #TODO: Catch
@@ -92,23 +95,17 @@ def supported_boards(instance_id):
         if output[l].find(":") < 0:
             break
 
-    return json.dumps({"supported_boards": output[l].split(" ")})
+    return json.dumps({"supported_boards": output[l].decode('utf-8').split(" ")})
 
 @app.task
-def build(app_name, board, bin_type, fb64):
+def build(app_name, board, bin_type, instance_id):
 
-    fc = base64.b64decode(fb64.encode('utf-8'))
-    f = tempfile.TemporaryFile()
-    f.write(fc)
-    f.seek(0)
-
-    dest = write_tar(f)
-    f.close()
+    directory = handle_file(instance_id)
 
     #Since we have the folder, let's do stuff
-    a=execute_makefile(dest, board, 'test')
+    tmp_dir=execute_makefile(directory, board, 'test')
 
-    with open("{}/app.{}".format(dest, bin_type), 'rb') as file:
+    with open("{}/app.{}".format(tmp_dir, bin_type), 'rb') as file:
         b64 = base64.b64encode(file.read())
 
-    return {"b64": str(b64), "filename": "{}_{}.{}".format(app_name, board, bin_type)}
+    return {"b64": b64.decode('utf-8'), "filename": "{}_{}.{}".format(app_name, board, bin_type)}
