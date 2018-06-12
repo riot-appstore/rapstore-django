@@ -95,7 +95,7 @@ def supported_boards(instance_id):
         if output[l].find(":") < 0:
             break
 
-    return json.dumps({"supported_boards": output[l].decode('utf-8').split(" ")})
+    return json.dumps({"supported_boards": output[l].split(" ")})
 
 @app.task
 def build(app_name, board, bin_type, instance_id):

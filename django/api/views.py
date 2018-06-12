@@ -133,12 +133,13 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated,])
     def supported_boards(self, request, pk=None):
-        app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.last().app_tarball
-        files = {'file': f}
 
-        r = requests.post('http://builder:8000/supported_boards/', files=files)
-        supported_boards = json.loads(r.text)["supported_boards"]
+        app = get_object_or_404(Application, pk=pk)
+        app_instance = app.applicationinstance_set.last()
+        r=tasks.supported_boards.delay(app_instance.pk)
+        res = r.get()
+        supported_boards = json.loads(res)["supported_boards"]
+        r.forget()
         queryset = Board.objects.filter(internal_name__in=supported_boards).order_by('display_name')
         serializer = BoardSerializer(queryset, many=True)
         return Response(serializer.data)
