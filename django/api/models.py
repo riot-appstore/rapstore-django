@@ -118,6 +118,7 @@ class Application(models.Model):
 
 
 class ApplicationInstance(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     application = models.ForeignKey(Application)
     version_code = models.PositiveIntegerField(default=0)
     version_name = models.CharField(max_length=255)
