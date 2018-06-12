@@ -45,6 +45,7 @@ RUN \
         pcregrep \
         python \
         python-pip \
+        python3-pip \
         python3 \
         python3-pexpect \
         python3-crypto \
@@ -113,6 +114,7 @@ ENV APP_ROOT /code
 
 
 RUN mkdir /home/${APP_USER}
+RUN mkdir /raw
 RUN groupadd -r ${APP_USER} \
     && useradd -r -m \
     --home-dir /home/${APP_USER} \
@@ -120,11 +122,13 @@ RUN groupadd -r ${APP_USER} \
     -g ${APP_USER} ${APP_USER}
 
 RUN chown -R ${APP_USER} /home/${APP_USER}
+RUN chown -R ${APP_USER} /raw
+
 
 COPY requirements.txt /code/
 WORKDIR ${APP_ROOT}
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 USER ${APP_USER}
 RUN touch /home/${APP_USER}/.gitconfig
