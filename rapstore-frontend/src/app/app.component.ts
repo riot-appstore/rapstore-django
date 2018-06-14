@@ -18,9 +18,11 @@ import {User, Feedback} from './models';
 export class AppComponent implements OnInit, OnDestroy {
 
   private user: User;
+  protected currentURL: string;
 
   private $subscriptionExtension: Subscription;
   private $subscriptionHost: Subscription;
+  private $subscriptionRouter: Subscription;
 
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
@@ -28,7 +30,12 @@ export class AppComponent implements OnInit, OnDestroy {
   private feedback: any = {};
   protected appVersion: string = environment.VERSION;
 
-  constructor(protected authService: AuthService, private router: Router, private browserIntegrationService: BrowserIntegrationService, private userService: UserService, private feedbackService: FeedbackService) {
+  constructor(protected authService: AuthService,
+              private router: Router,
+              private browserIntegrationService: BrowserIntegrationService,
+              private userService: UserService,
+              private feedbackService: FeedbackService) {
+
     this.feedbackConfiguration = {
       onSubmit: () => {
         this.feedbackService.sendFeedback(this.feedback).subscribe(
@@ -43,6 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+    this.$subscriptionRouter = this.router.events.subscribe(event => {
+      this.currentURL = this.router.url;
+    });
 
     this.$subscriptionExtension = this.browserIntegrationService.isExtensionAvailable()
       .subscribe(updatedBool => {
@@ -83,14 +94,4 @@ export class AppComponent implements OnInit, OnDestroy {
     this.$subscriptionExtension.unsubscribe();
     this.$subscriptionHost.unsubscribe();
   }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-  }
-
-  request_login_page() {
-    this.router.navigate(['/login'], { queryParams: { returnURL: this.router.url } });
-  }
-
 }

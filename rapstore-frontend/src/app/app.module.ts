@@ -33,6 +33,7 @@ import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
+import { LogoutComponent } from './logout/logout.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
@@ -54,6 +55,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     PageInstallInstructionDragAndDropComponent,
     ImprintComponent,
     AboutComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule,
