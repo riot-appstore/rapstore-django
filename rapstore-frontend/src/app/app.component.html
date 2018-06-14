@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-sm-3">
-              <span class="label label-default">powered by</span>
+              <span class="label label-default">supporting</span>
               <a href="https://riot-os.org/">
                 <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-responsive" width="250"/>
               </a>
@@ -34,6 +34,7 @@
     </div>
   </div>
 </header>
+<simple-notifications></simple-notifications>
 <ngx-bootstrap-feedback [configuration]="feedbackConfiguration">
   <!-- Your customizations. -->
   <div class="row">
@@ -77,7 +78,8 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li [routerLinkActive]="['active']"><a routerLink="/app">Applications</a></li>
+          <li *ngIf="router.url.indexOf('/app') == 0" [routerLinkActive]="['active']"><a routerLink="/app">Applications</a></li>
+          <li *ngIf="router.url === '/'" [routerLinkActive]="['active']"><a routerLink="/">Applications</a></li>
           <ng-container *ngIf="user">
             <li [routerLinkActive]="['active']"><a routerLink="/upload">Upload your RIOT application</a></li>
             <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
