@@ -45,6 +45,7 @@ RUN \
         pcregrep \
         python \
         python-pip \
+        python3-pip \
         python3 \
         python3-pexpect \
         python3-crypto \
@@ -106,9 +107,30 @@ RUN wget -q https://sgp.mirror.pkgbuild.com/core/os/x86_64/flex-2.6.4-1-x86_64.p
 RUN ldconfig
 ENV PATH $PATH:/opt/gnu-mcu-eclipse/riscv-none-gcc/7.2.0-2-20180111-2230/bin
 
-RUN mkdir /code
-COPY . /code/
-WORKDIR /code/
+ENV APP_USER user
+ENV APP_ROOT /code
+
+#ENV C_FORCE_ROOT true # intentionally kept it commented
+
+
+RUN mkdir /home/${APP_USER}
+RUN mkdir /raw
+RUN groupadd -r ${APP_USER} \
+    && useradd -r -m \
+    --home-dir /home/${APP_USER} \
+    -s /usr/sbin/nologin \
+    -g ${APP_USER} ${APP_USER}
+
+RUN chown -R ${APP_USER} /home/${APP_USER}
+RUN chown -R ${APP_USER} /raw
+
+
 COPY requirements.txt /code/
+WORKDIR ${APP_ROOT}
+
+RUN pip3 install -r requirements.txt
+
+USER ${APP_USER}
+RUN touch /home/${APP_USER}/.gitconfig
+RUN git config --global user.name "RIOT"
 RUN git config --global user.email "riot@riot-os.org"
-RUN pip install -r requirements.txt

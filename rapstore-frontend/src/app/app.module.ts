@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NguUtilityModule} from 'ngu-utility/dist';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {AppComponent} from './app.component';
@@ -32,6 +33,7 @@ import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule,
     HttpModule,
     FeedbackModule,
-    ModalModule
+    ModalModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
   bootstrap: [AppComponent]

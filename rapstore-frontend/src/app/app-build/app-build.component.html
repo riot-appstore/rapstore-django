@@ -19,6 +19,9 @@
       <div [hidden]="!error" class="alert alert-danger">
         {{error}}
       </div>
+      <div [hidden]="!loading" class="alert alert-success">
+          Successfully requested build. You can continue browsing the website while the service builds the app.
+      </div>
       <div class="well well-sm">
       <p *ngIf="selected_board?.storage_flash_support">
       <span class="glyphicon glyphicon-ok"></span> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
@@ -41,15 +44,15 @@
       <!--<button type="button" class="btn btn-primary">Install on device</button>-->
       <div class="btn-group" role="group" aria-label="Basic example">
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
-                (click)="download_binary(application.id, 'bin')">Download binary file
+                (click)="request_build(application.id, 'bin')">Download binary file
         </button>
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em"><span
           class="glyphicon glyphicon-info-sign"></span></button>
         <button [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
-                (click)="download_binary(application.id, 'elf')">Download ELF
+                (click)="request_build(application.id, 'elf')">Download ELF
         </button>
       </div>
-      <h1 [hidden]="!loading">Loading{{dots}}</h1>
+      <br />
     </div>
   </div>
 </div>

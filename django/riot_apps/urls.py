@@ -27,6 +27,7 @@ Including another URLconf
 from api.views import ApplicationViewSet
 from api.views import ApplicationInstanceViewSet
 from api.views import BoardViewSet
+from api.views import BuildManagerViewSet
 from api.views import UserViewSet
 from api.views import FeedbackViewSet
 from api.views import SecureSocialLogin
@@ -40,10 +41,11 @@ from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register(r'app', ApplicationViewSet, base_name='application')
-router.register(r'app/(?P<app_id>.+)/instance', ApplicationInstanceViewSet, base_name='instance')
+router.register(r'instance', ApplicationInstanceViewSet, base_name='instance')
 router.register(r'board', BoardViewSet)
 router.register(r'user', UserViewSet, base_name='user')
 router.register(r'feedback', FeedbackViewSet)
+router.register(r'buildmanager', BuildManagerViewSet, base_name='buildmanager')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
