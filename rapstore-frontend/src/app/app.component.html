@@ -78,13 +78,19 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li *ngIf="router.url.indexOf('/app') == 0" [routerLinkActive]="['active']"><a routerLink="/app">Applications</a></li>
-          <li *ngIf="router.url === '/'" [routerLinkActive]="['active']"><a routerLink="/">Applications</a></li>
+
+          <div *ngIf="router.url.indexOf('/app') == 0 || router.url === '/';then app_tab_active else app_tab_non_active"></div>
+
+          <ng-template #app_tab_active>
+            <li *ngIf="router.url.indexOf('/app') == 0" [routerLinkActive]="['active']"><a routerLink="/app">Applications</a></li>
+            <li *ngIf="router.url === '/'" [routerLinkActive]="['active']"><a routerLink="/">Applications</a></li>
+          </ng-template>
+          <ng-template #app_tab_non_active><li><a routerLink="/">Applications</a></li></ng-template>
+
           <ng-container *ngIf="user">
             <li [routerLinkActive]="['active']"><a routerLink="/upload">Upload your RIOT application</a></li>
             <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
           </ng-container>
-          <!--endif-->
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
