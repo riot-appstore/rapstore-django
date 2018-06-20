@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-sm-1">
       <a class="btn btn-primary download-binary-with-info" routerLink="/">
-        <span class="oi oi-arrow-thick-left"></span>
+        <i class="fa fa-arrow-left"></i>
       </a>
     </div>
     <div class="col-sm-11">
       <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink=""><span class="oi oi-home"></span></a></li>
+        <li class="breadcrumb-item"><a routerLink=""><i class="fa fa-home"></i></a></li>
         <li class="breadcrumb-item active">{{application?.name}}</li>
       </ul>
     </div>
@@ -31,7 +31,7 @@
         <h3> {{application?.name}} </h3>
         <p> {{ one_line_description }} </p>
         <!--<p> * * * * * </p>-->
-        <p><span class="oi oi-data-transfer-download"></span> {{application?.download_count}}</p>
+        <p><i class="fa fa-download"></i> {{application?.download_count}}</p>
       </div>
     </div>
     <div class="col-sm-3">

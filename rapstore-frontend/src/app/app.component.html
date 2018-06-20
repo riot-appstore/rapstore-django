@@ -88,8 +88,8 @@
           </li>
         </ng-container>
         <ng-container *ngIf="!user">
-          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a [routerLink]="['/signup']" [queryParams]="{returnURL: currentURL}"><span class="oi oi-person"></span> Sign up</a></li>
-          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a [routerLink]="['/login']" [queryParams]="{returnURL: currentURL}"><span class="oi oi-account-login"></span> Log in</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/signup']" [queryParams]="{returnURL: currentURL}"><i class="fa fa-user"></i> Sign up</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/login']" [queryParams]="{returnURL: currentURL}"><i class="fa fa-sign-in"></i> Log in</a></li>
         </ng-container>
       </ul>
     </form>
