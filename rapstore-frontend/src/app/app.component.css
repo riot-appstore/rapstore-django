@@ -34,6 +34,16 @@
   text-align: center;
 }
 
+.navbar-nav > .nav-item-tab {
+  -webkit-transition: background 0.1s; /* For Safari 3.1 to 6.0 */
+  transition: background 0.1s;
+}
+
+.navbar-nav > .nav-item-tab:hover {
+  background-color: #606060AA;
+  border-radius: 0 0 4px 4px;
+}
+
 .navbar-nav > .nav-item-tab.active > a,
 .navbar-nav > .nav-item-tab.active > a:hover,
 .navbar-nav > .nav-item-tab.active > a:focus {

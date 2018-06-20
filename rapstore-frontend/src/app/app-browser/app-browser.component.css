@@ -5,7 +5,7 @@
   transition: background 0.5s;
 }
 .app-overview-item:hover {
-  background: #2a9fd6;
+  background-color: #2a9fd6;
 }
 
 .app-panel .app-name {
