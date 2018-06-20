@@ -18,8 +18,14 @@
   <div class="row form-group">
     <div class="col-sm-9">
       <div class="app-detail-avatar">
-        <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
-                           avatar-data='{{application?.name}}'></ngu-letter-avatar>
+        <div class="box">
+          <div class="ribbon ribbon-official" *ngIf="application?.source == 'R'; else app_is_external"><span>RIOT MASTER</span></div>
+          <ng-template #app_is_external>
+            <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
+          </ng-template>
+          <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
+                             avatar-data='{{application?.name}}'></ngu-letter-avatar>
+        </div>
       </div>
       <div class="app-detail-headline">
         <h3> {{application?.name}} </h3>
@@ -35,7 +41,7 @@
       <p>License: {{application?.licenses}}</p>
       <a class="btn btn-primary" style="width: 200px" routerLink="/app/{{application?.id}}/build"
          role="button" *ngIf="user">Install</a>
-      <a class="btn btn-danger disabled" style="width: 200px" role="button" *ngIf="!user">Please login to install</a>
+      <a class="btn btn-danger" style="width: 200px" [routerLink]="['/login']" [queryParams]="{returnURL: currentURL}" role="button" *ngIf="!user">Please login to install</a>
     </div>
   </div>
 

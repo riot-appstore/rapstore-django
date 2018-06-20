@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NguUtilityModule} from 'ngu-utility/dist';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {AppComponent} from './app.component';
@@ -30,6 +31,10 @@ import {PageInstallInstructionDragAndDropComponent} from './page-install-instruc
 import {FeedbackModule} from 'ngx-bootstrap-feedback/feedback.module';
 import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
+import { ImprintComponent } from './imprint/imprint.component';
+import { AboutComponent } from './about/about.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
 @NgModule({
@@ -48,6 +53,9 @@ import {FeedbackService} from './feedback.service';
     SignupComponent,
     UserprofileComponent,
     PageInstallInstructionDragAndDropComponent,
+    ImprintComponent,
+    AboutComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +65,9 @@ import {FeedbackService} from './feedback.service';
     AppRoutingModule,
     HttpModule,
     FeedbackModule,
-    ModalModule
+    ModalModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
   bootstrap: [AppComponent]

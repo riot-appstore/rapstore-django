@@ -11,8 +11,8 @@
               <h1><a class="a-wrapper-no-decoration" routerLink="">RAPstore</a></h1>
               <h4>The friendly App Store for the Internet of Things.</h4>
             </div>
-            <div class="col-md-3">
-              <span class="badge badge-default">powered by</span>
+            <div class="col-sm-3">
+              <span class="label label-default">supporting</span>
               <a href="https://riot-os.org/">
                 <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-fluid"/>
               </a>
@@ -28,11 +28,18 @@
     </div>
   </div>
 </header>
+<simple-notifications></simple-notifications>
 <ngx-bootstrap-feedback [configuration]="feedbackConfiguration">
   <!-- Your customizations. -->
   <div class="row">
     <!-- Input fields. -->
     <div class="col-md-12">
+      <h6>
+        We highly appreciate any feedback you can give us. With your feedback we can improve our service for you and
+        other people to be able to provide a better user experience. What do you like? What do you dislike? <br>
+        Thank you very much for your support!
+      </h6>
+      <br>
       <!-- Description field. -->
       <div class="row">
         <div class="col-md-12">
@@ -52,7 +59,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/app">Applications</a></li>
+      <div *ngIf="router.url.indexOf('/app') == 0 || router.url === '/';then app_tab_active else app_tab_non_active"></div>
+      <ng-template #app_tab_active>
+        <li class="nav-item nav-item-tab" *ngIf="router.url.indexOf('/app') == 0" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/app">Applications</a></li>
+        <li class="nav-item nav-item-tab" *ngIf="router.url === '/'" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/">Applications</a></li>
+      </ng-template>
+      <ng-template #app_tab_non_active>
+        <li class="nav-item nav-item-tab"><a class="nav-link" routerLink="/">Applications</a></li>
+      </ng-template>
       <ng-container *ngIf="user">
         <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/upload">Upload your RIOT application</a></li>
         <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
@@ -69,13 +83,13 @@
               <a class="dropdown-item" routerLink="user-profile">Your profile</a>
               <!--<a class="dropdown-item">Your configurations</a>-->
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout()">Log out</a>
+              <a class="dropdown-item" [routerLink]="['/logout']">Log out</a>
             </div>
           </li>
         </ng-container>
         <ng-container *ngIf="!user">
-          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="signup"><span class="oi oi-person"></span> Sign up</a></li>
-          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" routerLink="login"><span class="oi oi-account-login"></span> Log in</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a [routerLink]="['/signup']" [queryParams]="{returnURL: currentURL}"><span class="oi oi-person"></span> Sign up</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a [routerLink]="['/login']" [queryParams]="{returnURL: currentURL}"><span class="oi oi-account-login"></span> Log in</a></li>
         </ng-container>
       </ul>
     </form>
@@ -89,8 +103,16 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-2">&copy; 2017-2018</div>
-      <div class="col-sm-6">
-        <a class="footer-link" routerLink="/install-instruction-browser-integration">Advanced flashing</a>.
+      <div class="col-sm-3">
+        <ul class="list-unstyled">
+          <li><a class="footer-link" routerLink="/about">About</a></li>
+          <li><a class="footer-link" routerLink="/imprint">Imprint</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <ul class="list-unstyled">
+          <li><a class="footer-link" routerLink="/install-instruction-browser-integration">Advanced flashing</a></li>
+        </ul>
       </div>
       <div class="col-sm-4">
         <a href="https://riot-os.org/">

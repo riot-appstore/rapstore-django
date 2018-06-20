@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -173,3 +174,6 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GITHUB_KEY = os.getenv('GITHUB_CLIENT_ID', '')
 SOCIAL_AUTH_GITHUB_SECRET = os.getenv('GITHUB_SECRET_KEY', '')
 REST_SOCIAL_OAUTH_REDIRECT_URI = '/login/'
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'

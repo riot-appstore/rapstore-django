@@ -12,6 +12,7 @@ import base64
 import requests
 from riot_apps import settings
 
+from api import tasks
 from api.models import Application
 from api.models import ApplicationInstance
 from api.models import Board
@@ -24,6 +25,7 @@ from api.serializers import BoardSerializer
 from api.serializers import CreateUserSerializer
 from api.serializers import UserSerializer
 from api.serializers import FeedbackSerializer
+from celery.result import AsyncResult
 from django.db import IntegrityError
 from django.db.models import F
 from django.http import HttpResponse
@@ -68,6 +70,34 @@ class NestedMultipartParser(parsers.MultiPartParser):
         return parsers.DataAndFiles(data, result.files)
 
 
+class BuildManagerViewSet(viewsets.ViewSet):
+
+    @detail_route(methods=['GET'])
+    def status(self, request, pk=None):
+        r = AsyncResult(pk)
+        status = r.status
+        if(status == "FAILURE"):
+            r.forget()
+        return Response({"status": status})
+
+    @detail_route(methods=['GET'])
+    def fetch(self, request, pk=None):
+        r = AsyncResult(pk)
+        if not r.result:
+            return Response({"error": "Link expired or request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if r.status != "SUCCESS":
+            return Response({"error": "Job failed or not ready"}, status=status.HTTP_400_BAD_REQUEST)
+
+        filename = r.result.get("filename")
+        b64 = r.result.get("b64")
+        r.forget()
+        response = HttpResponse(base64.b64decode(b64), content_type='application/octet-stream')
+        response['Content-Disposition'] = "attachment; filename={}".format(filename)
+        response["Access-Control-Expose-Headers"] = "Content-Disposition"
+        return response
+
+
 class ApplicationViewSet(viewsets.ModelViewSet):
 
     queryset = Application.objects.order_by('name')
@@ -82,10 +112,8 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     #TODO: Serializers here...
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated])
     def build(self, request, pk=None):
-
         app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.last().app_tarball
-        files = {'file': f}
+        app_instance = app.applicationinstance_set.last()
 
         board = request.GET.get('board', None)
         if not board:
@@ -96,34 +124,28 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             return Response('Missing type', status=status.HTTP_400_BAD_REQUEST)
 
         board_name = Board.objects.get(pk=board).internal_name
-        r = requests.post('http://builder:8000/build/', data={'board': board_name, 'type': bin_type}, files=files)
-
-        if r.status_code != 200:
-            return Response({"error": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
+        r=tasks.build.delay(app.name, board_name, bin_type, app_instance.pk)
 
         # build was successful, increment download counter now
         app.download_count = F('download_count') + 1
         app.save()
-
-        response = HttpResponse(base64.b64decode(r.text), content_type='application/octet-stream')
-        response['Content-Disposition'] = "attachment; filename={}.{}".format(slugify(app.name), bin_type)
-        response["Access-Control-Expose-Headers"] = "Content-Disposition"
-        return response
+        return Response({"task_id": r.task_id})
 
     @detail_route(methods=['GET'], permission_classes=[permissions.IsAuthenticated,])
     def supported_boards(self, request, pk=None):
-        app = get_object_or_404(Application, pk=pk)
-        f = app.applicationinstance_set.last().app_tarball
-        files = {'file': f}
 
-        r = requests.post('http://builder:8000/supported_boards/', files=files)
-        supported_boards = json.loads(r.text)["supported_boards"]
+        app = get_object_or_404(Application, pk=pk)
+        app_instance = app.applicationinstance_set.last()
+        r=tasks.supported_boards.delay(app_instance.pk)
+        res = r.get()
+        supported_boards = json.loads(res)["supported_boards"]
+        r.forget()
         queryset = Board.objects.filter(internal_name__in=supported_boards).order_by('display_name')
         serializer = BoardSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
-    @detail_route(methods=['GET'], permission_classes=[IsAdminUser, ])
+    @detail_route(methods=['GET'], permission_classes=[permissions.AllowAny, ])
     def download(self, request, pk=None):
         app = get_object_or_404(Application, pk=pk)
         f = app.applicationinstance_set.last().app_tarball
@@ -183,6 +205,15 @@ class ApplicationInstanceViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = ApplicationInstance.objects.order_by('version_code')
     serializer_class = ApplicationInstanceSerializer
+
+    @detail_route(methods=['GET'], permission_classes=[permissions.AllowAny, ])
+    def fetch(self, request, pk=None):
+        app_instance = get_object_or_404(ApplicationInstance, pk=pk)
+        f = app_instance.app_tarball
+        response = HttpResponse(f, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s.tar.gz' % app_instance.application.name
+
+        return response
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):

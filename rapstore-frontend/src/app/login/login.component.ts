@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {UserService} from '../user.service';
+import {User} from '../models';
 
 @Component({
   selector: 'app-login',
@@ -12,20 +15,39 @@ export class LoginComponent implements OnInit {
   error = '';
   github_url = '';
   social_loading: boolean = false;
+  returnURL: string;
+  private user: User;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
-  }
+  private $subscriptionRoute: Subscription;
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService) {}
 
   ngOnInit() {
+
+    if (this.authService.get_token()) {
+      // dont show login page if user is logged in
+      this.router.navigateByUrl('/');
+    }
+
+    this.$subscriptionRoute = this.activatedRoute
+    .queryParams
+    .subscribe(params => {
+      this.returnURL = params.returnURL || '/';
+    });
+
+    //this.returnURL = this.activatedRoute.snapshot.queryParams['returnURL'] || '/';
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         let code = params['code'];
         let state = params['state'];
         if(code && state) {
           this.social_loading = true;
-          this.authService.get_social_token(code, state).subscribe(val => this.router.navigate(['/']), error => {
-            alert("Invalid github login");
-            this.router.navigate(['/']);
+          this.authService.get_social_token(code, state).subscribe(val => this.router.navigateByUrl(this.returnURL), error => {
+            alert('Invalid github login');
+            this.router.navigateByUrl(this.returnURL);
           });
         }
       });
@@ -34,10 +56,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
-        this.router.navigate(['/']);
+        this.router.navigateByUrl(this.returnURL);
       }, err => {
         this.error = 'Invalid username or password';
       });
   }
-
 }
