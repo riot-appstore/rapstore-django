@@ -1,27 +1,18 @@
 .feedback-button{
   z-index:9999;
   position: fixed;
-  bottom: 0;
+  bottom: -2px;
   right: 20px;
 }
 
 .feedback-button a{
   display: block;
-  background: #06c;
   text-align:center;
   height: 30px;
   width: 140px;
   padding: 8px 16px;
-  color: #fff;
   font-family: Arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
   text-decoration: none;
-  -webkit-transition: background 0.1s; /* For Safari 3.1 to 6.0 */
-  transition: background 0.1s;
-  border-radius: 4px 4px 0 0;
-}
-
-.feedback-button a:hover {
-  background-color: #606060;
 }
