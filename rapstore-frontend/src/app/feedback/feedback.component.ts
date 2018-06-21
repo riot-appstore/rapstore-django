@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {User, Feedback} from './models';
 import {FeedbackService} from '../feedback.service';
 
 @Component({
