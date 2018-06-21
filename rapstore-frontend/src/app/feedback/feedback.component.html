@@ -18,15 +18,9 @@
           other people to be able to provide a better user experience. What do you like? What do you dislike? <br>
           Thank you very much for your support!
         </h6>
-        <div class="row">
-          <div class="col-md-12">
-            <div class=" form-group form-control-sm">
-              <label for="description-input">Description:</label>
-              <textarea id="description-input" class="form-control width-locked" rows="5" required
-                        [(ngModel)]="feedback.description"></textarea>
-            </div>
-          </div>
-        </div>
+        <br>
+        <textarea id="description-input" class="form-control width-locked" rows="5" placeholder="Write your feedback here" required
+                  [(ngModel)]="feedback.description"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
