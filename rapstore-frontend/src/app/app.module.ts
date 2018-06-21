@@ -34,6 +34,7 @@ import {FeedbackService} from './feedback.service';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
 import { LogoutComponent } from './logout/logout.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
@@ -56,6 +57,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ImprintComponent,
     AboutComponent,
     LogoutComponent,
+    FeedbackComponent,
   ],
   imports: [
     CommonModule,
