@@ -1,13 +1,13 @@
-<button type="button" class="btn btn-primary feedback-button" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary feedback-button" data-toggle="modal" data-target="#feedbackModal">
   Send feedback <i class="fa fa-comment"></i>
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Send Feedback</h5>
+        <h5 class="modal-title" id="feedbackModalLabel">Send Feedback</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -23,8 +23,8 @@
                   [(ngModel)]="feedback.description"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" (click)="feedbackCancel()" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="feedbackSubmit()" data-dismiss="modal">Submit</button>
       </div>
     </div>
   </div>
