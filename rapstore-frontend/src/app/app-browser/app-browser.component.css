@@ -5,7 +5,7 @@
   transition: background 0.5s;
 }
 .app-overview-item:hover {
-  background-color: #2a9fd6;
+  background-color: var(--blue);
 }
 
 .app-panel .app-name {

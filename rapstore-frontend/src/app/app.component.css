@@ -48,7 +48,7 @@
 .navbar-nav > .nav-item-tab.active > a:hover,
 .navbar-nav > .nav-item-tab.active > a:focus {
   color: #ffffff;
-  background-color: #2a9fd6;
+  background-color: var(--blue);
   border-radius: 0 0 4px 4px;
 }
 
