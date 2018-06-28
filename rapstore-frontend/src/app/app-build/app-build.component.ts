@@ -50,29 +50,29 @@ export class AppBuildComponent implements OnInit {
   request_build(id, type) {
     this.init_loading();
     this.appService.request_build(id, this.selected_board.id, this.application.name, type).subscribe(
-    res => {
-    this.toast = this.notificationsService.success(`Building "${this.application.name}"`, 'Please wait...', {
-        timeOut: 0,
-        clickToClose: false
-      });
-      this.task_id = res.task_id;
-      this.poll_id = setInterval(val => {
-        this.appService.check_build(this.task_id).subscribe(
-          res => {
-            if(res.status == "SUCCESS") {
-              this.notificationsService.remove(this.toast.id);
-              this.fetch_file(this.task_id);
+      res => {
+        this.toast = this.notificationsService.success(`Building "${this.application.name}"`, 'Please wait...', {
+          timeOut: 0,
+          clickToClose: false
+        });
+        this.task_id = res.task_id;
+        this.poll_id = setInterval(val => {
+          this.appService.check_build(this.task_id).subscribe(
+            res => {
+              if (res.status == 'SUCCESS') {
+                this.notificationsService.remove(this.toast.id);
+                this.fetch_file(this.task_id);
+              }
+              else if (res.status == 'FAILURE') {
+                this.notificationsService.remove(this.toast.id);
+                this.show_error_toast('Failed to build', `"${this.application.name}" on "${this.selected_board.display_name}"`);
+                this.set_error();
+              }
             }
-            else if (res.status == "FAILURE") {
-              this.notificationsService.remove(this.toast.id);
-              this.show_error_toast("Failed to build", `"${this.application.name}" on "${this.selected_board.display_name}"`);
-              this.set_error();
-            }
-          }
-        );
+          );
         }, 5000);
-    });
-
+      }
+    );
   }
 
   show_error_toast(msg: string, reason: string) {

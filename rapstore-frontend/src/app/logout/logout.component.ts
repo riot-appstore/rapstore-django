@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {User} from '../models';
-import {UserService} from '../user.service';
+import {AppService} from '../appservice.service';
 
 @Component({
   selector: 'app-logout',
@@ -14,7 +14,7 @@ export class LogoutComponent implements OnInit {
 
   constructor(protected authService: AuthService,
               private router: Router,
-              private userService: UserService) { }
+              private appService: AppService) { }
 
   ngOnInit() {
 
@@ -23,7 +23,13 @@ export class LogoutComponent implements OnInit {
       this.router.navigateByUrl('/');
     }
 
-    this.authService.logout();
-    this.router.navigateByUrl('/');
+    if (this.appService.isBuilding()) {
+      alert("There is a build process in the queue running, you can't log out now!");
+      this.router.navigateByUrl('/');
+    }
+    else {
+      this.authService.logout();
+      this.router.navigateByUrl('/');
+    }
   }
 }
