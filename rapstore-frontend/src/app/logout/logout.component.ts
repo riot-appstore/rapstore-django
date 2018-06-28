@@ -34,7 +34,7 @@ export class LogoutComponent implements OnInit {
     }
 
     if (this.appService.isBuilding()) {
-      alert("There is a build process in the queue running, you can't log out now!");
+      alert("There is a pending build in the queue. You can't log out now!");
       this.router.navigateByUrl(this.returnURL);
     }
     else {

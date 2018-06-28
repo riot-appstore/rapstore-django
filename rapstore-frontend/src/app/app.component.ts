@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, HostListener} from '@angular/core';
 import {BrowserIntegrationService} from './browser-integration.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from './auth.service';
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {environment} from '../environments/environment';
 import 'rxjs/add/operator/take';
 import {User, Feedback} from './models';
+import {AppService} from './appservice.service';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private router: Router,
               private browserIntegrationService: BrowserIntegrationService,
               private userService: UserService,
-              private feedbackService: FeedbackService) {
+              private feedbackService: FeedbackService,
+              private appService: AppService) {
 
     this.feedbackConfiguration = {
       onSubmit: () => {
@@ -93,5 +95,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.$subscriptionExtension.unsubscribe();
     this.$subscriptionHost.unsubscribe();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  doSomething($event) {
+    if(this.appService.isBuilding()) $event.returnValue='There is a pending build in the queue. Do you really want to leave?';
   }
 }
