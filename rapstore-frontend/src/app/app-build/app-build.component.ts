@@ -61,7 +61,7 @@ export class AppBuildComponent implements OnInit {
           res => {
             if(res.status == "SUCCESS") {
               this.notificationsService.remove(this.toast.id);
-              this.fetch_file(this.task_id);  
+              this.fetch_file(this.task_id);
             }
             else if (res.status == "FAILURE") {
               this.notificationsService.remove(this.toast.id);
@@ -72,12 +72,11 @@ export class AppBuildComponent implements OnInit {
         );
         }, 5000);
     });
-     
+
   }
 
   show_error_toast(msg: string, reason: string) {
       this.notificationsService.error(msg, reason, {
-        timeOut: 5000,
         clickToClose: true
       });
   }
