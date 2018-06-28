@@ -115,7 +115,7 @@
                 <li><a routerLink="user-profile">Your profile</a></li>
                 <!--<li><a href="#">Your configurations</a></li>-->
                 <li role="separator" class="divider"></li>
-                <li><a [routerLink]="['/logout']">Log out</a></li>
+                <li><a [routerLink]="['/logout']" [queryParams]="{returnURL: currentURL}">Log out</a></li>
               </ul>
             </li>
 

@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
     }
 
     this.$subscriptionRoute = this.activatedRoute
-    .queryParams
-    .subscribe(params => {
-      this.returnURL = params.returnURL || '/';
-    });
+      .queryParams
+      .subscribe(params => {
+        this.returnURL = params.returnURL || '/';
+      });
 
     //this.returnURL = this.activatedRoute.snapshot.queryParams['returnURL'] || '/';
     this.authService.get_github_url().subscribe(val => this.github_url = val.url);
