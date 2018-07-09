@@ -24,10 +24,36 @@
   color: white;
 }
 
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #ffffff;
-  background-color: #2a9fd6;
+#mainNavBar {
+  height: 3em;
+}
+
+.nav-link {
+  height: 3em;
+  line-height: 2em;
+  text-align: center;
+}
+
+.navbar-nav > .nav-item-tab {
+  -webkit-transition: background 0.1s; /* For Safari 3.1 to 6.0 */
+  transition: background 0.1s;
+}
+
+.navbar-nav > .nav-item-tab:hover {
+  background-color: #606060AA;
   border-radius: 0 0 4px 4px;
+}
+
+.navbar-nav > .nav-item-tab.active > a,
+.navbar-nav > .nav-item-tab.active > a:hover,
+.navbar-nav > .nav-item-tab.active > a:focus {
+  color: #ffffff;
+  background-color: var(--blue);
+  border-radius: 0 0 4px 4px;
+}
+
+.navbar-nav > .nav-item-text.active > a,
+.navbar-nav > .nav-item-text.active > a:hover,
+.navbar-nav > .nav-item-text.active > a:focus {
+  color: #ffffff;
 }

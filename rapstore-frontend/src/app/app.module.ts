@@ -28,12 +28,11 @@ import {DeveloperComponent} from './developer/developer.component';
 import {SignupComponent} from './signup/signup.component';
 import {UserprofileComponent} from './userprofile/userprofile.component';
 import {PageInstallInstructionDragAndDropComponent} from './page-install-instruction-drag-and-drop/page-install-instruction-drag-and-drop.component';
-import {FeedbackModule} from 'ngx-bootstrap-feedback/feedback.module';
-import {ModalModule} from '@herbis/ngx-modal';
 import {FeedbackService} from './feedback.service';
 import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
 import { LogoutComponent } from './logout/logout.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
@@ -56,6 +55,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ImprintComponent,
     AboutComponent,
     LogoutComponent,
+    FeedbackComponent,
   ],
   imports: [
     CommonModule,
@@ -64,8 +64,6 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     NguUtilityModule,
     AppRoutingModule,
     HttpModule,
-    FeedbackModule,
-    ModalModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
   ],
