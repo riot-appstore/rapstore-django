@@ -11,28 +11,17 @@
               <li *ngFor="let error of errors">{{error}}</li>
             </ul>
           </div>
-          <div class="form-group">
-              <label class="center-block">Name:
-                  <input class="form-control" formControlName="name">
-              </label>
-          </div>
-          <div class="form-group">
-              <label class="center-block">Description</label>
-              <textarea ref-textarea formControlName="description" class="form-control" rows=12></textarea>
-          </div>
-          <div class="form-group">
-              <label class="center-block">Licenses</label>
-              <input type="text" class="form-control" formControlName="licenses">
-          </div>
-          <div class="form-group">
-              <label class="center-block">Project Page</label>
-              <input type="text" class="form-control" formControlName="project_page">
-          </div>
-          <div class="form-group">
+          <app-form-element [element]="elements[0]" [form]="form"></app-form-element>
+          <app-form-element [element]="elements[1]" [form]="form"></app-form-element>
+          <app-form-element [element]="elements[2]" [form]="form"></app-form-element>
+          <app-form-element [element]="elements[3]" [form]="form"></app-form-element>
+          <app-form-element [element]="elements[4]" [form]="form" (notify_file)="fileChanged($event)"></app-form-element>
+
+          <!--<div class="form-group">
               <label class="center-block">App in tar.gz format. Ensure the Makefile is in the root (e.g
               my_app.tar.gz/Makefile)</label>
               <input type="file" accept=".tar.gz" formControlName="file" (change)="fileChanged($event)">
-          </div>
+          </div>-->
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>

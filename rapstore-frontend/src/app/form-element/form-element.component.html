@@ -5,6 +5,7 @@
         <input *ngSwitchCase="'textbox'" [formControlName]="element.key"
               [id]="element.key" [type]="element.type" class="form-control">
         <textarea *ngSwitchCase="'textarea'" ref-textarea [formControlName]="element.key" class="form-control" rows=12></textarea>
+         <input *ngSwitchCase="'file'" type="file" accept=".tar.gz" [formControlName]="element.key" (change)="onChange($event)">
     </div> 
     <!--<div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>-->
 </div>
