@@ -36,6 +36,7 @@ import { ImprintComponent } from './imprint/imprint.component';
 import { AboutComponent } from './about/about.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { FormElementComponent } from './form-element/form-element.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ImprintComponent,
     AboutComponent,
     LogoutComponent,
+    FormElementComponent,
   ],
   imports: [
     CommonModule,

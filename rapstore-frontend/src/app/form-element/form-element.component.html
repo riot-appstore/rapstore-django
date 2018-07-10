@@ -1,3 +1,9 @@
-<p>
-  form-element works!
-</p>
+<div [formGroup]="form" class="form-group">
+    <label class="center-block">{{el.label}}</label>
+ 
+    <div [ngSwitch]="el.controlType">
+        <input *ngSwitchCase="'textbox'" [formControlName]="el.key"
+              [id]="el.key" [type]="el.type">
+    </div> 
+    <!--<div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>-->
+</div>
