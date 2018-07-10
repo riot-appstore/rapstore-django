@@ -3,7 +3,7 @@ import {Http, RequestOptions, Headers} from '@angular/http';
 import {AuthService} from '../auth.service';
 import {environment} from '../../environments/environment';
 import {Application} from '../models';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-app-uploader',
@@ -18,9 +18,9 @@ export class AppUploaderComponent implements OnInit {
   private baseurl = environment.apiUrl;
   form: FormGroup;
 
-  constructor(private http: Http, private AuthService: AuthService, protected model: Application) {
+  constructor(private http: Http, private AuthService: AuthService, protected model: Application, private fb: FormBuilder) {
     this.model.initial_instance = {id: 0, version_name: '', version_code: 0};
-    this.form = new FormGroup({name: new FormControl(null, [Validators.required]), description: new FormControl(), licenses: new FormControl(), project_page: new FormControl(), file: new FormControl(null, ]Validators.required])});
+    this.form = this.fb.group({name: [null, Validators.required], description: '', licenses: '', project_page: '', file: [null, Validators.required]});
   }
 
   ngOnInit() {
