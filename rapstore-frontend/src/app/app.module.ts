@@ -16,6 +16,7 @@ import {AppService} from './appservice.service';
 import {AppBuildComponent} from './app-build/app-build.component';
 import {BoardService} from './board.service';
 import {AuthService} from './auth.service';
+import {DynFormService} from './dyn-form.service';
 import {AuthGuard} from './auth-guard';
 import {LoginComponent} from './login/login.component';
 import {NavbarComponent} from './navbar/navbar.component';
