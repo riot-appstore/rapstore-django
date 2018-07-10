@@ -85,3 +85,8 @@ export class TextboxElement extends FormElementBase<string> {
     this.type = options['type'] || '';
   }
 }
+
+export class TextareaElement extends FormElementBase<string> {
+  controlType = 'textarea';
+  type: string;
+}

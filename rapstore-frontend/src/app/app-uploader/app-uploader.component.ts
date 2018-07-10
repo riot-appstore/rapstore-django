@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import {AuthService} from '../auth.service';
+import {DynFormService} from '../dyn-form.service';
 import {environment} from '../../environments/environment';
 import {Application} from '../models';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormElementBase, TextboxElement, TextareaElement } from '../models';
 
 @Component({
   selector: 'app-app-uploader',
@@ -18,9 +20,16 @@ export class AppUploaderComponent implements OnInit {
   private baseurl = environment.apiUrl;
   form: FormGroup;
 
-  constructor(private http: Http, private AuthService: AuthService, protected model: Application, private fb: FormBuilder) {
-    this.model.initial_instance = {id: 0, version_name: '', version_code: 0};
-    this.form = this.fb.group({name: [null, Validators.required], description: '', licenses: '', project_page: '', file: [null, Validators.required]});
+  constructor(private http: Http, private AuthService: AuthService, private fb: FormBuilder, private df: DynFormService) {
+  let elements: FormElementBase<any>[] = [
+      new TextboxElement({key: "name", label: "App name", required: true}),
+      new TextareaElement({key: "description", label: "Description"}),
+      new TextboxElement({key: "licenses", label: "Licenses"}),
+      new TextboxElement({key: "project_page", label: "Project page"}),
+      new FormElementBase({key: "file", label: "File"}),
+    ];
+
+    this.form = df.toFormGroup(elements);
   }
 
   ngOnInit() {

@@ -74,7 +74,7 @@ import { FormElementComponent } from './form-element/form-element.component';
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
+  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService, DynFormService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

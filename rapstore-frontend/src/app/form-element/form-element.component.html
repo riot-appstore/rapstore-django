@@ -4,6 +4,7 @@
     <div [ngSwitch]="el.controlType">
         <input *ngSwitchCase="'textbox'" [formControlName]="el.key"
               [id]="el.key" [type]="el.type">
+        <textarea *ngSwitchCase="'textarea'" ref-textarea formControlName="el.key" class="form-control" rows=12></textarea>
     </div> 
     <!--<div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>-->
 </div>
