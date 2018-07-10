@@ -2,6 +2,26 @@
   <div class="row">
     <h3> Upload your RIOT app:</h3>
     <div class="col-sm-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label class="center-block">Name:
+                  <input class="form-control" formControlName="name">
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Description</label>
+              <textarea ref-textarea formControlName="description" class="form-control" rows=12></textarea>
+          </div>
+          <div class="form-group">
+              <label class="center-block">Licenses</label>
+              <input type="text" class="form-control" formControlName="licenses">
+          </div>
+          <div class="form-group">
+              <label class="center-block">Project Page</label>
+              <input type="text" class="form-control" formControlName="project_page">
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+      </form>
       <form (ngSubmit)="fileUpload()" #appUploadForm="ngForm">
         <div [hidden]="!message" class="alert alert-success">
           {{message}}

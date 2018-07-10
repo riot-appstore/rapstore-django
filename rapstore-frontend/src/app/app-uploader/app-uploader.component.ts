@@ -3,6 +3,7 @@ import {Http, RequestOptions, Headers} from '@angular/http';
 import {AuthService} from '../auth.service';
 import {environment} from '../../environments/environment';
 import {Application} from '../models';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-app-uploader',
@@ -15,12 +16,19 @@ export class AppUploaderComponent implements OnInit {
   message: string = '';
   errors: string[] = [];
   private baseurl = environment.apiUrl;
+  form = new FormGroup({name: new FormControl(), 
+  description: new FormControl(), licenses: new FormControl(), project_page: new FormControl()});
 
   constructor(private http: Http, private AuthService: AuthService, protected model: Application) {
     this.model.initial_instance = {id: 0, version_name: '', version_code: 0};
   }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    let formModel = this.form.value;
+    console.log(formModel);
   }
 
   fileUpload() {
