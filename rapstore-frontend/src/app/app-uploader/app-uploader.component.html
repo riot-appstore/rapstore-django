@@ -11,11 +11,12 @@
               <li *ngFor="let error of errors">{{error}}</li>
             </ul>
           </div>
-          <app-form-element [element]="elements[0]" [form]="form"></app-form-element>
-          <app-form-element [element]="elements[1]" [form]="form"></app-form-element>
-          <app-form-element [element]="elements[2]" [form]="form"></app-form-element>
-          <app-form-element [element]="elements[3]" [form]="form"></app-form-element>
-          <app-form-element [element]="elements[4]" [form]="form" (notify_file)="fileChanged($event)"></app-form-element>
+
+          <ng-container *ngFor="let el of elements">
+              <app-form-element [element]="el" [form]="form"></app-form-element>
+          </ng-container>
+
+          <app-form-element [element]="file_element" [form]="form" (notify_file)="fileChanged($event)"></app-form-element>
 
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>

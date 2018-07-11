@@ -20,17 +20,18 @@ export class AppUploaderComponent implements OnInit {
   private baseurl = environment.apiUrl;
   form: FormGroup;
   elements: FormElementBase<any>[];
+  file_element: FormElementBase<any>;
 
   constructor(private http: Http, private AuthService: AuthService, private fb: FormBuilder, private df: DynFormService) {
+    this.file_element = new FormElementBase({key: "file", label: "File", controlType: "file"});
     this.elements = [
       new TextboxElement({key: "name", label: "App name", required: true}),
       new TextareaElement({key: "description", label: "Description"}),
       new TextboxElement({key: "licenses", label: "Licenses"}),
       new TextboxElement({key: "project_page", label: "Project page"}),
-      new FormElementBase({key: "file", label: "File", controlType: "file"}),
     ];
 
-    this.form = df.toFormGroup(this.elements);
+    this.form = df.toFormGroup(this.elements.concat([this.file_element]));
   }
 
   ngOnInit() {
