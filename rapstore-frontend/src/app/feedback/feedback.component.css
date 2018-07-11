@@ -1,0 +1,18 @@
+.feedback-button{
+  z-index:9999;
+  position: fixed;
+  bottom: -2px;
+  right: 20px;
+}
+
+.feedback-button a{
+  display: block;
+  text-align:center;
+  height: 30px;
+  width: 140px;
+  padding: 8px 16px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}

@@ -1,6 +1,6 @@
 <!-- ID_PREFIX, SELECTOR_ID-->
 <div class="form-group">
   <select [(ngModel)]="selectedBoard" #t (change)="onChange()" class="form-control board-selector">
-      <option *ngFor="let board of boards" [ngValue]="board">{{board.display_name}} ({{board.internal_name}})</option>
+    <option *ngFor="let board of boards" [ngValue]="board">{{board.display_name}} ({{board.internal_name}})</option>
   </select>
 </div>
