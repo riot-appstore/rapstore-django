@@ -17,11 +17,6 @@
           <app-form-element [element]="elements[3]" [form]="form"></app-form-element>
           <app-form-element [element]="elements[4]" [form]="form" (notify_file)="fileChanged($event)"></app-form-element>
 
-          <!--<div class="form-group">
-              <label class="center-block">App in tar.gz format. Ensure the Makefile is in the root (e.g
-              my_app.tar.gz/Makefile)</label>
-              <input type="file" accept=".tar.gz" formControlName="file" (change)="fileChanged($event)">
-          </div>-->
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
