@@ -2,62 +2,76 @@
   <div id="main-jumbotron" class="jumbotron">
     <div class="container-fluid main-jumbotron-container">
       <div class="row">
-        <div class="col-sm-2">
-
+        <div class="col-md-2">
           <!-- <app-missing-components-label-section *ngIf="!extensionAvailable || !nativeMessagingHostAvailable;"></app-missing-components-label-section> -->
-
         </div>
-        <div class="col-sm-8">
-
-          <div class="container">
-            <div class="col-sm-7">
-              <h1><a routerLink="" style="text-decoration: none">RAPstore</a></h1>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-7">
+              <h1><a class="a-wrapper-no-decoration" routerLink="">RAPstore</a></h1>
               <h4>The friendly App Store for the Internet of Things.</h4>
             </div>
-
             <div class="col-sm-3">
-              <span class="label label-default">supporting</span>
+              <span class="badge badge-secondary">supporting</span>
               <a href="https://riot-os.org/">
-                <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-responsive" width="250"/>
+                <img src="/assets/img/riot_logo.png" alt="RIOT logo" class="img-fluid"/>
               </a>
             </div>
-            <div class="col-sm-2">
-
+            <div class="col-md-2">
             </div>
           </div>
-
         </div>
-        <div class="col-sm-2">
-          <p class="pull-right"><span class="label label-warning">BETA</span></p>
+        <div class="col-md-2">
+          <h5><p class="float-right"><span class="badge badge-warning">BETA</span></p></h5>
         </div>
       </div>
     </div>
   </div>
 </header>
 <simple-notifications></simple-notifications>
-<ngx-bootstrap-feedback [configuration]="feedbackConfiguration">
-  <!-- Your customizations. -->
-  <div class="row">
-    <!-- Input fields. -->
-    <div class="col-md-12">
-      <h6>
-        We highly appreciate any feedback you can give us. With your feedback we can improve our service for you and
-        other people to be able to provide a better user experience. What do you like? What do you dislike? <br>
-        Thank you very much for your support!
-      </h6>
-      <br>
-      <!-- Description field. -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class=" form-group form-group-sm">
-            <label for="description-input">Description:</label>
-            <textarea id="description-input" class="form-control width-locked" rows="5" required
-                      [(ngModel)]="feedback.description"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
+<feedback></feedback>
+<nav id="mainNavBar" class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark py-0 mb-4">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <div *ngIf="router.url.indexOf('/app') == 0 || router.url === '/';then app_tab_active else app_tab_non_active"></div>
+      <ng-template #app_tab_active>
+        <li class="nav-item nav-item-tab" *ngIf="router.url.indexOf('/app') == 0" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/app">Applications</a></li>
+        <li class="nav-item nav-item-tab" *ngIf="router.url === '/'" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/">Applications</a></li>
+      </ng-template>
+      <ng-template #app_tab_non_active>
+        <li class="nav-item nav-item-tab"><a class="nav-link" routerLink="/">Applications</a></li>
+      </ng-template>
+      <ng-container *ngIf="user">
+        <li class="nav-item nav-item-tab" [routerLinkActive]="['active']"><a class="nav-link" routerLink="/upload">Upload your RIOT application</a></li>
+        <!--<li *ngIf="user && user.is_dev"><a routerLink="developer">Developer</a></li>-->
+      </ng-container>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <ng-container *ngIf="user">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Logged in as <b>{{user?.username}}</b>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="user-profile">Your profile</a>
+              <!--<a class="dropdown-item">Your configurations</a>-->
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [routerLink]="['/logout']">Log out</a>
+            </div>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!user">
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/signup']" [queryParams]="{returnURL: currentURL}"><i class="fa fa-user"></i> Sign up</a></li>
+          <li class="nav-item nav-item-text" [routerLinkActive]="['active']"><a class="nav-link" [routerLink]="['/login']" [queryParams]="{returnURL: currentURL}"><i class="fa fa-sign-in"></i> Log in</a></li>
+        </ng-container>
+      </ul>
+    </form>
   </div>
+<<<<<<< HEAD
 </ngx-bootstrap-feedback>
 
 
@@ -130,13 +144,14 @@
   </nav>
 </div>
 
+=======
+</nav>
+>>>>>>> master
 <div id="content-view" class="container-fluid">
   <router-outlet></router-outlet>
 </div>
-
-<div style="padding-bottom: 100px;"></div>
-
-<footer class="footer">
+<div style="padding-bottom: 120px;"></div>
+<footer class="footer bg-dark">
   <div class="container">
     <div class="row">
       <div class="col-sm-2">&copy; 2017-2018</div>

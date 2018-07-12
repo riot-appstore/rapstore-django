@@ -69,47 +69,6 @@ body {
   content: "\e114"; /* glyphicon-chevron-down bootstrap.css */
 }
 
-/* bootstrap 3 helpers https://www.bootply.com/118877 */
-
-.nav.affix {
-  position: fixed;
-  top: 0;
-  width: 100%
-}
-
-.nav-wrapper {
-  min-height: 50px;
-  position: relative;
-  z-index: 100;
-}
-
-/* make sidebar nav vertical */
-@media (min-width: 768px) {
-
-  .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
-
-  .sidebar-nav .navbar ul {
-    float: none;
-  }
-
-  .sidebar-nav .navbar ul:not {
-    display: block;
-  }
-
-  .sidebar-nav .navbar li {
-    float: none;
-    display: block;
-  }
-
-  .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-}
-
 /* nice looking submenues for sidebar */
 .list-group.list-group-root {
   padding: 0;
@@ -145,13 +104,14 @@ body {
   font-size: 4em;
 }
 
-.a-wrapper-no-decoration {
+.a-wrapper-no-decoration,
+.a-wrapper-no-decoration:hover {
   text-decoration: none;
   font-weight: normal;
-  color: white;
 }
 
-.a-wrapper-no-decoration:hover {
+.a-wrapper-no-decoration-white-text,
+.a-wrapper-no-decoration-white-text:hover {
   text-decoration: none;
   font-weight: normal;
   color: white;

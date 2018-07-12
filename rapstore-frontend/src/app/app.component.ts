@@ -5,10 +5,10 @@ import {AuthService} from './auth.service';
 import {UserService} from './user.service';
 import {FeedbackService} from './feedback.service';
 import {Router} from '@angular/router';
+import {User} from './models';
+import {AppService} from './appservice.service';
 import {environment} from '../environments/environment';
 import 'rxjs/add/operator/take';
-import {User, Feedback} from './models';
-import {AppService} from './appservice.service';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +27,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   protected extensionAvailable = true;
   protected nativeMessagingHostAvailable = true;
-  private feedbackConfiguration = {};
-  private feedback: any = {};
   protected appVersion: string = environment.VERSION;
 
   constructor(protected authService: AuthService,
@@ -37,17 +35,6 @@ export class AppComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private feedbackService: FeedbackService,
               private appService: AppService) {
-
-    this.feedbackConfiguration = {
-      onSubmit: () => {
-        this.feedbackService.sendFeedback(this.feedback).subscribe(
-          (val) => alert('Thank you for your feedback!'),
-          (err) => alert('There was a problem uploading the feedback. Please try again')
-        );
-        this.feedback = {};
-      },
-      onCancel: () => this.feedback = {}
-    };
   }
 
 

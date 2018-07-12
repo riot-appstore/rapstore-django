@@ -1,16 +1,16 @@
-<div class="container rounded app-panel panel-default panel">
+<div class="container rounded app-panel card">
   <div class="row">
     <div class="col-sm-1">
       <a class="btn btn-primary download-binary-with-info" routerLink="/app/{{application?.id}}">
-        <span class="glyphicon glyphicon-arrow-left"></span>
+        <i class="fa fa-arrow-left"></i>
       </a>
     </div>
     <div class="col-sm-11">
-      <ul class="breadcrumb">
-        <li><a routerLink=""><i class="glyphicon glyphicon-home"></i></a></li>
-        <li><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
-        <li class="active">Install</li>
-      </ul>
+      <nav class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink=""><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a routerLink="/app/{{application?.id}}">{{application?.name}}</a></li>
+        <li class="breadcrumb-item active">Install</li>
+      </nav>
     </div>
   </div>
   <div class="row">
@@ -23,13 +23,13 @@
           Successfully requested build. You can continue browsing the website while the service builds the app.
       </div>
       <div class="well well-sm">
-      <p *ngIf="selected_board?.storage_flash_support">
-      <span class="glyphicon glyphicon-ok"></span> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
-      </p>
-      
-      <p *ngIf="!selected_board?.storage_flash_support">
-      <span class="glyphicon glyphicon-remove"></span> This board doesn't support Drag and Drop. Only ELF file is provided.
-      </p>
+        <p *ngIf="selected_board?.storage_flash_support">
+          <i class="fa fa-check"></i> This board supports Drag and Drop flashing. <a routerLink="/install-instruction-drag-and-drop">Follow the instructions here.</a>
+        </p>
+
+        <p *ngIf="!selected_board?.storage_flash_support">
+          <i class="fa fa-times"></i> This board doesn't support Drag and Drop. Only ELF file is provided.
+        </p>
       </div>
       <div class="form-group">
         Board
@@ -46,8 +46,9 @@
         <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
                 (click)="request_build(application.id, 'bin')">Download binary file
         </button>
-        <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em"><span
-          class="glyphicon glyphicon-info-sign"></span></button>
+        <button [hidden]="!selected_board?.storage_flash_support" [disabled]="loading" routerLink="/install-instruction-drag-and-drop" type="button" class="btn btn-primary" style="margin-right: 0.5em">
+          <i class="fa fa-info"></i>
+        </button>
         <button [disabled]="loading" type="button" class="btn btn-primary download-binary-with-info"
                 (click)="request_build(application.id, 'elf')">Download ELF
         </button>
