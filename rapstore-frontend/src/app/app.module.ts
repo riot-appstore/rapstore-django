@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NguUtilityModule} from 'ngu-utility/dist';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import {AppComponent} from './app.component';
@@ -15,6 +16,7 @@ import {AppService} from './appservice.service';
 import {AppBuildComponent} from './app-build/app-build.component';
 import {BoardService} from './board.service';
 import {AuthService} from './auth.service';
+import {DynFormService} from './dyn-form.service';
 import {AuthGuard} from './auth-guard';
 import {LoginComponent} from './login/login.component';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -34,6 +36,7 @@ import { AboutComponent } from './about/about.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { FormElementComponent } from './form-element/form-element.component';
 
 
 @NgModule({
@@ -55,19 +58,21 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     ImprintComponent,
     AboutComponent,
     LogoutComponent,
+    FormElementComponent,
     FeedbackComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     NguUtilityModule,
     AppRoutingModule,
     HttpModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService],
+  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService, DynFormService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -2,48 +2,23 @@
   <h3> Upload your RIOT app:</h3>
   <div class="row">
     <div class="col-sm-6">
-      <form (ngSubmit)="fileUpload()" #appUploadForm="ngForm">
-        <div [hidden]="!message" class="alert alert-success">
-          {{message}}
-        </div>
-        <div [hidden]="errors.length == 0" class="alert alert-danger">
-          <ul>
-            <li *ngFor="let error of errors">{{error}}</li>
-          </ul>
-        </div>
-        <div class="form-group">
-          <label for="name">App name</label>
-          <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required/>
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea ref-textarea name="description" #description="ngModel" [(ngModel)]="model.description"
-                    class="form-control" rows=12></textarea>
-        </div>
-        <div class="form-group">
-          <label for="licenses">Licenses</label>
-          <input type="text" class="form-control" name="licenses" [(ngModel)]="model.licenses" #licenses="ngModel"
-                 required/>
-        </div>
-        <div class="form-group">
-          <label for="project_page">Project page</label>
-          <input type="text" class="form-control" name="project_page" [(ngModel)]="model.project_page"
-                 #project_page="ngModel" required/>
-        </div>
-        <!--<div class="form-group">
-            <label for="version_name">Version name</label>
-            <input type="text" class="form-control" name="version_name" [(ngModel)]="model.initial_instance.version_name" #version_name="ngModel" required />
-        </div>
-        <div class="form-group">
-            <label for="version_code">Version code</label>
-            <input type="text" class="form-control" name="version_code" [(ngModel)]="model.initial_instance.version_code" #version_code="ngModel" required />
-        </div>-->
-        <div class="form-group">
-          <label for="file">App in tar.gz format. Ensure the Makefile is in the root (e.g
-            my_app.tar.gz/Makefile)</label>
-          <input type="file" (change)="fileChanged($event)" name="file" accept=".tar.gz">
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div [hidden]="!message" class="alert alert-success">
+            {{message}}
+          </div>
+          <div [hidden]="errors.length == 0" class="alert alert-danger">
+            <ul>
+              <li *ngFor="let error of errors">{{error}}</li>
+            </ul>
+          </div>
+
+          <ng-container *ngFor="let el of elements">
+              <app-form-element [element]="el" [form]="form"></app-form-element>
+          </ng-container>
+
+          <app-form-element [element]="file_element" [form]="form" (notify_file)="fileChanged($event)"></app-form-element>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
