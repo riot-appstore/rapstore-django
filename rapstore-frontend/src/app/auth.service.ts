@@ -42,7 +42,7 @@ export class AuthService {
     this.refresh(true);
     this.token = token;
     localStorage.setItem('user', JSON.stringify({username: username, token: token}));
-    
+
   }
   logout() {
     this.token = null;

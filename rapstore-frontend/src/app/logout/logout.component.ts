@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {AuthService} from '../auth.service';
-import {User} from '../models';
-import {UserService} from '../user.service';
+import {Subscription} from 'rxjs/Subscription';
+import {AppService} from '../appservice.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,20 +10,37 @@ import {UserService} from '../user.service';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
-  private user: User;
+  // returnURL is only used when logout cant be accomplished successfully
+  returnURL: string;
+
+  private $subscriptionRoute: Subscription;
 
   constructor(protected authService: AuthService,
               private router: Router,
-              private userService: UserService) { }
+              private activatedRoute: ActivatedRoute,
+              private appService: AppService) { }
 
   ngOnInit() {
+
+    this.$subscriptionRoute = this.activatedRoute
+      .queryParams
+      .subscribe(params => {
+        this.returnURL = params.returnURL || '/';
+      });
 
     if (!this.authService.get_token()) {
       // dont show logout page if user is not logged in
       this.router.navigateByUrl('/');
     }
 
-    this.authService.logout();
-    this.router.navigateByUrl('/');
+    if (this.appService.isBuilding()) {
+      alert("There is a pending build in the queue. You can't log out now!");
+      this.router.navigateByUrl(this.returnURL);
+    }
+    else {
+      this.authService.logout();
+      // dont use returnURL! we dont want to show pages which require authentification after the user logged out
+      this.router.navigateByUrl('/');
+    }
   }
 }
