@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import {AuthService} from '../auth.service';
@@ -60,8 +62,8 @@ export class AppUploaderComponent implements OnInit {
       headers.append('Authorization', 'Token ' + this.AuthService.get_token());
       headers.append('Accept', 'application/json');
       let options = new RequestOptions({headers: headers});
-      this.http.post(`${this.baseurl}/api/app/`, formData, options)
-        .map(res => res.json())
+      this.http.post(`${this.baseurl}/api/app/`, formData, options).pipe(
+        map(res => res.json()))
         .subscribe(
           data => this.message = `Successfully uploaded your app "${this.form.value.name}" ! The app will be under a review process in order to make it public.`,
           err => {

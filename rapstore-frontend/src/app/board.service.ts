@@ -1,7 +1,9 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Board} from './models';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {environment} from '../environments/environment';
 import {AuthService} from './auth.service';
 
@@ -16,7 +18,7 @@ export class BoardService {
   getAll(): Observable<Board[]> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.get(`${this.baseUrl}/api/board/`).map(res => res.json());
+    return this.http.get(`${this.baseUrl}/api/board/`).pipe(map(res => res.json()));
   }
 
   getAuthOptions(): RequestOptions {
@@ -27,7 +29,7 @@ export class BoardService {
   }
   getSupported(app_id: number): Observable<Board[]> {
     let options = this.getAuthOptions();
-    return this.http.get(`${this.baseUrl}/api/app/${app_id}/supported_boards/`, options).map(res => res.json());
+    return this.http.get(`${this.baseUrl}/api/app/${app_id}/supported_boards/`, options).pipe(map(res => res.json()));
   }
 
 }

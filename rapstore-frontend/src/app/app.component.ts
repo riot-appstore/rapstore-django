@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, HostListener} from '@angular/core';
 import {BrowserIntegrationService} from './browser-integration.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {AuthService} from './auth.service';
 import {UserService} from './user.service';
 import {FeedbackService} from './feedback.service';
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {User} from './models';
 import {AppService} from './appservice.service';
 import {environment} from '../environments/environment';
-import 'rxjs/add/operator/take';
+
 
 @Component({
   selector: 'app-root',
