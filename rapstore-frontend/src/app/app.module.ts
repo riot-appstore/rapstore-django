@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AvatarModule } from 'ngx-avatar';
 
 
 import {AppComponent} from './app.component';
@@ -61,6 +62,7 @@ import { FormElementComponent } from './form-element/form-element.component';
     FeedbackComponent,
   ],
   imports: [
+    AvatarModule,
     CommonModule,
     BrowserModule,
     FormsModule,
