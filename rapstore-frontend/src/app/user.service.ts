@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable, Output, EventEmitter} from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {AuthService} from './auth.service';
@@ -13,11 +15,11 @@ export class UserService {
   }
 
   get() {
-    return this.http.get(this.url, this.getAuthOptions()).map(res => res.json());
+    return this.http.get(this.url, this.getAuthOptions()).pipe(map(res => res.json()));
   }
 
   update(user: User) {
-    return this.http.put(`${this.url}update/`, user, this.getAuthOptions()).map(res => res.json());
+    return this.http.put(`${this.url}update/`, user, this.getAuthOptions()).pipe(map(res => res.json()));
   }
 
   getAuthOptions(): RequestOptions {
@@ -28,7 +30,7 @@ export class UserService {
 
   register(signup: Signup) {
     const authHeaders = new Headers(this.contentType);
-    return this.http.post(`${this.url}register/`, signup, new RequestOptions({headers: authHeaders})).map(res => res.json());
+    return this.http.post(`${this.url}register/`, signup, new RequestOptions({headers: authHeaders})).pipe(map(res => res.json()));
   }
 
 }

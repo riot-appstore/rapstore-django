@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Feedback} from './models';
@@ -13,7 +15,7 @@ export class FeedbackService {
 
   sendFeedback(feedback: Feedback) {
     const authHeaders = new Headers(this.contentType);
-    return this.http.post(`${this.baseUrl}/api/feedback/`, feedback, new RequestOptions({headers: authHeaders})).map(res => res.json());
+    return this.http.post(`${this.baseUrl}/api/feedback/`, feedback, new RequestOptions({headers: authHeaders})).pipe(map(res => res.json()));
   }
 
 }

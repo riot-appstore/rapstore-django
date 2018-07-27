@@ -1,7 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable, Output, EventEmitter} from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable, BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {User} from './models';
 import {environment} from '../environments/environment';
@@ -23,8 +24,8 @@ export class AuthService {
 
   login(username: string, password: string): Observable<boolean> {
     const url = `${this.base_url}/auth/`;
-    return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers})
-      .map((response: Response) => {
+    return this.http.post(url, JSON.stringify({username: username, password: password}), {headers: this.headers}).pipe(
+      map((response: Response) => {
         const data = response.json();
         const token = data && data.token;
         if (token) {
@@ -35,7 +36,7 @@ export class AuthService {
           this.refresh(false);
           return false;
         }
-      });
+      }));
   }
 
   perform_login(username: string, token: boolean) {
@@ -61,14 +62,14 @@ export class AuthService {
 
   get_github_url() {
     const url = `${this.base_url}/social/url/github/`;
-    return this.http.get(url, {headers: this.headers, withCredentials: true}).map(res => res.json());
+    return this.http.get(url, {headers: this.headers, withCredentials: true}).pipe(map(res => res.json()));
   }
   get_social_token(code: string, state: string) {
     const url = `${this.base_url}/social/login/github/`;
-    return this.http.post(url, JSON.stringify({code: code, state: state}), {headers: this.headers, withCredentials: true}).map((response: Response) => {
+    return this.http.post(url, JSON.stringify({code: code, state: state}), {headers: this.headers, withCredentials: true}).pipe(map((response: Response) => {
       let res = response.json();
       this.perform_login(res.username, res.token);
       return true;
-    });
+    }));
   }
 }

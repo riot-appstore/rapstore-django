@@ -23,8 +23,7 @@
           <ng-template #app_is_external>
             <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
           </ng-template>
-          <ngu-letter-avatar *ngIf="show_avatar" avatar-font-size="90" avatar-width="170px" avatar-height="170px"
-                             avatar-data='{{application?.name}}'></ngu-letter-avatar>
+          <ngx-avatar *ngIf="show_avatar" name="{{application?.name}}" [round]="false" borderCorner=0 size="170" textSizeRatio=3></ngx-avatar>
         </div>
       </div>
       <div class="app-detail-headline">

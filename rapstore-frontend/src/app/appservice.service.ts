@@ -1,9 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Application} from './models';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {Http, RequestOptions, Headers, ResponseContentType} from '@angular/http';
-import 'rxjs/add/operator/map';
+
 import {environment} from '../environments/environment';
 
 @Injectable()
@@ -20,14 +22,14 @@ export class AppService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(`${this.baseUrl}/api/app/`).map(res => res.json());
+    return this.http.get(`${this.baseUrl}/api/app/`).pipe(map(res => res.json()));
   }
 
   get(id: number): Observable<Application> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(`${this.baseUrl}/api/app/${id}/`).map(res => res.json());
+    return this.http.get(`${this.baseUrl}/api/app/${id}/`).pipe(map(res => res.json()));
   }
 
   getAuthHeaders(): Headers {
@@ -41,7 +43,7 @@ export class AppService {
     let headers = this.getAuthHeaders();
     headers.append('Content-Type', 'application/json');
 
-    let request = this.http.get(`${this.baseUrl}/api/app/${id}/build/?board=${board}&type=${type}`, new RequestOptions({headers: headers})).map(res => res.json());
+    let request = this.http.get(`${this.baseUrl}/api/app/${id}/build/?board=${board}&type=${type}`, new RequestOptions({headers: headers})).pipe(map(res => res.json()));
     let task_id, poll_id;
     request.subscribe(
       res => {
@@ -72,7 +74,7 @@ export class AppService {
     let headers = this.getAuthHeaders();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/status/`, new RequestOptions({headers: headers})).map(res => res.json());
+    return this.http.get(`${this.baseUrl}/api/buildmanager/${task_id}/status/`, new RequestOptions({headers: headers})).pipe(map(res => res.json()));
   }
 
   fetch_file(task_id) {
