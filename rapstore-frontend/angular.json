@@ -21,7 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/bootstrap-4.0.0-dist/css/bootstrap.min.css",
               "src/assets/css/bootstrap-social.css",
               "node_modules/font-awesome/css/font-awesome.css"
@@ -109,10 +109,10 @@
               "src/assets/bootstrap-4.0.0-dist/js/bootstrap.min.js"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/bootstrap-4.0.0-dist/css/bootstrap.min.css",
-              "src/assets/css/bootstrap-social.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "src/styles.scss",
+              "src/assets/bootstrap-4.0.0-dist/css/bootstrap.min.scss",
+              "src/assets/css/bootstrap-social.scss",
+              "node_modules/font-awesome/css/font-awesome.scss"
             ],
             "assets": [
               "src/assets",
@@ -164,7 +164,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

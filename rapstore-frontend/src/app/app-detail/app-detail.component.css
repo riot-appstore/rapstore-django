@@ -1,5 +1,6 @@
 .app-detail-avatar {
   float: left;
+  width: 100%;
 }
 
 .app-detail-headline {

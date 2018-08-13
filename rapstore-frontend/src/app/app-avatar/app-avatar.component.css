@@ -1,0 +1,22 @@
+.avatar {
+    border-radius: 0;
+    color: #fff;
+    font-size: 20vw;
+    height: 170px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Small devices (tablets, 576px and up) */
+@media (min-width: 576px) {
+    .avatar {
+        font-size: 10vw;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .avatar {
+        font-size: 5vw;
+    }
+}
