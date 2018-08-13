@@ -57,8 +57,6 @@ export class AppService {
                 const index: number = this.buildQueue.indexOf(task_id);
                 if (index !== -1) {
                   this.buildQueue.splice(index, 1);
-                }
-                else {
                   clearInterval(poll_id);
                 }
               }
