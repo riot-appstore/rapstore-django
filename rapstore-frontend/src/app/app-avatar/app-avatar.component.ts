@@ -4,7 +4,7 @@ import { AppAvatarService } from './app-avatar.service';
 @Component({
   selector: 'app-avatar',
   templateUrl: './app-avatar.component.html',
-  styleUrls: ['./app-avatar.component.css']
+  styleUrls: ['./app-avatar.component.scss']
 })
 
 export class AppAvatarComponent implements OnInit {
