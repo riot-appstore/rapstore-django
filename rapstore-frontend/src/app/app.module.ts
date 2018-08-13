@@ -37,6 +37,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { FormElementComponent } from './form-element/form-element.component';
+import { AppAvatarComponent } from './app-avatar/app-avatar.component';
+import { AppAvatarService } from './app-avatar/app-avatar.service';
 
 
 @NgModule({
@@ -60,6 +62,7 @@ import { FormElementComponent } from './form-element/form-element.component';
     LogoutComponent,
     FormElementComponent,
     FeedbackComponent,
+    AppAvatarComponent,
   ],
   imports: [
     AvatarModule,
@@ -72,7 +75,7 @@ import { FormElementComponent } from './form-element/form-element.component';
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService, DynFormService],
+  providers: [AppService, BoardService, AuthService, AuthGuard, BrowserIntegrationService, UserService, FeedbackService, DynFormService, AppAvatarService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
