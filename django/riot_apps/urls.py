@@ -32,6 +32,7 @@ from api.views import UserViewSet
 from api.views import FeedbackViewSet
 from api.views import SecureSocialLogin
 from api.views import get_social
+from lua.views import CodeViewSet
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login
@@ -47,10 +48,14 @@ router.register(r'user', UserViewSet, base_name='user')
 router.register(r'feedback', FeedbackViewSet)
 router.register(r'buildmanager', BuildManagerViewSet, base_name='buildmanager')
 
+luaRouter = routers.DefaultRouter()
+luaRouter.register(r'code', CodeViewSet, base_name='code')
+
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^api/', include(router.urls)),
+    url(r'^lua/', include(luaRouter.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^auth/', views.obtain_auth_token),
     url(r'^admin/', admin.site.urls),
