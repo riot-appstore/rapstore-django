@@ -33,7 +33,7 @@ class UserProfile(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)
     company = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
@@ -60,7 +60,7 @@ class Board(models.Model):
     flash_program = models.CharField(max_length=32)
     display_name = models.CharField(max_length=255)
     storage_flash_support = models.BooleanField(default=False)
-    transaction = models.ForeignKey('Transaction')
+    transaction = models.ForeignKey('Transaction', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.internal_name
@@ -71,7 +71,7 @@ class Module(models.Model):
     path = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
     group_identifier = models.CharField(max_length=255)
-    transaction = models.ForeignKey('Transaction')
+    transaction = models.ForeignKey('Transaction', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -86,7 +86,7 @@ class Application(models.Model):
         ('R', 'RIOT_REPO'),
         ('E', 'EXTERNAL'),
     )
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, unique=True, validators=[isalphavalidator])
     description = models.TextField(max_length=65535, null=True, blank=True)
     licenses = models.CharField(max_length=255, null=True, blank=True) 
@@ -119,7 +119,7 @@ class Application(models.Model):
 
 class ApplicationInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
     version_code = models.PositiveIntegerField(default=0)
     version_name = models.CharField(max_length=255)
     app_tarball = models.FileField(storage=fs)
