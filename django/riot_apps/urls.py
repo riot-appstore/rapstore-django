@@ -34,8 +34,8 @@ from api.views import SecureSocialLogin
 from api.views import get_social
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.views import login
-from django.contrib.auth.views import logout
+from django.contrib.auth import login
+from django.contrib.auth import logout
 from rest_framework import routers
 from rest_framework.authtoken import views
 
