@@ -1,0 +1,7 @@
+I=0
+read input
+for line in $input
+do
+    mv $line icon_$I.svg
+    ((I=$I+1))
+done
