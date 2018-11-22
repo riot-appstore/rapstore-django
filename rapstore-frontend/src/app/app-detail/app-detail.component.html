@@ -23,7 +23,8 @@
           <ng-template #app_is_external>
             <div class="ribbon ribbon-external"><span>EXTERNAL</span></div>
           </ng-template>
-          <ngx-avatar *ngIf="show_avatar" name="{{application?.name}}" [round]="false" borderCorner=0 size="170" textSizeRatio=3></ngx-avatar>
+          <!--<ngx-avatar *ngIf="show_avatar" name="{{application?.name}}" [round]="false" borderCorner=0 size="170" textSizeRatio=3></ngx-avatar>-->
+          <img src="/assets/img/imgs/icon_{{application?.id % 40}}.svg" *ngIf="show_avatar" width="170" height="170" style="filter:invert(0.9)" />
         </div>
       </div>
       <div class="app-detail-headline">
