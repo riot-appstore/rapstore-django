@@ -297,6 +297,6 @@ def get_social(request, provider):
         int_state = str(int_state).encode('utf-8')
 
         response = Response({"url": "https://github.com/login/oauth/authorize/?client_id={}&state={}".format(settings.SOCIAL_AUTH_GITHUB_KEY,md5(int_state).hexdigest())})
-        response.set_cookie("state", int_state)
+        response.set_cookie("state", int_state.decode('utf-8'))
         return response
     return Response({"error": "No provider"}, status=status.HTTP_400_BAD_REQUEST)
