@@ -109,3 +109,18 @@ def build(app_name, board, bin_type, instance_id):
         b64 = base64.b64encode(file.read())
 
     return {"b64": b64.decode('utf-8'), "filename": "{}_{}.{}".format(app_name, board, bin_type)}
+
+@app.task
+def lua_build(code, board, bin_type, instance_id):
+    directory = handle_file(instance_id)
+
+    f = open("{}/main.lua".format(directory), "w+")
+    f.write(code)
+    f.close()
+
+    tmp_dir = execute_makefile(directory, board, 'test')
+
+    with open("{}/app.{}".format(tmp_dir, bin_type), 'rb') as file:
+        b64 = base64.b64encode(file.read())
+
+    return {"b64": b64.decode('utf-8'), "filename": "lua_{}.{}".format(board, bin_type)}
